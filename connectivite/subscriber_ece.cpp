@@ -6,9 +6,9 @@ void messageCallback(const beginner_tutorials::ecemsg::ConstPtr& msg) {
 }
  
 int main(int argc, char **argv) {
-  ros::init(argc, argv, "subscriber ece");
+  ros::init(argc, argv, "subscriber_ece");
   ros::NodeHandle n;
-  ros::Subscriber sub = n.subscribe("topic ece", 1000, messageCallback);
+  ros::Subscriber sub = n.subscribe("topic_ece", 1000, messageCallback);
   ros::spin();
   return 0;
 }
