@@ -2,7 +2,7 @@
 #include "beginner_tutorials/ecemsg.h"
  
 void messageCallback(const beginner_tutorials::ecemsg::ConstPtr& msg) {
-  ROS_INFO("I have received: [%d] [%d] [%d]", msg->data);
+  ROS_INFO("I have received: [%d]", msg->data);
 }
  
 int main(int argc, char **argv) {
