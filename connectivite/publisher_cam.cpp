@@ -53,6 +53,8 @@ int main(int argc, char **argv)
 
     messages_cam::CAM CAM;
 
+    station_type.value = 10;
+
     position_confidence.semi_major_confidence = 0;
     position_confidence.semi_minor_confidence = 0;
     position_confidence.semi_major_orientation = 0;
@@ -99,6 +101,7 @@ int main(int argc, char **argv)
     CAM.reference_position = reference_position;
     CAM.high_frequency_container = high_frequency_container;
     CAM.low_frequency_container = low_frequency_container;
+    CAM.station_type = station_type;
 
     while (ros::ok())
     {
