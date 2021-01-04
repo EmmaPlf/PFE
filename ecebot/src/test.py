@@ -1,3 +1,4 @@
+# script marche chez moi avec python 2.7
 import random, math
 import rospy
 from geometry_msgs.msg import Twist, Point, Vector3Stamped
