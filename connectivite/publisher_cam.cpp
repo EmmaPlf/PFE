@@ -28,6 +28,13 @@ int main(int argc, char **argv)
     ros::Publisher pub = n.advertise<messages_cam::CAM>("topic_cam", 1000);
     ros::Rate loop_rate(10);
 
+    
+    messages_denm::Header header;
+
+    messages_denm::ItsPduHeader its_header;
+  
+    uint16_t generation_delta_time; // milliseconds since 2004 modulo 2^16
+
     messages_cam::StationType station_type;
 
     messages_cam::ReferencePosition reference_position;
@@ -52,6 +59,13 @@ int main(int argc, char **argv)
             message_cam::PathPoint[1] points;
 
     messages_cam::CAM CAM;
+
+    header.value = 0;
+    header.confidence = 0;
+
+    its_header.protocol_version = 0;
+    its_header.message_id = 0;
+    its_header.station_id = 0;
 
     station_type.value = 10;
 
@@ -100,8 +114,11 @@ int main(int argc, char **argv)
 
     CAM.reference_position = reference_position;
     CAM.high_frequency_container = high_frequency_container;
+    CAM.generation_delta_time = generation_delta_time;
     CAM.low_frequency_container = low_frequency_container;
     CAM.station_type = station_type;
+    CAM.header = header;
+    CAM.its_header = its_header;
 
     while (ros::ok())
     {
