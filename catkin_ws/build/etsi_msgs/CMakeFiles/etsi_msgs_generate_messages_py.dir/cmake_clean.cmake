@@ -1,0 +1,43 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/etsi_msgs_generate_messages_py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_CAM.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_SituationContainer.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_DeltaReferencePosition.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_ExteriorLights.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_PathPoint.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_PathHistory.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_BasicVehicleContainerLowFrequency.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_ActionID.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_LongitudinalAcceleration.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_Curvature.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_VehicleWidth.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_RelevanceDistance.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_AccelerationControl.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_LocationContainer.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_EventPoint.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_ManagementContainer.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_VehicleLength.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_PositionConfidenceEllipse.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_ReferencePosition.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_CurvatureCalculationMode.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_DriveDirection.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_YawRate.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_Heading.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_CauseCode.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_VehicleRole.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_ItsPduHeader.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_Altitude.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_InformationQuality.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_DENM.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_StationType.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_BasicVehicleContainerHighFrequency.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_Speed.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_RelevanceTrafficDirection.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_PathDeltaTime.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/__init__.py"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang )
+  include(CMakeFiles/etsi_msgs_generate_messages_py.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
