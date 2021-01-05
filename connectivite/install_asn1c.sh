@@ -1,5 +1,6 @@
 #!/bin/sh
 
+cd ~
 sudo apt-get update
 sudo apt-get install automake autoconf libtool bison flex
 git clone https://github.com/vlm/asn1c
