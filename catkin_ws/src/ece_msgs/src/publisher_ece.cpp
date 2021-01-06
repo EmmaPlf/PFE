@@ -14,9 +14,15 @@ int main(int argc, char **argv) {
   ros::Rate loop_rate(10);
 
   ece_msgs::ecemsg msg;
-  msg.data.push_back(0);
-  msg.data.push_back(1);
+
   while (ros::ok()) {
+
+    // Ouvrir et lire fichier avec message encodé
+
+    // Stocker le stream dans data du message ece ROS
+    msg.data.push_back(0);
+    msg.data.push_back(1);
+    
     pub.publish(msg);
     ros::spinOnce();
     loop_rate.sleep();

@@ -25,6 +25,17 @@ etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/cat
 etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/VehicleRole.h
 etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/VehicleWidth.h
 etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/YawRate.h
+etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/plugin/Altitude.h
+etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/plugin/Curvature.h
+etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/plugin/CurvatureCalculationMode.h
+etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/plugin/DeltaReferencePosition.h
+etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/plugin/DriveDirection.h
+etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/plugin/Heading.h
+etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/plugin/LongitudinalAcceleration.h
+etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/plugin/Speed.h
+etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/plugin/VehicleLength.h
+etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/plugin/VehicleWidth.h
+etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/plugin/YawRate.h
 etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /home/user/catkin_ws/src/etsi_msgs/src/subscriber_cam.cpp
 etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /opt/ros/kinetic/include/ros/advertise_options.h
 etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.o: /opt/ros/kinetic/include/ros/advertise_service_options.h

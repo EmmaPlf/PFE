@@ -2,6 +2,7 @@
 #include "ros/ros.h"
 
 void messageCallback(const ece_msgs::ecemsg::ConstPtr &msg) {
+  // Décoder le message
   ROS_INFO("I have received: [%d] [%d]", msg->data[0], msg->data[1]);
 }
 

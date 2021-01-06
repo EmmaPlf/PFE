@@ -2,8 +2,7 @@
 #include "ros/ros.h"
 
 void messageCallback(const etsi_msgs::DENM::ConstPtr &msg) {
-  ROS_INFO("I have received a message denm : has situation : [%d]",
-           msg->has_situation);
+  ROS_INFO("I have received a message denm : count : [%d]", msg->header.seq);
 }
 
 int main(int argc, char **argv) {
