@@ -166,6 +166,18 @@ target_link_libraries(subscriber_cam
    ${catkin_LIBRARIES}
  )
 
+add_executable(publisher_denm src/publisher_denm.cpp)
+add_dependencies(publisher_denm ${etsi_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(publisher_denm
+   ${catkin_LIBRARIES}
+ )
+
+add_executable(subscriber_denm src/subscriber_denm.cpp)
+add_dependencies(subscriber_denm ${etsi_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(subscriber_denm
+   ${catkin_LIBRARIES}
+ )
+
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/etsi_msgs.cpp

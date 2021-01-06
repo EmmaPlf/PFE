@@ -376,6 +376,21 @@ _etsi_msgs_generate_messages_check_deps_EventPoint/fast:
 .PHONY : _etsi_msgs_generate_messages_check_deps_EventPoint/fast
 
 # Convenience name for target.
+etsi_msgs/CMakeFiles/subscriber_denm.dir/rule:
+	cd /home/user/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 etsi_msgs/CMakeFiles/subscriber_denm.dir/rule
+.PHONY : etsi_msgs/CMakeFiles/subscriber_denm.dir/rule
+
+# Convenience name for target.
+subscriber_denm: etsi_msgs/CMakeFiles/subscriber_denm.dir/rule
+
+.PHONY : subscriber_denm
+
+# fast build rule for target.
+subscriber_denm/fast:
+	cd /home/user/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/subscriber_denm.dir/build.make etsi_msgs/CMakeFiles/subscriber_denm.dir/build
+.PHONY : subscriber_denm/fast
+
+# Convenience name for target.
 etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_PathPoint.dir/rule:
 	cd /home/user/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_PathPoint.dir/rule
 .PHONY : etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_PathPoint.dir/rule
@@ -766,6 +781,21 @@ etsi_msgs_generate_messages_nodejs/fast:
 .PHONY : etsi_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
+etsi_msgs/CMakeFiles/publisher_denm.dir/rule:
+	cd /home/user/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 etsi_msgs/CMakeFiles/publisher_denm.dir/rule
+.PHONY : etsi_msgs/CMakeFiles/publisher_denm.dir/rule
+
+# Convenience name for target.
+publisher_denm: etsi_msgs/CMakeFiles/publisher_denm.dir/rule
+
+.PHONY : publisher_denm
+
+# fast build rule for target.
+publisher_denm/fast:
+	cd /home/user/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/publisher_denm.dir/build.make etsi_msgs/CMakeFiles/publisher_denm.dir/build
+.PHONY : publisher_denm/fast
+
+# Convenience name for target.
 etsi_msgs/CMakeFiles/etsi_msgs_gennodejs.dir/rule:
 	cd /home/user/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 etsi_msgs/CMakeFiles/etsi_msgs_gennodejs.dir/rule
 .PHONY : etsi_msgs/CMakeFiles/etsi_msgs_gennodejs.dir/rule
@@ -897,6 +927,33 @@ src/publisher_cam.cpp.s:
 	cd /home/user/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/publisher_cam.dir/build.make etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.s
 .PHONY : src/publisher_cam.cpp.s
 
+src/publisher_denm.o: src/publisher_denm.cpp.o
+
+.PHONY : src/publisher_denm.o
+
+# target to build an object file
+src/publisher_denm.cpp.o:
+	cd /home/user/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/publisher_denm.dir/build.make etsi_msgs/CMakeFiles/publisher_denm.dir/src/publisher_denm.cpp.o
+.PHONY : src/publisher_denm.cpp.o
+
+src/publisher_denm.i: src/publisher_denm.cpp.i
+
+.PHONY : src/publisher_denm.i
+
+# target to preprocess a source file
+src/publisher_denm.cpp.i:
+	cd /home/user/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/publisher_denm.dir/build.make etsi_msgs/CMakeFiles/publisher_denm.dir/src/publisher_denm.cpp.i
+.PHONY : src/publisher_denm.cpp.i
+
+src/publisher_denm.s: src/publisher_denm.cpp.s
+
+.PHONY : src/publisher_denm.s
+
+# target to generate assembly for a file
+src/publisher_denm.cpp.s:
+	cd /home/user/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/publisher_denm.dir/build.make etsi_msgs/CMakeFiles/publisher_denm.dir/src/publisher_denm.cpp.s
+.PHONY : src/publisher_denm.cpp.s
+
 src/subscriber_cam.o: src/subscriber_cam.cpp.o
 
 .PHONY : src/subscriber_cam.o
@@ -924,6 +981,33 @@ src/subscriber_cam.cpp.s:
 	cd /home/user/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/subscriber_cam.dir/build.make etsi_msgs/CMakeFiles/subscriber_cam.dir/src/subscriber_cam.cpp.s
 .PHONY : src/subscriber_cam.cpp.s
 
+src/subscriber_denm.o: src/subscriber_denm.cpp.o
+
+.PHONY : src/subscriber_denm.o
+
+# target to build an object file
+src/subscriber_denm.cpp.o:
+	cd /home/user/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/subscriber_denm.dir/build.make etsi_msgs/CMakeFiles/subscriber_denm.dir/src/subscriber_denm.cpp.o
+.PHONY : src/subscriber_denm.cpp.o
+
+src/subscriber_denm.i: src/subscriber_denm.cpp.i
+
+.PHONY : src/subscriber_denm.i
+
+# target to preprocess a source file
+src/subscriber_denm.cpp.i:
+	cd /home/user/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/subscriber_denm.dir/build.make etsi_msgs/CMakeFiles/subscriber_denm.dir/src/subscriber_denm.cpp.i
+.PHONY : src/subscriber_denm.cpp.i
+
+src/subscriber_denm.s: src/subscriber_denm.cpp.s
+
+.PHONY : src/subscriber_denm.s
+
+# target to generate assembly for a file
+src/subscriber_denm.cpp.s:
+	cd /home/user/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/subscriber_denm.dir/build.make etsi_msgs/CMakeFiles/subscriber_denm.dir/src/subscriber_denm.cpp.s
+.PHONY : src/subscriber_denm.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -950,6 +1034,7 @@ help:
 	@echo "... _etsi_msgs_generate_messages_check_deps_DeltaReferencePosition"
 	@echo "... _etsi_msgs_generate_messages_check_deps_ItsPduHeader"
 	@echo "... _etsi_msgs_generate_messages_check_deps_EventPoint"
+	@echo "... subscriber_denm"
 	@echo "... _etsi_msgs_generate_messages_check_deps_PathPoint"
 	@echo "... _etsi_msgs_generate_messages_check_deps_SituationContainer"
 	@echo "... _etsi_msgs_generate_messages_check_deps_RelevanceDistance"
@@ -977,6 +1062,7 @@ help:
 	@echo "... _etsi_msgs_generate_messages_check_deps_CauseCode"
 	@echo "... etsi_msgs_generate_messages_lisp"
 	@echo "... etsi_msgs_generate_messages_nodejs"
+	@echo "... publisher_denm"
 	@echo "... etsi_msgs_gennodejs"
 	@echo "... _etsi_msgs_generate_messages_check_deps_LocationContainer"
 	@echo "... _etsi_msgs_generate_messages_check_deps_DriveDirection"
@@ -987,9 +1073,15 @@ help:
 	@echo "... src/publisher_cam.o"
 	@echo "... src/publisher_cam.i"
 	@echo "... src/publisher_cam.s"
+	@echo "... src/publisher_denm.o"
+	@echo "... src/publisher_denm.i"
+	@echo "... src/publisher_denm.s"
 	@echo "... src/subscriber_cam.o"
 	@echo "... src/subscriber_cam.i"
 	@echo "... src/subscriber_cam.s"
+	@echo "... src/subscriber_denm.o"
+	@echo "... src/subscriber_denm.i"
+	@echo "... src/subscriber_denm.s"
 .PHONY : help
 
 

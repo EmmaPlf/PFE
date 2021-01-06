@@ -842,6 +842,19 @@ _etsi_msgs_generate_messages_check_deps_EventPoint/fast:
 .PHONY : _etsi_msgs_generate_messages_check_deps_EventPoint/fast
 
 #=============================================================================
+# Target rules for targets named subscriber_denm
+
+# Build rule for target.
+subscriber_denm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 subscriber_denm
+.PHONY : subscriber_denm
+
+# fast build rule for target.
+subscriber_denm/fast:
+	$(MAKE) -f etsi_msgs/CMakeFiles/subscriber_denm.dir/build.make etsi_msgs/CMakeFiles/subscriber_denm.dir/build
+.PHONY : subscriber_denm/fast
+
+#=============================================================================
 # Target rules for targets named _etsi_msgs_generate_messages_check_deps_PathPoint
 
 # Build rule for target.
@@ -1180,6 +1193,19 @@ etsi_msgs_generate_messages_nodejs/fast:
 .PHONY : etsi_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
+# Target rules for targets named publisher_denm
+
+# Build rule for target.
+publisher_denm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 publisher_denm
+.PHONY : publisher_denm
+
+# fast build rule for target.
+publisher_denm/fast:
+	$(MAKE) -f etsi_msgs/CMakeFiles/publisher_denm.dir/build.make etsi_msgs/CMakeFiles/publisher_denm.dir/build
+.PHONY : publisher_denm/fast
+
+#=============================================================================
 # Target rules for targets named etsi_msgs_gennodejs
 
 # Build rule for target.
@@ -1335,6 +1361,7 @@ help:
 	@echo "... _etsi_msgs_generate_messages_check_deps_DeltaReferencePosition"
 	@echo "... _etsi_msgs_generate_messages_check_deps_ItsPduHeader"
 	@echo "... _etsi_msgs_generate_messages_check_deps_EventPoint"
+	@echo "... subscriber_denm"
 	@echo "... _etsi_msgs_generate_messages_check_deps_PathPoint"
 	@echo "... _etsi_msgs_generate_messages_check_deps_SituationContainer"
 	@echo "... _etsi_msgs_generate_messages_check_deps_RelevanceDistance"
@@ -1361,6 +1388,7 @@ help:
 	@echo "... _etsi_msgs_generate_messages_check_deps_CauseCode"
 	@echo "... etsi_msgs_generate_messages_lisp"
 	@echo "... etsi_msgs_generate_messages_nodejs"
+	@echo "... publisher_denm"
 	@echo "... etsi_msgs_gennodejs"
 	@echo "... _etsi_msgs_generate_messages_check_deps_LocationContainer"
 	@echo "... _etsi_msgs_generate_messages_check_deps_DriveDirection"
