@@ -2,7 +2,6 @@
 import random, math
 import rospy
 from geometry_msgs.msg import Twist, Point, Vector3Stamped
-from turtlesim.msg import Pose
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import Imu
 
