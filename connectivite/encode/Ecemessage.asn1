@@ -1,0 +1,7 @@
+Ecemessage DEFINITIONS ::= BEGIN
+
+Ecemessage ::= SEQUENCE {
+    vitesse INTEGER (0..50)
+}
+
+END
