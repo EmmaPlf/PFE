@@ -18,6 +18,9 @@
 (intern "*MESSAGE_ID_CAM*" (find-package "ETSI_MSGS::ITSPDUHEADER"))
 (shadow '*MESSAGE_ID_CAM* (find-package "ETSI_MSGS::ITSPDUHEADER"))
 (defconstant etsi_msgs::ItsPduHeader::*MESSAGE_ID_CAM* 2)
+(intern "*MESSAGE_ID_ECE*" (find-package "ETSI_MSGS::ITSPDUHEADER"))
+(shadow '*MESSAGE_ID_ECE* (find-package "ETSI_MSGS::ITSPDUHEADER"))
+(defconstant etsi_msgs::ItsPduHeader::*MESSAGE_ID_ECE* 3)
 (defclass etsi_msgs::ItsPduHeader
   :super ros::object
   :slots (_protocol_version _message_id _station_id ))
@@ -77,7 +80,7 @@
    self)
   )
 
-(setf (get etsi_msgs::ItsPduHeader :md5sum-) "493dd45f242245ef547b44cf2be57f2d")
+(setf (get etsi_msgs::ItsPduHeader :md5sum-) "ff8e90c8ffc6c6f2d381f49c4d8f0e67")
 (setf (get etsi_msgs::ItsPduHeader :datatype-) "etsi_msgs/ItsPduHeader")
 (setf (get etsi_msgs::ItsPduHeader :definition-)
       "uint8 protocol_version
@@ -86,11 +89,12 @@ uint32 station_id
 
 uint8 MESSAGE_ID_DENM = 1
 uint8 MESSAGE_ID_CAM = 2
+uint8 MESSAGE_ID_ECE = 3
 
 ")
 
 
 
-(provide :etsi_msgs/ItsPduHeader "493dd45f242245ef547b44cf2be57f2d")
+(provide :etsi_msgs/ItsPduHeader "ff8e90c8ffc6c6f2d381f49c4d8f0e67")
 
 

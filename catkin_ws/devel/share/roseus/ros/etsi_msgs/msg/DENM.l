@@ -137,7 +137,7 @@
    self)
   )
 
-(setf (get etsi_msgs::DENM :md5sum-) "66d74b1f24152abbfb60e3e0a2c36bfb")
+(setf (get etsi_msgs::DENM :md5sum-) "d0bac7531dd1fb966b1efa93ca520d89")
 (setf (get etsi_msgs::DENM :datatype-) "etsi_msgs/DENM")
 (setf (get etsi_msgs::DENM :definition-)
       "Header header
@@ -179,6 +179,7 @@ uint32 station_id
 
 uint8 MESSAGE_ID_DENM = 1
 uint8 MESSAGE_ID_CAM = 2
+uint8 MESSAGE_ID_ECE = 3
 
 ================================================================================
 MSG: etsi_msgs/ManagementContainer
@@ -427,6 +428,6 @@ PathDeltaTime path_delta_time
 
 
 
-(provide :etsi_msgs/DENM "66d74b1f24152abbfb60e3e0a2c36bfb")
+(provide :etsi_msgs/DENM "d0bac7531dd1fb966b1efa93ca520d89")
 
 

@@ -9,7 +9,7 @@ import etsi_msgs.msg
 import std_msgs.msg
 
 class CAM(genpy.Message):
-  _md5sum = "9c2e1d050ad79cf1fc0a55266577e7c4"
+  _md5sum = "d9e063e63c0b4bc09200e32f37bfbef3"
   _type = "etsi_msgs/CAM"
   _has_header = True #flag to mark the presence of a Header object
   _full_text = """Header header
@@ -54,6 +54,7 @@ uint32 station_id
 
 uint8 MESSAGE_ID_DENM = 1
 uint8 MESSAGE_ID_CAM = 2
+uint8 MESSAGE_ID_ECE = 3
 
 ================================================================================
 MSG: etsi_msgs/StationType

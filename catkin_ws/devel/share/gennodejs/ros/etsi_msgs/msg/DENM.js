@@ -132,7 +132,7 @@ class DENM {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '66d74b1f24152abbfb60e3e0a2c36bfb';
+    return 'd0bac7531dd1fb966b1efa93ca520d89';
   }
 
   static messageDefinition() {
@@ -177,6 +177,7 @@ class DENM {
     
     uint8 MESSAGE_ID_DENM = 1
     uint8 MESSAGE_ID_CAM = 2
+    uint8 MESSAGE_ID_ECE = 3
     
     ================================================================================
     MSG: etsi_msgs/ManagementContainer

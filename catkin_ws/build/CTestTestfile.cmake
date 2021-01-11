@@ -7,3 +7,6 @@
 subdirs(gtest)
 subdirs(ece_msgs)
 subdirs(etsi_msgs)
+subdirs(rosbot_description/src/rosbot_navigation)
+subdirs(rosbot_description/src/rosbot_description)
+subdirs(rosbot_description/src/rosbot_gazebo)

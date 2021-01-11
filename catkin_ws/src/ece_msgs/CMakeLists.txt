@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(ece_msgs)
 
+# set(ASN1_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ASN1)
+# add_subdirectory(ASN1)
+
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
@@ -51,6 +54,19 @@ find_package(catkin REQUIRED COMPONENTS
    DIRECTORY msg
    FILES
    ecemsg.msg
+   Altitude.msg
+   Desinsertion.msg
+   Feu.msg
+   FreinageUrgence.msg
+   IDs.msg
+   Insertion.msg
+   ItsPduHeader.msg
+   Platoon.msg
+   PositionConfidenceEllipse.msg
+   ReferencePosition.msg
+   Speed.msg
+   StationType.msg
+   VitesseInterdistance.msg
  )
 
 ## Generate services in the 'srv' folder
@@ -117,17 +133,25 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
+  #${ASN1_INCLUDE_DIRS}
 )
 
 add_executable(publisher_ece src/publisher_ece.cpp)
+
+#add_executable(publisher_ece src/publisher_ece.cpp)
 add_dependencies(publisher_ece ${ece_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+#add_dependencies(publisher_ece ASN1)
 target_link_libraries(publisher_ece ${catkin_LIBRARIES})
- 
+#target_link_libraries(publisher_ece ASN1)
+
 add_executable(subscriber_ece src/subscriber_ece.cpp)
+#add_executable(subscriber_ece src/subscriber_ece.cpp)
 add_dependencies(subscriber_ece ${ece_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+#add_dependencies(subscriber_ece ASN1)
 target_link_libraries(subscriber_ece ${catkin_LIBRARIES})
+#target_link_libraries(subscriber_ece ASN1)
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}

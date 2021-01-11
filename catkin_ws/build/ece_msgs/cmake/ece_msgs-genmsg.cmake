@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "ece_msgs: 1 messages, 0 services")
+message(STATUS "ece_msgs: 14 messages, 0 services")
 
 set(MSG_I_FLAGS "-Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg;-Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg")
 
@@ -17,9 +17,74 @@ add_custom_target(ece_msgs_generate_messages ALL)
 
 
 
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg" NAME_WE)
+add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg" ""
+)
+
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg" NAME_WE)
+add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg" ""
+)
+
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg" NAME_WE)
+add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg" ""
+)
+
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg" NAME_WE)
+add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg" ""
+)
+
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg" NAME_WE)
+add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg" "ece_msgs/ReferencePosition:ece_msgs/PositionConfidenceEllipse:ece_msgs/Altitude:ece_msgs/IDs"
+)
+
 get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg" NAME_WE)
 add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg" "std_msgs/Header"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg" "ece_msgs/VitesseInterdistance:ece_msgs/Altitude:std_msgs/Header:ece_msgs/Feu:ece_msgs/IDs:ece_msgs/Speed:ece_msgs/StationType:ece_msgs/PositionConfidenceEllipse:ece_msgs/FreinageUrgence:ece_msgs/Desinsertion:ece_msgs/Insertion:ece_msgs/Platoon:ece_msgs/ItsPduHeader:ece_msgs/ReferencePosition"
+)
+
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg" NAME_WE)
+add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg" ""
+)
+
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg" NAME_WE)
+add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg" "ece_msgs/Altitude:ece_msgs/PositionConfidenceEllipse:ece_msgs/ReferencePosition"
+)
+
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg" NAME_WE)
+add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg" "ece_msgs/Altitude:ece_msgs/PositionConfidenceEllipse"
+)
+
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg" NAME_WE)
+add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg" ""
+)
+
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg" NAME_WE)
+add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg" ""
+)
+
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg" NAME_WE)
+add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg" "ece_msgs/PositionConfidenceEllipse:ece_msgs/Altitude:ece_msgs/Speed:ece_msgs/ReferencePosition"
+)
+
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg" NAME_WE)
+add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg" "ece_msgs/Speed"
+)
+
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg" NAME_WE)
+add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ece_msgs" "/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg" ""
 )
 
 #
@@ -29,9 +94,87 @@ add_custom_target(_ece_msgs_generate_messages_check_deps_${_filename}
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_cpp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_cpp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_cpp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_cpp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_cpp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_cpp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_cpp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_cpp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_cpp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_cpp(ece_msgs
   "/home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg;/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg;/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg;/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg;/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg;/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg;/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg;/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_cpp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_cpp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_cpp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ece_msgs
 )
 
@@ -49,7 +192,33 @@ add_custom_target(ece_msgs_generate_messages_cpp
 add_dependencies(ece_msgs_generate_messages ece_msgs_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg" NAME_WE)
 add_dependencies(ece_msgs_generate_messages_cpp _ece_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -62,9 +231,87 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS ece_msgs_generate_messages_cpp)
 ### Section generating for lang: geneus
 ### Generating Messages
 _generate_msg_eus(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_eus(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_eus(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_eus(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_eus(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_eus(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_eus(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_eus(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_eus(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_eus(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_eus(ece_msgs
   "/home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg;/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg;/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg;/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg;/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg;/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg;/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg;/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_eus(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_eus(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_eus(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ece_msgs
 )
 
@@ -82,7 +329,33 @@ add_custom_target(ece_msgs_generate_messages_eus
 add_dependencies(ece_msgs_generate_messages ece_msgs_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg" NAME_WE)
 add_dependencies(ece_msgs_generate_messages_eus _ece_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -95,9 +368,87 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS ece_msgs_generate_messages_eus)
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_lisp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_lisp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_lisp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_lisp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_lisp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_lisp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_lisp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_lisp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_lisp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_lisp(ece_msgs
   "/home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg;/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg;/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg;/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg;/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg;/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg;/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg;/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_lisp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_lisp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_lisp(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ece_msgs
 )
 
@@ -115,7 +466,33 @@ add_custom_target(ece_msgs_generate_messages_lisp
 add_dependencies(ece_msgs_generate_messages ece_msgs_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg" NAME_WE)
 add_dependencies(ece_msgs_generate_messages_lisp _ece_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -128,9 +505,87 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS ece_msgs_generate_messages_lisp)
 ### Section generating for lang: gennodejs
 ### Generating Messages
 _generate_msg_nodejs(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_nodejs(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_nodejs(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_nodejs(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_nodejs(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_nodejs(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_nodejs(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_nodejs(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_nodejs(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_nodejs(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_nodejs(ece_msgs
   "/home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg;/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg;/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg;/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg;/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg;/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg;/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg;/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_nodejs(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_nodejs(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_nodejs(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ece_msgs
 )
 
@@ -148,7 +603,33 @@ add_custom_target(ece_msgs_generate_messages_nodejs
 add_dependencies(ece_msgs_generate_messages ece_msgs_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg" NAME_WE)
 add_dependencies(ece_msgs_generate_messages_nodejs _ece_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -161,9 +642,87 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS ece_msgs_generate_messages_nodejs)
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_py(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_py(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_py(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_py(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_py(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_py(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_py(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_py(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_py(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_py(ece_msgs
   "/home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg;/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg;/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg;/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg;/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg;/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg;/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg;/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg;/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_py(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_py(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
+)
+_generate_msg_py(ece_msgs
+  "/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg"
+  "${MSG_I_FLAGS}"
+  "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg;/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg;/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ece_msgs
 )
 
@@ -181,7 +740,33 @@ add_custom_target(ece_msgs_generate_messages_py
 add_dependencies(ece_msgs_generate_messages ece_msgs_generate_messages_py)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/IDs.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Feu.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg" NAME_WE)
+add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg" NAME_WE)
 add_dependencies(ece_msgs_generate_messages_py _ece_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

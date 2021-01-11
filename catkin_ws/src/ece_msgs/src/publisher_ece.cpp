@@ -1,9 +1,6 @@
 #include "../../devel/include/ece_msgs/ecemsg.h"
 #include "ros/ros.h"
-#include <iostream>
-#include <ros/console.h>
 #include <sstream>
-using namespace std;
 
 int main(int argc, char **argv) {
 
@@ -15,14 +12,10 @@ int main(int argc, char **argv) {
 
   ece_msgs::ecemsg msg;
 
+  msg.insertion.confirmation_insertion = true;
+
   while (ros::ok()) {
 
-    // Ouvrir et lire fichier avec message encodé
-
-    // Stocker le stream dans data du message ece ROS
-    msg.data.push_back(0);
-    msg.data.push_back(1);
-    
     pub.publish(msg);
     ros::spinOnce();
     loop_rate.sleep();

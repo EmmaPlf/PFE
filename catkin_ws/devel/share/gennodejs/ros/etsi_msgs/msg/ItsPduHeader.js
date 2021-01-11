@@ -79,7 +79,7 @@ class ItsPduHeader {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '493dd45f242245ef547b44cf2be57f2d';
+    return 'ff8e90c8ffc6c6f2d381f49c4d8f0e67';
   }
 
   static messageDefinition() {
@@ -91,6 +91,7 @@ class ItsPduHeader {
     
     uint8 MESSAGE_ID_DENM = 1
     uint8 MESSAGE_ID_CAM = 2
+    uint8 MESSAGE_ID_ECE = 3
     
     `;
   }
@@ -130,6 +131,7 @@ class ItsPduHeader {
 ItsPduHeader.Constants = {
   MESSAGE_ID_DENM: 1,
   MESSAGE_ID_CAM: 2,
+  MESSAGE_ID_ECE: 3,
 }
 
 module.exports = ItsPduHeader;

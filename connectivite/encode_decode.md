@@ -4,7 +4,7 @@
 <br/>
 
 ## Pré-requis
-Pour installer le compilateur ASN1, il faut suivre les instructions sur [ce lien](https://github.com/vlm/asn1c).
+Pour installer le compilateur ASN1, il suffit de lancer le script `install_asn1c.sh` ou de suivre les instructions sur [ce lien](https://github.com/vlm/asn1c).
 
 <br/>
 

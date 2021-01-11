@@ -143,7 +143,7 @@ class CAM {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '9c2e1d050ad79cf1fc0a55266577e7c4';
+    return 'd9e063e63c0b4bc09200e32f37bfbef3';
   }
 
   static messageDefinition() {
@@ -191,6 +191,7 @@ class CAM {
     
     uint8 MESSAGE_ID_DENM = 1
     uint8 MESSAGE_ID_CAM = 2
+    uint8 MESSAGE_ID_ECE = 3
     
     ================================================================================
     MSG: etsi_msgs/StationType
