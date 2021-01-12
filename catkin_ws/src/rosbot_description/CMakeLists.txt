@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(ece_msgs)
+project(rosbot_description)
 
 # set(ASN1_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ASN1)
 # add_subdirectory(ASN1)
@@ -13,8 +13,8 @@ project(ece_msgs)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
-  std_msgs
-  message_generation
+  ece_msgs
+  etsi_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -50,26 +50,9 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
- add_message_files(
-   DIRECTORY msg
-   FILES
-   ecemsg.msg
-   Altitude.msg
-   Desinsertion.msg
-   Feu.msg
-   FreinageUrgence.msg
-   IDs.msg
-   Insertion.msg
-   ItsPduHeader.msg
-   Platoon.msg
-   PositionConfidenceEllipse.msg
-   ReferencePosition.msg
-   Speed.msg
-   StationType.msg
-   VitesseInterdistance.msg
-   BasicContainer.msg
-   Phase.msg
- )
+#  add_message_files(
+#    FILES
+#  )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -86,10 +69,9 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
- generate_messages(
-   DEPENDENCIES
-   std_msgs
- )
+#  generate_messages(
+#    DEPENDENCIES
+#  )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -125,7 +107,7 @@ catkin_package(
 #  LIBRARIES beginner_tutorials
 #  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
-   CATKIN_DEPENDS roscpp rospy message_runtime
+   CATKIN_DEPENDS roscpp rospy
 )
 
 ###########
@@ -140,20 +122,14 @@ include_directories(
   #${ASN1_INCLUDE_DIRS}
 )
 
-add_executable(publisher_ece src/publisher_ece.cpp)
-
+add_executable(controler src/controler/controler.cpp)
 #add_executable(publisher_ece src/publisher_ece.cpp)
-add_dependencies(publisher_ece ${ece_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(controler ${rosbot_description_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(../ece_msgs ${ece_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(../etsi_msgs ${etsi_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 #add_dependencies(publisher_ece ASN1)
-target_link_libraries(publisher_ece ${catkin_LIBRARIES})
+target_link_libraries(controler ${catkin_LIBRARIES})
 #target_link_libraries(publisher_ece ASN1)
-
-add_executable(subscriber_ece src/subscriber_ece.cpp)
-#add_executable(subscriber_ece src/subscriber_ece.cpp)
-add_dependencies(subscriber_ece ${ece_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-#add_dependencies(subscriber_ece ASN1)
-target_link_libraries(subscriber_ece ${catkin_LIBRARIES})
-#target_link_libraries(subscriber_ece ASN1)
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}

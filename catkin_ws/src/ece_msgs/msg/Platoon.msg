@@ -1,6 +1,3 @@
-# ID Vt : 3 bits 
-uint8 id_vt
-
 # ID platoon : 3 bits
 uint8 id_platoon
 
