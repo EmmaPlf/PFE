@@ -8,8 +8,8 @@ Vehicle::Vehicle()
 
 Vehicle::Vehicle(int8_t id, int8_t pos)
 {
-    this.id = id;
-    this.pos = pos;
+    this->id = id;
+    this->pos = pos;
 }
     
 Vehicle::~Vehicle()
@@ -19,20 +19,20 @@ Vehicle::~Vehicle()
 
 int8_t Vehicle::getId()
 {
-    return this.id;
+    return this->id;
 }
 
 int8_t Vehicle::getPos()
 {
-    return this.pos;
+    return this->pos;
 }
 
 void Vehicle::setId(int8_t id)
 {
-    this.id = id;
+    this->id = id;
 }
 
 void Vehicle::setPos(int8_t pos)
 {
-    this.pos = pos;
+    this->pos = pos;
 }

@@ -122,14 +122,12 @@ include_directories(
   #${ASN1_INCLUDE_DIRS}
 )
 
-add_executable(controler src/controler/controler.cpp)
-#add_executable(publisher_ece src/publisher_ece.cpp)
+add_executable(controler src/controler/Controler.cpp src/controler/Platoon.cpp src/controler/Position.cpp
+src/controler/traitement.cpp src/controler/Vehicle.cpp)
 add_dependencies(controler ${rosbot_description_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 # add_dependencies(../ece_msgs ${ece_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 # add_dependencies(../etsi_msgs ${etsi_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-#add_dependencies(publisher_ece ASN1)
 target_link_libraries(controler ${catkin_LIBRARIES})
-#target_link_libraries(publisher_ece ASN1)
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
