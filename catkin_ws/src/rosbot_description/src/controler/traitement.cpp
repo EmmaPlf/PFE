@@ -5,11 +5,6 @@ void traitement_init(ece_msgs::ecemsg msg, Controler &c) {
   // Expéditeur
   uint8_t exp_id = msg.basic_container.ID_exp;
 
-
-  // Classe Controler et réfléchir aux attributs (sûr : 1 platoon et une map
-  // de véhicules avec leur destination) Voilà
-
-
   // Recoit destination de la voiture ???
   Position exp_p = Position(msg.platoon.reference_position.latitude, 
   msg.platoon.reference_position.longitude,
@@ -18,8 +13,6 @@ void traitement_init(ece_msgs::ecemsg msg, Controler &c) {
   // Liste de véhicules
   // Regarde les destinations et si destination en commun : platoon : envoi des messages avec les infos pour chaque voiture
 
-  // Regarde expéditeur, regarde si déjà dans les véhicules enregistrés
-  
   // Si map différente de vide
   if(!c.getMapVP().empty())
   {
@@ -31,11 +24,14 @@ void traitement_init(ece_msgs::ecemsg msg, Controler &c) {
       // Accessing VALUE from element pointed by it.
       Position p = it->second;
       // On regarde si le véhicule a déjà été ajouté ou pas
-      if(v.getId != exp_id && p.comparePositions())
+      if(v.getId != exp_id && !p.comparePositions())
       {
+        //TODO
+        // Comment faire position ?
+        Vehicle exp_v = Vehicle(exp_id, );
         // On ajoute
-        c.add_Vehicle(v,p);
-        // On informe le véhicule
+        c.add_Vehicle(exp_v, exp_p);
+        // On informe le véhicule si plusieurs véhicules ont aussi la même destination ?
         //TODO
       }
       // Increment the Iterator to point to next entry
@@ -74,12 +70,21 @@ void traitement_init(ece_msgs::ecemsg msg, Controler &c) {
   }*/
 }
 
-void traitement_insert(ece_msgs::ecemsg msg) {
+void traitement_insert(ece_msgs::ecemsg msg, Controler &c) {
   // Remplissage de l'objet Platoon avec les informations du message
+  
+  // Expéditeur
+  uint8_t exp_id = msg.basic_container.ID_exp;
 
-  // Envoi
+  // Recoit destination de la voiture ???
+  Position exp_p = Position(msg.platoon.reference_position.latitude, 
+  msg.platoon.reference_position.longitude,
+  msg.platoon.reference_position.alt);
+
+  // Envoi informations du platoon au véhicule ?
 
   // Ajout
+  c.add_Vehicle(exp_id, exp_p);
 }
 
 void traitement_desinsert(ece_msgs::ecemsg msg, Platoon &p) {
