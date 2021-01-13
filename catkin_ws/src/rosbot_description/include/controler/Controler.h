@@ -1,4 +1,8 @@
 #include "Platoon.h"
+#include "../../devel/include/ece_msgs/ecemsg.h"
+#include "../../devel/include/etsi_msgs/CAM.h"
+#include "../../devel/include/etsi_msgs/DENM.h"
+#include "ros/ros.h"
 #include <vector>
 
 #define TRUE 1
@@ -31,10 +35,18 @@ public:
   // Ajouter un platoon
   void add_Platoon(Platoon p);
 
-  // Méthode pour calculer les destinations proches
-
   // Méthode pour checker destination et créer platoon après
   // ou modif platoon
   void search_Platoon(Vehicle v);
 
+  //init
+  uint8_t init(ece_msgs::ecemsg msg);
+  //insert
+  uint8_t insert(ece_msgs::ecemsg msg);
+  //desinsert
+  uint8_t desinsert(ece_msgs::ecemsg msg);
+  //feux
+  uint8_t feux(ece_msgs::ecemsg msg);
+  //freinage_urg
+  uint8_t freinage_urg(ece_msgs::ecemsg msg);
 }

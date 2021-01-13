@@ -1,6 +1,4 @@
-#include "../../include/controler/traitement.h"
 #include "../../include/controler/Controler.h"
-#include "ros/ros.h"
 
 
 Controler::Controler()
@@ -96,7 +94,7 @@ void Controler::search_Platoon(Vehicle v)
           // TODO :: rank : selon la position
           std::map<Vehicle, uint8_t> map_rank;
 
-
+          // TODO
           // Première véhicule devient voiture de tête
           // Envoi message initialisation
           // Envoi message insertion au deuxième véhicule
@@ -189,6 +187,110 @@ void Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg, Controler 
 
   // Récupérer destinataire
   uint8_t dest = msg->basic_container.ID_dest;
+}
+
+
+uint8_t Controler::init(ece_msgs::ecemsg msg) {
+
+  bool known_vehicle = false;
+
+  // Expéditeur
+  uint8_t exp_id = msg.basic_container.ID_exp;
+
+  // Recoit destination de la voiture 
+  Position exp_p = Position(msg.basic_container.reference_position.latitude, 
+  msg.basic_container.reference_position.longitude,
+  msg.basic_container.reference_position.alt);
+
+  // Liste de véhicules
+  // Regarde les destinations et si destination en commun : platoon : envoi des messages avec les infos pour chaque voiture
+
+  // Si vector différent de vide
+  if(!this->getVectorV().empty())
+  {
+    // Itérateur
+    std::vector<Vehicle>::iterator it = c.getVectorV().begin();
+
+    // Tant qu'on n'est pas à la fin
+    while(it != this->getVectorV().end() && !known_vehicle)
+    {
+      // Vérifier si véhicule est là ou pas
+      if(it->getId() != exp_id)
+      {
+        // Ajout
+        Vehicle v = Vehicle(exp_id, exp_p);
+        this->add_Vehicle(v);
+        known_vehicle = true;
+        // Recherche platoon
+        this->search_Platoon(v);
+
+      }else if(!it->getDest().comparePositions(exp_p))
+      {
+        // Destination différente : update
+        it->setDest(exp_p);
+        if(it->getHasPlatoon())
+        {
+          // TODO : Désinsertion
+        }
+        // Recherche platoon
+        c.search_Platoon(*it);
+      }
+      
+    }
+  }
+}
+
+uint8_t Controler::insert(ece_msgs::ecemsg msg) {
+  
+  // Expéditeur
+  uint8_t exp_id = msg.basic_container.ID_exp;
+
+  // Recoit destination de la voiture ???
+  Position exp_p = Position(msg.platoon.reference_position.latitude, 
+  msg.platoon.reference_position.longitude,
+  msg.platoon.reference_position.alt);
+
+  // Envoi informations du platoon au véhicule ?
+
+  // Ajout
+  this->add_Vehicle(exp_id, exp_p);
+}
+
+uint8_t Controler::desinsert(ece_msgs::ecemsg msg) {
+
+  // Expéditeur
+  uint8_t exp_id = msg.basic_container.ID_exp;
+
+  // Reçoit demande de sortie et vitesse de sortie
+  bool demande_sortie = msg.desinsertion.demande_sortie;
+
+  // Si demande de sortie :
+
+    // "Recalcule" les différentes positions des voitures du platoon
+    // Calcule la vitesse et le point de sortie
+    // Calcule l'interdistance et la vitesse de décélération des véhicules derrière le véhicule sortant
+    // Calcule la vitesse d'accélération par la suite à tous les véhicules du platoon
+
+    // Envoie :
+    // Vitesse et point de sortie au véhicule sortant
+    // Interdistance et vitesse de décélération aux véhicules derrière 
+    // le véhicule sortant
+    // Envoie ensuite à tous les véhicules du platoon la vitesse
+    // d'accélération et leur nouvelle position dans P
+
+
+}
+
+uint8_t Controler::feux(ece_msgs::ecemsg msg) {
+
+  // Si feu on envoie quelque chose
+  // Envoyer ok ou non au platoon pour passer le feu
+}
+
+uint8_t Controler::freinage_urg(ece_msgs::ecemsg msg) {
+
+  // ??? Reçoit d'un véhicule message freinage urgence
+  // Renvoie aux autres véhicules l'info ?
 }
 
 
