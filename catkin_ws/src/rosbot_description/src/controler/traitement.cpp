@@ -16,38 +16,35 @@ void traitement_init(ece_msgs::ecemsg msg, Controler &c) {
   // Si map différente de vide
   if(!c.getMapVP().empty())
   {
+    // Création itérateur
     std::map<Vehicle, Position>::iterator it = c.getMapVP().begin();
+    // Tant qu'on n'est pas à la fin de la map
     while (it != c.getMapVP().end())
     {
-      // Accessing KEY from element pointed by it.
+      // Récupération objet véhicule
       Vehicle v = it->first;
-      // Accessing VALUE from element pointed by it.
+      // Récupération objet position
       Position p = it->second;
       // On regarde si le véhicule a déjà été ajouté ou pas
       if(v.getId != exp_id && !p.comparePositions())
       {
-        //TODO
-        // Comment faire position ?
-        Vehicle exp_v = Vehicle(exp_id, );
-        // On ajoute
+        // TODO : Comment faire position ?
+        Vehicle exp_v = Vehicle(exp_id, ???);
+        // Ajout
         c.add_Vehicle(exp_v, exp_p);
-        // On informe le véhicule si plusieurs véhicules ont aussi la même destination ?
-        //TODO
+        // TODO : On informe le véhicule si plusieurs véhicules ont aussi la même destination ?
       }
       // Increment the Iterator to point to next entry
       it++;
     }
   }
 
-
-
-
-
+  // Comment faire pour attendre que tous les véhicules aient envoyé
+  // leurs infos et ensuite voir si destination commune ou pas ?
 
 
   //FAUX!!!
 
-  // Remplissage de l'objet Platoon avec les informations du message
   /*Position dest = Position();
   dest.setLat(msg.platoon.reference_position.latitude);
   dest.setLon(msg.platoon.reference_position.longitude);
@@ -71,7 +68,6 @@ void traitement_init(ece_msgs::ecemsg msg, Controler &c) {
 }
 
 void traitement_insert(ece_msgs::ecemsg msg, Controler &c) {
-  // Remplissage de l'objet Platoon avec les informations du message
   
   // Expéditeur
   uint8_t exp_id = msg.basic_container.ID_exp;
@@ -88,13 +84,38 @@ void traitement_insert(ece_msgs::ecemsg msg, Controler &c) {
 }
 
 void traitement_desinsert(ece_msgs::ecemsg msg, Platoon &p) {
-  // Remplissage de l'objet Platoon avec les informations du message
+
+  // Expéditeur
+  uint8_t exp_id = msg.basic_container.ID_exp;
+
+  // Reçoit demande de sortie et vitesse de sortie
+  bool demande_sortie = msg.desinsertion.demande_sortie;
+
+  // Si demande de sortie :
+
+    // "Recalcule" les différentes positions des voitures du platoon
+    // Calcule la vitesse et le point de sortie
+    // Calcule l'interdistance et la vitesse de décélération des véhicules derrière le véhicule sortant
+    // Calcule la vitesse d'accélération par la suite à tous les véhicules du platoon
+
+    // Envoie :
+    // Vitesse et point de sortie au véhicule sortant
+    // Interdistance et vitesse de décélération aux véhicules derrière 
+    // le véhicule sortant
+    // Envoie ensuite à tous les véhicules du platoon la vitesse
+    // d'accélération et leur nouvelle position dans P
+
+
 }
 
 void traitement_feux(ece_msgs::ecemsg msg, Platoon &p) {
-  // Remplissage de l'objet Platoon avec les informations du message
+
+  // Si feu envoie quelque chose
+  // Envoyer ok ou non au platoon pour passer le feu
 }
 
 void traitement_freinage_urg(ece_msgs::ecemsg msg, Platoon &p) {
-  // Remplissage de l'objet Platoon avec les informations du message
+
+  // ??? Reçoit d'un véhicule message freinage urgence
+  // Renvoie aux autres véhicules l'info ?
 }

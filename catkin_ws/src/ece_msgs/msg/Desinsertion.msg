@@ -1,4 +1,5 @@
 # Demande de sortie : 1 bit
+bool demande_sortie
 
 # Vitesse de sortie : 6 bits 
 Speed speed

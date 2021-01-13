@@ -69,7 +69,9 @@ void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &msg, Controle
     break;
 
   case 2:
+    //Recoit :
     //Demande de sortie
+    //Envoie :
     //Vitesse de sortie
     //Position/Point de sortie
     //Interdistance
@@ -80,12 +82,13 @@ void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &msg, Controle
     break;
 
   case 3:
-    //Normalement rien ici à part si on reçoit des feux ?
+    // Réception ici de message venant de feux
     traitement_feux(msg, p);
     break;
 
   case 4:
-    // Rien ici normalement aussi ?
+    // ??? Reçoit d'un véhicule message freinage urgence
+    // Renvoie aux autres véhicules l'info ?
     traitement_freinage_urg(msg, p);
     break;
 
