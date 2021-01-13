@@ -1,16 +1,24 @@
+#include "Position.h"
+
 class Vehicle {
 private:
   int8_t id;
-  int8_t pos;
+  Position dest;
+  Position actual_pos;
+  uint8_t has_platoon;
 
 public:
   Vehicle();
-  Vehicle(int8_t id, int8_t pos);
+  Vehicle(int8_t id, Position dest, Position actual_pos, uint8_t has_platoon);
   ~Vehicle();
 
   int8_t getId();
-  int8_t getPos();
+  Position getDest();
+  Position getActualPos();
+  uint8_t getHasPlatoon();
 
   void setId(int8_t id);
-  void setPos(int8_t pos);
+  void setDest(Position dest);
+  void setActualPos(Position actual_pos);
+  void setHasPlatoon(uint8_t has_platoon);
 };

@@ -23,7 +23,7 @@ void Position::setLon(int64_t lon) { this->lon = lon; }
 void Position::setAlt(int32_t alt) { this->alt = alt; }
 
 //Ret 1 si positions identiques
-int Position::comparePositions(Position p)
+uint8_t Position::comparePositions(Position p)
 {
   uint8_t ret = 0;
 
@@ -32,6 +32,20 @@ int Position::comparePositions(Position p)
   {
     ret = 1;
   }
+
+  return ret;
+}
+
+uint8_t Position::compareZone(Position p)
+{
+  uint8_t ret = 0;
+
+  if(((this->lat >= p.getLat() - ZONE_DIFF) && (this->lat <= p.getLat() + ZONE_DIFF)) 
+  || ((this->lon >= p.getLon() - ZONE_DIFF) && (this->lon <= p.getLon() + ZONE_DIFF)))
+  {
+    ret = 1;
+  }
+
 
   return ret;
 }

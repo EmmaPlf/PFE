@@ -2,69 +2,53 @@
 
 void traitement_init(ece_msgs::ecemsg msg, Controler &c) {
 
+  bool known_vehicle = false;
+
   // Expéditeur
   uint8_t exp_id = msg.basic_container.ID_exp;
 
-  // Recoit destination de la voiture ???
-  Position exp_p = Position(msg.platoon.reference_position.latitude, 
-  msg.platoon.reference_position.longitude,
-  msg.platoon.reference_position.alt);
+  // Recoit destination de la voiture 
+  Position exp_p = Position(msg.basic_container.reference_position.latitude, 
+  msg.basic_container.reference_position.longitude,
+  msg.basic_container.reference_position.alt);
 
   // Liste de véhicules
   // Regarde les destinations et si destination en commun : platoon : envoi des messages avec les infos pour chaque voiture
 
-  // Si map différente de vide
-  if(!c.getMapVP().empty())
+  // Si vector différent de vide
+  if(!c.getVectorV().empty())
   {
-    // Création itérateur
-    std::map<Vehicle, Position>::iterator it = c.getMapVP().begin();
-    // Tant qu'on n'est pas à la fin de la map
-    while (it != c.getMapVP().end())
+    // Itérateur
+    std::vector<Vehicle>::iterator it = c.getVectorV().begin();
+
+    // Tant qu'on n'est pas à la fin
+    while(it != c.getVectorV().end() && !known_vehicle)
     {
-      // Récupération objet véhicule
-      Vehicle v = it->first;
-      // Récupération objet position
-      Position p = it->second;
-      // On regarde si le véhicule a déjà été ajouté ou pas
-      if(v.getId != exp_id && !p.comparePositions())
+      // Vérifier si véhicule est là ou pas
+      if(it->getId() != exp_id)
       {
-        // TODO : Comment faire position ?
-        Vehicle exp_v = Vehicle(exp_id, ???);
         // Ajout
-        c.add_Vehicle(exp_v, exp_p);
-        // TODO : On informe le véhicule si plusieurs véhicules ont aussi la même destination ?
+        Vehicle v = Vehicle(exp_id, exp_p);
+        c.add_Vehicle(v);
+        known_vehicle = true;
+        // Recherche platoon
+        c.search_Platoon(v);
+
+      }else if(!it->getDest().comparePositions(exp_p))
+      {
+        // Destination différente : update
+        it->setDest(exp_p);
+        if(it->getHasPlatoon())
+        {
+          // TODO : Désinsertion
+        }
+        // Recherche platoon
+        c.search_Platoon(*it);
       }
-      // Increment the Iterator to point to next entry
-      it++;
+      
     }
   }
 
-  // Comment faire pour attendre que tous les véhicules aient envoyé
-  // leurs infos et ensuite voir si destination commune ou pas ?
-
-
-  //FAUX!!!
-
-  /*Position dest = Position();
-  dest.setLat(msg.platoon.reference_position.latitude);
-  dest.setLon(msg.platoon.reference_position.longitude);
-  dest.setAlt(msg.platoon.reference_position.altitude.value);
-  p.setDest(dest);
-
-  // Attention vitesse en 0.01 m/s
-  p.setSpeed(msg.vitesse_interdistance.speed.value);
-
-  p.setInter(msg.vitesse_interdistance.interdistance);
-
-  p.setNbVehicles(msg.platoon.nombre_vehicules);
-
-  // Vecteur de véhicules
-  Vehicle v = Vehicle();
-  for (int i = 0; i < p.getNbVehicles(); i++) {
-    v.setId(msg.platoon.IDs[i]);
-    v.setPos(msg.platoon.position[i]);
-    p.addVehicle(v);
-  }*/
 }
 
 void traitement_insert(ece_msgs::ecemsg msg, Controler &c) {

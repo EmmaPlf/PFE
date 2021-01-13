@@ -1,5 +1,8 @@
 #include <sys/types.h>
 
+// A modifier selon les conditions de simulation
+#define ZONE_DIFF 5
+
 class Position {
 private:
   int64_t lat;
@@ -20,5 +23,8 @@ public:
   void setAlt(int32_t alt);
 
   //Ret 1 si positions identiques
-  int comparePositions(Position p);
+  uint8_t comparePositions(Position p);
+
+  //Ret 1 si positions assez proches (même zone)
+  uint8_t compareZone(Position p);
 };

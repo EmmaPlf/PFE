@@ -5,13 +5,13 @@
 
 Controler::Controler()
 {
-  this->p = Platoon();
+
 }
 
-Controler::Controler(Platoon p, std::map<Vehicle, Position> map_v_p)
+Controler::Controler(std::vector<Vehicle> vector_v, std::vector<Platoon> vector_p)
 {
-  this->p = p;
-  this->map_v_p = map_v_p;
+  this->vector_v = vector_v;
+  this->vector_p = vector_p;
 }
 
 Controler::~Controler()
@@ -19,29 +19,101 @@ Controler::~Controler()
 
 }
 
-Platoon Controler::getPlatoon()
+std::vector<Vehicle> Controler::getVectorV()
 {
-  return this->p;
+  return this->getVectorV;
 }
 
-std::map<Vehicle, Position> Controler::getMapVP()
+std::vector<Platoon> Controler::getVectorP()
 {
-  return this->getMapVP;
+  return this->getVectorP;
 }
 
-void Controler::setPlatoon(Platoon p)
+void Controler::setVectorV(std::vector<Vehicle> vector_v)
 {
-  this->p = p;
+  this->vector_v = vector_v;
 }
 
-void Controler::setMapVP(std::map<Vehicle, Position> map_v_p)
+void Controler::setVectorP(std::vector<Platoon> vector_p)
 {
-  this->map_v_p = map_v_p;
+  this->vector_p = vector_p;
 }
 
-void Controler::add_Vehicle(Vehicle v, Position p)
+void Controler::add_Vehicle(Vehicle v)
 {
-  this->map_v_p.insert(std::pair<Vehicle,Position>(v,p));
+  this->vector_v.push_back(v);
+}
+
+void Controler::add_Platoon(Platoon p)
+{
+  this->vector_p.push_back(p);
+}
+
+void Controler::search_Platoon(Vehicle v)
+{
+
+  // Checker si un platoon avec destination dans la même zone de destination
+  // Pour tous les platoons
+  // Si vector différent de vide
+  if(!this->vector_p.empty())
+  {
+    // Itérateur
+    std::vector<Platoon>::iterator it = this->vector_p.begin();
+    // Tant qu'on n'est pas à la fin
+    while(it != this->vector_p.end() && !v.getHasPlatoon())
+    {
+      // Vérifier si destination est dans même zone
+      if(it->getDest().compareZone(v.getDest))
+      {
+        // Ajout
+        it->addVehicle(v);
+        v.setHasPlatoon(TRUE);
+      }
+    }
+  }
+
+  // Sinon chercher parmi les voitures celles avec une même destination
+  // Si pas de platoon trouvé
+  if(!v.getHasPlatoon())
+  {
+    // Si vector différent de vide
+    if(!this->vector_v.empty())
+    {
+      std::vector<Vehicle>::iterator it = this->vector_v.begin();
+      // Tant qu'on n'est pas à la fin et que les deux véhicules n'ont pas de platoon
+      while(it != this->vector_v.end() && !v.getHasPlatoon() && !this->getHasPlatoon())
+      {
+        // Vérifier si destination est dans même zone
+        if(it->getDest().compareZone(v.getDest()))
+        {
+          // On crée un platoon avec les 2 voitures
+          Platoon p = Platoon();
+          p.setDest(it->getDest());
+          // TODO : speed dans vehicle et calcul à faire !
+          p.setSpeed(0);
+          // TODO : inter : calcul à faire !
+          p.setInter(0);
+          // TODO :: rank : selon la position
+          std::map<Vehicle, uint8_t> map_rank;
+
+
+          // Première véhicule devient voiture de tête
+          // Envoi message initialisation
+          // Envoi message insertion au deuxième véhicule
+          // pour qu'il rejoigne la voiture de tête
+          
+          // Ajout du platoon dans le vector de platoon
+          this->.add_Platoon(p);
+          // TODO: Id récupérer de l'index du vector de platoon
+          p.setId();
+
+
+        }
+      }
+    }
+
+  }
+  
 }
 
 
