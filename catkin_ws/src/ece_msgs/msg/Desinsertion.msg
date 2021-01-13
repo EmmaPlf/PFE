@@ -5,7 +5,7 @@ bool demande_sortie
 Speed speed
 
 # Point de sortie : 8 octets
-ReferencePosition reference_position
+ReferencePosition point_sortie
 
 # Nouvelle position dans P : 2 bits
 uint8 position

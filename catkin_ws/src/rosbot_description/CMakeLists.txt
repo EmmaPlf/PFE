@@ -122,8 +122,8 @@ include_directories(
   #${ASN1_INCLUDE_DIRS}
 )
 
-add_executable(controler src/controler/Controler.cpp src/controler/Platoon.cpp src/controler/Position.cpp
-src/controler/traitement.cpp src/controler/Vehicle.cpp)
+add_executable(controler src/controler/main.cpp src/controler/Controler.cpp src/controler/Platoon.cpp src/controler/Position.cpp
+src/controler/Vehicle.cpp)
 add_dependencies(controler ${rosbot_description_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 # add_dependencies(../ece_msgs ${ece_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 # add_dependencies(../etsi_msgs ${etsi_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})

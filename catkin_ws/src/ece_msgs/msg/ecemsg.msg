@@ -11,9 +11,13 @@ Platoon platoon
 
 VitesseInterdistance vitesse_interdistance
 
-Insertion insertion 
+Insertion insertion
+
 Desinsertion desinsertion 
 
 FreinageUrgence freinage_urgence
 
 Feu feu
+
+# Actual position : 8 octets
+ReferencePosition actual_position

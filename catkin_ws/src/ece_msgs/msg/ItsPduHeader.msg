@@ -4,4 +4,4 @@ uint32 station_id
 
 uint8 MESSAGE_ID_DENM = 1
 uint8 MESSAGE_ID_CAM = 2
-uint8 MESSAGE_ID_ECE = 3
+uint8 MESSAGE_ID_ECE = 8

@@ -6,6 +6,3 @@ uint8 ID_dest
 
 # Phase de plattoning
 Phase phase
-
-# Destination : 8 octets
-ReferencePosition reference_position
