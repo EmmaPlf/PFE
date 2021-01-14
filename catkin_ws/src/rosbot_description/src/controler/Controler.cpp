@@ -113,6 +113,15 @@ ajouter à un platoon ou créer un platoon ou rien
  */
 uint8_t Controler::init_receive(ece_msgs::ecemsg msg) {
 
+  // Header
+  uint8_t header_station_id = msg.its_header.station_id;
+  uint8_t header_message_id = msg.its_header.message_id;
+
+  if(header_message_id != ECE_ID)
+  {
+    return 0;
+  }
+
   bool known_vehicle = false;
 
   // Expéditeur
@@ -156,15 +165,13 @@ uint8_t Controler::init_receive(ece_msgs::ecemsg msg) {
 
         // Destination différente : update
         it->setDest(exp_dest);
-        if (it->getHasPlatoon()) {
-          // TODO : Désinsertion
-        }
-
         // Recherche platoon
         this->search_for_platoon(*it);
       }
     }
   }
+
+  return 1;
 }
 
 void Controler::search_for_platoon(Vehicle v) {
@@ -266,7 +273,7 @@ uint8_t Controler::init_send(Platoon p) {
   msg.platoon.reference_position.longitude = p.getDest().getLon();
   msg.platoon.reference_position.altitude.value = p.getDest().getAlt();
 
-  // Réemplir tableau ID/Rang avec la map
+  // Remplir tableau ID/Rang avec la map
   if (!p.getMapRank().empty()) {
 
     for (int i = 0; i < p.getNbVehicles(); i++) {
@@ -284,18 +291,48 @@ uint8_t Controler::init_send(Platoon p) {
   }
 }
 
-/** A FINIR
- */
 uint8_t Controler::insert_receive(ece_msgs::ecemsg msg) {
+
+  // Header
+  uint8_t header_station_id = msg.its_header.station_id;
+  uint8_t header_message_id = msg.its_header.message_id;
+
+  if(header_message_id != ECE_ID)
+  {
+    return 0;
+  }
 
   // Expéditeur
   uint8_t exp_id = msg.basic_container.ID_exp;
 
-  // Check confirmation insertion
-  if (msg.insertion.confirmation_insertion == true) {
-    // Ajout : TODO
-    // this->add_Vehicle(exp_id, exp_p);
+  // Check confirmation insertion : si faux on supprime
+  if (msg.insertion.confirmation_insertion == false) {
+    
+    // Chercher le platoon correspondant de la voiture
+    if (!this->vector_p.empty()) {
+
+      std::vector<Platoon>::iterator it_p = this->getVectorP().begin();
+      std::map<uint8_t, uint8_t>::iterator it_m = it_p->getMapRank().begin();
+
+      while (it_p != this->getVectorP().end()) {
+
+        while (it_m != it_p->getMapRank().end()) {
+
+          // Vérifier si véhicule présent dans platoon avec ID
+          if (it_m->first == exp_id) {
+
+            // Retirer la voiture du platoon (map)
+            it_p->erase_map_elmt(it_m);
+
+            // Décrémenter nb_véhicules du platoon
+            it_p->setNbVehicles(it_p->getNbVehicles() - 1);
+          }
+        }
+      }
+    }
   }
+
+  return 1;
 }
 
 /** A FINIR
@@ -324,13 +361,21 @@ uint8_t Controler::insert_send(uint8_t id_dest) {
   }
 }
 
+// A finir mais plutôt compliqué pour le moment
 uint8_t Controler::desinsert_receive(ece_msgs::ecemsg msg) {
 
   uint8_t rank = 0;
   uint8_t rank_found = 0;
   std::vector<uint8_t> ids_behind;
 
-  // Header TODO
+  // Header
+  uint8_t header_station_id = msg.its_header.station_id;
+  uint8_t header_message_id = msg.its_header.message_id;
+
+  if(header_message_id != ECE_ID)
+  {
+    return 0;
+  }
 
   // Expéditeur
   uint8_t exp_id = msg.basic_container.ID_exp;
@@ -431,14 +476,19 @@ uint8_t Controler::desinsert_receive(ece_msgs::ecemsg msg) {
       // d'accélération et leur nouvelle position dans P
     }
   }
+
+  // Tout s'est bien passé
+  return 1;
 }
 
+// Plus tard
 uint8_t Controler::feux(ece_msgs::ecemsg msg) {
 
   // Si feu on envoie quelque chose
   // Envoyer ok ou non au platoon pour passer le feu
 }
 
+// Plus tard
 uint8_t Controler::freinage_urg(ece_msgs::ecemsg msg) {
 
   // ??? Reçoit d'un véhicule message freinage urgence
@@ -448,7 +498,7 @@ uint8_t Controler::freinage_urg(ece_msgs::ecemsg msg) {
 void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &msg,
                                  Controler &c) {
 
-  ROS_INFO("I have received ece msg");
+  ROS_INFO("I have received ece msg, %d", msg->header.seq);
   int rep = 0;
 
   // Récupérer expéditeur
@@ -462,25 +512,18 @@ void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &msg,
     // Récup véhicules avec destinations pour créer un platoon
     // Envoie ensuite les infos à chaque véhicule concerné
     rep = c.init_receive(*msg);
+    //TODO rep == 0 ? (erreur)
     break;
 
   case 1:
     // Véhicule souhaitant s'insérer ? Ou uniquement confirmation insertion ?
     rep = c.insert_receive(*msg);
+    //TODO rep == 0 ? (erreur)
     break;
 
   case 2:
     rep = c.desinsert_receive(*msg);
-    // Recoit :
-    // Demande de sortie
-    // Envoie :
-    // Vitesse de sortie
-    // Position/Point de sortie
-    // Interdistance
-    // Vitesse décélération
-    // Vitesse accélération
-    // Nouvelle position dans P
-    // traitement_desinsert(msg, p);
+    //TODO rep == 0 ? (erreur)
     break;
 
   case 3:

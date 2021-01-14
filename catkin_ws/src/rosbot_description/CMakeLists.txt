@@ -129,6 +129,12 @@ add_dependencies(controler ${rosbot_description_EXPORTED_TARGETS} ${catkin_EXPOR
 # add_dependencies(../etsi_msgs ${etsi_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(controler ${catkin_LIBRARIES})
 
+
+add_executable(essai src/controler/essai.cpp)
+add_dependencies(essai ${rosbot_description_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(../ece_msgs ${ece_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(../etsi_msgs ${etsi_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(essai ${catkin_LIBRARIES})
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/beginner_tutorials.cpp

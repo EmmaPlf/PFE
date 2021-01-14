@@ -9,3 +9,4 @@ ReferencePosition point_sortie
 
 # Nouvelle position dans P : 2 bits
 uint8 position
+

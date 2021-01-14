@@ -8,4 +8,10 @@ int main(int argc, char **argv) {
   Controler c = Controler(n);
 
   ros::Rate loop_rate(10);
+  
+  while(ros::ok())
+  {
+    ros::spinOnce();
+    loop_rate.sleep();
+  }
 }
