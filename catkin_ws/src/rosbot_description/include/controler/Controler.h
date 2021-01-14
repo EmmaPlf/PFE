@@ -18,10 +18,11 @@ private:
   ros::Subscriber sub_ece;
   ros::Subscriber sub_DENM;
   ros::Subscriber sub_CAM;
+  ros::NodeHandle n;
   uint64_t count;
 
 public:
-  Controler(ros::NodeHandle n);
+  Controler();
   Controler(std::vector<Vehicle> vector_v, std::vector<Platoon> vector_p,
             ros::NodeHandle n);
   ~Controler();
@@ -34,6 +35,7 @@ public:
   ros::Subscriber getSubCAM();
   ros::Subscriber getSubDENM();
   uint64_t getCount();
+  ros::NodeHandle getNodeHandle();
 
   void setVectorV(std::vector<Vehicle> vector_v);
   void setVectorP(std::vector<Platoon> vector_p);
@@ -43,6 +45,7 @@ public:
   void setSubCAM(ros::Subscriber sub);
   void setSubDENM(ros::Subscriber sub);
   void setCount(uint64_t count);
+  void setNodeHandle(ros::NodeHandle n);
 
   static void sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &msg,
                                Controler &c);
@@ -73,4 +76,7 @@ public:
   uint8_t desinsert_receive(ece_msgs::ecemsg msg);
   uint8_t feux(ece_msgs::ecemsg msg);
   uint8_t freinage_urg(ece_msgs::ecemsg msg);
+
+  uint8_t publish_ece_msg(ece_msgs::ecemsg msg);
+  uint8_t publish_DENM_msg(etsi_msgs::DENM msg);
 };

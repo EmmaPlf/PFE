@@ -12,26 +12,26 @@
 
 /// CONSTRUCTEURS
 
-Controler::Controler(ros::NodeHandle n) {
+Controler::Controler() {
 
   this->setCount(0);
 
   /// SUBSCRIBERS
 
-  this->sub_ece = n.subscribe<ece_msgs::ecemsg>(
+  this->sub_ece = this->n.subscribe<ece_msgs::ecemsg>(
       "controler_ece", 1000, boost::bind(sub_ece_callback, _1, *this));
 
-  this->sub_DENM = n.subscribe<etsi_msgs::DENM>(
+  this->sub_DENM = this->n.subscribe<etsi_msgs::DENM>(
       "controler_DENM", 1000, boost::bind(sub_DENM_callback, _1, *this));
 
-  this->sub_CAM = n.subscribe<etsi_msgs::CAM>(
+  this->sub_CAM = this->n.subscribe<etsi_msgs::CAM>(
       "controler_CAM", 1000, boost::bind(sub_CAM_callback, _1, *this));
 
   /// PUBLISHERS
 
-  this->pub_ece = n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
+  this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
 
-  this->pub_DENM = n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
+  this->pub_DENM = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
 }
 
 Controler::Controler(std::vector<Vehicle> vector_v,
@@ -40,22 +40,24 @@ Controler::Controler(std::vector<Vehicle> vector_v,
   this->vector_p = vector_p;
   this->setCount(0);
 
+  this->n = n;
+
   /// SUBSCRIBERS
 
-  this->sub_ece = n.subscribe<ece_msgs::ecemsg>(
+  this->sub_ece = this->n.subscribe<ece_msgs::ecemsg>(
       "controler_ece", 1000, boost::bind(sub_ece_callback, _1, *this));
 
-  this->sub_DENM = n.subscribe<etsi_msgs::DENM>(
+  this->sub_DENM = this->n.subscribe<etsi_msgs::DENM>(
       "controler_DENM", 1000, boost::bind(sub_DENM_callback, _1, *this));
 
-  this->sub_CAM = n.subscribe<etsi_msgs::CAM>(
+  this->sub_CAM = this->n.subscribe<etsi_msgs::CAM>(
       "controler_CAM", 1000, boost::bind(sub_CAM_callback, _1, *this));
 
   /// PUBLISHERS
 
-  this->pub_ece = n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
+  this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
 
-  this->pub_DENM = n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
+  this->pub_DENM = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
 }
 
 /// DESTRUCTEURS
@@ -80,6 +82,8 @@ ros::Subscriber Controler::getSubDENM() { return this->sub_DENM; }
 
 uint64_t Controler::getCount() { return this->count; }
 
+ros::NodeHandle Controler::getNodeHandle() { return this->n; }
+
 /// SETTERS
 
 void Controler::setVectorV(std::vector<Vehicle> vector_v) {
@@ -102,6 +106,8 @@ void Controler::setSubDENM(ros::Subscriber sub) { this->sub_DENM = sub; }
 
 void Controler::setCount(uint64_t count) { this->count = count; }
 
+void Controler::setNodeHandle(ros::NodeHandle n) { this->n = n; }
+
 /// METHODS
 
 void Controler::add_vehicle(Vehicle v) { this->vector_v.push_back(v); }
@@ -117,12 +123,13 @@ uint8_t Controler::init_receive(ece_msgs::ecemsg msg) {
   uint8_t header_station_id = msg.its_header.station_id;
   uint8_t header_message_id = msg.its_header.message_id;
 
-  if(header_message_id != ECE_ID)
-  {
+  ROS_INFO("I have received ece msg, station_id : %d", header_station_id);
+
+  if (header_message_id != ECE_ID) {
     return 0;
   }
 
-  bool known_vehicle = false;
+  uint8_t count = 0;
 
   // Expéditeur
   uint8_t exp_id = msg.basic_container.ID_exp;
@@ -132,10 +139,14 @@ uint8_t Controler::init_receive(ece_msgs::ecemsg msg) {
       Position(msg.actual_position.latitude, msg.actual_position.longitude,
                msg.actual_position.altitude.value);
 
+  ROS_INFO("station_id : %d  pos : %d", header_station_id, exp_pos.getLon());
+
   // Recoit destination de la voiture
   Position exp_dest = Position(msg.platoon.reference_position.latitude,
                                msg.platoon.reference_position.longitude,
                                msg.platoon.reference_position.altitude.value);
+
+  ROS_INFO("station_id : %d dest : %d", header_station_id, exp_dest.getLon());
 
   // Liste de véhicules
   // Regarde les destinations et si destination en commun : platoon : envoi des
@@ -148,18 +159,12 @@ uint8_t Controler::init_receive(ece_msgs::ecemsg msg) {
     std::vector<Vehicle>::iterator it = this->getVectorV().begin();
 
     // Tant qu'on n'est pas à la fin
-    while (it != this->getVectorV().end() && !known_vehicle) {
+    while (it != this->getVectorV().end()) {
 
       // Vérifier si véhicule est là ou pas
       if (it->getId() != exp_id) {
 
-        // Ajout du véhicule dans le platoon
-        Vehicle v = Vehicle(exp_id, exp_dest, exp_pos, 0);
-        this->add_vehicle(v);
-        known_vehicle = true;
-
-        // Recherche platoon
-        this->search_for_platoon(v);
+        count++;
 
       } else if (!it->getDest().comparePositions(exp_dest)) {
 
@@ -168,13 +173,39 @@ uint8_t Controler::init_receive(ece_msgs::ecemsg msg) {
         // Recherche platoon
         this->search_for_platoon(*it);
       }
+      it++;
     }
+
+    ROS_INFO("Count : %d", count);
+
+    // Si le véhicule n'est pas dans la liste de véhicules
+    if (count == this->getVectorV().size()) {
+      // Ajout du véhicule dans la liste du contrôleur
+      Vehicle v = Vehicle(exp_id, exp_dest, exp_pos, 0);
+      this->add_vehicle(v);
+      ROS_INFO("station_id : %d ID actuel vehicule du vector : %d", v.getId(),
+               this->getVectorV().back().getId());
+
+      // Recherche platoon
+      this->search_for_platoon(v);
+    }
+  } else {
+    // Ajout du véhicule dans la liste du contrôleur
+    Vehicle v = Vehicle(exp_id, exp_dest, exp_pos, 0);
+    this->add_vehicle(v);
+    ROS_INFO("ID actuel vehicule du vector : %d",
+             this->getVectorV().back().getId());
+
+    // Recherche platoon
+    this->search_for_platoon(v);
   }
 
   return 1;
 }
 
 void Controler::search_for_platoon(Vehicle v) {
+
+  ROS_INFO("search_for_platoon : Vehicule ID : %d", v.getId());
 
   // Checker si un platoon avec destination dans la même zone de destination
   // Pour tous les platoons
@@ -194,15 +225,19 @@ void Controler::search_for_platoon(Vehicle v) {
         it->addVehicle(v);
         v.setHasPlatoon(true);
       }
+      it++;
     }
   }
 
   // Sinon chercher parmi les voitures celles avec une même destination
   // Si pas de platoon trouvé
   if (!v.getHasPlatoon()) {
+    ROS_INFO("Pas de platoon trouve");
 
     // Si vector différent de vide
     if (!this->vector_v.empty()) {
+
+      ROS_INFO("Vector de vehicules different de vide");
 
       std::vector<Vehicle>::iterator it = this->vector_v.begin();
 
@@ -212,12 +247,14 @@ void Controler::search_for_platoon(Vehicle v) {
              !it->getHasPlatoon()) {
 
         // Vérifier si destination est dans même zone
-        if (it->getDest().compareZone(v.getDest())) {
+        if (it->getDest().compareZone(v.getDest()) &&
+            it->getId() != v.getId()) {
+          ROS_INFO("compareZone = 1");
 
           // On crée un platoon avec les 2 voitures
           Platoon p = Platoon();
 
-          p.setDest(it->getDest());
+          p.setDest(v.getDest());
 
           // TODO : speed dans vehicle et calcul à faire !
           p.setSpeed(0);
@@ -230,23 +267,33 @@ void Controler::search_for_platoon(Vehicle v) {
           // Créer une map de Véicule et de rang
           std::map<uint8_t, uint8_t> map_rank;
 
-          // TODO
           // Remplir la map avec le première véhicule qui est la voiture de tête
-          p.getMapRank().insert(std::pair<uint8_t, uint8_t>(it->getId(), 0));
+          map_rank.insert(std::pair<uint8_t, uint8_t>(v.getId(), 0));
+
+          p.setMapRank(map_rank);
+
+          ROS_INFO("Avant init_send");
 
           // Envoi message initialisation
           this->init_send(p);
 
+          ROS_INFO("Apres init_send");
+
           // Envoi message insertion au deuxième véhicule
           // pour qu'il rejoigne la voiture de tête
-          this->insert_send(v.getId());
+          this->insert_send(it->getId());
 
-          // Ajout du platoon dans le vector de platoon
-          add_platoon(p);
+          ROS_INFO("Apres insert_send");
 
           // Id du platoon : récupérer de l'index du vector de platoon
-          p.setId(this->getVectorP().size());
+          p.setId(this->getVectorP().size() + 1);
+
+          // Ajout du platoon dans le vector de platoon
+          this->add_platoon(p);
+
+          ROS_INFO("station_id : %d : Platoon cree", v->getId());
         }
+        it++;
       }
     }
   }
@@ -273,22 +320,31 @@ uint8_t Controler::init_send(Platoon p) {
   msg.platoon.reference_position.longitude = p.getDest().getLon();
   msg.platoon.reference_position.altitude.value = p.getDest().getAlt();
 
+  ROS_INFO("Avant remplissage");
+
   // Remplir tableau ID/Rang avec la map
   if (!p.getMapRank().empty()) {
 
+    std::map<uint8_t, uint8_t>::iterator it = p.getMapRank().begin();
     for (int i = 0; i < p.getNbVehicles(); i++) {
 
-      std::map<uint8_t, uint8_t>::iterator it = p.getMapRank().begin();
-      msg.platoon.ids[i].ID = it->first;
-      msg.platoon.ids[i].position = it->second;
+      ece_msgs::IDs id;
+      id.ID = it->first;
+      id.position = it->second;
+      msg.platoon.ids.push_back(id);
       ++it;
     }
   }
 
+  ROS_INFO("Apres remplissage");
+
   // Envoyer le msg init sur le topic des véhicules
   if (ros::ok()) {
-    this->getPubEce().publish(msg);
+    // this->getPubEce().publish(msg);
+    this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
+    this->publish_ece_msg(msg);
   }
+  ROS_INFO("Apres envoi");
 }
 
 uint8_t Controler::insert_receive(ece_msgs::ecemsg msg) {
@@ -297,8 +353,7 @@ uint8_t Controler::insert_receive(ece_msgs::ecemsg msg) {
   uint8_t header_station_id = msg.its_header.station_id;
   uint8_t header_message_id = msg.its_header.message_id;
 
-  if(header_message_id != ECE_ID)
-  {
+  if (header_message_id != ECE_ID) {
     return 0;
   }
 
@@ -307,7 +362,7 @@ uint8_t Controler::insert_receive(ece_msgs::ecemsg msg) {
 
   // Check confirmation insertion : si faux on supprime
   if (msg.insertion.confirmation_insertion == false) {
-    
+
     // Chercher le platoon correspondant de la voiture
     if (!this->vector_p.empty()) {
 
@@ -357,7 +412,8 @@ uint8_t Controler::insert_send(uint8_t id_dest) {
 
   // Envoyer message sur topic des véhicules
   if (ros::ok()) {
-    this->getPubEce().publish(msg);
+    // this->getPubEce().publish(msg);
+    this->publish_ece_msg(msg);
   }
 }
 
@@ -372,8 +428,7 @@ uint8_t Controler::desinsert_receive(ece_msgs::ecemsg msg) {
   uint8_t header_station_id = msg.its_header.station_id;
   uint8_t header_message_id = msg.its_header.message_id;
 
-  if(header_message_id != ECE_ID)
-  {
+  if (header_message_id != ECE_ID) {
     return 0;
   }
 
@@ -455,7 +510,8 @@ uint8_t Controler::desinsert_receive(ece_msgs::ecemsg msg) {
 
         // Envoyer message sur topic des véhicules
         if (ros::ok()) {
-          this->getPubEce().publish(msg);
+          // this->getPubEce().publish(msg);
+          this->publish_ece_msg(msg);
         }
       }
 
@@ -469,7 +525,8 @@ uint8_t Controler::desinsert_receive(ece_msgs::ecemsg msg) {
 
       // Envoyer
       if (ros::ok()) {
-        this->getPubEce().publish(msg);
+        // this->getPubEce().publish(msg);
+        this->publish_ece_msg(msg);
       }
 
       // Envoie ensuite à tous les véhicules derrière la vitesse
@@ -512,18 +569,18 @@ void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &msg,
     // Récup véhicules avec destinations pour créer un platoon
     // Envoie ensuite les infos à chaque véhicule concerné
     rep = c.init_receive(*msg);
-    //TODO rep == 0 ? (erreur)
+    // TODO rep == 0 ? (erreur)
     break;
 
   case 1:
     // Véhicule souhaitant s'insérer ? Ou uniquement confirmation insertion ?
     rep = c.insert_receive(*msg);
-    //TODO rep == 0 ? (erreur)
+    // TODO rep == 0 ? (erreur)
     break;
 
   case 2:
     rep = c.desinsert_receive(*msg);
-    //TODO rep == 0 ? (erreur)
+    // TODO rep == 0 ? (erreur)
     break;
 
   case 3:
@@ -583,3 +640,11 @@ void Controler::fill_header(ece_msgs::ecemsg &msg, char *frame,
 }
 
 void Controler::increment_counter() { this->count++; }
+
+uint8_t Controler::publish_ece_msg(ece_msgs::ecemsg msg) {
+  this->pub_ece.publish(msg);
+}
+
+uint8_t Controler::publish_DENM_msg(etsi_msgs::DENM msg) {
+  this->pub_DENM.publish(msg);
+}

@@ -130,11 +130,14 @@ add_dependencies(controler ${rosbot_description_EXPORTED_TARGETS} ${catkin_EXPOR
 target_link_libraries(controler ${catkin_LIBRARIES})
 
 
-add_executable(essai src/controler/essai.cpp)
-add_dependencies(essai ${rosbot_description_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_executable(voiture_1 src/controler/voiture_1.cpp)
+add_dependencies(voiture_1 ${rosbot_description_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_executable(voiture_2 src/controler/voiture_2.cpp)
+add_dependencies(voiture_2 ${rosbot_description_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 # add_dependencies(../ece_msgs ${ece_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 # add_dependencies(../etsi_msgs ${etsi_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(essai ${catkin_LIBRARIES})
+target_link_libraries(voiture_1 ${catkin_LIBRARIES})
+target_link_libraries(voiture_2 ${catkin_LIBRARIES})
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/beginner_tutorials.cpp

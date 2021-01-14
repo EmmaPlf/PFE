@@ -17,18 +17,24 @@ int main(int argc, char **argv) {
   ece_msgs::ecemsg msg;
   int32_t count = 0;
 
-  ros::init(argc, argv, "essai");
+  ros::init(argc, argv, "voiture_1");
   ros::NodeHandle n;
 
   ros::Publisher pub = n.advertise<ece_msgs::ecemsg>("controler_ece", 1000);
   ros::Rate loop_rate(10);
 
+  while (pub.getNumSubscribers() < 1) {
+    // wait for a connection to publisher
+    // you can do whatever you like here or simply do nothing
+  }
+
+  ece_data(msg, count);
+  pub.publish(msg);
+
   while (ros::ok()) {
-    pub.publish(msg);
+
     ros::spinOnce();
     loop_rate.sleep();
-    ece_data(msg, count); //, navSat_arg, eventTime_arg, situation_arg,
-    //          location_arg);
     ++count;
   }
 
@@ -62,4 +68,18 @@ void ece_data(ece_msgs::ecemsg &msg, int count) {
   msg.its_header.message_id = MSG_ID;                 // uint8_t
   // StationID ::= INTEGER(0..4294967295)
   msg.its_header.station_id = STATION_ID; // uint32_t
+
+  msg.basic_container.phase.value = 0;
+  msg.basic_container.ID_exp = 1;
+  msg.basic_container.ID_dest = 0;
+
+  // Destination actuelle
+  msg.platoon.reference_position.longitude = 1;
+  msg.platoon.reference_position.latitude = 1;
+  msg.platoon.reference_position.altitude.value = 0;
+
+  // Position voiture
+  msg.actual_position.longitude = 50;
+  msg.actual_position.latitude = 50;
+  msg.actual_position.altitude.value = 0;
 }
