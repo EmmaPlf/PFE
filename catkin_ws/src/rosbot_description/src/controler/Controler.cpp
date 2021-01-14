@@ -291,7 +291,7 @@ void Controler::search_for_platoon(Vehicle v) {
           // Ajout du platoon dans le vector de platoon
           this->add_platoon(p);
 
-          ROS_INFO("station_id : %d : Platoon cree", v->getId());
+          ROS_INFO("station_id : %d : Platoon cree", v.getId());
         }
         it++;
       }

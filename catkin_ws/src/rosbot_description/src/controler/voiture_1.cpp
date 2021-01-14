@@ -1,6 +1,7 @@
 #include "../../devel/include/ece_msgs/ecemsg.h"
 #include "ros/ros.h"
 #include <iostream>
+#include <nav_msgs/Odometry.h>
 #include <sstream>
 
 // Paramètres à modifier selon la station
@@ -12,6 +13,12 @@
 
 void ece_data(ece_msgs::ecemsg &msg, int count);
 
+void odom_callback(const nav_msgs::Odometry::ConstPtr &msg) {
+  ROS_INFO("odom_callback : x : %d", msg->pose.pose.position.x);
+  ROS_INFO("odom_callback : y : %d", msg->pose.pose.position.y);
+  ROS_INFO("odom_callback : z : %d", msg->pose.pose.position.z);
+}
+
 int main(int argc, char **argv) {
 
   ece_msgs::ecemsg msg;
@@ -21,6 +28,10 @@ int main(int argc, char **argv) {
   ros::NodeHandle n;
 
   ros::Publisher pub = n.advertise<ece_msgs::ecemsg>("controler_ece", 1000);
+
+  ros::Subscriber sub =
+      n.subscribe<nav_msgs::Odometry>("odom", 1000, odom_callback);
+
   ros::Rate loop_rate(10);
 
   while (pub.getNumSubscribers() < 1) {
