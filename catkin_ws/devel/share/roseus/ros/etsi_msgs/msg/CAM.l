@@ -152,7 +152,7 @@
    self)
   )
 
-(setf (get etsi_msgs::CAM :md5sum-) "d9e063e63c0b4bc09200e32f37bfbef3")
+(setf (get etsi_msgs::CAM :md5sum-) "9c2e1d050ad79cf1fc0a55266577e7c4")
 (setf (get etsi_msgs::CAM :datatype-) "etsi_msgs/CAM")
 (setf (get etsi_msgs::CAM :definition-)
       "Header header
@@ -197,7 +197,6 @@ uint32 station_id
 
 uint8 MESSAGE_ID_DENM = 1
 uint8 MESSAGE_ID_CAM = 2
-uint8 MESSAGE_ID_ECE = 3
 
 ================================================================================
 MSG: etsi_msgs/StationType
@@ -474,6 +473,6 @@ uint16 TEN_MILLISECONDS_IN_PAST = 1
 
 
 
-(provide :etsi_msgs/CAM "d9e063e63c0b4bc09200e32f37bfbef3")
+(provide :etsi_msgs/CAM "9c2e1d050ad79cf1fc0a55266577e7c4")
 
 

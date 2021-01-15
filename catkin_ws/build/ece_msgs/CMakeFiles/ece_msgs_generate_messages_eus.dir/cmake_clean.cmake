@@ -12,6 +12,8 @@ file(REMOVE_RECURSE
   "/home/user/catkin_ws/devel/share/roseus/ros/ece_msgs/msg/ReferencePosition.l"
   "/home/user/catkin_ws/devel/share/roseus/ros/ece_msgs/msg/ecemsg.l"
   "/home/user/catkin_ws/devel/share/roseus/ros/ece_msgs/msg/FreinageUrgence.l"
+  "/home/user/catkin_ws/devel/share/roseus/ros/ece_msgs/msg/BasicContainer.l"
+  "/home/user/catkin_ws/devel/share/roseus/ros/ece_msgs/msg/Phase.l"
   "/home/user/catkin_ws/devel/share/roseus/ros/ece_msgs/msg/StationType.l"
   "/home/user/catkin_ws/devel/share/roseus/ros/ece_msgs/msg/Desinsertion.l"
   "/home/user/catkin_ws/devel/share/roseus/ros/ece_msgs/manifest.l"

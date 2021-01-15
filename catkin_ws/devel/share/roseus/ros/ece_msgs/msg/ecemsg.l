@@ -16,7 +16,7 @@
 
 (defclass ece_msgs::ecemsg
   :super ros::object
-  :slots (_header _its_header _generation_delta_time _station_type _platoon _vitesse_interdistance _insertion _desinsertion _freinage_urgence _feu ))
+  :slots (_header _its_header _generation_delta_time _basic_container _station_type _platoon _vitesse_interdistance _insertion _desinsertion _freinage_urgence _feu _actual_position ))
 
 (defmethod ece_msgs::ecemsg
   (:init
@@ -24,6 +24,7 @@
     ((:header __header) (instance std_msgs::Header :init))
     ((:its_header __its_header) (instance ece_msgs::ItsPduHeader :init))
     ((:generation_delta_time __generation_delta_time) 0)
+    ((:basic_container __basic_container) (instance ece_msgs::BasicContainer :init))
     ((:station_type __station_type) (instance ece_msgs::StationType :init))
     ((:platoon __platoon) (instance ece_msgs::Platoon :init))
     ((:vitesse_interdistance __vitesse_interdistance) (instance ece_msgs::VitesseInterdistance :init))
@@ -31,11 +32,13 @@
     ((:desinsertion __desinsertion) (instance ece_msgs::Desinsertion :init))
     ((:freinage_urgence __freinage_urgence) (instance ece_msgs::FreinageUrgence :init))
     ((:feu __feu) (instance ece_msgs::Feu :init))
+    ((:actual_position __actual_position) (instance ece_msgs::ReferencePosition :init))
     )
    (send-super :init)
    (setq _header __header)
    (setq _its_header __its_header)
    (setq _generation_delta_time (round __generation_delta_time))
+   (setq _basic_container __basic_container)
    (setq _station_type __station_type)
    (setq _platoon __platoon)
    (setq _vitesse_interdistance __vitesse_interdistance)
@@ -43,6 +46,7 @@
    (setq _desinsertion __desinsertion)
    (setq _freinage_urgence __freinage_urgence)
    (setq _feu __feu)
+   (setq _actual_position __actual_position)
    self)
   (:header
    (&rest __header)
@@ -61,6 +65,13 @@
   (:generation_delta_time
    (&optional __generation_delta_time)
    (if __generation_delta_time (setq _generation_delta_time __generation_delta_time)) _generation_delta_time)
+  (:basic_container
+   (&rest __basic_container)
+   (if (keywordp (car __basic_container))
+       (send* _basic_container __basic_container)
+     (progn
+       (if __basic_container (setq _basic_container (car __basic_container)))
+       _basic_container)))
   (:station_type
    (&rest __station_type)
    (if (keywordp (car __station_type))
@@ -110,6 +121,13 @@
      (progn
        (if __feu (setq _feu (car __feu)))
        _feu)))
+  (:actual_position
+   (&rest __actual_position)
+   (if (keywordp (car __actual_position))
+       (send* _actual_position __actual_position)
+     (progn
+       (if __actual_position (setq _actual_position (car __actual_position)))
+       _actual_position)))
   (:serialization-length
    ()
    (+
@@ -119,6 +137,8 @@
     (send _its_header :serialization-length)
     ;; uint16 _generation_delta_time
     2
+    ;; ece_msgs/BasicContainer _basic_container
+    (send _basic_container :serialization-length)
     ;; ece_msgs/StationType _station_type
     (send _station_type :serialization-length)
     ;; ece_msgs/Platoon _platoon
@@ -133,6 +153,8 @@
     (send _freinage_urgence :serialization-length)
     ;; ece_msgs/Feu _feu
     (send _feu :serialization-length)
+    ;; ece_msgs/ReferencePosition _actual_position
+    (send _actual_position :serialization-length)
     ))
   (:serialize
    (&optional strm)
@@ -144,6 +166,8 @@
        (send _its_header :serialize s)
      ;; uint16 _generation_delta_time
        (write-word _generation_delta_time s)
+     ;; ece_msgs/BasicContainer _basic_container
+       (send _basic_container :serialize s)
      ;; ece_msgs/StationType _station_type
        (send _station_type :serialize s)
      ;; ece_msgs/Platoon _platoon
@@ -158,6 +182,8 @@
        (send _freinage_urgence :serialize s)
      ;; ece_msgs/Feu _feu
        (send _feu :serialize s)
+     ;; ece_msgs/ReferencePosition _actual_position
+       (send _actual_position :serialize s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
@@ -168,6 +194,8 @@
      (send _its_header :deserialize buf ptr-) (incf ptr- (send _its_header :serialization-length))
    ;; uint16 _generation_delta_time
      (setq _generation_delta_time (sys::peek buf ptr- :short)) (incf ptr- 2)
+   ;; ece_msgs/BasicContainer _basic_container
+     (send _basic_container :deserialize buf ptr-) (incf ptr- (send _basic_container :serialization-length))
    ;; ece_msgs/StationType _station_type
      (send _station_type :deserialize buf ptr-) (incf ptr- (send _station_type :serialization-length))
    ;; ece_msgs/Platoon _platoon
@@ -182,11 +210,13 @@
      (send _freinage_urgence :deserialize buf ptr-) (incf ptr- (send _freinage_urgence :serialization-length))
    ;; ece_msgs/Feu _feu
      (send _feu :deserialize buf ptr-) (incf ptr- (send _feu :serialization-length))
+   ;; ece_msgs/ReferencePosition _actual_position
+     (send _actual_position :deserialize buf ptr-) (incf ptr- (send _actual_position :serialization-length))
    ;;
    self)
   )
 
-(setf (get ece_msgs::ecemsg :md5sum-) "c7b2cb36ce6de0044edf394d8a8fc5ca")
+(setf (get ece_msgs::ecemsg :md5sum-) "54adc2ed35f37e7b35eea21ecf34f073")
 (setf (get ece_msgs::ecemsg :datatype-) "ece_msgs/ecemsg")
 (setf (get ece_msgs::ecemsg :definition-)
       "Header header
@@ -194,19 +224,24 @@ ItsPduHeader its_header
 uint16 generation_delta_time # milliseconds since 2004 modulo 2^16
 
 # basic container
+BasicContainer basic_container
+
 StationType station_type
 
 Platoon platoon
 
 VitesseInterdistance vitesse_interdistance
 
-Insertion insertion 
+Insertion insertion
+
 Desinsertion desinsertion 
 
 FreinageUrgence freinage_urgence
 
 Feu feu
 
+# Actual position : 8 octets
+ReferencePosition actual_position
 ================================================================================
 MSG: std_msgs/Header
 # Standard metadata for higher-level stamped data types.
@@ -233,7 +268,28 @@ uint32 station_id
 
 uint8 MESSAGE_ID_DENM = 1
 uint8 MESSAGE_ID_CAM = 2
-uint8 MESSAGE_ID_ECE = 3
+uint8 MESSAGE_ID_ECE = 8
+================================================================================
+MSG: ece_msgs/BasicContainer
+# ID expediteur
+uint8 ID_exp
+
+# ID destinataire
+uint8 ID_dest
+
+# Phase de plattoning
+Phase phase
+
+================================================================================
+MSG: ece_msgs/Phase
+# Phase de plattoning
+uint8 value
+
+uint8 INIT = 0
+uint8 INSERTION = 1
+uint8 DESINSERTION = 2
+uint8 FEU = 3
+uint8 FREINAGE_URG = 4
 ================================================================================
 MSG: ece_msgs/StationType
 uint8 value
@@ -253,14 +309,11 @@ uint8 TRAM = 11
 uint8 ROAD_SIDE_UNIT = 15
 ================================================================================
 MSG: ece_msgs/Platoon
-# ID Vt : 3 bits 
-uint8 id_vt
-
 # ID platoon : 3 bits
 uint8 id_platoon
 
-# ID autres véhicules platoon : 3 bits
-IDs ids 
+# ID autres véhicules platoon
+IDs[] ids 
 
 # Nombre de véhicules : 3 bits
 uint8 nombre_vehicules
@@ -345,15 +398,18 @@ bool confirmation_insertion
 ================================================================================
 MSG: ece_msgs/Desinsertion
 # Demande de sortie : 1 bit
+bool demande_sortie
 
 # Vitesse de sortie : 6 bits 
 Speed speed
 
 # Point de sortie : 8 octets
-ReferencePosition reference_position
+ReferencePosition point_sortie
 
 # Nouvelle position dans P : 2 bits
 uint8 position
+
+
 ================================================================================
 MSG: ece_msgs/FreinageUrgence
 # Position P : 2 bits
@@ -366,6 +422,6 @@ bool permission_feu
 
 
 
-(provide :ece_msgs/ecemsg "c7b2cb36ce6de0044edf394d8a8fc5ca")
+(provide :ece_msgs/ecemsg "54adc2ed35f37e7b35eea21ecf34f073")
 
 

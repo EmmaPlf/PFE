@@ -51,7 +51,7 @@ struct ItsPduHeader_
   enum {
     MESSAGE_ID_DENM = 1u,
     MESSAGE_ID_CAM = 2u,
-    MESSAGE_ID_ECE = 3u,
+    MESSAGE_ID_ECE = 8u,
   };
 
 
@@ -135,12 +135,12 @@ struct MD5Sum< ::ece_msgs::ItsPduHeader_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "ff8e90c8ffc6c6f2d381f49c4d8f0e67";
+    return "11c9ba5f62074a5d8d5f31309d5b72b6";
   }
 
   static const char* value(const ::ece_msgs::ItsPduHeader_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xff8e90c8ffc6c6f2ULL;
-  static const uint64_t static_value2 = 0xd381f49c4d8f0e67ULL;
+  static const uint64_t static_value1 = 0x11c9ba5f62074a5dULL;
+  static const uint64_t static_value2 = 0x8d5f31309d5b72b6ULL;
 };
 
 template<class ContainerAllocator>
@@ -165,7 +165,7 @@ uint32 station_id\n\
 \n\
 uint8 MESSAGE_ID_DENM = 1\n\
 uint8 MESSAGE_ID_CAM = 2\n\
-uint8 MESSAGE_ID_ECE = 3\n\
+uint8 MESSAGE_ID_ECE = 8\n\
 ";
   }
 

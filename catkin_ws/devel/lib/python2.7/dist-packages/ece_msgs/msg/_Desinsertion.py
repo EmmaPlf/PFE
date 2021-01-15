@@ -8,19 +8,22 @@ import struct
 import ece_msgs.msg
 
 class Desinsertion(genpy.Message):
-  _md5sum = "8c11695e348cdf58d2655e6625478e1f"
+  _md5sum = "737935e1f42b0a7edea1212ba87b7938"
   _type = "ece_msgs/Desinsertion"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """# Demande de sortie : 1 bit
+bool demande_sortie
 
 # Vitesse de sortie : 6 bits 
 Speed speed
 
 # Point de sortie : 8 octets
-ReferencePosition reference_position
+ReferencePosition point_sortie
 
 # Nouvelle position dans P : 2 bits
 uint8 position
+
+
 ================================================================================
 MSG: ece_msgs/Speed
 uint16 value # 0.01 m/s
@@ -78,8 +81,8 @@ uint8 CONFIDENCE_200M = 13
 uint8 CONFIDENCE_OUT_OF_RANGE = 14
 uint8 CONFIDENCE_UNAVAILABLE = 15
 """
-  __slots__ = ['speed','reference_position','position']
-  _slot_types = ['ece_msgs/Speed','ece_msgs/ReferencePosition','uint8']
+  __slots__ = ['demande_sortie','speed','point_sortie','position']
+  _slot_types = ['bool','ece_msgs/Speed','ece_msgs/ReferencePosition','uint8']
 
   def __init__(self, *args, **kwds):
     """
@@ -89,7 +92,7 @@ uint8 CONFIDENCE_UNAVAILABLE = 15
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       speed,reference_position,position
+       demande_sortie,speed,point_sortie,position
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -98,15 +101,18 @@ uint8 CONFIDENCE_UNAVAILABLE = 15
     if args or kwds:
       super(Desinsertion, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
+      if self.demande_sortie is None:
+        self.demande_sortie = False
       if self.speed is None:
         self.speed = ece_msgs.msg.Speed()
-      if self.reference_position is None:
-        self.reference_position = ece_msgs.msg.ReferencePosition()
+      if self.point_sortie is None:
+        self.point_sortie = ece_msgs.msg.ReferencePosition()
       if self.position is None:
         self.position = 0
     else:
+      self.demande_sortie = False
       self.speed = ece_msgs.msg.Speed()
-      self.reference_position = ece_msgs.msg.ReferencePosition()
+      self.point_sortie = ece_msgs.msg.ReferencePosition()
       self.position = 0
 
   def _get_types(self):
@@ -122,7 +128,7 @@ uint8 CONFIDENCE_UNAVAILABLE = 15
     """
     try:
       _x = self
-      buff.write(_get_struct_HB2q3Hi2B().pack(_x.speed.value, _x.speed.confidence, _x.reference_position.latitude, _x.reference_position.longitude, _x.reference_position.position_confidence.semi_major_confidence, _x.reference_position.position_confidence.semi_minor_confidence, _x.reference_position.position_confidence.semi_major_orientation, _x.reference_position.altitude.value, _x.reference_position.altitude.confidence, _x.position))
+      buff.write(_get_struct_BHB2q3Hi2B().pack(_x.demande_sortie, _x.speed.value, _x.speed.confidence, _x.point_sortie.latitude, _x.point_sortie.longitude, _x.point_sortie.position_confidence.semi_major_confidence, _x.point_sortie.position_confidence.semi_minor_confidence, _x.point_sortie.position_confidence.semi_major_orientation, _x.point_sortie.altitude.value, _x.point_sortie.altitude.confidence, _x.position))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -134,13 +140,14 @@ uint8 CONFIDENCE_UNAVAILABLE = 15
     try:
       if self.speed is None:
         self.speed = ece_msgs.msg.Speed()
-      if self.reference_position is None:
-        self.reference_position = ece_msgs.msg.ReferencePosition()
+      if self.point_sortie is None:
+        self.point_sortie = ece_msgs.msg.ReferencePosition()
       end = 0
       _x = self
       start = end
-      end += 31
-      (_x.speed.value, _x.speed.confidence, _x.reference_position.latitude, _x.reference_position.longitude, _x.reference_position.position_confidence.semi_major_confidence, _x.reference_position.position_confidence.semi_minor_confidence, _x.reference_position.position_confidence.semi_major_orientation, _x.reference_position.altitude.value, _x.reference_position.altitude.confidence, _x.position,) = _get_struct_HB2q3Hi2B().unpack(str[start:end])
+      end += 32
+      (_x.demande_sortie, _x.speed.value, _x.speed.confidence, _x.point_sortie.latitude, _x.point_sortie.longitude, _x.point_sortie.position_confidence.semi_major_confidence, _x.point_sortie.position_confidence.semi_minor_confidence, _x.point_sortie.position_confidence.semi_major_orientation, _x.point_sortie.altitude.value, _x.point_sortie.altitude.confidence, _x.position,) = _get_struct_BHB2q3Hi2B().unpack(str[start:end])
+      self.demande_sortie = bool(self.demande_sortie)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -154,7 +161,7 @@ uint8 CONFIDENCE_UNAVAILABLE = 15
     """
     try:
       _x = self
-      buff.write(_get_struct_HB2q3Hi2B().pack(_x.speed.value, _x.speed.confidence, _x.reference_position.latitude, _x.reference_position.longitude, _x.reference_position.position_confidence.semi_major_confidence, _x.reference_position.position_confidence.semi_minor_confidence, _x.reference_position.position_confidence.semi_major_orientation, _x.reference_position.altitude.value, _x.reference_position.altitude.confidence, _x.position))
+      buff.write(_get_struct_BHB2q3Hi2B().pack(_x.demande_sortie, _x.speed.value, _x.speed.confidence, _x.point_sortie.latitude, _x.point_sortie.longitude, _x.point_sortie.position_confidence.semi_major_confidence, _x.point_sortie.position_confidence.semi_minor_confidence, _x.point_sortie.position_confidence.semi_major_orientation, _x.point_sortie.altitude.value, _x.point_sortie.altitude.confidence, _x.position))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -167,13 +174,14 @@ uint8 CONFIDENCE_UNAVAILABLE = 15
     try:
       if self.speed is None:
         self.speed = ece_msgs.msg.Speed()
-      if self.reference_position is None:
-        self.reference_position = ece_msgs.msg.ReferencePosition()
+      if self.point_sortie is None:
+        self.point_sortie = ece_msgs.msg.ReferencePosition()
       end = 0
       _x = self
       start = end
-      end += 31
-      (_x.speed.value, _x.speed.confidence, _x.reference_position.latitude, _x.reference_position.longitude, _x.reference_position.position_confidence.semi_major_confidence, _x.reference_position.position_confidence.semi_minor_confidence, _x.reference_position.position_confidence.semi_major_orientation, _x.reference_position.altitude.value, _x.reference_position.altitude.confidence, _x.position,) = _get_struct_HB2q3Hi2B().unpack(str[start:end])
+      end += 32
+      (_x.demande_sortie, _x.speed.value, _x.speed.confidence, _x.point_sortie.latitude, _x.point_sortie.longitude, _x.point_sortie.position_confidence.semi_major_confidence, _x.point_sortie.position_confidence.semi_minor_confidence, _x.point_sortie.position_confidence.semi_major_orientation, _x.point_sortie.altitude.value, _x.point_sortie.altitude.confidence, _x.position,) = _get_struct_BHB2q3Hi2B().unpack(str[start:end])
+      self.demande_sortie = bool(self.demande_sortie)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -182,9 +190,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_HB2q3Hi2B = None
-def _get_struct_HB2q3Hi2B():
-    global _struct_HB2q3Hi2B
-    if _struct_HB2q3Hi2B is None:
-        _struct_HB2q3Hi2B = struct.Struct("<HB2q3Hi2B")
-    return _struct_HB2q3Hi2B
+_struct_BHB2q3Hi2B = None
+def _get_struct_BHB2q3Hi2B():
+    global _struct_BHB2q3Hi2B
+    if _struct_BHB2q3Hi2B is None:
+        _struct_BHB2q3Hi2B = struct.Struct("<BHB2q3Hi2B")
+    return _struct_BHB2q3Hi2B

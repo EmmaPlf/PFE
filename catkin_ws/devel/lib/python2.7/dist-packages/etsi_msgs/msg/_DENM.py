@@ -9,7 +9,7 @@ import etsi_msgs.msg
 import std_msgs.msg
 
 class DENM(genpy.Message):
-  _md5sum = "d0bac7531dd1fb966b1efa93ca520d89"
+  _md5sum = "66d74b1f24152abbfb60e3e0a2c36bfb"
   _type = "etsi_msgs/DENM"
   _has_header = True #flag to mark the presence of a Header object
   _full_text = """Header header
@@ -51,7 +51,6 @@ uint32 station_id
 
 uint8 MESSAGE_ID_DENM = 1
 uint8 MESSAGE_ID_CAM = 2
-uint8 MESSAGE_ID_ECE = 3
 
 ================================================================================
 MSG: etsi_msgs/ManagementContainer

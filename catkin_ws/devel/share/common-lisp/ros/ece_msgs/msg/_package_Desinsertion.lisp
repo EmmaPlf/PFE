@@ -1,8 +1,10 @@
 (cl:in-package ece_msgs-msg)
-(cl:export '(SPEED-VAL
+(cl:export '(DEMANDE_SORTIE-VAL
+          DEMANDE_SORTIE
+          SPEED-VAL
           SPEED
-          REFERENCE_POSITION-VAL
-          REFERENCE_POSITION
+          POINT_SORTIE-VAL
+          POINT_SORTIE
           POSITION-VAL
           POSITION
 ))

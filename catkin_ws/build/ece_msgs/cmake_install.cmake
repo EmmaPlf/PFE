@@ -48,6 +48,8 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
     "/home/user/catkin_ws/src/ece_msgs/msg/Speed.msg"
     "/home/user/catkin_ws/src/ece_msgs/msg/StationType.msg"
     "/home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg"
+    "/home/user/catkin_ws/src/ece_msgs/msg/BasicContainer.msg"
+    "/home/user/catkin_ws/src/ece_msgs/msg/Phase.msg"
     )
 endif()
 

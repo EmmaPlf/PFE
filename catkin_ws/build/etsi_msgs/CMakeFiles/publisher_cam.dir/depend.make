@@ -37,6 +37,14 @@ etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /home/user/catki
 etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/plugin/VehicleWidth.h
 etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /home/user/catkin_ws/devel/include/etsi_msgs/plugin/YawRate.h
 etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /home/user/catkin_ws/src/etsi_msgs/src/publisher_cam.cpp
+etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /opt/ros/kinetic/include/geometry_msgs/Point.h
+etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /opt/ros/kinetic/include/geometry_msgs/Pose.h
+etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /opt/ros/kinetic/include/geometry_msgs/PoseWithCovariance.h
+etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /opt/ros/kinetic/include/geometry_msgs/Quaternion.h
+etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /opt/ros/kinetic/include/geometry_msgs/Twist.h
+etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /opt/ros/kinetic/include/geometry_msgs/TwistWithCovariance.h
+etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /opt/ros/kinetic/include/geometry_msgs/Vector3.h
+etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /opt/ros/kinetic/include/nav_msgs/Odometry.h
 etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /opt/ros/kinetic/include/ros/advertise_options.h
 etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /opt/ros/kinetic/include/ros/advertise_service_options.h
 etsi_msgs/CMakeFiles/publisher_cam.dir/src/publisher_cam.cpp.o: /opt/ros/kinetic/include/ros/assert.h

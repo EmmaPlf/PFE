@@ -1,7 +1,5 @@
 (cl:in-package ece_msgs-msg)
-(cl:export '(ID_VT-VAL
-          ID_VT
-          ID_PLATOON-VAL
+(cl:export '(ID_PLATOON-VAL
           ID_PLATOON
           IDS-VAL
           IDS

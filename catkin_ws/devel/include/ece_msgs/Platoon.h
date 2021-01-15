@@ -26,15 +26,13 @@ struct Platoon_
   typedef Platoon_<ContainerAllocator> Type;
 
   Platoon_()
-    : id_vt(0)
-    , id_platoon(0)
+    : id_platoon(0)
     , ids()
     , nombre_vehicules(0)
     , reference_position()  {
     }
   Platoon_(const ContainerAllocator& _alloc)
-    : id_vt(0)
-    , id_platoon(0)
+    : id_platoon(0)
     , ids(_alloc)
     , nombre_vehicules(0)
     , reference_position(_alloc)  {
@@ -43,13 +41,10 @@ struct Platoon_
 
 
 
-   typedef uint8_t _id_vt_type;
-  _id_vt_type id_vt;
-
    typedef uint8_t _id_platoon_type;
   _id_platoon_type id_platoon;
 
-   typedef  ::ece_msgs::IDs_<ContainerAllocator>  _ids_type;
+   typedef std::vector< ::ece_msgs::IDs_<ContainerAllocator> , typename ContainerAllocator::template rebind< ::ece_msgs::IDs_<ContainerAllocator> >::other >  _ids_type;
   _ids_type ids;
 
    typedef uint8_t _nombre_vehicules_type;
@@ -92,7 +87,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
 // {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ece_msgs': ['/home/user/catkin_ws/src/ece_msgs/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -102,12 +97,12 @@ namespace message_traits
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::ece_msgs::Platoon_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::ece_msgs::Platoon_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
@@ -136,12 +131,12 @@ struct MD5Sum< ::ece_msgs::Platoon_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "e04a40bb6fe3969e75a1973bd60b5977";
+    return "b7532dcd39ebae5557f8abd6a9baa912";
   }
 
   static const char* value(const ::ece_msgs::Platoon_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xe04a40bb6fe3969eULL;
-  static const uint64_t static_value2 = 0x75a1973bd60b5977ULL;
+  static const uint64_t static_value1 = 0xb7532dcd39ebae55ULL;
+  static const uint64_t static_value2 = 0x57f8abd6a9baa912ULL;
 };
 
 template<class ContainerAllocator>
@@ -160,14 +155,11 @@ struct Definition< ::ece_msgs::Platoon_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# ID Vt : 3 bits \n\
-uint8 id_vt\n\
-\n\
-# ID platoon : 3 bits\n\
+    return "# ID platoon : 3 bits\n\
 uint8 id_platoon\n\
 \n\
-# ID autres véhicules platoon : 3 bits\n\
-IDs ids \n\
+# ID autres véhicules platoon\n\
+IDs[] ids \n\
 \n\
 # Nombre de véhicules : 3 bits\n\
 uint8 nombre_vehicules\n\
@@ -240,7 +232,6 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.id_vt);
       stream.next(m.id_platoon);
       stream.next(m.ids);
       stream.next(m.nombre_vehicules);
@@ -263,13 +254,16 @@ struct Printer< ::ece_msgs::Platoon_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::ece_msgs::Platoon_<ContainerAllocator>& v)
   {
-    s << indent << "id_vt: ";
-    Printer<uint8_t>::stream(s, indent + "  ", v.id_vt);
     s << indent << "id_platoon: ";
     Printer<uint8_t>::stream(s, indent + "  ", v.id_platoon);
-    s << indent << "ids: ";
-    s << std::endl;
-    Printer< ::ece_msgs::IDs_<ContainerAllocator> >::stream(s, indent + "  ", v.ids);
+    s << indent << "ids[]" << std::endl;
+    for (size_t i = 0; i < v.ids.size(); ++i)
+    {
+      s << indent << "  ids[" << i << "]: ";
+      s << std::endl;
+      s << indent;
+      Printer< ::ece_msgs::IDs_<ContainerAllocator> >::stream(s, indent + "    ", v.ids[i]);
+    }
     s << indent << "nombre_vehicules: ";
     Printer<uint8_t>::stream(s, indent + "  ", v.nombre_vehicules);
     s << indent << "reference_position: ";

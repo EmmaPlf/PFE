@@ -65,6 +65,8 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/deve
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ReferencePosition.js
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/FreinageUrgence.js
+ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/BasicContainer.js
+ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/Phase.js
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/StationType.js
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/Desinsertion.js
 
@@ -132,10 +134,12 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/deve
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg
+/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/BasicContainer.msg
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg
-/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/Phase.msg
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/Feu.msg
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/IDs.msg
+/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/Speed.msg
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/StationType.msg
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg
@@ -144,7 +148,7 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/deve
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg
-/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg
+/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating Javascript code from ece_msgs/ecemsg.msg"
 	cd /home/user/catkin_ws/build/ece_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg
 
@@ -153,9 +157,20 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/deve
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating Javascript code from ece_msgs/FreinageUrgence.msg"
 	cd /home/user/catkin_ws/build/ece_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg
 
+/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/BasicContainer.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/BasicContainer.js: /home/user/catkin_ws/src/ece_msgs/msg/BasicContainer.msg
+/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/BasicContainer.js: /home/user/catkin_ws/src/ece_msgs/msg/Phase.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating Javascript code from ece_msgs/BasicContainer.msg"
+	cd /home/user/catkin_ws/build/ece_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/user/catkin_ws/src/ece_msgs/msg/BasicContainer.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg
+
+/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/Phase.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/Phase.js: /home/user/catkin_ws/src/ece_msgs/msg/Phase.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Generating Javascript code from ece_msgs/Phase.msg"
+	cd /home/user/catkin_ws/build/ece_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/user/catkin_ws/src/ece_msgs/msg/Phase.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg
+
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/StationType.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/StationType.js: /home/user/catkin_ws/src/ece_msgs/msg/StationType.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating Javascript code from ece_msgs/StationType.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Generating Javascript code from ece_msgs/StationType.msg"
 	cd /home/user/catkin_ws/build/ece_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/user/catkin_ws/src/ece_msgs/msg/StationType.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg
 
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/Desinsertion.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
@@ -164,7 +179,7 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/deve
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/Desinsertion.js: /home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/Desinsertion.js: /home/user/catkin_ws/src/ece_msgs/msg/Speed.msg
 /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/Desinsertion.js: /home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Generating Javascript code from ece_msgs/Desinsertion.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Generating Javascript code from ece_msgs/Desinsertion.msg"
 	cd /home/user/catkin_ws/build/ece_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg
 
 ece_msgs_generate_messages_nodejs: ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs
@@ -180,6 +195,8 @@ ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ro
 ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ReferencePosition.js
 ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js
 ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/FreinageUrgence.js
+ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/BasicContainer.js
+ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/Phase.js
 ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/StationType.js
 ece_msgs_generate_messages_nodejs: /home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/Desinsertion.js
 ece_msgs_generate_messages_nodejs: ece_msgs/CMakeFiles/ece_msgs_generate_messages_nodejs.dir/build.make

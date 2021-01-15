@@ -17,6 +17,7 @@
 
 #include <std_msgs/Header.h>
 #include <ece_msgs/ItsPduHeader.h>
+#include <ece_msgs/BasicContainer.h>
 #include <ece_msgs/StationType.h>
 #include <ece_msgs/Platoon.h>
 #include <ece_msgs/VitesseInterdistance.h>
@@ -24,6 +25,7 @@
 #include <ece_msgs/Desinsertion.h>
 #include <ece_msgs/FreinageUrgence.h>
 #include <ece_msgs/Feu.h>
+#include <ece_msgs/ReferencePosition.h>
 
 namespace ece_msgs
 {
@@ -36,25 +38,29 @@ struct ecemsg_
     : header()
     , its_header()
     , generation_delta_time(0)
+    , basic_container()
     , station_type()
     , platoon()
     , vitesse_interdistance()
     , insertion()
     , desinsertion()
     , freinage_urgence()
-    , feu()  {
+    , feu()
+    , actual_position()  {
     }
   ecemsg_(const ContainerAllocator& _alloc)
     : header(_alloc)
     , its_header(_alloc)
     , generation_delta_time(0)
+    , basic_container(_alloc)
     , station_type(_alloc)
     , platoon(_alloc)
     , vitesse_interdistance(_alloc)
     , insertion(_alloc)
     , desinsertion(_alloc)
     , freinage_urgence(_alloc)
-    , feu(_alloc)  {
+    , feu(_alloc)
+    , actual_position(_alloc)  {
   (void)_alloc;
     }
 
@@ -68,6 +74,9 @@ struct ecemsg_
 
    typedef uint16_t _generation_delta_time_type;
   _generation_delta_time_type generation_delta_time;
+
+   typedef  ::ece_msgs::BasicContainer_<ContainerAllocator>  _basic_container_type;
+  _basic_container_type basic_container;
 
    typedef  ::ece_msgs::StationType_<ContainerAllocator>  _station_type_type;
   _station_type_type station_type;
@@ -89,6 +98,9 @@ struct ecemsg_
 
    typedef  ::ece_msgs::Feu_<ContainerAllocator>  _feu_type;
   _feu_type feu;
+
+   typedef  ::ece_msgs::ReferencePosition_<ContainerAllocator>  _actual_position_type;
+  _actual_position_type actual_position;
 
 
 
@@ -168,12 +180,12 @@ struct MD5Sum< ::ece_msgs::ecemsg_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "c7b2cb36ce6de0044edf394d8a8fc5ca";
+    return "54adc2ed35f37e7b35eea21ecf34f073";
   }
 
   static const char* value(const ::ece_msgs::ecemsg_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xc7b2cb36ce6de004ULL;
-  static const uint64_t static_value2 = 0x4edf394d8a8fc5caULL;
+  static const uint64_t static_value1 = 0x54adc2ed35f37e7bULL;
+  static const uint64_t static_value2 = 0x35eea21ecf34f073ULL;
 };
 
 template<class ContainerAllocator>
@@ -197,19 +209,24 @@ ItsPduHeader its_header\n\
 uint16 generation_delta_time # milliseconds since 2004 modulo 2^16\n\
 \n\
 # basic container\n\
+BasicContainer basic_container\n\
+\n\
 StationType station_type\n\
 \n\
 Platoon platoon\n\
 \n\
 VitesseInterdistance vitesse_interdistance\n\
 \n\
-Insertion insertion \n\
+Insertion insertion\n\
+\n\
 Desinsertion desinsertion \n\
 \n\
 FreinageUrgence freinage_urgence\n\
 \n\
 Feu feu\n\
 \n\
+# Actual position : 8 octets\n\
+ReferencePosition actual_position\n\
 ================================================================================\n\
 MSG: std_msgs/Header\n\
 # Standard metadata for higher-level stamped data types.\n\
@@ -236,7 +253,28 @@ uint32 station_id\n\
 \n\
 uint8 MESSAGE_ID_DENM = 1\n\
 uint8 MESSAGE_ID_CAM = 2\n\
-uint8 MESSAGE_ID_ECE = 3\n\
+uint8 MESSAGE_ID_ECE = 8\n\
+================================================================================\n\
+MSG: ece_msgs/BasicContainer\n\
+# ID expediteur\n\
+uint8 ID_exp\n\
+\n\
+# ID destinataire\n\
+uint8 ID_dest\n\
+\n\
+# Phase de plattoning\n\
+Phase phase\n\
+\n\
+================================================================================\n\
+MSG: ece_msgs/Phase\n\
+# Phase de plattoning\n\
+uint8 value\n\
+\n\
+uint8 INIT = 0\n\
+uint8 INSERTION = 1\n\
+uint8 DESINSERTION = 2\n\
+uint8 FEU = 3\n\
+uint8 FREINAGE_URG = 4\n\
 ================================================================================\n\
 MSG: ece_msgs/StationType\n\
 uint8 value\n\
@@ -256,14 +294,11 @@ uint8 TRAM = 11\n\
 uint8 ROAD_SIDE_UNIT = 15\n\
 ================================================================================\n\
 MSG: ece_msgs/Platoon\n\
-# ID Vt : 3 bits \n\
-uint8 id_vt\n\
-\n\
 # ID platoon : 3 bits\n\
 uint8 id_platoon\n\
 \n\
-# ID autres véhicules platoon : 3 bits\n\
-IDs ids \n\
+# ID autres véhicules platoon\n\
+IDs[] ids \n\
 \n\
 # Nombre de véhicules : 3 bits\n\
 uint8 nombre_vehicules\n\
@@ -348,15 +383,18 @@ bool confirmation_insertion\n\
 ================================================================================\n\
 MSG: ece_msgs/Desinsertion\n\
 # Demande de sortie : 1 bit\n\
+bool demande_sortie\n\
 \n\
 # Vitesse de sortie : 6 bits \n\
 Speed speed\n\
 \n\
 # Point de sortie : 8 octets\n\
-ReferencePosition reference_position\n\
+ReferencePosition point_sortie\n\
 \n\
 # Nouvelle position dans P : 2 bits\n\
 uint8 position\n\
+\n\
+\n\
 ================================================================================\n\
 MSG: ece_msgs/FreinageUrgence\n\
 # Position P : 2 bits\n\
@@ -386,6 +424,7 @@ namespace serialization
       stream.next(m.header);
       stream.next(m.its_header);
       stream.next(m.generation_delta_time);
+      stream.next(m.basic_container);
       stream.next(m.station_type);
       stream.next(m.platoon);
       stream.next(m.vitesse_interdistance);
@@ -393,6 +432,7 @@ namespace serialization
       stream.next(m.desinsertion);
       stream.next(m.freinage_urgence);
       stream.next(m.feu);
+      stream.next(m.actual_position);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -419,6 +459,9 @@ struct Printer< ::ece_msgs::ecemsg_<ContainerAllocator> >
     Printer< ::ece_msgs::ItsPduHeader_<ContainerAllocator> >::stream(s, indent + "  ", v.its_header);
     s << indent << "generation_delta_time: ";
     Printer<uint16_t>::stream(s, indent + "  ", v.generation_delta_time);
+    s << indent << "basic_container: ";
+    s << std::endl;
+    Printer< ::ece_msgs::BasicContainer_<ContainerAllocator> >::stream(s, indent + "  ", v.basic_container);
     s << indent << "station_type: ";
     s << std::endl;
     Printer< ::ece_msgs::StationType_<ContainerAllocator> >::stream(s, indent + "  ", v.station_type);
@@ -440,6 +483,9 @@ struct Printer< ::ece_msgs::ecemsg_<ContainerAllocator> >
     s << indent << "feu: ";
     s << std::endl;
     Printer< ::ece_msgs::Feu_<ContainerAllocator> >::stream(s, indent + "  ", v.feu);
+    s << indent << "actual_position: ";
+    s << std::endl;
+    Printer< ::ece_msgs::ReferencePosition_<ContainerAllocator> >::stream(s, indent + "  ", v.actual_position);
   }
 };
 

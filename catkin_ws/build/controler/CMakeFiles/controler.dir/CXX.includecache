@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/user/catkin_ws/src/controler/src/Controler.cpp
+../include/controler/Controler.h
+/home/user/catkin_ws/src/controler/include/controler/Controler.h
+iostream
+-
+map
+-
+
+/home/user/catkin_ws/src/controler/src/Platoon.cpp
+../include/controler/Platoon.h
+/home/user/catkin_ws/src/controler/include/controler/Platoon.h
+
+/home/user/catkin_ws/src/controler/src/Position.cpp
+../include/controler/Position.h
+/home/user/catkin_ws/src/controler/include/controler/Position.h
+
+/home/user/catkin_ws/src/controler/src/Vehicle.cpp
+../include/controler/Vehicle.h
+/home/user/catkin_ws/src/controler/include/controler/Vehicle.h
+
+/home/user/catkin_ws/src/controler/src/main.cpp
+../include/controler/Controler.h
+/home/user/catkin_ws/src/controler/include/controler/Controler.h
+

@@ -12,6 +12,7 @@ const _arrayDeserializer = _deserializer.Array;
 const _finder = _ros_msg_utils.Find;
 const _getByteLength = _ros_msg_utils.getByteLength;
 let ItsPduHeader = require('./ItsPduHeader.js');
+let BasicContainer = require('./BasicContainer.js');
 let StationType = require('./StationType.js');
 let Platoon = require('./Platoon.js');
 let VitesseInterdistance = require('./VitesseInterdistance.js');
@@ -19,6 +20,7 @@ let Insertion = require('./Insertion.js');
 let Desinsertion = require('./Desinsertion.js');
 let FreinageUrgence = require('./FreinageUrgence.js');
 let Feu = require('./Feu.js');
+let ReferencePosition = require('./ReferencePosition.js');
 let std_msgs = _finder('std_msgs');
 
 //-----------------------------------------------------------
@@ -30,6 +32,7 @@ class ecemsg {
       this.header = null;
       this.its_header = null;
       this.generation_delta_time = null;
+      this.basic_container = null;
       this.station_type = null;
       this.platoon = null;
       this.vitesse_interdistance = null;
@@ -37,6 +40,7 @@ class ecemsg {
       this.desinsertion = null;
       this.freinage_urgence = null;
       this.feu = null;
+      this.actual_position = null;
     }
     else {
       if (initObj.hasOwnProperty('header')) {
@@ -56,6 +60,12 @@ class ecemsg {
       }
       else {
         this.generation_delta_time = 0;
+      }
+      if (initObj.hasOwnProperty('basic_container')) {
+        this.basic_container = initObj.basic_container
+      }
+      else {
+        this.basic_container = new BasicContainer();
       }
       if (initObj.hasOwnProperty('station_type')) {
         this.station_type = initObj.station_type
@@ -99,6 +109,12 @@ class ecemsg {
       else {
         this.feu = new Feu();
       }
+      if (initObj.hasOwnProperty('actual_position')) {
+        this.actual_position = initObj.actual_position
+      }
+      else {
+        this.actual_position = new ReferencePosition();
+      }
     }
   }
 
@@ -110,6 +126,8 @@ class ecemsg {
     bufferOffset = ItsPduHeader.serialize(obj.its_header, buffer, bufferOffset);
     // Serialize message field [generation_delta_time]
     bufferOffset = _serializer.uint16(obj.generation_delta_time, buffer, bufferOffset);
+    // Serialize message field [basic_container]
+    bufferOffset = BasicContainer.serialize(obj.basic_container, buffer, bufferOffset);
     // Serialize message field [station_type]
     bufferOffset = StationType.serialize(obj.station_type, buffer, bufferOffset);
     // Serialize message field [platoon]
@@ -124,6 +142,8 @@ class ecemsg {
     bufferOffset = FreinageUrgence.serialize(obj.freinage_urgence, buffer, bufferOffset);
     // Serialize message field [feu]
     bufferOffset = Feu.serialize(obj.feu, buffer, bufferOffset);
+    // Serialize message field [actual_position]
+    bufferOffset = ReferencePosition.serialize(obj.actual_position, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -137,6 +157,8 @@ class ecemsg {
     data.its_header = ItsPduHeader.deserialize(buffer, bufferOffset);
     // Deserialize message field [generation_delta_time]
     data.generation_delta_time = _deserializer.uint16(buffer, bufferOffset);
+    // Deserialize message field [basic_container]
+    data.basic_container = BasicContainer.deserialize(buffer, bufferOffset);
     // Deserialize message field [station_type]
     data.station_type = StationType.deserialize(buffer, bufferOffset);
     // Deserialize message field [platoon]
@@ -151,13 +173,16 @@ class ecemsg {
     data.freinage_urgence = FreinageUrgence.deserialize(buffer, bufferOffset);
     // Deserialize message field [feu]
     data.feu = Feu.deserialize(buffer, bufferOffset);
+    // Deserialize message field [actual_position]
+    data.actual_position = ReferencePosition.deserialize(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
     length += std_msgs.msg.Header.getMessageSize(object.header);
-    return length + 106;
+    length += Platoon.getMessageSize(object.platoon);
+    return length + 105;
   }
 
   static datatype() {
@@ -167,7 +192,7 @@ class ecemsg {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'c7b2cb36ce6de0044edf394d8a8fc5ca';
+    return '54adc2ed35f37e7b35eea21ecf34f073';
   }
 
   static messageDefinition() {
@@ -178,19 +203,24 @@ class ecemsg {
     uint16 generation_delta_time # milliseconds since 2004 modulo 2^16
     
     # basic container
+    BasicContainer basic_container
+    
     StationType station_type
     
     Platoon platoon
     
     VitesseInterdistance vitesse_interdistance
     
-    Insertion insertion 
+    Insertion insertion
+    
     Desinsertion desinsertion 
     
     FreinageUrgence freinage_urgence
     
     Feu feu
     
+    # Actual position : 8 octets
+    ReferencePosition actual_position
     ================================================================================
     MSG: std_msgs/Header
     # Standard metadata for higher-level stamped data types.
@@ -217,7 +247,28 @@ class ecemsg {
     
     uint8 MESSAGE_ID_DENM = 1
     uint8 MESSAGE_ID_CAM = 2
-    uint8 MESSAGE_ID_ECE = 3
+    uint8 MESSAGE_ID_ECE = 8
+    ================================================================================
+    MSG: ece_msgs/BasicContainer
+    # ID expediteur
+    uint8 ID_exp
+    
+    # ID destinataire
+    uint8 ID_dest
+    
+    # Phase de plattoning
+    Phase phase
+    
+    ================================================================================
+    MSG: ece_msgs/Phase
+    # Phase de plattoning
+    uint8 value
+    
+    uint8 INIT = 0
+    uint8 INSERTION = 1
+    uint8 DESINSERTION = 2
+    uint8 FEU = 3
+    uint8 FREINAGE_URG = 4
     ================================================================================
     MSG: ece_msgs/StationType
     uint8 value
@@ -237,14 +288,11 @@ class ecemsg {
     uint8 ROAD_SIDE_UNIT = 15
     ================================================================================
     MSG: ece_msgs/Platoon
-    # ID Vt : 3 bits 
-    uint8 id_vt
-    
     # ID platoon : 3 bits
     uint8 id_platoon
     
-    # ID autres véhicules platoon : 3 bits
-    IDs ids 
+    # ID autres véhicules platoon
+    IDs[] ids 
     
     # Nombre de véhicules : 3 bits
     uint8 nombre_vehicules
@@ -329,15 +377,18 @@ class ecemsg {
     ================================================================================
     MSG: ece_msgs/Desinsertion
     # Demande de sortie : 1 bit
+    bool demande_sortie
     
     # Vitesse de sortie : 6 bits 
     Speed speed
     
     # Point de sortie : 8 octets
-    ReferencePosition reference_position
+    ReferencePosition point_sortie
     
     # Nouvelle position dans P : 2 bits
     uint8 position
+    
+    
     ================================================================================
     MSG: ece_msgs/FreinageUrgence
     # Position P : 2 bits
@@ -374,6 +425,13 @@ class ecemsg {
     }
     else {
       resolved.generation_delta_time = 0
+    }
+
+    if (msg.basic_container !== undefined) {
+      resolved.basic_container = BasicContainer.Resolve(msg.basic_container)
+    }
+    else {
+      resolved.basic_container = new BasicContainer()
     }
 
     if (msg.station_type !== undefined) {
@@ -423,6 +481,13 @@ class ecemsg {
     }
     else {
       resolved.feu = new Feu()
+    }
+
+    if (msg.actual_position !== undefined) {
+      resolved.actual_position = ReferencePosition.Resolve(msg.actual_position)
+    }
+    else {
+      resolved.actual_position = new ReferencePosition()
     }
 
     return resolved;

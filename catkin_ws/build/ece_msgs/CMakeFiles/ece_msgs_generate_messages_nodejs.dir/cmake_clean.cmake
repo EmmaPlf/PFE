@@ -12,6 +12,8 @@ file(REMOVE_RECURSE
   "/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ReferencePosition.js"
   "/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/ecemsg.js"
   "/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/FreinageUrgence.js"
+  "/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/BasicContainer.js"
+  "/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/Phase.js"
   "/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/StationType.js"
   "/home/user/catkin_ws/devel/share/gennodejs/ros/ece_msgs/msg/Desinsertion.js"
 )

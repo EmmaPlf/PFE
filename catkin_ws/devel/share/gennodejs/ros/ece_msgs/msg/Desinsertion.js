@@ -20,22 +20,29 @@ class Desinsertion {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
+      this.demande_sortie = null;
       this.speed = null;
-      this.reference_position = null;
+      this.point_sortie = null;
       this.position = null;
     }
     else {
+      if (initObj.hasOwnProperty('demande_sortie')) {
+        this.demande_sortie = initObj.demande_sortie
+      }
+      else {
+        this.demande_sortie = false;
+      }
       if (initObj.hasOwnProperty('speed')) {
         this.speed = initObj.speed
       }
       else {
         this.speed = new Speed();
       }
-      if (initObj.hasOwnProperty('reference_position')) {
-        this.reference_position = initObj.reference_position
+      if (initObj.hasOwnProperty('point_sortie')) {
+        this.point_sortie = initObj.point_sortie
       }
       else {
-        this.reference_position = new ReferencePosition();
+        this.point_sortie = new ReferencePosition();
       }
       if (initObj.hasOwnProperty('position')) {
         this.position = initObj.position
@@ -48,10 +55,12 @@ class Desinsertion {
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type Desinsertion
+    // Serialize message field [demande_sortie]
+    bufferOffset = _serializer.bool(obj.demande_sortie, buffer, bufferOffset);
     // Serialize message field [speed]
     bufferOffset = Speed.serialize(obj.speed, buffer, bufferOffset);
-    // Serialize message field [reference_position]
-    bufferOffset = ReferencePosition.serialize(obj.reference_position, buffer, bufferOffset);
+    // Serialize message field [point_sortie]
+    bufferOffset = ReferencePosition.serialize(obj.point_sortie, buffer, bufferOffset);
     // Serialize message field [position]
     bufferOffset = _serializer.uint8(obj.position, buffer, bufferOffset);
     return bufferOffset;
@@ -61,17 +70,19 @@ class Desinsertion {
     //deserializes a message object of type Desinsertion
     let len;
     let data = new Desinsertion(null);
+    // Deserialize message field [demande_sortie]
+    data.demande_sortie = _deserializer.bool(buffer, bufferOffset);
     // Deserialize message field [speed]
     data.speed = Speed.deserialize(buffer, bufferOffset);
-    // Deserialize message field [reference_position]
-    data.reference_position = ReferencePosition.deserialize(buffer, bufferOffset);
+    // Deserialize message field [point_sortie]
+    data.point_sortie = ReferencePosition.deserialize(buffer, bufferOffset);
     // Deserialize message field [position]
     data.position = _deserializer.uint8(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 31;
+    return 32;
   }
 
   static datatype() {
@@ -81,22 +92,25 @@ class Desinsertion {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '8c11695e348cdf58d2655e6625478e1f';
+    return '737935e1f42b0a7edea1212ba87b7938';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     # Demande de sortie : 1 bit
+    bool demande_sortie
     
     # Vitesse de sortie : 6 bits 
     Speed speed
     
     # Point de sortie : 8 octets
-    ReferencePosition reference_position
+    ReferencePosition point_sortie
     
     # Nouvelle position dans P : 2 bits
     uint8 position
+    
+    
     ================================================================================
     MSG: ece_msgs/Speed
     uint16 value # 0.01 m/s
@@ -163,6 +177,13 @@ class Desinsertion {
       msg = {};
     }
     const resolved = new Desinsertion(null);
+    if (msg.demande_sortie !== undefined) {
+      resolved.demande_sortie = msg.demande_sortie;
+    }
+    else {
+      resolved.demande_sortie = false
+    }
+
     if (msg.speed !== undefined) {
       resolved.speed = Speed.Resolve(msg.speed)
     }
@@ -170,11 +191,11 @@ class Desinsertion {
       resolved.speed = new Speed()
     }
 
-    if (msg.reference_position !== undefined) {
-      resolved.reference_position = ReferencePosition.Resolve(msg.reference_position)
+    if (msg.point_sortie !== undefined) {
+      resolved.point_sortie = ReferencePosition.Resolve(msg.point_sortie)
     }
     else {
-      resolved.reference_position = new ReferencePosition()
+      resolved.point_sortie = new ReferencePosition()
     }
 
     if (msg.position !== undefined) {

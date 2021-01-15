@@ -9,7 +9,7 @@ import ece_msgs.msg
 import std_msgs.msg
 
 class ecemsg(genpy.Message):
-  _md5sum = "c7b2cb36ce6de0044edf394d8a8fc5ca"
+  _md5sum = "54adc2ed35f37e7b35eea21ecf34f073"
   _type = "ece_msgs/ecemsg"
   _has_header = True #flag to mark the presence of a Header object
   _full_text = """Header header
@@ -17,19 +17,24 @@ ItsPduHeader its_header
 uint16 generation_delta_time # milliseconds since 2004 modulo 2^16
 
 # basic container
+BasicContainer basic_container
+
 StationType station_type
 
 Platoon platoon
 
 VitesseInterdistance vitesse_interdistance
 
-Insertion insertion 
+Insertion insertion
+
 Desinsertion desinsertion 
 
 FreinageUrgence freinage_urgence
 
 Feu feu
 
+# Actual position : 8 octets
+ReferencePosition actual_position
 ================================================================================
 MSG: std_msgs/Header
 # Standard metadata for higher-level stamped data types.
@@ -56,7 +61,28 @@ uint32 station_id
 
 uint8 MESSAGE_ID_DENM = 1
 uint8 MESSAGE_ID_CAM = 2
-uint8 MESSAGE_ID_ECE = 3
+uint8 MESSAGE_ID_ECE = 8
+================================================================================
+MSG: ece_msgs/BasicContainer
+# ID expediteur
+uint8 ID_exp
+
+# ID destinataire
+uint8 ID_dest
+
+# Phase de plattoning
+Phase phase
+
+================================================================================
+MSG: ece_msgs/Phase
+# Phase de plattoning
+uint8 value
+
+uint8 INIT = 0
+uint8 INSERTION = 1
+uint8 DESINSERTION = 2
+uint8 FEU = 3
+uint8 FREINAGE_URG = 4
 ================================================================================
 MSG: ece_msgs/StationType
 uint8 value
@@ -76,14 +102,11 @@ uint8 TRAM = 11
 uint8 ROAD_SIDE_UNIT = 15
 ================================================================================
 MSG: ece_msgs/Platoon
-# ID Vt : 3 bits 
-uint8 id_vt
-
 # ID platoon : 3 bits
 uint8 id_platoon
 
-# ID autres véhicules platoon : 3 bits
-IDs ids 
+# ID autres véhicules platoon
+IDs[] ids 
 
 # Nombre de véhicules : 3 bits
 uint8 nombre_vehicules
@@ -168,15 +191,18 @@ bool confirmation_insertion
 ================================================================================
 MSG: ece_msgs/Desinsertion
 # Demande de sortie : 1 bit
+bool demande_sortie
 
 # Vitesse de sortie : 6 bits 
 Speed speed
 
 # Point de sortie : 8 octets
-ReferencePosition reference_position
+ReferencePosition point_sortie
 
 # Nouvelle position dans P : 2 bits
 uint8 position
+
+
 ================================================================================
 MSG: ece_msgs/FreinageUrgence
 # Position P : 2 bits
@@ -185,8 +211,8 @@ uint8 position
 MSG: ece_msgs/Feu
 # Permission de passer le feu : 1 bit
 bool permission_feu"""
-  __slots__ = ['header','its_header','generation_delta_time','station_type','platoon','vitesse_interdistance','insertion','desinsertion','freinage_urgence','feu']
-  _slot_types = ['std_msgs/Header','ece_msgs/ItsPduHeader','uint16','ece_msgs/StationType','ece_msgs/Platoon','ece_msgs/VitesseInterdistance','ece_msgs/Insertion','ece_msgs/Desinsertion','ece_msgs/FreinageUrgence','ece_msgs/Feu']
+  __slots__ = ['header','its_header','generation_delta_time','basic_container','station_type','platoon','vitesse_interdistance','insertion','desinsertion','freinage_urgence','feu','actual_position']
+  _slot_types = ['std_msgs/Header','ece_msgs/ItsPduHeader','uint16','ece_msgs/BasicContainer','ece_msgs/StationType','ece_msgs/Platoon','ece_msgs/VitesseInterdistance','ece_msgs/Insertion','ece_msgs/Desinsertion','ece_msgs/FreinageUrgence','ece_msgs/Feu','ece_msgs/ReferencePosition']
 
   def __init__(self, *args, **kwds):
     """
@@ -196,7 +222,7 @@ bool permission_feu"""
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       header,its_header,generation_delta_time,station_type,platoon,vitesse_interdistance,insertion,desinsertion,freinage_urgence,feu
+       header,its_header,generation_delta_time,basic_container,station_type,platoon,vitesse_interdistance,insertion,desinsertion,freinage_urgence,feu,actual_position
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -211,6 +237,8 @@ bool permission_feu"""
         self.its_header = ece_msgs.msg.ItsPduHeader()
       if self.generation_delta_time is None:
         self.generation_delta_time = 0
+      if self.basic_container is None:
+        self.basic_container = ece_msgs.msg.BasicContainer()
       if self.station_type is None:
         self.station_type = ece_msgs.msg.StationType()
       if self.platoon is None:
@@ -225,10 +253,13 @@ bool permission_feu"""
         self.freinage_urgence = ece_msgs.msg.FreinageUrgence()
       if self.feu is None:
         self.feu = ece_msgs.msg.Feu()
+      if self.actual_position is None:
+        self.actual_position = ece_msgs.msg.ReferencePosition()
     else:
       self.header = std_msgs.msg.Header()
       self.its_header = ece_msgs.msg.ItsPduHeader()
       self.generation_delta_time = 0
+      self.basic_container = ece_msgs.msg.BasicContainer()
       self.station_type = ece_msgs.msg.StationType()
       self.platoon = ece_msgs.msg.Platoon()
       self.vitesse_interdistance = ece_msgs.msg.VitesseInterdistance()
@@ -236,6 +267,7 @@ bool permission_feu"""
       self.desinsertion = ece_msgs.msg.Desinsertion()
       self.freinage_urgence = ece_msgs.msg.FreinageUrgence()
       self.feu = ece_msgs.msg.Feu()
+      self.actual_position = ece_msgs.msg.ReferencePosition()
 
   def _get_types(self):
     """
@@ -258,7 +290,14 @@ bool permission_feu"""
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_get_struct_2BIH6B2q3HiBH2B2q3Hi2BHB2q3Hi4B().pack(_x.its_header.protocol_version, _x.its_header.message_id, _x.its_header.station_id, _x.generation_delta_time, _x.station_type.value, _x.platoon.id_vt, _x.platoon.id_platoon, _x.platoon.ids.ID, _x.platoon.ids.position, _x.platoon.nombre_vehicules, _x.platoon.reference_position.latitude, _x.platoon.reference_position.longitude, _x.platoon.reference_position.position_confidence.semi_major_confidence, _x.platoon.reference_position.position_confidence.semi_minor_confidence, _x.platoon.reference_position.position_confidence.semi_major_orientation, _x.platoon.reference_position.altitude.value, _x.platoon.reference_position.altitude.confidence, _x.vitesse_interdistance.speed.value, _x.vitesse_interdistance.speed.confidence, _x.vitesse_interdistance.interdistance, _x.insertion.reference_position.latitude, _x.insertion.reference_position.longitude, _x.insertion.reference_position.position_confidence.semi_major_confidence, _x.insertion.reference_position.position_confidence.semi_minor_confidence, _x.insertion.reference_position.position_confidence.semi_major_orientation, _x.insertion.reference_position.altitude.value, _x.insertion.reference_position.altitude.confidence, _x.insertion.confirmation_insertion, _x.desinsertion.speed.value, _x.desinsertion.speed.confidence, _x.desinsertion.reference_position.latitude, _x.desinsertion.reference_position.longitude, _x.desinsertion.reference_position.position_confidence.semi_major_confidence, _x.desinsertion.reference_position.position_confidence.semi_minor_confidence, _x.desinsertion.reference_position.position_confidence.semi_major_orientation, _x.desinsertion.reference_position.altitude.value, _x.desinsertion.reference_position.altitude.confidence, _x.desinsertion.position, _x.freinage_urgence.position, _x.feu.permission_feu))
+      buff.write(_get_struct_2BIH5B().pack(_x.its_header.protocol_version, _x.its_header.message_id, _x.its_header.station_id, _x.generation_delta_time, _x.basic_container.ID_exp, _x.basic_container.ID_dest, _x.basic_container.phase.value, _x.station_type.value, _x.platoon.id_platoon))
+      length = len(self.platoon.ids)
+      buff.write(_struct_I.pack(length))
+      for val1 in self.platoon.ids:
+        _x = val1
+        buff.write(_get_struct_2B().pack(_x.ID, _x.position))
+      _x = self
+      buff.write(_get_struct_B2q3HiBH2B2q3Hi3BHB2q3Hi4B2q3HiB().pack(_x.platoon.nombre_vehicules, _x.platoon.reference_position.latitude, _x.platoon.reference_position.longitude, _x.platoon.reference_position.position_confidence.semi_major_confidence, _x.platoon.reference_position.position_confidence.semi_minor_confidence, _x.platoon.reference_position.position_confidence.semi_major_orientation, _x.platoon.reference_position.altitude.value, _x.platoon.reference_position.altitude.confidence, _x.vitesse_interdistance.speed.value, _x.vitesse_interdistance.speed.confidence, _x.vitesse_interdistance.interdistance, _x.insertion.reference_position.latitude, _x.insertion.reference_position.longitude, _x.insertion.reference_position.position_confidence.semi_major_confidence, _x.insertion.reference_position.position_confidence.semi_minor_confidence, _x.insertion.reference_position.position_confidence.semi_major_orientation, _x.insertion.reference_position.altitude.value, _x.insertion.reference_position.altitude.confidence, _x.insertion.confirmation_insertion, _x.desinsertion.demande_sortie, _x.desinsertion.speed.value, _x.desinsertion.speed.confidence, _x.desinsertion.point_sortie.latitude, _x.desinsertion.point_sortie.longitude, _x.desinsertion.point_sortie.position_confidence.semi_major_confidence, _x.desinsertion.point_sortie.position_confidence.semi_minor_confidence, _x.desinsertion.point_sortie.position_confidence.semi_major_orientation, _x.desinsertion.point_sortie.altitude.value, _x.desinsertion.point_sortie.altitude.confidence, _x.desinsertion.position, _x.freinage_urgence.position, _x.feu.permission_feu, _x.actual_position.latitude, _x.actual_position.longitude, _x.actual_position.position_confidence.semi_major_confidence, _x.actual_position.position_confidence.semi_minor_confidence, _x.actual_position.position_confidence.semi_major_orientation, _x.actual_position.altitude.value, _x.actual_position.altitude.confidence))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -272,6 +311,8 @@ bool permission_feu"""
         self.header = std_msgs.msg.Header()
       if self.its_header is None:
         self.its_header = ece_msgs.msg.ItsPduHeader()
+      if self.basic_container is None:
+        self.basic_container = ece_msgs.msg.BasicContainer()
       if self.station_type is None:
         self.station_type = ece_msgs.msg.StationType()
       if self.platoon is None:
@@ -286,6 +327,8 @@ bool permission_feu"""
         self.freinage_urgence = ece_msgs.msg.FreinageUrgence()
       if self.feu is None:
         self.feu = ece_msgs.msg.Feu()
+      if self.actual_position is None:
+        self.actual_position = ece_msgs.msg.ReferencePosition()
       end = 0
       _x = self
       start = end
@@ -302,9 +345,25 @@ bool permission_feu"""
         self.header.frame_id = str[start:end]
       _x = self
       start = end
-      end += 106
-      (_x.its_header.protocol_version, _x.its_header.message_id, _x.its_header.station_id, _x.generation_delta_time, _x.station_type.value, _x.platoon.id_vt, _x.platoon.id_platoon, _x.platoon.ids.ID, _x.platoon.ids.position, _x.platoon.nombre_vehicules, _x.platoon.reference_position.latitude, _x.platoon.reference_position.longitude, _x.platoon.reference_position.position_confidence.semi_major_confidence, _x.platoon.reference_position.position_confidence.semi_minor_confidence, _x.platoon.reference_position.position_confidence.semi_major_orientation, _x.platoon.reference_position.altitude.value, _x.platoon.reference_position.altitude.confidence, _x.vitesse_interdistance.speed.value, _x.vitesse_interdistance.speed.confidence, _x.vitesse_interdistance.interdistance, _x.insertion.reference_position.latitude, _x.insertion.reference_position.longitude, _x.insertion.reference_position.position_confidence.semi_major_confidence, _x.insertion.reference_position.position_confidence.semi_minor_confidence, _x.insertion.reference_position.position_confidence.semi_major_orientation, _x.insertion.reference_position.altitude.value, _x.insertion.reference_position.altitude.confidence, _x.insertion.confirmation_insertion, _x.desinsertion.speed.value, _x.desinsertion.speed.confidence, _x.desinsertion.reference_position.latitude, _x.desinsertion.reference_position.longitude, _x.desinsertion.reference_position.position_confidence.semi_major_confidence, _x.desinsertion.reference_position.position_confidence.semi_minor_confidence, _x.desinsertion.reference_position.position_confidence.semi_major_orientation, _x.desinsertion.reference_position.altitude.value, _x.desinsertion.reference_position.altitude.confidence, _x.desinsertion.position, _x.freinage_urgence.position, _x.feu.permission_feu,) = _get_struct_2BIH6B2q3HiBH2B2q3Hi2BHB2q3Hi4B().unpack(str[start:end])
+      end += 13
+      (_x.its_header.protocol_version, _x.its_header.message_id, _x.its_header.station_id, _x.generation_delta_time, _x.basic_container.ID_exp, _x.basic_container.ID_dest, _x.basic_container.phase.value, _x.station_type.value, _x.platoon.id_platoon,) = _get_struct_2BIH5B().unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      self.platoon.ids = []
+      for i in range(0, length):
+        val1 = ece_msgs.msg.IDs()
+        _x = val1
+        start = end
+        end += 2
+        (_x.ID, _x.position,) = _get_struct_2B().unpack(str[start:end])
+        self.platoon.ids.append(val1)
+      _x = self
+      start = end
+      end += 121
+      (_x.platoon.nombre_vehicules, _x.platoon.reference_position.latitude, _x.platoon.reference_position.longitude, _x.platoon.reference_position.position_confidence.semi_major_confidence, _x.platoon.reference_position.position_confidence.semi_minor_confidence, _x.platoon.reference_position.position_confidence.semi_major_orientation, _x.platoon.reference_position.altitude.value, _x.platoon.reference_position.altitude.confidence, _x.vitesse_interdistance.speed.value, _x.vitesse_interdistance.speed.confidence, _x.vitesse_interdistance.interdistance, _x.insertion.reference_position.latitude, _x.insertion.reference_position.longitude, _x.insertion.reference_position.position_confidence.semi_major_confidence, _x.insertion.reference_position.position_confidence.semi_minor_confidence, _x.insertion.reference_position.position_confidence.semi_major_orientation, _x.insertion.reference_position.altitude.value, _x.insertion.reference_position.altitude.confidence, _x.insertion.confirmation_insertion, _x.desinsertion.demande_sortie, _x.desinsertion.speed.value, _x.desinsertion.speed.confidence, _x.desinsertion.point_sortie.latitude, _x.desinsertion.point_sortie.longitude, _x.desinsertion.point_sortie.position_confidence.semi_major_confidence, _x.desinsertion.point_sortie.position_confidence.semi_minor_confidence, _x.desinsertion.point_sortie.position_confidence.semi_major_orientation, _x.desinsertion.point_sortie.altitude.value, _x.desinsertion.point_sortie.altitude.confidence, _x.desinsertion.position, _x.freinage_urgence.position, _x.feu.permission_feu, _x.actual_position.latitude, _x.actual_position.longitude, _x.actual_position.position_confidence.semi_major_confidence, _x.actual_position.position_confidence.semi_minor_confidence, _x.actual_position.position_confidence.semi_major_orientation, _x.actual_position.altitude.value, _x.actual_position.altitude.confidence,) = _get_struct_B2q3HiBH2B2q3Hi3BHB2q3Hi4B2q3HiB().unpack(str[start:end])
       self.insertion.confirmation_insertion = bool(self.insertion.confirmation_insertion)
+      self.desinsertion.demande_sortie = bool(self.desinsertion.demande_sortie)
       self.feu.permission_feu = bool(self.feu.permission_feu)
       return self
     except struct.error as e:
@@ -327,7 +386,14 @@ bool permission_feu"""
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_get_struct_2BIH6B2q3HiBH2B2q3Hi2BHB2q3Hi4B().pack(_x.its_header.protocol_version, _x.its_header.message_id, _x.its_header.station_id, _x.generation_delta_time, _x.station_type.value, _x.platoon.id_vt, _x.platoon.id_platoon, _x.platoon.ids.ID, _x.platoon.ids.position, _x.platoon.nombre_vehicules, _x.platoon.reference_position.latitude, _x.platoon.reference_position.longitude, _x.platoon.reference_position.position_confidence.semi_major_confidence, _x.platoon.reference_position.position_confidence.semi_minor_confidence, _x.platoon.reference_position.position_confidence.semi_major_orientation, _x.platoon.reference_position.altitude.value, _x.platoon.reference_position.altitude.confidence, _x.vitesse_interdistance.speed.value, _x.vitesse_interdistance.speed.confidence, _x.vitesse_interdistance.interdistance, _x.insertion.reference_position.latitude, _x.insertion.reference_position.longitude, _x.insertion.reference_position.position_confidence.semi_major_confidence, _x.insertion.reference_position.position_confidence.semi_minor_confidence, _x.insertion.reference_position.position_confidence.semi_major_orientation, _x.insertion.reference_position.altitude.value, _x.insertion.reference_position.altitude.confidence, _x.insertion.confirmation_insertion, _x.desinsertion.speed.value, _x.desinsertion.speed.confidence, _x.desinsertion.reference_position.latitude, _x.desinsertion.reference_position.longitude, _x.desinsertion.reference_position.position_confidence.semi_major_confidence, _x.desinsertion.reference_position.position_confidence.semi_minor_confidence, _x.desinsertion.reference_position.position_confidence.semi_major_orientation, _x.desinsertion.reference_position.altitude.value, _x.desinsertion.reference_position.altitude.confidence, _x.desinsertion.position, _x.freinage_urgence.position, _x.feu.permission_feu))
+      buff.write(_get_struct_2BIH5B().pack(_x.its_header.protocol_version, _x.its_header.message_id, _x.its_header.station_id, _x.generation_delta_time, _x.basic_container.ID_exp, _x.basic_container.ID_dest, _x.basic_container.phase.value, _x.station_type.value, _x.platoon.id_platoon))
+      length = len(self.platoon.ids)
+      buff.write(_struct_I.pack(length))
+      for val1 in self.platoon.ids:
+        _x = val1
+        buff.write(_get_struct_2B().pack(_x.ID, _x.position))
+      _x = self
+      buff.write(_get_struct_B2q3HiBH2B2q3Hi3BHB2q3Hi4B2q3HiB().pack(_x.platoon.nombre_vehicules, _x.platoon.reference_position.latitude, _x.platoon.reference_position.longitude, _x.platoon.reference_position.position_confidence.semi_major_confidence, _x.platoon.reference_position.position_confidence.semi_minor_confidence, _x.platoon.reference_position.position_confidence.semi_major_orientation, _x.platoon.reference_position.altitude.value, _x.platoon.reference_position.altitude.confidence, _x.vitesse_interdistance.speed.value, _x.vitesse_interdistance.speed.confidence, _x.vitesse_interdistance.interdistance, _x.insertion.reference_position.latitude, _x.insertion.reference_position.longitude, _x.insertion.reference_position.position_confidence.semi_major_confidence, _x.insertion.reference_position.position_confidence.semi_minor_confidence, _x.insertion.reference_position.position_confidence.semi_major_orientation, _x.insertion.reference_position.altitude.value, _x.insertion.reference_position.altitude.confidence, _x.insertion.confirmation_insertion, _x.desinsertion.demande_sortie, _x.desinsertion.speed.value, _x.desinsertion.speed.confidence, _x.desinsertion.point_sortie.latitude, _x.desinsertion.point_sortie.longitude, _x.desinsertion.point_sortie.position_confidence.semi_major_confidence, _x.desinsertion.point_sortie.position_confidence.semi_minor_confidence, _x.desinsertion.point_sortie.position_confidence.semi_major_orientation, _x.desinsertion.point_sortie.altitude.value, _x.desinsertion.point_sortie.altitude.confidence, _x.desinsertion.position, _x.freinage_urgence.position, _x.feu.permission_feu, _x.actual_position.latitude, _x.actual_position.longitude, _x.actual_position.position_confidence.semi_major_confidence, _x.actual_position.position_confidence.semi_minor_confidence, _x.actual_position.position_confidence.semi_major_orientation, _x.actual_position.altitude.value, _x.actual_position.altitude.confidence))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -342,6 +408,8 @@ bool permission_feu"""
         self.header = std_msgs.msg.Header()
       if self.its_header is None:
         self.its_header = ece_msgs.msg.ItsPduHeader()
+      if self.basic_container is None:
+        self.basic_container = ece_msgs.msg.BasicContainer()
       if self.station_type is None:
         self.station_type = ece_msgs.msg.StationType()
       if self.platoon is None:
@@ -356,6 +424,8 @@ bool permission_feu"""
         self.freinage_urgence = ece_msgs.msg.FreinageUrgence()
       if self.feu is None:
         self.feu = ece_msgs.msg.Feu()
+      if self.actual_position is None:
+        self.actual_position = ece_msgs.msg.ReferencePosition()
       end = 0
       _x = self
       start = end
@@ -372,9 +442,25 @@ bool permission_feu"""
         self.header.frame_id = str[start:end]
       _x = self
       start = end
-      end += 106
-      (_x.its_header.protocol_version, _x.its_header.message_id, _x.its_header.station_id, _x.generation_delta_time, _x.station_type.value, _x.platoon.id_vt, _x.platoon.id_platoon, _x.platoon.ids.ID, _x.platoon.ids.position, _x.platoon.nombre_vehicules, _x.platoon.reference_position.latitude, _x.platoon.reference_position.longitude, _x.platoon.reference_position.position_confidence.semi_major_confidence, _x.platoon.reference_position.position_confidence.semi_minor_confidence, _x.platoon.reference_position.position_confidence.semi_major_orientation, _x.platoon.reference_position.altitude.value, _x.platoon.reference_position.altitude.confidence, _x.vitesse_interdistance.speed.value, _x.vitesse_interdistance.speed.confidence, _x.vitesse_interdistance.interdistance, _x.insertion.reference_position.latitude, _x.insertion.reference_position.longitude, _x.insertion.reference_position.position_confidence.semi_major_confidence, _x.insertion.reference_position.position_confidence.semi_minor_confidence, _x.insertion.reference_position.position_confidence.semi_major_orientation, _x.insertion.reference_position.altitude.value, _x.insertion.reference_position.altitude.confidence, _x.insertion.confirmation_insertion, _x.desinsertion.speed.value, _x.desinsertion.speed.confidence, _x.desinsertion.reference_position.latitude, _x.desinsertion.reference_position.longitude, _x.desinsertion.reference_position.position_confidence.semi_major_confidence, _x.desinsertion.reference_position.position_confidence.semi_minor_confidence, _x.desinsertion.reference_position.position_confidence.semi_major_orientation, _x.desinsertion.reference_position.altitude.value, _x.desinsertion.reference_position.altitude.confidence, _x.desinsertion.position, _x.freinage_urgence.position, _x.feu.permission_feu,) = _get_struct_2BIH6B2q3HiBH2B2q3Hi2BHB2q3Hi4B().unpack(str[start:end])
+      end += 13
+      (_x.its_header.protocol_version, _x.its_header.message_id, _x.its_header.station_id, _x.generation_delta_time, _x.basic_container.ID_exp, _x.basic_container.ID_dest, _x.basic_container.phase.value, _x.station_type.value, _x.platoon.id_platoon,) = _get_struct_2BIH5B().unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      self.platoon.ids = []
+      for i in range(0, length):
+        val1 = ece_msgs.msg.IDs()
+        _x = val1
+        start = end
+        end += 2
+        (_x.ID, _x.position,) = _get_struct_2B().unpack(str[start:end])
+        self.platoon.ids.append(val1)
+      _x = self
+      start = end
+      end += 121
+      (_x.platoon.nombre_vehicules, _x.platoon.reference_position.latitude, _x.platoon.reference_position.longitude, _x.platoon.reference_position.position_confidence.semi_major_confidence, _x.platoon.reference_position.position_confidence.semi_minor_confidence, _x.platoon.reference_position.position_confidence.semi_major_orientation, _x.platoon.reference_position.altitude.value, _x.platoon.reference_position.altitude.confidence, _x.vitesse_interdistance.speed.value, _x.vitesse_interdistance.speed.confidence, _x.vitesse_interdistance.interdistance, _x.insertion.reference_position.latitude, _x.insertion.reference_position.longitude, _x.insertion.reference_position.position_confidence.semi_major_confidence, _x.insertion.reference_position.position_confidence.semi_minor_confidence, _x.insertion.reference_position.position_confidence.semi_major_orientation, _x.insertion.reference_position.altitude.value, _x.insertion.reference_position.altitude.confidence, _x.insertion.confirmation_insertion, _x.desinsertion.demande_sortie, _x.desinsertion.speed.value, _x.desinsertion.speed.confidence, _x.desinsertion.point_sortie.latitude, _x.desinsertion.point_sortie.longitude, _x.desinsertion.point_sortie.position_confidence.semi_major_confidence, _x.desinsertion.point_sortie.position_confidence.semi_minor_confidence, _x.desinsertion.point_sortie.position_confidence.semi_major_orientation, _x.desinsertion.point_sortie.altitude.value, _x.desinsertion.point_sortie.altitude.confidence, _x.desinsertion.position, _x.freinage_urgence.position, _x.feu.permission_feu, _x.actual_position.latitude, _x.actual_position.longitude, _x.actual_position.position_confidence.semi_major_confidence, _x.actual_position.position_confidence.semi_minor_confidence, _x.actual_position.position_confidence.semi_major_orientation, _x.actual_position.altitude.value, _x.actual_position.altitude.confidence,) = _get_struct_B2q3HiBH2B2q3Hi3BHB2q3Hi4B2q3HiB().unpack(str[start:end])
       self.insertion.confirmation_insertion = bool(self.insertion.confirmation_insertion)
+      self.desinsertion.demande_sortie = bool(self.desinsertion.demande_sortie)
       self.feu.permission_feu = bool(self.feu.permission_feu)
       return self
     except struct.error as e:
@@ -384,15 +470,27 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_2BIH6B2q3HiBH2B2q3Hi2BHB2q3Hi4B = None
-def _get_struct_2BIH6B2q3HiBH2B2q3Hi2BHB2q3Hi4B():
-    global _struct_2BIH6B2q3HiBH2B2q3Hi2BHB2q3Hi4B
-    if _struct_2BIH6B2q3HiBH2B2q3Hi2BHB2q3Hi4B is None:
-        _struct_2BIH6B2q3HiBH2B2q3Hi2BHB2q3Hi4B = struct.Struct("<2BIH6B2q3HiBH2B2q3Hi2BHB2q3Hi4B")
-    return _struct_2BIH6B2q3HiBH2B2q3Hi2BHB2q3Hi4B
 _struct_3I = None
 def _get_struct_3I():
     global _struct_3I
     if _struct_3I is None:
         _struct_3I = struct.Struct("<3I")
     return _struct_3I
+_struct_B2q3HiBH2B2q3Hi3BHB2q3Hi4B2q3HiB = None
+def _get_struct_B2q3HiBH2B2q3Hi3BHB2q3Hi4B2q3HiB():
+    global _struct_B2q3HiBH2B2q3Hi3BHB2q3Hi4B2q3HiB
+    if _struct_B2q3HiBH2B2q3Hi3BHB2q3Hi4B2q3HiB is None:
+        _struct_B2q3HiBH2B2q3Hi3BHB2q3Hi4B2q3HiB = struct.Struct("<B2q3HiBH2B2q3Hi3BHB2q3Hi4B2q3HiB")
+    return _struct_B2q3HiBH2B2q3Hi3BHB2q3Hi4B2q3HiB
+_struct_2BIH5B = None
+def _get_struct_2BIH5B():
+    global _struct_2BIH5B
+    if _struct_2BIH5B is None:
+        _struct_2BIH5B = struct.Struct("<2BIH5B")
+    return _struct_2BIH5B
+_struct_2B = None
+def _get_struct_2B():
+    global _struct_2B
+    if _struct_2B is None:
+        _struct_2B = struct.Struct("<2B")
+    return _struct_2B

@@ -12,6 +12,8 @@ file(REMOVE_RECURSE
   "/home/user/catkin_ws/devel/share/common-lisp/ros/ece_msgs/msg/ReferencePosition.lisp"
   "/home/user/catkin_ws/devel/share/common-lisp/ros/ece_msgs/msg/ecemsg.lisp"
   "/home/user/catkin_ws/devel/share/common-lisp/ros/ece_msgs/msg/FreinageUrgence.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/ece_msgs/msg/BasicContainer.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/ece_msgs/msg/Phase.lisp"
   "/home/user/catkin_ws/devel/share/common-lisp/ros/ece_msgs/msg/StationType.lisp"
   "/home/user/catkin_ws/devel/share/common-lisp/ros/ece_msgs/msg/Desinsertion.lisp"
 )

@@ -49,14 +49,12 @@
 (cl:defmethod roslisp-msg-protocol:symbol-codes ((msg-type (cl:eql '<ItsPduHeader>)))
     "Constants for message type '<ItsPduHeader>"
   '((:MESSAGE_ID_DENM . 1)
-    (:MESSAGE_ID_CAM . 2)
-    (:MESSAGE_ID_ECE . 3))
+    (:MESSAGE_ID_CAM . 2))
 )
 (cl:defmethod roslisp-msg-protocol:symbol-codes ((msg-type (cl:eql 'ItsPduHeader)))
     "Constants for message type 'ItsPduHeader"
   '((:MESSAGE_ID_DENM . 1)
-    (:MESSAGE_ID_CAM . 2)
-    (:MESSAGE_ID_ECE . 3))
+    (:MESSAGE_ID_CAM . 2))
 )
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <ItsPduHeader>) ostream)
   "Serializes a message object of type '<ItsPduHeader>"
@@ -85,16 +83,16 @@
   "etsi_msgs/ItsPduHeader")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<ItsPduHeader>)))
   "Returns md5sum for a message object of type '<ItsPduHeader>"
-  "ff8e90c8ffc6c6f2d381f49c4d8f0e67")
+  "493dd45f242245ef547b44cf2be57f2d")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'ItsPduHeader)))
   "Returns md5sum for a message object of type 'ItsPduHeader"
-  "ff8e90c8ffc6c6f2d381f49c4d8f0e67")
+  "493dd45f242245ef547b44cf2be57f2d")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<ItsPduHeader>)))
   "Returns full string definition for message of type '<ItsPduHeader>"
-  (cl:format cl:nil "uint8 protocol_version~%uint8 message_id~%uint32 station_id~%~%uint8 MESSAGE_ID_DENM = 1~%uint8 MESSAGE_ID_CAM = 2~%uint8 MESSAGE_ID_ECE = 3~%~%~%"))
+  (cl:format cl:nil "uint8 protocol_version~%uint8 message_id~%uint32 station_id~%~%uint8 MESSAGE_ID_DENM = 1~%uint8 MESSAGE_ID_CAM = 2~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'ItsPduHeader)))
   "Returns full string definition for message of type 'ItsPduHeader"
-  (cl:format cl:nil "uint8 protocol_version~%uint8 message_id~%uint32 station_id~%~%uint8 MESSAGE_ID_DENM = 1~%uint8 MESSAGE_ID_CAM = 2~%uint8 MESSAGE_ID_ECE = 3~%~%~%"))
+  (cl:format cl:nil "uint8 protocol_version~%uint8 message_id~%uint32 station_id~%~%uint8 MESSAGE_ID_DENM = 1~%uint8 MESSAGE_ID_CAM = 2~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <ItsPduHeader>))
   (cl:+ 0
      1

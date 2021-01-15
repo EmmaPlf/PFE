@@ -7,7 +7,7 @@ import struct
 
 
 class ItsPduHeader(genpy.Message):
-  _md5sum = "ff8e90c8ffc6c6f2d381f49c4d8f0e67"
+  _md5sum = "493dd45f242245ef547b44cf2be57f2d"
   _type = "etsi_msgs/ItsPduHeader"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """uint8 protocol_version
@@ -16,12 +16,10 @@ uint32 station_id
 
 uint8 MESSAGE_ID_DENM = 1
 uint8 MESSAGE_ID_CAM = 2
-uint8 MESSAGE_ID_ECE = 3
 """
   # Pseudo-constants
   MESSAGE_ID_DENM = 1
   MESSAGE_ID_CAM = 2
-  MESSAGE_ID_ECE = 3
 
   __slots__ = ['protocol_version','message_id','station_id']
   _slot_types = ['uint8','uint8','uint32']

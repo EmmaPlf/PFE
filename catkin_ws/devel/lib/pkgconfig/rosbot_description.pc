@@ -4,5 +4,5 @@ Name: rosbot_description
 Description: Description of rosbot_description
 Version: 0.0.0
 Cflags: 
-Libs: -L${prefix}/lib 
+Libs: -L/home/user/catkin_ws/devel/lib 
 Requires: 

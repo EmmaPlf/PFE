@@ -8,17 +8,14 @@ import struct
 import ece_msgs.msg
 
 class Platoon(genpy.Message):
-  _md5sum = "e04a40bb6fe3969e75a1973bd60b5977"
+  _md5sum = "b7532dcd39ebae5557f8abd6a9baa912"
   _type = "ece_msgs/Platoon"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """# ID Vt : 3 bits 
-uint8 id_vt
-
-# ID platoon : 3 bits
+  _full_text = """# ID platoon : 3 bits
 uint8 id_platoon
 
-# ID autres véhicules platoon : 3 bits
-IDs ids 
+# ID autres véhicules platoon
+IDs[] ids 
 
 # Nombre de véhicules : 3 bits
 uint8 nombre_vehicules
@@ -74,8 +71,8 @@ uint8 CONFIDENCE_200M = 13
 uint8 CONFIDENCE_OUT_OF_RANGE = 14
 uint8 CONFIDENCE_UNAVAILABLE = 15
 """
-  __slots__ = ['id_vt','id_platoon','ids','nombre_vehicules','reference_position']
-  _slot_types = ['uint8','uint8','ece_msgs/IDs','uint8','ece_msgs/ReferencePosition']
+  __slots__ = ['id_platoon','ids','nombre_vehicules','reference_position']
+  _slot_types = ['uint8','ece_msgs/IDs[]','uint8','ece_msgs/ReferencePosition']
 
   def __init__(self, *args, **kwds):
     """
@@ -85,7 +82,7 @@ uint8 CONFIDENCE_UNAVAILABLE = 15
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       id_vt,id_platoon,ids,nombre_vehicules,reference_position
+       id_platoon,ids,nombre_vehicules,reference_position
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -94,20 +91,17 @@ uint8 CONFIDENCE_UNAVAILABLE = 15
     if args or kwds:
       super(Platoon, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.id_vt is None:
-        self.id_vt = 0
       if self.id_platoon is None:
         self.id_platoon = 0
       if self.ids is None:
-        self.ids = ece_msgs.msg.IDs()
+        self.ids = []
       if self.nombre_vehicules is None:
         self.nombre_vehicules = 0
       if self.reference_position is None:
         self.reference_position = ece_msgs.msg.ReferencePosition()
     else:
-      self.id_vt = 0
       self.id_platoon = 0
-      self.ids = ece_msgs.msg.IDs()
+      self.ids = []
       self.nombre_vehicules = 0
       self.reference_position = ece_msgs.msg.ReferencePosition()
 
@@ -123,8 +117,14 @@ uint8 CONFIDENCE_UNAVAILABLE = 15
     :param buff: buffer, ``StringIO``
     """
     try:
+      buff.write(_get_struct_B().pack(self.id_platoon))
+      length = len(self.ids)
+      buff.write(_struct_I.pack(length))
+      for val1 in self.ids:
+        _x = val1
+        buff.write(_get_struct_2B().pack(_x.ID, _x.position))
       _x = self
-      buff.write(_get_struct_5B2q3HiB().pack(_x.id_vt, _x.id_platoon, _x.ids.ID, _x.ids.position, _x.nombre_vehicules, _x.reference_position.latitude, _x.reference_position.longitude, _x.reference_position.position_confidence.semi_major_confidence, _x.reference_position.position_confidence.semi_minor_confidence, _x.reference_position.position_confidence.semi_major_orientation, _x.reference_position.altitude.value, _x.reference_position.altitude.confidence))
+      buff.write(_get_struct_B2q3HiB().pack(_x.nombre_vehicules, _x.reference_position.latitude, _x.reference_position.longitude, _x.reference_position.position_confidence.semi_major_confidence, _x.reference_position.position_confidence.semi_minor_confidence, _x.reference_position.position_confidence.semi_major_orientation, _x.reference_position.altitude.value, _x.reference_position.altitude.confidence))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -135,14 +135,28 @@ uint8 CONFIDENCE_UNAVAILABLE = 15
     """
     try:
       if self.ids is None:
-        self.ids = ece_msgs.msg.IDs()
+        self.ids = None
       if self.reference_position is None:
         self.reference_position = ece_msgs.msg.ReferencePosition()
       end = 0
+      start = end
+      end += 1
+      (self.id_platoon,) = _get_struct_B().unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      self.ids = []
+      for i in range(0, length):
+        val1 = ece_msgs.msg.IDs()
+        _x = val1
+        start = end
+        end += 2
+        (_x.ID, _x.position,) = _get_struct_2B().unpack(str[start:end])
+        self.ids.append(val1)
       _x = self
       start = end
-      end += 32
-      (_x.id_vt, _x.id_platoon, _x.ids.ID, _x.ids.position, _x.nombre_vehicules, _x.reference_position.latitude, _x.reference_position.longitude, _x.reference_position.position_confidence.semi_major_confidence, _x.reference_position.position_confidence.semi_minor_confidence, _x.reference_position.position_confidence.semi_major_orientation, _x.reference_position.altitude.value, _x.reference_position.altitude.confidence,) = _get_struct_5B2q3HiB().unpack(str[start:end])
+      end += 28
+      (_x.nombre_vehicules, _x.reference_position.latitude, _x.reference_position.longitude, _x.reference_position.position_confidence.semi_major_confidence, _x.reference_position.position_confidence.semi_minor_confidence, _x.reference_position.position_confidence.semi_major_orientation, _x.reference_position.altitude.value, _x.reference_position.altitude.confidence,) = _get_struct_B2q3HiB().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -155,8 +169,14 @@ uint8 CONFIDENCE_UNAVAILABLE = 15
     :param numpy: numpy python module
     """
     try:
+      buff.write(_get_struct_B().pack(self.id_platoon))
+      length = len(self.ids)
+      buff.write(_struct_I.pack(length))
+      for val1 in self.ids:
+        _x = val1
+        buff.write(_get_struct_2B().pack(_x.ID, _x.position))
       _x = self
-      buff.write(_get_struct_5B2q3HiB().pack(_x.id_vt, _x.id_platoon, _x.ids.ID, _x.ids.position, _x.nombre_vehicules, _x.reference_position.latitude, _x.reference_position.longitude, _x.reference_position.position_confidence.semi_major_confidence, _x.reference_position.position_confidence.semi_minor_confidence, _x.reference_position.position_confidence.semi_major_orientation, _x.reference_position.altitude.value, _x.reference_position.altitude.confidence))
+      buff.write(_get_struct_B2q3HiB().pack(_x.nombre_vehicules, _x.reference_position.latitude, _x.reference_position.longitude, _x.reference_position.position_confidence.semi_major_confidence, _x.reference_position.position_confidence.semi_minor_confidence, _x.reference_position.position_confidence.semi_major_orientation, _x.reference_position.altitude.value, _x.reference_position.altitude.confidence))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -168,14 +188,28 @@ uint8 CONFIDENCE_UNAVAILABLE = 15
     """
     try:
       if self.ids is None:
-        self.ids = ece_msgs.msg.IDs()
+        self.ids = None
       if self.reference_position is None:
         self.reference_position = ece_msgs.msg.ReferencePosition()
       end = 0
+      start = end
+      end += 1
+      (self.id_platoon,) = _get_struct_B().unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      self.ids = []
+      for i in range(0, length):
+        val1 = ece_msgs.msg.IDs()
+        _x = val1
+        start = end
+        end += 2
+        (_x.ID, _x.position,) = _get_struct_2B().unpack(str[start:end])
+        self.ids.append(val1)
       _x = self
       start = end
-      end += 32
-      (_x.id_vt, _x.id_platoon, _x.ids.ID, _x.ids.position, _x.nombre_vehicules, _x.reference_position.latitude, _x.reference_position.longitude, _x.reference_position.position_confidence.semi_major_confidence, _x.reference_position.position_confidence.semi_minor_confidence, _x.reference_position.position_confidence.semi_major_orientation, _x.reference_position.altitude.value, _x.reference_position.altitude.confidence,) = _get_struct_5B2q3HiB().unpack(str[start:end])
+      end += 28
+      (_x.nombre_vehicules, _x.reference_position.latitude, _x.reference_position.longitude, _x.reference_position.position_confidence.semi_major_confidence, _x.reference_position.position_confidence.semi_minor_confidence, _x.reference_position.position_confidence.semi_major_orientation, _x.reference_position.altitude.value, _x.reference_position.altitude.confidence,) = _get_struct_B2q3HiB().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -184,9 +218,21 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_5B2q3HiB = None
-def _get_struct_5B2q3HiB():
-    global _struct_5B2q3HiB
-    if _struct_5B2q3HiB is None:
-        _struct_5B2q3HiB = struct.Struct("<5B2q3HiB")
-    return _struct_5B2q3HiB
+_struct_B2q3HiB = None
+def _get_struct_B2q3HiB():
+    global _struct_B2q3HiB
+    if _struct_B2q3HiB is None:
+        _struct_B2q3HiB = struct.Struct("<B2q3HiB")
+    return _struct_B2q3HiB
+_struct_B = None
+def _get_struct_B():
+    global _struct_B
+    if _struct_B is None:
+        _struct_B = struct.Struct("<B")
+    return _struct_B
+_struct_2B = None
+def _get_struct_2B():
+    global _struct_2B
+    if _struct_2B is None:
+        _struct_2B = struct.Struct("<2B")
+    return _struct_2B

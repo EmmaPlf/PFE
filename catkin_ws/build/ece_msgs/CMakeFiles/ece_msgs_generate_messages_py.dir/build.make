@@ -65,6 +65,8 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/li
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ReferencePosition.py
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_FreinageUrgence.py
+ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_BasicContainer.py
+ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Phase.py
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_StationType.py
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Desinsertion.py
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/__init__.py
@@ -133,10 +135,12 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/li
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg
+/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/BasicContainer.msg
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg
-/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/Phase.msg
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/Feu.msg
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/IDs.msg
+/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/Speed.msg
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/StationType.msg
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg
@@ -145,7 +149,7 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/li
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg
-/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg
+/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating Python from MSG ece_msgs/ecemsg"
 	cd /home/user/catkin_ws/build/ece_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg
 
@@ -154,9 +158,20 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/li
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating Python from MSG ece_msgs/FreinageUrgence"
 	cd /home/user/catkin_ws/build/ece_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg
 
+/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_BasicContainer.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_BasicContainer.py: /home/user/catkin_ws/src/ece_msgs/msg/BasicContainer.msg
+/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_BasicContainer.py: /home/user/catkin_ws/src/ece_msgs/msg/Phase.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating Python from MSG ece_msgs/BasicContainer"
+	cd /home/user/catkin_ws/build/ece_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/user/catkin_ws/src/ece_msgs/msg/BasicContainer.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg
+
+/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Phase.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Phase.py: /home/user/catkin_ws/src/ece_msgs/msg/Phase.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Generating Python from MSG ece_msgs/Phase"
+	cd /home/user/catkin_ws/build/ece_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/user/catkin_ws/src/ece_msgs/msg/Phase.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg
+
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_StationType.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_StationType.py: /home/user/catkin_ws/src/ece_msgs/msg/StationType.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating Python from MSG ece_msgs/StationType"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Generating Python from MSG ece_msgs/StationType"
 	cd /home/user/catkin_ws/build/ece_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/user/catkin_ws/src/ece_msgs/msg/StationType.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg
 
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Desinsertion.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
@@ -165,7 +180,7 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/li
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Desinsertion.py: /home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Desinsertion.py: /home/user/catkin_ws/src/ece_msgs/msg/Speed.msg
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Desinsertion.py: /home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Generating Python from MSG ece_msgs/Desinsertion"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Generating Python from MSG ece_msgs/Desinsertion"
 	cd /home/user/catkin_ws/build/ece_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg
 
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
@@ -181,9 +196,11 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/li
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/__init__.py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ReferencePosition.py
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/__init__.py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/__init__.py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_FreinageUrgence.py
+/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/__init__.py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_BasicContainer.py
+/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/__init__.py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Phase.py
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/__init__.py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_StationType.py
 /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/__init__.py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Desinsertion.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Generating Python msg __init__.py for ece_msgs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Generating Python msg __init__.py for ece_msgs"
 	cd /home/user/catkin_ws/build/ece_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg --initpy
 
 ece_msgs_generate_messages_py: ece_msgs/CMakeFiles/ece_msgs_generate_messages_py
@@ -199,6 +216,8 @@ ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-pac
 ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ReferencePosition.py
 ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py
 ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_FreinageUrgence.py
+ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_BasicContainer.py
+ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Phase.py
 ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_StationType.py
 ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Desinsertion.py
 ece_msgs_generate_messages_py: /home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/__init__.py

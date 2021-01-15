@@ -5,6 +5,8 @@
           ITS_HEADER
           GENERATION_DELTA_TIME-VAL
           GENERATION_DELTA_TIME
+          BASIC_CONTAINER-VAL
+          BASIC_CONTAINER
           STATION_TYPE-VAL
           STATION_TYPE
           PLATOON-VAL
@@ -19,4 +21,6 @@
           FREINAGE_URGENCE
           FEU-VAL
           FEU
+          ACTUAL_POSITION-VAL
+          ACTUAL_POSITION
 ))

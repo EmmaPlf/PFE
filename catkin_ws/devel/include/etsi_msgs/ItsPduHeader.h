@@ -51,7 +51,6 @@ struct ItsPduHeader_
   enum {
     MESSAGE_ID_DENM = 1u,
     MESSAGE_ID_CAM = 2u,
-    MESSAGE_ID_ECE = 3u,
   };
 
 
@@ -66,8 +65,6 @@ typedef boost::shared_ptr< ::etsi_msgs::ItsPduHeader > ItsPduHeaderPtr;
 typedef boost::shared_ptr< ::etsi_msgs::ItsPduHeader const> ItsPduHeaderConstPtr;
 
 // constants requiring out of line definition
-
-   
 
    
 
@@ -135,12 +132,12 @@ struct MD5Sum< ::etsi_msgs::ItsPduHeader_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "ff8e90c8ffc6c6f2d381f49c4d8f0e67";
+    return "493dd45f242245ef547b44cf2be57f2d";
   }
 
   static const char* value(const ::etsi_msgs::ItsPduHeader_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xff8e90c8ffc6c6f2ULL;
-  static const uint64_t static_value2 = 0xd381f49c4d8f0e67ULL;
+  static const uint64_t static_value1 = 0x493dd45f242245efULL;
+  static const uint64_t static_value2 = 0x547b44cf2be57f2dULL;
 };
 
 template<class ContainerAllocator>
@@ -165,7 +162,6 @@ uint32 station_id\n\
 \n\
 uint8 MESSAGE_ID_DENM = 1\n\
 uint8 MESSAGE_ID_CAM = 2\n\
-uint8 MESSAGE_ID_ECE = 3\n\
 ";
   }
 

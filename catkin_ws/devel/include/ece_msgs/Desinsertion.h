@@ -26,24 +26,29 @@ struct Desinsertion_
   typedef Desinsertion_<ContainerAllocator> Type;
 
   Desinsertion_()
-    : speed()
-    , reference_position()
+    : demande_sortie(false)
+    , speed()
+    , point_sortie()
     , position(0)  {
     }
   Desinsertion_(const ContainerAllocator& _alloc)
-    : speed(_alloc)
-    , reference_position(_alloc)
+    : demande_sortie(false)
+    , speed(_alloc)
+    , point_sortie(_alloc)
     , position(0)  {
   (void)_alloc;
     }
 
 
 
+   typedef uint8_t _demande_sortie_type;
+  _demande_sortie_type demande_sortie;
+
    typedef  ::ece_msgs::Speed_<ContainerAllocator>  _speed_type;
   _speed_type speed;
 
-   typedef  ::ece_msgs::ReferencePosition_<ContainerAllocator>  _reference_position_type;
-  _reference_position_type reference_position;
+   typedef  ::ece_msgs::ReferencePosition_<ContainerAllocator>  _point_sortie_type;
+  _point_sortie_type point_sortie;
 
    typedef uint8_t _position_type;
   _position_type position;
@@ -126,12 +131,12 @@ struct MD5Sum< ::ece_msgs::Desinsertion_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "8c11695e348cdf58d2655e6625478e1f";
+    return "737935e1f42b0a7edea1212ba87b7938";
   }
 
   static const char* value(const ::ece_msgs::Desinsertion_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x8c11695e348cdf58ULL;
-  static const uint64_t static_value2 = 0xd2655e6625478e1fULL;
+  static const uint64_t static_value1 = 0x737935e1f42b0a7eULL;
+  static const uint64_t static_value2 = 0xdea1212ba87b7938ULL;
 };
 
 template<class ContainerAllocator>
@@ -151,15 +156,18 @@ struct Definition< ::ece_msgs::Desinsertion_<ContainerAllocator> >
   static const char* value()
   {
     return "# Demande de sortie : 1 bit\n\
+bool demande_sortie\n\
 \n\
 # Vitesse de sortie : 6 bits \n\
 Speed speed\n\
 \n\
 # Point de sortie : 8 octets\n\
-ReferencePosition reference_position\n\
+ReferencePosition point_sortie\n\
 \n\
 # Nouvelle position dans P : 2 bits\n\
 uint8 position\n\
+\n\
+\n\
 ================================================================================\n\
 MSG: ece_msgs/Speed\n\
 uint16 value # 0.01 m/s\n\
@@ -234,8 +242,9 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
+      stream.next(m.demande_sortie);
       stream.next(m.speed);
-      stream.next(m.reference_position);
+      stream.next(m.point_sortie);
       stream.next(m.position);
     }
 
@@ -255,12 +264,14 @@ struct Printer< ::ece_msgs::Desinsertion_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::ece_msgs::Desinsertion_<ContainerAllocator>& v)
   {
+    s << indent << "demande_sortie: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.demande_sortie);
     s << indent << "speed: ";
     s << std::endl;
     Printer< ::ece_msgs::Speed_<ContainerAllocator> >::stream(s, indent + "  ", v.speed);
-    s << indent << "reference_position: ";
+    s << indent << "point_sortie: ";
     s << std::endl;
-    Printer< ::ece_msgs::ReferencePosition_<ContainerAllocator> >::stream(s, indent + "  ", v.reference_position);
+    Printer< ::ece_msgs::ReferencePosition_<ContainerAllocator> >::stream(s, indent + "  ", v.point_sortie);
     s << indent << "position: ";
     Printer<uint8_t>::stream(s, indent + "  ", v.position);
   }

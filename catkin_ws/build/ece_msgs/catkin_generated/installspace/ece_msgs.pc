@@ -3,6 +3,6 @@ prefix=/home/user/catkin_ws/install
 Name: ece_msgs
 Description: Description of ece_msgs
 Version: 0.0.0
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib 
+Cflags: -I/home/user/catkin_ws/install/include
+Libs: -L/home/user/catkin_ws/install/lib 
 Requires: roscpp rospy message_runtime

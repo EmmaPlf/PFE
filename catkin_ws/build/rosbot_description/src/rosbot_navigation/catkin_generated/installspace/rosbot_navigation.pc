@@ -4,5 +4,5 @@ Name: rosbot_navigation
 Description: Description of rosbot_navigation
 Version: 0.0.0
 Cflags: 
-Libs: -L${prefix}/lib 
+Libs: -L/home/user/catkin_ws/install/lib 
 Requires: 

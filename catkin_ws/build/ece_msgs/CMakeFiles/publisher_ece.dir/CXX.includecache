@@ -22,6 +22,24 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
+/home/user/catkin_ws/devel/include/ece_msgs/BasicContainer.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+ece_msgs/Phase.h
+-
+
 /home/user/catkin_ws/devel/include/ece_msgs/Desinsertion.h
 string
 -
@@ -109,6 +127,22 @@ ece_msgs/ReferencePosition.h
 -
 
 /home/user/catkin_ws/devel/include/ece_msgs/ItsPduHeader.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+
+/home/user/catkin_ws/devel/include/ece_msgs/Phase.h
 string
 -
 vector
@@ -249,6 +283,8 @@ std_msgs/Header.h
 -
 ece_msgs/ItsPduHeader.h
 -
+ece_msgs/BasicContainer.h
+-
 ece_msgs/StationType.h
 -
 ece_msgs/Platoon.h
@@ -262,6 +298,8 @@ ece_msgs/Desinsertion.h
 ece_msgs/FreinageUrgence.h
 -
 ece_msgs/Feu.h
+-
+ece_msgs/ReferencePosition.h
 -
 
 /home/user/catkin_ws/src/ece_msgs/src/publisher_ece.cpp

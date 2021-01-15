@@ -149,12 +149,12 @@ struct MD5Sum< ::etsi_msgs::DENM_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "d0bac7531dd1fb966b1efa93ca520d89";
+    return "66d74b1f24152abbfb60e3e0a2c36bfb";
   }
 
   static const char* value(const ::etsi_msgs::DENM_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xd0bac7531dd1fb96ULL;
-  static const uint64_t static_value2 = 0x6b1efa93ca520d89ULL;
+  static const uint64_t static_value1 = 0x66d74b1f24152abbULL;
+  static const uint64_t static_value2 = 0xfb60e3e0a2c36bfbULL;
 };
 
 template<class ContainerAllocator>
@@ -212,7 +212,6 @@ uint32 station_id\n\
 \n\
 uint8 MESSAGE_ID_DENM = 1\n\
 uint8 MESSAGE_ID_CAM = 2\n\
-uint8 MESSAGE_ID_ECE = 3\n\
 \n\
 ================================================================================\n\
 MSG: etsi_msgs/ManagementContainer\n\

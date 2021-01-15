@@ -14,27 +14,22 @@
 
 (defclass ece_msgs::Platoon
   :super ros::object
-  :slots (_id_vt _id_platoon _ids _nombre_vehicules _reference_position ))
+  :slots (_id_platoon _ids _nombre_vehicules _reference_position ))
 
 (defmethod ece_msgs::Platoon
   (:init
    (&key
-    ((:id_vt __id_vt) 0)
     ((:id_platoon __id_platoon) 0)
-    ((:ids __ids) (instance ece_msgs::IDs :init))
+    ((:ids __ids) (let (r) (dotimes (i 0) (push (instance ece_msgs::IDs :init) r)) r))
     ((:nombre_vehicules __nombre_vehicules) 0)
     ((:reference_position __reference_position) (instance ece_msgs::ReferencePosition :init))
     )
    (send-super :init)
-   (setq _id_vt (round __id_vt))
    (setq _id_platoon (round __id_platoon))
    (setq _ids __ids)
    (setq _nombre_vehicules (round __nombre_vehicules))
    (setq _reference_position __reference_position)
    self)
-  (:id_vt
-   (&optional __id_vt)
-   (if __id_vt (setq _id_vt __id_vt)) _id_vt)
   (:id_platoon
    (&optional __id_platoon)
    (if __id_platoon (setq _id_platoon __id_platoon)) _id_platoon)
@@ -58,12 +53,10 @@
   (:serialization-length
    ()
    (+
-    ;; uint8 _id_vt
-    1
     ;; uint8 _id_platoon
     1
-    ;; ece_msgs/IDs _ids
-    (send _ids :serialization-length)
+    ;; ece_msgs/IDs[] _ids
+    (apply #'+ (send-all _ids :serialization-length)) 4
     ;; uint8 _nombre_vehicules
     1
     ;; ece_msgs/ReferencePosition _reference_position
@@ -73,12 +66,13 @@
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; uint8 _id_vt
-       (write-byte _id_vt s)
      ;; uint8 _id_platoon
        (write-byte _id_platoon s)
-     ;; ece_msgs/IDs _ids
-       (send _ids :serialize s)
+     ;; ece_msgs/IDs[] _ids
+     (write-long (length _ids) s)
+     (dolist (elem _ids)
+       (send elem :serialize s)
+       )
      ;; uint8 _nombre_vehicules
        (write-byte _nombre_vehicules s)
      ;; ece_msgs/ReferencePosition _reference_position
@@ -87,12 +81,15 @@
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; uint8 _id_vt
-     (setq _id_vt (sys::peek buf ptr- :char)) (incf ptr- 1)
    ;; uint8 _id_platoon
      (setq _id_platoon (sys::peek buf ptr- :char)) (incf ptr- 1)
-   ;; ece_msgs/IDs _ids
-     (send _ids :deserialize buf ptr-) (incf ptr- (send _ids :serialization-length))
+   ;; ece_msgs/IDs[] _ids
+   (let (n)
+     (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
+     (setq _ids (let (r) (dotimes (i n) (push (instance ece_msgs::IDs :init) r)) r))
+     (dolist (elem- _ids)
+     (send elem- :deserialize buf ptr-) (incf ptr- (send elem- :serialization-length))
+     ))
    ;; uint8 _nombre_vehicules
      (setq _nombre_vehicules (sys::peek buf ptr- :char)) (incf ptr- 1)
    ;; ece_msgs/ReferencePosition _reference_position
@@ -101,17 +98,14 @@
    self)
   )
 
-(setf (get ece_msgs::Platoon :md5sum-) "e04a40bb6fe3969e75a1973bd60b5977")
+(setf (get ece_msgs::Platoon :md5sum-) "b7532dcd39ebae5557f8abd6a9baa912")
 (setf (get ece_msgs::Platoon :datatype-) "ece_msgs/Platoon")
 (setf (get ece_msgs::Platoon :definition-)
-      "# ID Vt : 3 bits 
-uint8 id_vt
-
-# ID platoon : 3 bits
+      "# ID platoon : 3 bits
 uint8 id_platoon
 
-# ID autres véhicules platoon : 3 bits
-IDs ids 
+# ID autres véhicules platoon
+IDs[] ids 
 
 # Nombre de véhicules : 3 bits
 uint8 nombre_vehicules
@@ -171,6 +165,6 @@ uint8 CONFIDENCE_UNAVAILABLE = 15
 
 
 
-(provide :ece_msgs/Platoon "e04a40bb6fe3969e75a1973bd60b5977")
+(provide :ece_msgs/Platoon "b7532dcd39ebae5557f8abd6a9baa912")
 
 

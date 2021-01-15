@@ -4,5 +4,5 @@ Name: rosbot_gazebo
 Description: Description of rosbot_gazebo
 Version: 0.0.0
 Cflags: 
-Libs: -L${prefix}/lib 
+Libs: -L/home/user/catkin_ws/devel/lib 
 Requires: 

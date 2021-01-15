@@ -20,19 +20,12 @@ class Platoon {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.id_vt = null;
       this.id_platoon = null;
       this.ids = null;
       this.nombre_vehicules = null;
       this.reference_position = null;
     }
     else {
-      if (initObj.hasOwnProperty('id_vt')) {
-        this.id_vt = initObj.id_vt
-      }
-      else {
-        this.id_vt = 0;
-      }
       if (initObj.hasOwnProperty('id_platoon')) {
         this.id_platoon = initObj.id_platoon
       }
@@ -43,7 +36,7 @@ class Platoon {
         this.ids = initObj.ids
       }
       else {
-        this.ids = new IDs();
+        this.ids = [];
       }
       if (initObj.hasOwnProperty('nombre_vehicules')) {
         this.nombre_vehicules = initObj.nombre_vehicules
@@ -62,12 +55,14 @@ class Platoon {
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type Platoon
-    // Serialize message field [id_vt]
-    bufferOffset = _serializer.uint8(obj.id_vt, buffer, bufferOffset);
     // Serialize message field [id_platoon]
     bufferOffset = _serializer.uint8(obj.id_platoon, buffer, bufferOffset);
     // Serialize message field [ids]
-    bufferOffset = IDs.serialize(obj.ids, buffer, bufferOffset);
+    // Serialize the length for message field [ids]
+    bufferOffset = _serializer.uint32(obj.ids.length, buffer, bufferOffset);
+    obj.ids.forEach((val) => {
+      bufferOffset = IDs.serialize(val, buffer, bufferOffset);
+    });
     // Serialize message field [nombre_vehicules]
     bufferOffset = _serializer.uint8(obj.nombre_vehicules, buffer, bufferOffset);
     // Serialize message field [reference_position]
@@ -79,12 +74,15 @@ class Platoon {
     //deserializes a message object of type Platoon
     let len;
     let data = new Platoon(null);
-    // Deserialize message field [id_vt]
-    data.id_vt = _deserializer.uint8(buffer, bufferOffset);
     // Deserialize message field [id_platoon]
     data.id_platoon = _deserializer.uint8(buffer, bufferOffset);
     // Deserialize message field [ids]
-    data.ids = IDs.deserialize(buffer, bufferOffset);
+    // Deserialize array length for message field [ids]
+    len = _deserializer.uint32(buffer, bufferOffset);
+    data.ids = new Array(len);
+    for (let i = 0; i < len; ++i) {
+      data.ids[i] = IDs.deserialize(buffer, bufferOffset)
+    }
     // Deserialize message field [nombre_vehicules]
     data.nombre_vehicules = _deserializer.uint8(buffer, bufferOffset);
     // Deserialize message field [reference_position]
@@ -93,7 +91,9 @@ class Platoon {
   }
 
   static getMessageSize(object) {
-    return 32;
+    let length = 0;
+    length += 2 * object.ids.length;
+    return length + 33;
   }
 
   static datatype() {
@@ -103,20 +103,17 @@ class Platoon {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'e04a40bb6fe3969e75a1973bd60b5977';
+    return 'b7532dcd39ebae5557f8abd6a9baa912';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    # ID Vt : 3 bits 
-    uint8 id_vt
-    
     # ID platoon : 3 bits
     uint8 id_platoon
     
-    # ID autres véhicules platoon : 3 bits
-    IDs ids 
+    # ID autres véhicules platoon
+    IDs[] ids 
     
     # Nombre de véhicules : 3 bits
     uint8 nombre_vehicules
@@ -181,13 +178,6 @@ class Platoon {
       msg = {};
     }
     const resolved = new Platoon(null);
-    if (msg.id_vt !== undefined) {
-      resolved.id_vt = msg.id_vt;
-    }
-    else {
-      resolved.id_vt = 0
-    }
-
     if (msg.id_platoon !== undefined) {
       resolved.id_platoon = msg.id_platoon;
     }
@@ -196,10 +186,13 @@ class Platoon {
     }
 
     if (msg.ids !== undefined) {
-      resolved.ids = IDs.Resolve(msg.ids)
+      resolved.ids = new Array(msg.ids.length);
+      for (let i = 0; i < resolved.ids.length; ++i) {
+        resolved.ids[i] = IDs.Resolve(msg.ids[i]);
+      }
     }
     else {
-      resolved.ids = new IDs()
+      resolved.ids = []
     }
 
     if (msg.nombre_vehicules !== undefined) {

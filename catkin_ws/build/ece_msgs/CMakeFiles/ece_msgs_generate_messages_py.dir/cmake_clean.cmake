@@ -12,6 +12,8 @@ file(REMOVE_RECURSE
   "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ReferencePosition.py"
   "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_ecemsg.py"
   "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_FreinageUrgence.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_BasicContainer.py"
+  "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Phase.py"
   "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_StationType.py"
   "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/_Desinsertion.py"
   "/home/user/catkin_ws/devel/lib/python2.7/dist-packages/ece_msgs/msg/__init__.py"

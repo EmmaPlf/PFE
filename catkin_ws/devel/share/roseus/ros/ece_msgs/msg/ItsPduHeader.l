@@ -20,7 +20,7 @@
 (defconstant ece_msgs::ItsPduHeader::*MESSAGE_ID_CAM* 2)
 (intern "*MESSAGE_ID_ECE*" (find-package "ECE_MSGS::ITSPDUHEADER"))
 (shadow '*MESSAGE_ID_ECE* (find-package "ECE_MSGS::ITSPDUHEADER"))
-(defconstant ece_msgs::ItsPduHeader::*MESSAGE_ID_ECE* 3)
+(defconstant ece_msgs::ItsPduHeader::*MESSAGE_ID_ECE* 8)
 (defclass ece_msgs::ItsPduHeader
   :super ros::object
   :slots (_protocol_version _message_id _station_id ))
@@ -80,7 +80,7 @@
    self)
   )
 
-(setf (get ece_msgs::ItsPduHeader :md5sum-) "ff8e90c8ffc6c6f2d381f49c4d8f0e67")
+(setf (get ece_msgs::ItsPduHeader :md5sum-) "11c9ba5f62074a5d8d5f31309d5b72b6")
 (setf (get ece_msgs::ItsPduHeader :datatype-) "ece_msgs/ItsPduHeader")
 (setf (get ece_msgs::ItsPduHeader :definition-)
       "uint8 protocol_version
@@ -89,11 +89,11 @@ uint32 station_id
 
 uint8 MESSAGE_ID_DENM = 1
 uint8 MESSAGE_ID_CAM = 2
-uint8 MESSAGE_ID_ECE = 3
+uint8 MESSAGE_ID_ECE = 8
 ")
 
 
 
-(provide :ece_msgs/ItsPduHeader "ff8e90c8ffc6c6f2d381f49c4d8f0e67")
+(provide :ece_msgs/ItsPduHeader "11c9ba5f62074a5d8d5f31309d5b72b6")
 
 

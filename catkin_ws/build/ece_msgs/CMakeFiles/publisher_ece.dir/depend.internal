@@ -3,12 +3,14 @@
 
 ece_msgs/CMakeFiles/publisher_ece.dir/src/publisher_ece.cpp.o
  /home/user/catkin_ws/devel/include/ece_msgs/Altitude.h
+ /home/user/catkin_ws/devel/include/ece_msgs/BasicContainer.h
  /home/user/catkin_ws/devel/include/ece_msgs/Desinsertion.h
  /home/user/catkin_ws/devel/include/ece_msgs/Feu.h
  /home/user/catkin_ws/devel/include/ece_msgs/FreinageUrgence.h
  /home/user/catkin_ws/devel/include/ece_msgs/IDs.h
  /home/user/catkin_ws/devel/include/ece_msgs/Insertion.h
  /home/user/catkin_ws/devel/include/ece_msgs/ItsPduHeader.h
+ /home/user/catkin_ws/devel/include/ece_msgs/Phase.h
  /home/user/catkin_ws/devel/include/ece_msgs/Platoon.h
  /home/user/catkin_ws/devel/include/ece_msgs/PositionConfidenceEllipse.h
  /home/user/catkin_ws/devel/include/ece_msgs/ReferencePosition.h

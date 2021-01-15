@@ -65,6 +65,8 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/i
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/ReferencePosition.h
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/FreinageUrgence.h
+ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/BasicContainer.h
+ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/Phase.h
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/StationType.h
 ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/Desinsertion.h
 
@@ -142,10 +144,12 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/i
 /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg
 /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/VitesseInterdistance.msg
+/home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/BasicContainer.msg
 /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/Altitude.msg
-/home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+/home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/Phase.msg
 /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/Feu.msg
 /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/IDs.msg
+/home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg
 /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/Speed.msg
 /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/StationType.msg
 /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/PositionConfidenceEllipse.msg
@@ -154,7 +158,7 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/i
 /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/Insertion.msg
 /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/Platoon.msg
 /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/ItsPduHeader.msg
-/home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg
+/home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
 /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h: /opt/ros/kinetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating C++ code from ece_msgs/ecemsg.msg"
 	cd /home/user/catkin_ws/src/ece_msgs && /home/user/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/user/catkin_ws/src/ece_msgs/msg/ecemsg.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/include/ece_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
@@ -165,10 +169,23 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/i
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating C++ code from ece_msgs/FreinageUrgence.msg"
 	cd /home/user/catkin_ws/src/ece_msgs && /home/user/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/user/catkin_ws/src/ece_msgs/msg/FreinageUrgence.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/include/ece_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
+/home/user/catkin_ws/devel/include/ece_msgs/BasicContainer.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
+/home/user/catkin_ws/devel/include/ece_msgs/BasicContainer.h: /home/user/catkin_ws/src/ece_msgs/msg/BasicContainer.msg
+/home/user/catkin_ws/devel/include/ece_msgs/BasicContainer.h: /home/user/catkin_ws/src/ece_msgs/msg/Phase.msg
+/home/user/catkin_ws/devel/include/ece_msgs/BasicContainer.h: /opt/ros/kinetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating C++ code from ece_msgs/BasicContainer.msg"
+	cd /home/user/catkin_ws/src/ece_msgs && /home/user/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/user/catkin_ws/src/ece_msgs/msg/BasicContainer.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/include/ece_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
+
+/home/user/catkin_ws/devel/include/ece_msgs/Phase.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
+/home/user/catkin_ws/devel/include/ece_msgs/Phase.h: /home/user/catkin_ws/src/ece_msgs/msg/Phase.msg
+/home/user/catkin_ws/devel/include/ece_msgs/Phase.h: /opt/ros/kinetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Generating C++ code from ece_msgs/Phase.msg"
+	cd /home/user/catkin_ws/src/ece_msgs && /home/user/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/user/catkin_ws/src/ece_msgs/msg/Phase.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/include/ece_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
+
 /home/user/catkin_ws/devel/include/ece_msgs/StationType.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/user/catkin_ws/devel/include/ece_msgs/StationType.h: /home/user/catkin_ws/src/ece_msgs/msg/StationType.msg
 /home/user/catkin_ws/devel/include/ece_msgs/StationType.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating C++ code from ece_msgs/StationType.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Generating C++ code from ece_msgs/StationType.msg"
 	cd /home/user/catkin_ws/src/ece_msgs && /home/user/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/user/catkin_ws/src/ece_msgs/msg/StationType.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/include/ece_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/user/catkin_ws/devel/include/ece_msgs/Desinsertion.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
@@ -178,7 +195,7 @@ ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/i
 /home/user/catkin_ws/devel/include/ece_msgs/Desinsertion.h: /home/user/catkin_ws/src/ece_msgs/msg/Speed.msg
 /home/user/catkin_ws/devel/include/ece_msgs/Desinsertion.h: /home/user/catkin_ws/src/ece_msgs/msg/ReferencePosition.msg
 /home/user/catkin_ws/devel/include/ece_msgs/Desinsertion.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Generating C++ code from ece_msgs/Desinsertion.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/user/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Generating C++ code from ece_msgs/Desinsertion.msg"
 	cd /home/user/catkin_ws/src/ece_msgs && /home/user/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/user/catkin_ws/src/ece_msgs/msg/Desinsertion.msg -Iece_msgs:/home/user/catkin_ws/src/ece_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p ece_msgs -o /home/user/catkin_ws/devel/include/ece_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 ece_msgs_generate_messages_cpp: ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp
@@ -194,6 +211,8 @@ ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/Inse
 ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/ReferencePosition.h
 ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h
 ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/FreinageUrgence.h
+ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/BasicContainer.h
+ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/Phase.h
 ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/StationType.h
 ece_msgs_generate_messages_cpp: /home/user/catkin_ws/devel/include/ece_msgs/Desinsertion.h
 ece_msgs_generate_messages_cpp: ece_msgs/CMakeFiles/ece_msgs_generate_messages_cpp.dir/build.make

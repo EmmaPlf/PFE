@@ -4,6 +4,7 @@
 let ecemsg = require('./ecemsg.js');
 let StationType = require('./StationType.js');
 let Insertion = require('./Insertion.js');
+let BasicContainer = require('./BasicContainer.js');
 let IDs = require('./IDs.js');
 let Speed = require('./Speed.js');
 let Feu = require('./Feu.js');
@@ -15,11 +16,13 @@ let VitesseInterdistance = require('./VitesseInterdistance.js');
 let Desinsertion = require('./Desinsertion.js');
 let FreinageUrgence = require('./FreinageUrgence.js');
 let ReferencePosition = require('./ReferencePosition.js');
+let Phase = require('./Phase.js');
 
 module.exports = {
   ecemsg: ecemsg,
   StationType: StationType,
   Insertion: Insertion,
+  BasicContainer: BasicContainer,
   IDs: IDs,
   Speed: Speed,
   Feu: Feu,
@@ -31,4 +34,5 @@ module.exports = {
   Desinsertion: Desinsertion,
   FreinageUrgence: FreinageUrgence,
   ReferencePosition: ReferencePosition,
+  Phase: Phase,
 };

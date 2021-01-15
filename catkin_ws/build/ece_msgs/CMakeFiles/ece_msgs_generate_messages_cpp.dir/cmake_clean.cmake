@@ -12,6 +12,8 @@ file(REMOVE_RECURSE
   "/home/user/catkin_ws/devel/include/ece_msgs/ReferencePosition.h"
   "/home/user/catkin_ws/devel/include/ece_msgs/ecemsg.h"
   "/home/user/catkin_ws/devel/include/ece_msgs/FreinageUrgence.h"
+  "/home/user/catkin_ws/devel/include/ece_msgs/BasicContainer.h"
+  "/home/user/catkin_ws/devel/include/ece_msgs/Phase.h"
   "/home/user/catkin_ws/devel/include/ece_msgs/StationType.h"
   "/home/user/catkin_ws/devel/include/ece_msgs/Desinsertion.h"
 )
