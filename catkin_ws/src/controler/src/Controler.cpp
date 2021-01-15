@@ -29,35 +29,9 @@ Controler::Controler() {
 
   /// PUBLISHERS
 
-  this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
+  /*this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
 
-  this->pub_DENM = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
-}
-
-Controler::Controler(std::vector<Vehicle> vector_v,
-                     std::vector<Platoon> vector_p, ros::NodeHandle n) {
-  this->vector_v = vector_v;
-  this->vector_p = vector_p;
-  this->setCount(0);
-
-  this->n = n;
-
-  /// SUBSCRIBERS
-
-  this->sub_ece = this->n.subscribe<ece_msgs::ecemsg>(
-      "controler_ece", 1000, boost::bind(sub_ece_callback, _1, *this));
-
-  this->sub_DENM = this->n.subscribe<etsi_msgs::DENM>(
-      "controler_DENM", 1000, boost::bind(sub_DENM_callback, _1, *this));
-
-  this->sub_CAM = this->n.subscribe<etsi_msgs::CAM>(
-      "controler_CAM", 1000, boost::bind(sub_CAM_callback, _1, *this));
-
-  /// PUBLISHERS
-
-  this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
-
-  this->pub_DENM = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
+  this->pub_DENM = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);*/
 }
 
 /// DESTRUCTEURS

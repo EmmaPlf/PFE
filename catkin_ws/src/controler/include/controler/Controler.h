@@ -23,8 +23,6 @@ private:
 
 public:
   Controler();
-  Controler(std::vector<Vehicle> vector_v, std::vector<Platoon> vector_p,
-            ros::NodeHandle n);
   ~Controler();
 
   std::vector<Vehicle> getVectorV();
