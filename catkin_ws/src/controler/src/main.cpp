@@ -1,4 +1,4 @@
-#include "../include/controler/Controler.h"
+#include "../include/Controler.h"
 
 int main(int argc, char **argv) {
 

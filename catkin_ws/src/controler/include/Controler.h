@@ -47,10 +47,10 @@ public:
 
   static void sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &msg,
                                Controler &c);
-  static void sub_DENM_callback(const etsi_msgs::DENM::ConstPtr &msg,
-                                Controler &c);
-  static void sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
-                               Controler &c);
+  static uint8_t sub_DENM_callback(const etsi_msgs::DENM::ConstPtr &msg,
+                                   Controler &c);
+  static uint8_t sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
+                                  Controler &c);
 
   // Ajouter un véhicule
   void add_vehicle(Vehicle v);

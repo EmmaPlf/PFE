@@ -1,4 +1,4 @@
-#include "../include/controler/Platoon.h"
+#include "../include/Platoon.h"
 
 Platoon::Platoon() {
   this->dest = Position();

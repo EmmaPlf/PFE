@@ -1,5 +1,6 @@
 #include "../../devel/include/ece_msgs/ecemsg.h"
-#include "../include/controler/Controler.h"
+#include "../../devel/include/etsi_msgs/CAM.h"
+#include "../include/Controler.h"
 #include "nav_msgs/Odometry.h"
 #include "ros/ros.h"
 #include <iostream>
@@ -15,10 +16,10 @@
 #define PROTOCOL_VERSION 131 // EN 302 637-3 v1.3.1.
 
 void ece_data(ece_msgs::ecemsg &msg, int count);
-void cam_data(etsi_msgs::CAM &msg, int count, double longitude, double latitude,
-              int32_t altitude, uint8_t confidenceAlt, int16_t velocityLong,
-              uint8_t confidenceVelocityLong, int16_t yaw_rate,
-              uint8_t yaw_rate_confidence);
+void cam_data(etsi_msgs::CAM &msg, int count, int64_t longitude,
+              int64_t latitude, int64_t altitude, uint8_t confidenceAlt,
+              int16_t velocityLong, uint8_t confidenceVelocityLong,
+              int16_t yaw_rate, uint8_t yaw_rate_confidence);
 
 void odom_callback(const nav_msgs::Odometry::ConstPtr &msg, int64_t *longitude,
                    int64_t *latitude, int64_t *altitude, uint8_t *confidenceAlt,
@@ -38,8 +39,9 @@ void odom_callback(const nav_msgs::Odometry::ConstPtr &msg, int64_t *longitude,
   *altitude = z_int;
   *confidenceAlt = msg->pose.covariance[14];
   *velocityLong = msg->twist.twist.linear.x;
+  // msg->twist.twist.linear.y ?
   *confidenceVelocityLong = msg->twist.covariance[0];
-  *yaw_rate = msg->twist.twist.angular.z; // conversion radiant to degree
+  *yaw_rate = msg->twist.twist.angular.z; // conversion rad/s to 0.01 degree/s
   *yaw_rate_confidence = msg->twist.covariance[35];
 
   ROS_INFO("odom_callback : x : %d", *longitude);
@@ -49,7 +51,8 @@ void odom_callback(const nav_msgs::Odometry::ConstPtr &msg, int64_t *longitude,
 
 int main(int argc, char **argv) {
 
-  ece_msgs::ecemsg msg;
+  // ece_msgs::ecemsg msg;
+  etsi_msgs::CAM msg;
   int32_t count = 0;
 
   int64_t longitude = 0;     // posX
@@ -169,7 +172,7 @@ void cam_data(etsi_msgs::CAM &msg, int count, int64_t longitude,
 
   msg.its_header.protocol_version = 0;
   msg.its_header.message_id = CAM_ID;
-  msg.its_header.station_id = 0;
+  msg.its_header.station_id = STATION_ID;
 
   msg.station_type.value = 10;
 

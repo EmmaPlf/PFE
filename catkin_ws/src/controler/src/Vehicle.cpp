@@ -1,4 +1,4 @@
-#include "../include/controler/Vehicle.h"
+#include "../include/Vehicle.h"
 
 Vehicle::Vehicle() : id(0), dest(0, 0, 0) {}
 

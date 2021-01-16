@@ -1,4 +1,4 @@
-#include "../include/controler/Position.h"
+#include "../include/Position.h"
 
 Position::Position() : lat(0), lon(0), alt(0) {}
 

@@ -1,4 +1,4 @@
-#include "../include/controler/Controler.h"
+#include "../include/Controler.h"
 #include <iostream>
 #include <map>
 #define STATION_ID 0         // 1 ID par station
@@ -573,25 +573,39 @@ void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &msg,
   }
 }
 
-void Controler::sub_DENM_callback(const etsi_msgs::DENM::ConstPtr &msg,
-                                  Controler &c) {
-
+uint8_t Controler::sub_DENM_callback(const etsi_msgs::DENM::ConstPtr &msg,
+                                     Controler &c) {
+  uint8_t ret = 1;
   ROS_INFO("I have received DENM msg");
 
-  // Récupérer expéditeur
-  // uint8_t exp = msg->basic_container.ID_exp; // EXISTE PAS
+  // Vérifier que c'est bien un DENM
+  uint8_t denm_id = msg->its_header.message_id;
+  if (denm_id != DENM_ID) {
+    return 0;
+  }
 
+  // Récupérer expéditeur
+  uint8_t exp = msg->its_header.station_id;
   // Récupérer destinataire // EXISTE PAS
   // uint8_t dest = msg->basic_container.ID_dest;
 }
 
-void Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
-                                 Controler &c) {
+uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
+                                    Controler &c) {
 
+  uint8_t ret = 1;
   ROS_INFO("I have received CAM msg");
 
-  // Récupérer expéditeur // EXISTE PAS
-  // uint8_t exp = msg->basic_container.ID_exp;
+  // TODO
+
+  // Vérifier que c'est bien un CAM
+  uint8_t cam_id = msg->its_header.message_id;
+  if (cam_id != CAM_ID) {
+    return 0;
+  }
+
+  // Récupérer expéditeur
+  uint8_t exp = msg->its_header.station_id;
 
   // Récupérer destinataire // EXISTE PAS
   // uint8_t dest = msg->basic_container.ID_dest;
