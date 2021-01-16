@@ -155,7 +155,7 @@ uint8_t Controler::init_receive(ece_msgs::ecemsg msg) {
     // Si le véhicule n'est pas dans la liste de véhicules
     if (count == this->getVectorV().size()) {
       // Ajout du véhicule dans la liste du contrôleur
-      Vehicle v = Vehicle(exp_id, exp_dest, exp_pos, 0);
+      Vehicle v = Vehicle(exp_id, exp_dest, exp_pos, 0, 0);
       this->add_vehicle(v);
       ROS_INFO("station_id : %d ID actuel vehicule du vector : %d", v.getId(),
                this->getVectorV().back().getId());
@@ -165,7 +165,7 @@ uint8_t Controler::init_receive(ece_msgs::ecemsg msg) {
     }
   } else {
     // Ajout du véhicule dans la liste du contrôleur
-    Vehicle v = Vehicle(exp_id, exp_dest, exp_pos, 0);
+    Vehicle v = Vehicle(exp_id, exp_dest, exp_pos, 0, 0);
     this->add_vehicle(v);
     ROS_INFO("ID actuel vehicule du vector : %d",
              this->getVectorV().back().getId());
@@ -604,31 +604,31 @@ uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
 
   // Récupérer expéditeur
   uint8_t exp_id = msg->its_header.station_id;
+  /*
+    // Trouver la voiture correspondante dans le vecteur de véhicules
+    std::vector<Vehicle>::iterator it_v = vector_v.begin();
 
-  // Trouver la voiture correspondante dans le vecteur de véhicules
-  std::vector<Vehicle>::iterator it_v = this->getVectorV().begin();
+    // Tant qu'on n'est pas à la fin du vecteur de véhicules
+    while (it_v != vector_v.end()) {
 
-  // Tant qu'on n'est pas à la fin du vecteur de véhicules
-  while (it_v != this->getVectoV().end()) {
+      // Si on trouve l'ID du véhicule
+      if (it_v->getId() != exp_id) {
 
-    // Si on trouve l'ID du véhicule
-    if (it_v->getId() != exp_id) {
+        // On récupère la vitesse et la renseigne dans le véhicule
+        // Convertir km/h
+        uint8_t speed = msg->high_frequency_container.speed.value * 3.6;
+        it_v->setSpeed(speed);
 
-      // On récupère la vitesse et la renseigne dans le véhicule
-      // Convertir km/h
-      uint8_t speed = msg->high_frequency_container.speed.value * 3.6;
-      it_v->setSpeed(speed);
-
-      // On récupère la position actuelle et la renseigne dans le véhicule
-      // Récupérer en float
-      float latitude = msg->reference_position.latitude / 131072;
-      float longitude = msg->reference_position.longitude / 131072;
-      float altitude = msg->reference_position.altitude.value / 131072;
-      Position p = Position(latitude, longitude, altitude);
-      it_v->setActualPos(p);
-    }
-    it_v++;
-  }
+        // On récupère la position actuelle et la renseigne dans le véhicule
+        // Récupérer en float
+        float latitude = msg->reference_position.latitude / 131072;
+        float longitude = msg->reference_position.longitude / 131072;
+        float altitude = msg->reference_position.altitude.value / 131072;
+        Position p = Position(latitude, longitude, altitude);
+        it_v->setActualPos(p);
+      }
+      it_v++;
+    }*/
 }
 
 void Controler::fill_header(ece_msgs::ecemsg &msg, char *frame,

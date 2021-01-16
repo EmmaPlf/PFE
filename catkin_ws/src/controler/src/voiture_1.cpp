@@ -19,7 +19,7 @@
 
 void ece_data(ece_msgs::ecemsg &msg, int count);
 void cam_data(etsi_msgs::CAM &msg, int count, int64_t longitude,
-              int64_t latitude, int64_t altitude, uint8_t confidenceAlt,
+              int64_t latitude, int32_t altitude, uint8_t confidenceAlt,
               int8_t velocity, uint8_t confidenceVelocityLong, int16_t yaw_rate,
               uint8_t yaw_rate_confidence);
 
@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
   int64_t latitude = 0;      // posY
   int32_t altitude = 0;      // posZ perte de donnée par rapport à ROS
   uint8_t confidenceAlt = 0; // posZ confidence
-  int8_t velocityLong = 0;
+  int8_t velocity = 0;
   uint8_t confidenceVelocityLong = 0;
   int16_t yaw_rate = 0;
   uint8_t yaw_rate_confidence = 0;
@@ -91,8 +91,8 @@ int main(int argc, char **argv) {
   //   ++count;
   //   pub.publish(msg);
 
-  cam_data(msg, count, longitude, latitude, altitude, confidenceAlt,
-           velocityLong, confidenceVelocityLong, yaw_rate, yaw_rate_confidence);
+  cam_data(msg, count, longitude, latitude, altitude, confidenceAlt, velocity,
+           confidenceVelocityLong, yaw_rate, yaw_rate_confidence);
   ++count;
   pub.publish(msg);
 
@@ -199,9 +199,9 @@ void cam_data(etsi_msgs::CAM &msg, int count, int64_t longitude,
   msg.high_frequency_container.vehicle_width.value = 0;                  // TODO
 
   msg.high_frequency_container.longitudinal_acceleration.value =
-      0 // velocityLong;
-      msg.high_frequency_container.longitudinal_acceleration.confidence =
-          confidenceVelocityLong;
+      0; // velocityLong;
+  msg.high_frequency_container.longitudinal_acceleration.confidence =
+      confidenceVelocityLong;
 
   msg.high_frequency_container.curvature.value = 0;
   msg.high_frequency_container.curvature.confidence = 0;
