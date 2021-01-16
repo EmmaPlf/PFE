@@ -1,8 +1,10 @@
 #include "../../devel/include/ece_msgs/ecemsg.h"
 #include "../../devel/include/etsi_msgs/CAM.h"
 #include "../include/Controler.h"
+#include "geometry_msgs/Twist.h"
 #include "nav_msgs/Odometry.h"
 #include "ros/ros.h"
+#include <cmath>
 #include <iostream>
 #include <sstream>
 
@@ -18,13 +20,13 @@
 void ece_data(ece_msgs::ecemsg &msg, int count);
 void cam_data(etsi_msgs::CAM &msg, int count, int64_t longitude,
               int64_t latitude, int64_t altitude, uint8_t confidenceAlt,
-              int16_t velocityLong, uint8_t confidenceVelocityLong,
-              int16_t yaw_rate, uint8_t yaw_rate_confidence);
+              int8_t velocity, uint8_t confidenceVelocityLong, int16_t yaw_rate,
+              uint8_t yaw_rate_confidence);
 
-void odom_callback(const nav_msgs::Odometry::ConstPtr &msg, int64_t *longitude,
-                   int64_t *latitude, int64_t *altitude, uint8_t *confidenceAlt,
-                   int16_t *velocityLong, uint8_t *confidenceVelocityLong,
-                   int16_t *yaw_rate, uint8_t *yaw_rate_confidence) {
+void odom_callback(const nav_msgs::Odometry::ConstPtr &msg, int64_t &longitude,
+                   int64_t &latitude, int32_t &altitude, uint8_t &confidenceAlt,
+                   int8_t &velocity, uint8_t &confidenceVelocityLong,
+                   int16_t &yaw_rate, uint8_t &yaw_rate_confidence) {
 
   double x_flottant = msg->pose.pose.position.x;
   double y_flottant = msg->pose.pose.position.y;
@@ -32,21 +34,21 @@ void odom_callback(const nav_msgs::Odometry::ConstPtr &msg, int64_t *longitude,
 
   int64_t x_int = (int64_t)(x_flottant * 131072);
   int64_t y_int = (int64_t)(y_flottant * 131072);
-  int64_t z_int = (int64_t)(z_flottant * 131072);
+  int32_t z_int = (int32_t)(z_flottant * 131072);
 
-  *longitude = x_int;
-  *latitude = y_int;
-  *altitude = z_int;
-  *confidenceAlt = msg->pose.covariance[14];
-  *velocityLong = msg->twist.twist.linear.x;
-  // msg->twist.twist.linear.y ?
-  *confidenceVelocityLong = msg->twist.covariance[0];
-  *yaw_rate = msg->twist.twist.angular.z; // conversion rad/s to 0.01 degree/s
-  *yaw_rate_confidence = msg->twist.covariance[35];
+  longitude = x_int;
+  latitude = y_int;
+  altitude = z_int;
+  confidenceAlt = msg->pose.covariance[14];
+  velocity = (int8_t)sqrt(pow(msg->twist.twist.linear.x, 2) +
+                          pow(msg->twist.twist.linear.y, 2));
+  confidenceVelocityLong = msg->twist.covariance[0];
+  yaw_rate = msg->twist.twist.angular.z; // conversion rad/s to 0.01 degree/s
+  yaw_rate_confidence = msg->twist.covariance[35];
 
-  ROS_INFO("odom_callback : x : %d", *longitude);
-  ROS_INFO("odom_callback : y : %d", *latitude);
-  ROS_INFO("odom_callback : z : %d", *altitude);
+  ROS_INFO("odom_callback : x : %d", longitude);
+  ROS_INFO("odom_callback : y : %d", latitude);
+  ROS_INFO("odom_callback : z : %d", altitude);
 }
 
 int main(int argc, char **argv) {
@@ -57,10 +59,10 @@ int main(int argc, char **argv) {
 
   int64_t longitude = 0;     // posX
   int64_t latitude = 0;      // posY
-  int64_t altitude = 0;      // posZ perte de donnée par rapport à ROS
+  int32_t altitude = 0;      // posZ perte de donnée par rapport à ROS
   uint8_t confidenceAlt = 0; // posZ confidence
-  int16_t velocityLong = 0.0;
-  uint8_t confidenceVelocityLong = 0.0;
+  int8_t velocityLong = 0;
+  uint8_t confidenceVelocityLong = 0;
   int16_t yaw_rate = 0;
   uint8_t yaw_rate_confidence = 0;
 
@@ -72,9 +74,9 @@ int main(int argc, char **argv) {
 
   ros::Subscriber sub = n.subscribe<nav_msgs::Odometry>(
       "odom", 1000,
-      boost::bind(&odom_callback, _1, &longitude, &latitude, &altitude,
-                  &confidenceAlt, &velocityLong, &confidenceVelocityLong,
-                  &yaw_rate, &yaw_rate_confidence));
+      boost::bind(&odom_callback, _1, longitude, latitude, altitude,
+                  confidenceAlt, velocity, confidenceVelocityLong, yaw_rate,
+                  yaw_rate_confidence));
 
   ros::spin();
 
@@ -147,9 +149,9 @@ void ece_data(ece_msgs::ecemsg &msg, int count) {
 }
 
 void cam_data(etsi_msgs::CAM &msg, int count, int64_t longitude,
-              int64_t latitude, int64_t altitude, uint8_t confidenceAlt,
-              int16_t velocityLong, uint8_t confidenceVelocityLong,
-              int16_t yaw_rate, uint8_t yaw_rate_confidence) {
+              int64_t latitude, int32_t altitude, uint8_t confidenceAlt,
+              int8_t velocity, uint8_t confidenceVelocityLong, int16_t yaw_rate,
+              uint8_t yaw_rate_confidence) {
 
   msg.generation_delta_time = 0; // milliseconds since 2004 modulo 2^16 uint16_t
 
@@ -181,12 +183,13 @@ void cam_data(etsi_msgs::CAM &msg, int count, int64_t longitude,
   //   msg.reference_position.position_confidence.semi_minor_confidence = 0;
   //   msg.reference_position.position_confidence.semi_major_orientation = 0;
 
-  msg.reference_position.longitude = longitude;
-  msg.reference_position.latitude = latitude;
-  msg.reference_position.altitude.value = altitude;
-  msg.reference_position.altitude.confidence = 15; // unavailable
+  msg.reference_position.longitude = longitude;     //
+  msg.reference_position.latitude = latitude;       //
+  msg.reference_position.altitude.value = altitude; // Convertir en 0.01m
+  msg.reference_position.altitude.confidence = 15;  // unavailable
 
-  msg.high_frequency_container.speed.value = 0;      // TODO
+  msg.high_frequency_container.speed.value =
+      velocity; // Ne pas oublier : convertir dans controler
   msg.high_frequency_container.speed.confidence = 0; // A VOIR
 
   msg.high_frequency_container.drive_direction.value = 0; // TODO
@@ -195,9 +198,10 @@ void cam_data(etsi_msgs::CAM &msg, int count, int64_t longitude,
   msg.high_frequency_container.vehicle_length.confidence_indication = 0; // TODO
   msg.high_frequency_container.vehicle_width.value = 0;                  // TODO
 
-  msg.high_frequency_container.longitudinal_acceleration.value = velocityLong;
-  msg.high_frequency_container.longitudinal_acceleration.confidence =
-      confidenceVelocityLong;
+  msg.high_frequency_container.longitudinal_acceleration.value =
+      0 // velocityLong;
+      msg.high_frequency_container.longitudinal_acceleration.confidence =
+          confidenceVelocityLong;
 
   msg.high_frequency_container.curvature.value = 0;
   msg.high_frequency_container.curvature.confidence = 0;

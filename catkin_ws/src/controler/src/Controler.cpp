@@ -596,8 +596,6 @@ uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
   uint8_t ret = 1;
   ROS_INFO("I have received CAM msg");
 
-  // TODO
-
   // Vérifier que c'est bien un CAM
   uint8_t cam_id = msg->its_header.message_id;
   if (cam_id != CAM_ID) {
@@ -605,10 +603,32 @@ uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
   }
 
   // Récupérer expéditeur
-  uint8_t exp = msg->its_header.station_id;
+  uint8_t exp_id = msg->its_header.station_id;
 
-  // Récupérer destinataire // EXISTE PAS
-  // uint8_t dest = msg->basic_container.ID_dest;
+  // Trouver la voiture correspondante dans le vecteur de véhicules
+  std::vector<Vehicle>::iterator it_v = this->getVectorV().begin();
+
+  // Tant qu'on n'est pas à la fin du vecteur de véhicules
+  while (it_v != this->getVectoV().end()) {
+
+    // Si on trouve l'ID du véhicule
+    if (it_v->getId() != exp_id) {
+
+      // On récupère la vitesse et la renseigne dans le véhicule
+      // Convertir km/h
+      uint8_t speed = msg->high_frequency_container.speed.value * 3.6;
+      it_v->setSpeed(speed);
+
+      // On récupère la position actuelle et la renseigne dans le véhicule
+      // Récupérer en float
+      float latitude = msg->reference_position.latitude / 131072;
+      float longitude = msg->reference_position.longitude / 131072;
+      float altitude = msg->reference_position.altitude.value / 131072;
+      Position p = Position(latitude, longitude, altitude);
+      it_v->setActualPos(p);
+    }
+    it_v++;
+  }
 }
 
 void Controler::fill_header(ece_msgs::ecemsg &msg, char *frame,

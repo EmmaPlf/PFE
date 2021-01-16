@@ -6,22 +6,22 @@
 
 class Position {
 private:
-  int64_t lat;
-  int64_t lon;
-  int32_t alt;
+  float lat;
+  float lon;
+  float alt;
 
 public:
   Position();
-  Position(int64_t lat, int64_t lon, int32_t alt);
+  Position(float lat, float lon, float alt);
   ~Position();
 
-  int64_t getLat();
-  int64_t getLon();
-  int32_t getAlt();
+  float getLat();
+  float getLon();
+  float getAlt();
 
-  void setLat(int64_t lat);
-  void setLon(int64_t lon);
-  void setAlt(int32_t alt);
+  void setLat(float lat);
+  void setLon(float lon);
+  void setAlt(float alt);
 
   // Ret 1 si positions identiques
   uint8_t comparePositions(Position p);

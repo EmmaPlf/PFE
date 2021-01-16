@@ -2,7 +2,7 @@
 
 Position::Position() : lat(0), lon(0), alt(0) {}
 
-Position::Position(int64_t lat, int64_t lon, int32_t alt) {
+Position::Position(float lat, float lon, float alt) {
   this->lat = lat;
   this->lon = lon;
   this->alt = alt;
@@ -10,17 +10,17 @@ Position::Position(int64_t lat, int64_t lon, int32_t alt) {
 
 Position::~Position() {}
 
-int64_t Position::getLat() { return this->lat; }
+float Position::getLat() { return this->lat; }
 
-int64_t Position::getLon() { return this->lon; }
+float Position::getLon() { return this->lon; }
 
-int32_t Position::getAlt() { return this->alt; }
+float Position::getAlt() { return this->alt; }
 
-void Position::setLat(int64_t lat) { this->lat = lat; }
+void Position::setLat(float lat) { this->lat = lat; }
 
-void Position::setLon(int64_t lon) { this->lon = lon; }
+void Position::setLon(float lon) { this->lon = lon; }
 
-void Position::setAlt(int32_t alt) { this->alt = alt; }
+void Position::setAlt(float alt) { this->alt = alt; }
 
 // Ret 1 si positions identiques
 uint8_t Position::comparePositions(Position p) {
