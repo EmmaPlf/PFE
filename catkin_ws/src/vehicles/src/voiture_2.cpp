@@ -1,14 +1,11 @@
 #include "../../devel/include/ece_msgs/ecemsg.h"
+#include "../include/Vehicles.h"
 #include "ros/ros.h"
 #include <iostream>
 #include <sstream>
 
 // Paramètres à modifier selon la station
-#define STATION_TYPE 5 // PassengerCar
 #define STATION_ID 2   // 1 ID par station
-#define MSG_ID 8       // DENM
-#define FRAME_ID "/ece"
-#define PROTOCOL_VERSION 131 // EN 302 637-3 v1.3.1.
 
 void ece_data(ece_msgs::ecemsg &msg, int count);
 
@@ -58,14 +55,14 @@ void ece_data(ece_msgs::ecemsg &msg, int count) {
  */
   msg.header.seq = count;              // uint32
   msg.header.stamp = ros::Time::now(); // time
-  msg.header.frame_id = FRAME_ID;      // string
+  msg.header.frame_id = ECE_FRAME_ID;      // string
 
   // ItsPduHeader ::= SEQUENCE {protocolVersion INTEGER{currentVersion(1)}
   // (0..255), messageID INTEGER{ denm(1), cam(2), poi(3), spat(4), map(5),
   // ivi(6), ev-rsr(7)} (0..255),
   // stationID StationID }
   msg.its_header.protocol_version = PROTOCOL_VERSION; // uint8_t
-  msg.its_header.message_id = MSG_ID;                 // uint8_t
+  msg.its_header.message_id = ECE_MSG_ID;                 // uint8_t
   // StationID ::= INTEGER(0..4294967295)
   msg.its_header.station_id = STATION_ID; // uint32_t
 

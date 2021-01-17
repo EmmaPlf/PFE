@@ -91,7 +91,7 @@ void Controler::add_platoon(Platoon p) { this->vector_p.push_back(p); }
 /** @brief Lorsque reçoit un message init
 ajouter à un platoon ou créer un platoon ou rien
  */
-uint8_t Controler::init_receive(ece_msgs::ecemsg msg) {
+uint8_t Controler::init_receive(ece_msgs::ecemsg &msg) {
 
   // Header
   uint8_t header_station_id = msg.its_header.station_id;
@@ -315,13 +315,12 @@ uint8_t Controler::init_send(Platoon p) {
   // Envoyer le msg init sur le topic des véhicules
   if (ros::ok()) {
     // this->getPubEce().publish(msg);
-    this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
     this->publish_ece_msg(msg);
   }
   ROS_INFO("Apres envoi");
 }
 
-uint8_t Controler::insert_receive(ece_msgs::ecemsg msg) {
+uint8_t Controler::insert_receive(ece_msgs::ecemsg &msg) {
 
   // Header
   uint8_t header_station_id = msg.its_header.station_id;
@@ -392,7 +391,7 @@ uint8_t Controler::insert_send(uint8_t id_dest) {
 }
 
 // A finir mais plutôt compliqué pour le moment
-uint8_t Controler::desinsert_receive(ece_msgs::ecemsg msg) {
+uint8_t Controler::desinsert_receive(ece_msgs::ecemsg &msg) {
 
   uint8_t rank = 0;
   uint8_t rank_found = 0;
@@ -513,14 +512,14 @@ uint8_t Controler::desinsert_receive(ece_msgs::ecemsg msg) {
 }
 
 // Plus tard
-uint8_t Controler::feux(ece_msgs::ecemsg msg) {
+uint8_t Controler::feux(ece_msgs::ecemsg &msg) {
 
   // Si feu on envoie quelque chose
   // Envoyer ok ou non au platoon pour passer le feu
 }
 
 // Plus tard
-uint8_t Controler::freinage_urg(ece_msgs::ecemsg msg) {
+uint8_t Controler::freinage_urg(ece_msgs::ecemsg &msg) {
 
   // ??? Reçoit d'un véhicule message freinage urgence
   // Renvoie aux autres véhicules l'info ?
@@ -604,19 +603,19 @@ uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
 
   // Récupérer expéditeur
   uint8_t exp_id = msg->its_header.station_id;
-  /*
+  
     // Trouver la voiture correspondante dans le vecteur de véhicules
-    std::vector<Vehicle>::iterator it_v = vector_v.begin();
+    std::vector<Vehicle>::iterator it_v = c.getVectorV().begin();
 
     // Tant qu'on n'est pas à la fin du vecteur de véhicules
-    while (it_v != vector_v.end()) {
+    while (it_v != c.getVectorV().end()) {
 
       // Si on trouve l'ID du véhicule
       if (it_v->getId() != exp_id) {
 
         // On récupère la vitesse et la renseigne dans le véhicule
         // Convertir km/h
-        uint8_t speed = msg->high_frequency_container.speed.value * 3.6;
+        int8_t speed = (int8_t) msg->high_frequency_container.speed.value * 3.6;
         it_v->setSpeed(speed);
 
         // On récupère la position actuelle et la renseigne dans le véhicule
@@ -628,7 +627,7 @@ uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
         it_v->setActualPos(p);
       }
       it_v++;
-    }*/
+    }
 }
 
 void Controler::fill_header(ece_msgs::ecemsg &msg, char *frame,
@@ -650,9 +649,11 @@ void Controler::fill_header(ece_msgs::ecemsg &msg, char *frame,
 void Controler::increment_counter() { this->count++; }
 
 uint8_t Controler::publish_ece_msg(ece_msgs::ecemsg msg) {
+  this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
   this->pub_ece.publish(msg);
 }
 
 uint8_t Controler::publish_DENM_msg(etsi_msgs::DENM msg) {
+  this->pub_ece = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
   this->pub_DENM.publish(msg);
 }

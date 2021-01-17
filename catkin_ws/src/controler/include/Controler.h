@@ -1,7 +1,7 @@
+#include "Platoon.h"
 #include "../../devel/include/ece_msgs/ecemsg.h"
 #include "../../devel/include/etsi_msgs/CAM.h"
 #include "../../devel/include/etsi_msgs/DENM.h"
-#include "Platoon.h"
 #include "ros/ros.h"
 #include <vector>
 
@@ -67,13 +67,13 @@ public:
 
   void fill_header(ece_msgs::ecemsg &msg, char *frame, uint8_t msg_id);
 
-  uint8_t init_receive(ece_msgs::ecemsg msg);
+  uint8_t init_receive(ece_msgs::ecemsg &msg);
   uint8_t init_send(Platoon p);
-  uint8_t insert_receive(ece_msgs::ecemsg msg);
+  uint8_t insert_receive(ece_msgs::ecemsg &msg);
   uint8_t insert_send(uint8_t id_dest);
-  uint8_t desinsert_receive(ece_msgs::ecemsg msg);
-  uint8_t feux(ece_msgs::ecemsg msg);
-  uint8_t freinage_urg(ece_msgs::ecemsg msg);
+  uint8_t desinsert_receive(ece_msgs::ecemsg &msg);
+  uint8_t feux(ece_msgs::ecemsg &msg);
+  uint8_t freinage_urg(ece_msgs::ecemsg &msg);
 
   uint8_t publish_ece_msg(ece_msgs::ecemsg msg);
   uint8_t publish_DENM_msg(etsi_msgs::DENM msg);
