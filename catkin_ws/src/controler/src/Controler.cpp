@@ -113,14 +113,14 @@ uint8_t Controler::init_receive(ece_msgs::ecemsg &msg) {
       Position(msg.actual_position.latitude, msg.actual_position.longitude,
                msg.actual_position.altitude.value);
 
-  ROS_INFO("station_id : %d  pos : %d", header_station_id, exp_pos.getLon());
+  ROS_INFO("station_id : %d  pos : %f", header_station_id, exp_pos.getLon());
 
   // Recoit destination de la voiture
   Position exp_dest = Position(msg.platoon.reference_position.latitude,
                                msg.platoon.reference_position.longitude,
                                msg.platoon.reference_position.altitude.value);
 
-  ROS_INFO("station_id : %d dest : %d", header_station_id, exp_dest.getLon());
+  ROS_INFO("station_id : %d dest : %f", header_station_id, exp_dest.getLon());
 
   // Liste de véhicules
   // Regarde les destinations et si destination en commun : platoon : envoi des
@@ -525,34 +525,38 @@ uint8_t Controler::freinage_urg(ece_msgs::ecemsg &msg) {
   // Renvoie aux autres véhicules l'info ?
 }
 
-void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &msg,
+void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &p_msg,
                                  Controler &c) {
 
-  ROS_INFO("I have received ece msg, %d", msg->header.seq);
+  ROS_INFO("I have received ece msg, %d", p_msg->header.seq);
   int rep = 0;
 
   // Récupérer expéditeur
-  uint8_t exp = msg->basic_container.ID_exp;
+  uint8_t exp = p_msg->basic_container.ID_exp;
 
   // Récupérer phase de platooning
-  uint8_t phase = msg->basic_container.phase.value;
+  uint8_t phase = p_msg->basic_container.phase.value;
+
+  // On stocke la valeur du pointeur dans un message
+  // pour pouvoir passer par reference dans les fonctions
+  ece_msgs::ecemsg msg = *p_msg;
 
   switch (phase) {
   case 0:
     // Récup véhicules avec destinations pour créer un platoon
     // Envoie ensuite les infos à chaque véhicule concerné
-    rep = c.init_receive(*msg);
+    rep = c.init_receive(msg);
     // TODO rep == 0 ? (erreur)
     break;
 
   case 1:
     // Véhicule souhaitant s'insérer ? Ou uniquement confirmation insertion ?
-    rep = c.insert_receive(*msg);
+    rep = c.insert_receive(msg);
     // TODO rep == 0 ? (erreur)
     break;
 
   case 2:
-    rep = c.desinsert_receive(*msg);
+    rep = c.desinsert_receive(msg);
     // TODO rep == 0 ? (erreur)
     break;
 
@@ -603,31 +607,31 @@ uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
 
   // Récupérer expéditeur
   uint8_t exp_id = msg->its_header.station_id;
-  
-    // Trouver la voiture correspondante dans le vecteur de véhicules
-    std::vector<Vehicle>::iterator it_v = c.getVectorV().begin();
 
-    // Tant qu'on n'est pas à la fin du vecteur de véhicules
-    while (it_v != c.getVectorV().end()) {
+  // Trouver la voiture correspondante dans le vecteur de véhicules
+  std::vector<Vehicle>::iterator it_v = c.getVectorV().begin();
 
-      // Si on trouve l'ID du véhicule
-      if (it_v->getId() != exp_id) {
+  // Tant qu'on n'est pas à la fin du vecteur de véhicules
+  while (it_v != c.getVectorV().end()) {
 
-        // On récupère la vitesse et la renseigne dans le véhicule
-        // Convertir km/h
-        int8_t speed = (int8_t) msg->high_frequency_container.speed.value * 3.6;
-        it_v->setSpeed(speed);
+    // Si on trouve l'ID du véhicule
+    if (it_v->getId() != exp_id) {
 
-        // On récupère la position actuelle et la renseigne dans le véhicule
-        // Récupérer en float
-        float latitude = msg->reference_position.latitude / 131072;
-        float longitude = msg->reference_position.longitude / 131072;
-        float altitude = msg->reference_position.altitude.value / 131072;
-        Position p = Position(latitude, longitude, altitude);
-        it_v->setActualPos(p);
-      }
-      it_v++;
+      // On récupère la vitesse et la renseigne dans le véhicule
+      // Convertir km/h
+      int8_t speed = (int8_t)msg->high_frequency_container.speed.value * 3.6;
+      it_v->setSpeed(speed);
+
+      // On récupère la position actuelle et la renseigne dans le véhicule
+      // Récupérer en float
+      float latitude = msg->reference_position.latitude / 131072;
+      float longitude = msg->reference_position.longitude / 131072;
+      float altitude = msg->reference_position.altitude.value / 131072;
+      Position p = Position(latitude, longitude, altitude);
+      it_v->setActualPos(p);
     }
+    it_v++;
+  }
 }
 
 void Controler::fill_header(ece_msgs::ecemsg &msg, char *frame,

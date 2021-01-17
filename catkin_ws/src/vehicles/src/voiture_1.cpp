@@ -19,18 +19,13 @@ void cam_data(etsi_msgs::CAM &msg, int count, int64_t longitude,
 
 int main(int argc, char **argv) {
 
-  // ece_msgs::ecemsg msg;
-  // etsi_msgs::CAM msg;
   int32_t count = 0;
 
   // INIT
   ros::init(argc, argv, "voiture_1");
 
-  // Vehicles v1 = Vehicles();
-
-  // TODO : bouger au bon endroit
-  // ros::Subscriber sub = n.subscribe<nav_msgs::Odometry>(
-  //    "odom", 1000, /*TODO : odom_callback du vehicule*/);
+  // TODO Changer quand on aura plusieurs vehicules
+  Vehicles v1 = Vehicles("/odom");
 
   ros::spin();
 

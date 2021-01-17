@@ -2,23 +2,13 @@
 
 /// CONSTRUCTEUR
 
-Vehicles::Vehicles() {
-
-  /// PUBLISHERS
-
-  //   this->pub_ece_C = n.advertise<ece_msgs::ecemsg>("controler_ece", 1000);
-
-  //   this->pub_DENM_C = n.advertise<etsi_msgs::DENM>("controler_DENM", 1000);
-
-  //   this->pub_CAM_C = n.advertise<etsi_msgs::DENM>("controler_CAM", 1000);
-
-  //   this->pub_ece_V = n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
-
-  //   this->pub_DENM_V = n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
-
-  //   this->pub_CAM_V = n.advertise<etsi_msgs::DENM>("vehicles_CAM", 1000);
+Vehicles::Vehicles(char *odom_topic) {
 
   /// SUBSCRIBERS
+
+  this->sub_odom =
+      n.subscribe<nav_msgs::Odometry>(odom_topic, 1000, boost::bind(odom_callback, _1, *this));
+
   this->sub_ece_V = n.subscribe<ece_msgs::ecemsg>(
       "vehicles_ece", 1000, boost::bind(sub_ece_V_callback, _1, *this));
 
@@ -317,23 +307,23 @@ uint8_t Vehicles::publish_DENM_msg_V(etsi_msgs::DENM msg) {
   this->pub_DENM_V.publish(msg);
 }
 
-void Vehicles::odom_callback(const nav_msgs::Odometry::ConstPtr &msg) {
+void Vehicles::odom_callback(const nav_msgs::Odometry::ConstPtr &msg, Vehicles &v) {
 
   double x_flottant = msg->pose.pose.position.x;
   double y_flottant = msg->pose.pose.position.y;
   double z_flottant = msg->pose.pose.position.z;
 
-  this->longitude = (int64_t)(x_flottant * 131072);
-  this->latitude = (int64_t)(y_flottant * 131072);
-  this->altitude = (int32_t)(z_flottant * 131072);
+  v.longitude = (int64_t)(x_flottant * 131072);
+  v.latitude = (int64_t)(y_flottant * 131072);
+  v.altitude = (int32_t)(z_flottant * 131072);
 
-  this->velocity = (int8_t)sqrt(pow(msg->twist.twist.linear.x, 2) +
+  v.velocity = (int8_t)sqrt(pow(msg->twist.twist.linear.x, 2) +
                                 pow(msg->twist.twist.linear.y, 2));
 
-  this->yaw_rate =
+  v.yaw_rate =
       msg->twist.twist.angular.z; // conversion rad/s to 0.01 degree/s
 
-  /*ROS_INFO("odom_callback : x : %d", longitude);
-  ROS_INFO("odom_callback : y : %d", latitude);
-  ROS_INFO("odom_callback : z : %d", altitude);*/
+//   ROS_INFO("odom_callback : x : %f", v.longitude);
+//   ROS_INFO("odom_callback : y : %f", v.latitude);
+//   ROS_INFO("odom_callback : z : %f", v.altitude);
 }
