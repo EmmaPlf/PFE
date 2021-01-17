@@ -2,8 +2,7 @@
 
 /// CONSTRUCTEUR
 
-Vehicles::Vehicles()
-{
+Vehicles::Vehicles() {
 
   /// PUBLISHERS
 
@@ -19,15 +18,14 @@ Vehicles::Vehicles()
 
   //   this->pub_CAM_V = n.advertise<etsi_msgs::DENM>("vehicles_CAM", 1000);
 
-
   /// SUBSCRIBERS
-    this->sub_ece_V = n.subscribe<ece_msgs::ecemsg>(
+  this->sub_ece_V = n.subscribe<ece_msgs::ecemsg>(
       "vehicles_ece", 1000, boost::bind(sub_ece_V_callback, _1, *this));
 
-    this->sub_DENM_V = n.subscribe<etsi_msgs::DENM>(
+  this->sub_DENM_V = n.subscribe<etsi_msgs::DENM>(
       "vehicles_DENM", 1000, boost::bind(sub_DENM_V_callback, _1, *this));
 
-    this->sub_CAM_V = n.subscribe<etsi_msgs::CAM>(
+  this->sub_CAM_V = n.subscribe<etsi_msgs::CAM>(
       "vehicles_CAM", 1000, boost::bind(sub_CAM_V_callback, _1, *this));
 }
 
@@ -37,30 +35,15 @@ Vehicles::~Vehicles() {}
 
 /// GETTERS
 
-int64_t Vehicles::getLongitude()
-{
-    return this->longitude;
-}
+int64_t Vehicles::getLongitude() { return this->longitude; }
 
-int64_t Vehicles::getLatitude()
-{
-    return this->latitude;
-}
+int64_t Vehicles::getLatitude() { return this->latitude; }
 
-int32_t Vehicles::getAltitude()
-{
-    return this->altitude;
-}
+int32_t Vehicles::getAltitude() { return this->altitude; }
 
-int8_t Vehicles::getVelocity()
-{
-    return this->velocity;
-}
+int8_t Vehicles::getVelocity() { return this->velocity; }
 
-int16_t Vehicles::getYawRate()
-{
-    return this->yaw_rate;
-}
+int16_t Vehicles::getYawRate() { return this->yaw_rate; }
 
 ros::NodeHandle Vehicles::getNodeHandle() { return this->n; }
 
@@ -84,33 +67,17 @@ ros::Subscriber Vehicles::getSubDENM_V() { return this->sub_DENM_V; }
 
 ros::Subscriber Vehicles::getSubCAM_V() { return this->sub_CAM_V; }
 
-
 /// SETTERS
 
-void Vehicles::setLongitude(int64_t longitude)
-{
-    this->longitude = longitude;
-}
+void Vehicles::setLongitude(int64_t longitude) { this->longitude = longitude; }
 
-void Vehicles::setLatitude(int64_t latitude)
-{
-    this->latitude = latitude;
-}
+void Vehicles::setLatitude(int64_t latitude) { this->latitude = latitude; }
 
-void Vehicles::setAltitude(int32_t altitude)
-{
-    this->altitude = altitude;
-}
+void Vehicles::setAltitude(int32_t altitude) { this->altitude = altitude; }
 
-void Vehicles::setVelocity(int8_t velocity)
-{
-    this->velocity = velocity;
-}
+void Vehicles::setVelocity(int8_t velocity) { this->velocity = velocity; }
 
-void Vehicles::setYawRate(int16_t yaw_rate)
-{
-    this->yaw_rate = yaw_rate;
-}
+void Vehicles::setYawRate(int16_t yaw_rate) { this->yaw_rate = yaw_rate; }
 
 void Vehicles::setNodeHandle(ros::NodeHandle n) { this->n = n; }
 
@@ -135,110 +102,110 @@ void Vehicles::setSubDENM_V(ros::Subscriber sub) { this->sub_DENM_V = sub; }
 void Vehicles::setSubCAM_V(ros::Subscriber sub) { this->sub_CAM_V = sub; }
 
 /// METHODS
-uint8_t Vehicles::init_receive(ece_msgs::ecemsg &msg) {
+uint8_t Vehicles::init_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   // Récupère les informations utiles pour l'initialisation
   return 1;
 }
 
-uint8_t Vehicle::insert_receive(ece_msgs::ecemsg &msg) {
+uint8_t Vehicles::insert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   // Récupère les informations utiles pour l'initialisation
   ROS_INFO("I have received ece msg, insertion message !");
 
   // Header
-  uint8_t header_station_id = msg.its_header.station_id;
-  uint8_t header_message_id = msg.its_header.message_id;
+  uint8_t header_station_id = msg->its_header.station_id;
+  uint8_t header_message_id = msg->its_header.message_id;
 
   // Ref Position
-  int64_t lon = msg.insertion.reference_position.longitude;
-  int64_t lat = msg.insertion.reference_position.latitude;
+  int64_t lon = msg->insertion.reference_position.longitude;
+  int64_t lat = msg->insertion.reference_position.latitude;
 
   // PositionConfidenceEllipse
   uint16_t semi_major_confidence =
-      msg.insertion.reference_position.position_confidence
+      msg->insertion.reference_position.position_confidence
           .semi_major_confidence;
   uint16_t semi_minor_confidence =
-      msg.insertion.reference_position.position_confidence
+      msg->insertion.reference_position.position_confidence
           .semi_minor_confidence;
   uint16_t semi_major_orientation =
-      msg.insertion.reference_position.position_confidence
+      msg->insertion.reference_position.position_confidence
           .semi_major_orientation;
 
   // Altitude:
-  int32_t altValue = msg.insertion.reference_position.altitude.value;
-  uint8_t altConf = msg.insertion.reference_position.altitude.confidence;
+  int32_t altValue = msg->insertion.reference_position.altitude.value;
+  uint8_t altConf = msg->insertion.reference_position.altitude.confidence;
 
   // Confirmation insertion
-  bool checkInsert = msg.insertion.confirmation_insertion;
+  bool checkInsert = msg->insertion.confirmation_insertion;
   return 1;
 }
 
-uint8_t Vehicles::desinsert_receive(ece_msgs::ecemsg &msg) {
+uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   // Récupère les informations utiles pour désinsertion
   ROS_INFO("I have received ece msg, desinsertion message !");
 
   // Header
-  uint8_t header_station_id = msg.its_header.station_id;
-  uint8_t header_message_id = msg.its_header.message_id;
+  uint8_t header_station_id = msg->its_header.station_id;
+  uint8_t header_message_id = msg->its_header.message_id;
 
   /// Desinsertion
-  bool askExit = msg.desinsertion.demande_sortie;
+  bool askExit = msg->desinsertion.demande_sortie;
 
   // Speed
-  int16_t speedVal = msg.desinsertion.speed.value;
-  uint8_t speedConf = msg.desinsertion.speed.confidence;
+  int16_t speedVal = msg->desinsertion.speed.value;
+  uint8_t speedConf = msg->desinsertion.speed.confidence;
 
   // Ref Position
-  int64_t lat = msg.desinsertion.point_sortie.latitude;
-  int64_t lon = msg.desinsertion.point_sortie.longitude;
+  int64_t lat = msg->desinsertion.point_sortie.latitude;
+  int64_t lon = msg->desinsertion.point_sortie.longitude;
 
   // PositionConfidenceEllipse
   uint16_t semi_major_confidence =
-      msg.desinsertion.point_sortie.position_confidence.semi_major_confidence;
+      msg->desinsertion.point_sortie.position_confidence.semi_major_confidence;
   uint16_t semi_minor_confidence =
-      msg.desinsertion.point_sortie.position_confidence.semi_minor_confidence;
+      msg->desinsertion.point_sortie.position_confidence.semi_minor_confidence;
   uint16_t semi_major_orientation =
-      msg.desinsertion.point_sortie.position_confidence.semi_major_orientation;
+      msg->desinsertion.point_sortie.position_confidence.semi_major_orientation;
 
   // insert Altitude:
-  int32_t altValue = msg.desinsertion.point_sortie.altitude.value;
-  uint8_t altConf = msg.desinsertion.point_sortie.altitude.confidence;
+  int32_t altValue = msg->desinsertion.point_sortie.altitude.value;
+  uint8_t altConf = msg->desinsertion.point_sortie.altitude.confidence;
 
   // Confirmation insertion
-  uint8_t position = msg.desinsertion.position;
+  uint8_t position = msg->desinsertion.position;
   return 1;
 }
 
-uint8_t Vehicles::light_receive(ece_msgs::ecemsg &msg) {
+uint8_t Vehicles::light_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   // Récupère les informations utiles pour l'initialisation
   ROS_INFO("I have received ece msg, traffic light message !");
 
   // Header
-  uint8_t header_station_id = msg.its_header.station_id;
-  uint8_t header_message_id = msg.its_header.message_id;
+  uint8_t header_station_id = msg->its_header.station_id;
+  uint8_t header_message_id = msg->its_header.message_id;
 
   /// feu de signalisation
-  bool askExit = msg.feu.permission_feu;
+  bool askExit = msg->feu.permission_feu;
 
   return 1;
 }
 
-uint8_t Vehicles::brake_receive(ece_msgs::ecemsg &msg) {
+uint8_t Vehicles::brake_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   // Récupère les informations utiles pour l'initialisation
   ROS_INFO("I have received ece msg, emergency brake message !");
 
   // Header
-  uint8_t header_station_id = msg.its_header.station_id;
-  uint8_t header_message_id = msg.its_header.message_id;
+  uint8_t header_station_id = msg->its_header.station_id;
+  uint8_t header_message_id = msg->its_header.message_id;
 
   /// freinage d'urgence
-  uint8_t postion = msg.freinage_urgence.position;
+  uint8_t postion = msg->freinage_urgence.position;
 
   return 1;
 }
 
 // Callback
 void Vehicles::sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
-                                 Vehicle &v) {
+                                  Vehicles &v) {
 
   ROS_INFO("I have received ece msg, %d", msg->header.seq);
   int rep = 0;
@@ -251,7 +218,7 @@ void Vehicles::sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
 
   // Si le message nous est destiné on lis la suite
   uint8_t receiver = msg->basic_container.ID_dest;
-  if (receiver != v.getId()) {
+  /*if (receiver != v.getId()) {
     // si ne nous est pas destiné
   } else {
 
@@ -290,11 +257,11 @@ void Vehicles::sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
     default:
       break;
     }
-  }
+  }*/
 }
 
 void Vehicles::sub_DENM_V_callback(const etsi_msgs::DENM::ConstPtr &msg,
-                                  Vehicle &v) {
+                                   Vehicles &v) {
 
   ROS_INFO("I have received DENM msg");
 
@@ -306,7 +273,7 @@ void Vehicles::sub_DENM_V_callback(const etsi_msgs::DENM::ConstPtr &msg,
 }
 
 void Vehicles::sub_CAM_V_callback(const etsi_msgs::CAM::ConstPtr &msg,
-                                 Vehicle &v) {
+                                  Vehicles &v) {
 
   ROS_INFO("I have received CAM msg");
 
@@ -320,36 +287,35 @@ void Vehicles::sub_CAM_V_callback(const etsi_msgs::CAM::ConstPtr &msg,
 // Publish
 // to CONTROLER
 uint8_t Vehicles::publish_ece_msg_C(ece_msgs::ecemsg msg) {
-  this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("controler_ece", 1000);
+  this->pub_ece_C = this->n.advertise<ece_msgs::ecemsg>("controler_ece", 1000);
   this->pub_ece_C.publish(msg);
 }
 
 uint8_t Vehicles::publish_CAM_msg_C(etsi_msgs::CAM msg) {
-  this->pub_ece = this->n.advertise<etsi_msgs::CAM>("controler_CAM", 1000);
+  this->pub_ece_C = this->n.advertise<etsi_msgs::CAM>("controler_CAM", 1000);
   this->pub_CAM_C.publish(msg);
 }
 
 uint8_t Vehicles::publish_DENM_msg_C(etsi_msgs::DENM msg) {
-  this->pub_ece = this->n.advertise<etsi_msgs::DENM>("controler_DENM", 1000);
+  this->pub_ece_C = this->n.advertise<etsi_msgs::DENM>("controler_DENM", 1000);
   this->pub_DENM_C.publish(msg);
 }
 
 // to VEHICLE
 uint8_t Vehicles::publish_ece_msg_V(ece_msgs::ecemsg msg) {
-  this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
+  this->pub_ece_V = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
   this->pub_ece_V.publish(msg);
 }
 
 uint8_t Vehicles::publish_CAM_msg_V(etsi_msgs::CAM msg) {
-  this->pub_ece = this->n.advertise<etsi_msgs::CAM>("vehicles_CAM", 1000);
+  this->pub_ece_V = this->n.advertise<etsi_msgs::CAM>("vehicles_CAM", 1000);
   this->pub_CAM_V.publish(msg);
 }
 
 uint8_t Vehicles::publish_DENM_msg_V(etsi_msgs::DENM msg) {
-  this->pub_ece = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
+  this->pub_ece_V = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
   this->pub_DENM_V.publish(msg);
 }
-
 
 void Vehicles::odom_callback(const nav_msgs::Odometry::ConstPtr &msg) {
 
@@ -362,9 +328,10 @@ void Vehicles::odom_callback(const nav_msgs::Odometry::ConstPtr &msg) {
   this->altitude = (int32_t)(z_flottant * 131072);
 
   this->velocity = (int8_t)sqrt(pow(msg->twist.twist.linear.x, 2) +
-                          pow(msg->twist.twist.linear.y, 2));
+                                pow(msg->twist.twist.linear.y, 2));
 
-  this->yaw_rate = msg->twist.twist.angular.z; // conversion rad/s to 0.01 degree/s
+  this->yaw_rate =
+      msg->twist.twist.angular.z; // conversion rad/s to 0.01 degree/s
 
   /*ROS_INFO("odom_callback : x : %d", longitude);
   ROS_INFO("odom_callback : y : %d", latitude);

@@ -9,7 +9,7 @@
 #include <sstream>
 
 // Paramètres à modifier selon la station
-#define STATION_ID 1   // 1 ID par station
+#define STATION_ID 1 // 1 ID par station
 
 void ece_data(ece_msgs::ecemsg &msg, int count);
 void cam_data(etsi_msgs::CAM &msg, int count, int64_t longitude,
@@ -17,21 +17,19 @@ void cam_data(etsi_msgs::CAM &msg, int count, int64_t longitude,
               int8_t velocity, uint8_t confidenceVelocityLong, int16_t yaw_rate,
               uint8_t yaw_rate_confidence);
 
-
-
 int main(int argc, char **argv) {
 
   // ece_msgs::ecemsg msg;
-  //etsi_msgs::CAM msg;
+  // etsi_msgs::CAM msg;
   int32_t count = 0;
 
-    // INIT
+  // INIT
   ros::init(argc, argv, "voiture_1");
 
-  Vehicles v1 = Vehicles();
+  // Vehicles v1 = Vehicles();
 
   // TODO : bouger au bon endroit
-  //ros::Subscriber sub = n.subscribe<nav_msgs::Odometry>(
+  // ros::Subscriber sub = n.subscribe<nav_msgs::Odometry>(
   //    "odom", 1000, /*TODO : odom_callback du vehicule*/);
 
   ros::spin();
@@ -47,10 +45,11 @@ int main(int argc, char **argv) {
   //   ++count;
   //   pub.publish(msg);
 
-  //cam_data(msg, count, longitude, latitude, altitude, confidenceAlt, velocity,
+  // cam_data(msg, count, longitude, latitude, altitude, confidenceAlt,
+  // velocity,
   //         confidenceVelocityLong, yaw_rate, yaw_rate_confidence);
   //++count;
-  //pub.publish(msg);
+  // pub.publish(msg);
 
   //   while (ros::ok()) {
 
@@ -85,7 +84,7 @@ void ece_data(ece_msgs::ecemsg &msg, int count) {
   // ivi(6), ev-rsr(7)} (0..255),
   // stationID StationID }
   msg.its_header.protocol_version = PROTOCOL_VERSION; // uint8_t
-  msg.its_header.message_id = ECE_MSG_ID;                 // uint8_t
+  msg.its_header.message_id = ECE_MSG_ID;             // uint8_t
   // StationID ::= INTEGER(0..4294967295)
   msg.its_header.station_id = STATION_ID; // uint32_t
 
@@ -104,7 +103,7 @@ void ece_data(ece_msgs::ecemsg &msg, int count) {
   msg.actual_position.altitude.value = 0;
 }
 
-//TODO : implémenter dans Vehicles
+// TODO : implémenter dans Vehicles
 void cam_data(etsi_msgs::CAM &msg, int count, int64_t longitude,
               int64_t latitude, int32_t altitude, uint8_t confidenceAlt,
               int8_t velocity, uint8_t confidenceVelocityLong, int16_t yaw_rate,
