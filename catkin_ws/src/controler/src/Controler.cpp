@@ -19,19 +19,19 @@ Controler::Controler() {
   /// SUBSCRIBERS /// UTILISER GETTERS POUR N
 
   this->sub_ece = this->n.subscribe<ece_msgs::ecemsg>(
-      "controler_ece", 1000, boost::bind(sub_ece_callback, _1, *this));
+      "controler_ece", 1000, boost::bind(sub_ece_callback, _1, this));
 
   this->sub_DENM = this->n.subscribe<etsi_msgs::DENM>(
-      "controler_DENM", 1000, boost::bind(sub_DENM_callback, _1, *this));
+      "controler_DENM", 1000, boost::bind(sub_DENM_callback, _1, this));
 
   this->sub_CAM = this->n.subscribe<etsi_msgs::CAM>(
-      "controler_CAM", 1000, boost::bind(sub_CAM_callback, _1, *this));
+      "controler_CAM", 1000, boost::bind(sub_CAM_callback, _1, this));
 
   /// PUBLISHERS
 
-  /*this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
+  this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
 
-  this->pub_DENM = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);*/
+  this->pub_DENM = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
 }
 
 /// DESTRUCTEURS
@@ -94,6 +94,7 @@ ajouter à un platoon ou créer un platoon ou rien
 uint8_t Controler::init_receive(ece_msgs::ecemsg &msg) {
 
   // Header
+
   uint8_t header_station_id = msg.its_header.station_id;
   uint8_t header_message_id = msg.its_header.message_id;
 
@@ -109,18 +110,24 @@ uint8_t Controler::init_receive(ece_msgs::ecemsg &msg) {
   uint8_t exp_id = msg.basic_container.ID_exp;
 
   // Recoit position actuelle de la voiture
-  Position exp_pos =
-      Position(msg.actual_position.latitude, msg.actual_position.longitude,
-               msg.actual_position.altitude.value);
+  float latitude = (float)msg.actual_position.latitude / 1024;
+  float longitude = (float)msg.actual_position.longitude / 1024;
+  float altitude = (float)msg.actual_position.altitude.value / 1024;
 
-  ROS_INFO("station_id : %d  pos : %f", header_station_id, exp_pos.getLon());
+  Position exp_pos = Position(latitude, longitude, altitude);
+
+  ROS_INFO("station_id : %d  pos lat: %f, pos lon: %f", header_station_id,
+           exp_pos.getLat(), exp_pos.getLon());
 
   // Recoit destination de la voiture
-  Position exp_dest = Position(msg.platoon.reference_position.latitude,
-                               msg.platoon.reference_position.longitude,
-                               msg.platoon.reference_position.altitude.value);
+  latitude = (float)msg.platoon.reference_position.latitude / 1024;
+  longitude = (float)msg.platoon.reference_position.longitude / 1024;
+  altitude = (float)msg.platoon.reference_position.altitude.value / 1024;
 
-  ROS_INFO("station_id : %d dest : %f", header_station_id, exp_dest.getLon());
+  Position exp_dest = Position(latitude, longitude, altitude);
+
+  ROS_INFO("station_id : %d dest lon : %f", header_station_id,
+           exp_dest.getLon());
 
   // Liste de véhicules
   // Regarde les destinations et si destination en commun : platoon : envoi des
@@ -526,7 +533,7 @@ uint8_t Controler::freinage_urg(ece_msgs::ecemsg &msg) {
 }
 
 void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &p_msg,
-                                 Controler &c) {
+                                 Controler *c) {
 
   ROS_INFO("I have received ece msg, %d", p_msg->header.seq);
   int rep = 0;
@@ -545,18 +552,18 @@ void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &p_msg,
   case 0:
     // Récup véhicules avec destinations pour créer un platoon
     // Envoie ensuite les infos à chaque véhicule concerné
-    rep = c.init_receive(msg);
+    rep = c->init_receive(msg);
     // TODO rep == 0 ? (erreur)
     break;
 
   case 1:
     // Véhicule souhaitant s'insérer ? Ou uniquement confirmation insertion ?
-    rep = c.insert_receive(msg);
+    rep = c->insert_receive(msg);
     // TODO rep == 0 ? (erreur)
     break;
 
   case 2:
-    rep = c.desinsert_receive(msg);
+    rep = c->desinsert_receive(msg);
     // TODO rep == 0 ? (erreur)
     break;
 
@@ -577,7 +584,7 @@ void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &p_msg,
 }
 
 uint8_t Controler::sub_DENM_callback(const etsi_msgs::DENM::ConstPtr &msg,
-                                     Controler &c) {
+                                     Controler *c) {
   uint8_t ret = 1;
   ROS_INFO("I have received DENM msg");
 
@@ -594,7 +601,7 @@ uint8_t Controler::sub_DENM_callback(const etsi_msgs::DENM::ConstPtr &msg,
 }
 
 uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
-                                    Controler &c) {
+                                    Controler *c) {
 
   uint8_t ret = 1;
   ROS_INFO("I have received CAM msg");
@@ -609,10 +616,10 @@ uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
   uint8_t exp_id = msg->its_header.station_id;
 
   // Trouver la voiture correspondante dans le vecteur de véhicules
-  std::vector<Vehicle>::iterator it_v = c.getVectorV().begin();
+  std::vector<Vehicle>::iterator it_v = c->getVectorV().begin();
 
   // Tant qu'on n'est pas à la fin du vecteur de véhicules
-  while (it_v != c.getVectorV().end()) {
+  while (it_v != c->getVectorV().end()) {
 
     // Si on trouve l'ID du véhicule
     if (it_v->getId() != exp_id) {
@@ -624,9 +631,9 @@ uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
 
       // On récupère la position actuelle et la renseigne dans le véhicule
       // Récupérer en float
-      float latitude = msg->reference_position.latitude / 131072;
-      float longitude = msg->reference_position.longitude / 131072;
-      float altitude = msg->reference_position.altitude.value / 131072;
+      float latitude = (float) msg->reference_position.latitude / 1024;
+      float longitude = (float)msg->reference_position.longitude / 1024;
+      float altitude = (float)msg->reference_position.altitude.value / 1024;
       Position p = Position(latitude, longitude, altitude);
       it_v->setActualPos(p);
     }

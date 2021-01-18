@@ -16,9 +16,6 @@
 class Vehicles {
 
 private:
-  //   int64_t longitude; // posX
-  //   int64_t latitude;  // posY
-  //   int32_t altitude;  // posZ perte de donnée par rapport à ROS
   Position actual_pos;
   Position dest;
   int8_t velocity;  // vitesse
@@ -92,13 +89,17 @@ public:
   void setSubDENM_V(ros::Subscriber sub);
   void setSubCAM_V(ros::Subscriber sub);
 
-  /// METHOD
+  /// CALL BACK
+
   static void sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
-                                 Vehicles &v);
+                                 Vehicles *v);
   static void sub_DENM_V_callback(const etsi_msgs::DENM::ConstPtr &msg,
-                                  Vehicles &v);
+                                  Vehicles *v);
   static void sub_CAM_V_callback(const etsi_msgs::CAM::ConstPtr &msg,
-                                 Vehicles &v);
+                                 Vehicles *v);
+
+  static void odom_callback(const nav_msgs::Odometry::ConstPtr &msg,
+                            Vehicles *v);
 
   uint8_t init_receive(const ece_msgs::ecemsg::ConstPtr &msg);
   uint8_t insert_receive(const ece_msgs::ecemsg::ConstPtr &msg);
@@ -115,10 +116,7 @@ public:
   uint8_t publish_DENM_msg_V(etsi_msgs::DENM msg);
   uint8_t publish_CAM_msg_V(etsi_msgs::CAM msg);
 
-  static void odom_callback(const nav_msgs::Odometry::ConstPtr &msg,
-                            Vehicles &v);
-
   // Messages
-  void ece_data(ece_msgs::ecemsg &msg, uint32_t id_dest);
+  void ece_data(uint32_t id_dest, uint8_t phase);
   void cam_data(etsi_msgs::CAM &msg);
 };

@@ -1,7 +1,7 @@
-#include "Platoon.h"
 #include "../../devel/include/ece_msgs/ecemsg.h"
 #include "../../devel/include/etsi_msgs/CAM.h"
 #include "../../devel/include/etsi_msgs/DENM.h"
+#include "Platoon.h"
 #include "ros/ros.h"
 #include <vector>
 
@@ -46,11 +46,11 @@ public:
   void setNodeHandle(ros::NodeHandle n);
 
   static void sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &msg,
-                               Controler &c);
+                               Controler *c);
   static uint8_t sub_DENM_callback(const etsi_msgs::DENM::ConstPtr &msg,
-                                   Controler &c);
+                                   Controler *c);
   static uint8_t sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
-                                  Controler &c);
+                                  Controler *c);
 
   // Ajouter un véhicule
   void add_vehicle(Vehicle v);

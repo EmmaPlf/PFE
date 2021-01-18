@@ -15,22 +15,23 @@ int main(int argc, char **argv) {
 
   // INIT
   ros::init(argc, argv, "vehicle_1");
+  ros::Time::init();
+  ros::Rate loop_rate(0.1);
 
-  // TODO /ODOM Changer quand on aura plusieurs vehicules
-  Vehicles v1 = Vehicles("/odom", STATION_ID);
-
-  ros::spin();
-
-  ros::Rate loop_rate(10);
+  // Construction d'un véhicule
+  Vehicles v1 = Vehicles("tb3_0/odom", STATION_ID);
+  Position pos = Position(50, 50, 0);
+  v1.setDest(pos);
 
   // Attendre d'avoir une connection avec un subscriber au moins
-  //   while (pub.getNumSubscribers() < 1) {
-  //   }
+  while (v1.getPubEce_C().getNumSubscribers() < 1) {
+  }
 
-  // while (ros::ok()) {
-  // ros::spinOnce();
-  // loop_rate.sleep();
-  //   }
+  while (ros::ok()) {
+    ros::spinOnce();
+    v1.ece_data(0, 0);
+    loop_rate.sleep();
+  }
 
   return 0;
 }

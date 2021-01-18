@@ -9,35 +9,29 @@
 #include <sstream>
 
 // Paramètres à modifier selon la station
-#define STATION_ID 2 // 1 ID par station
+#define STATION_ID 3 // 1 ID par station
 
 int main(int argc, char **argv) {
 
   // INIT
-  ros::init(argc, argv, "vehicle_2");
+  ros::init(argc, argv, "vehicle_3");
   ros::Time::init();
   ros::Rate loop_rate(10);
 
   // TODO /ODOM Changer quand on aura plusieurs vehicules
-  Vehicles v2 = Vehicles("tb3_1/odom", STATION_ID);
-  Position pos = Position(51, 51, 0);
-  v2.setDest(pos);
+  Vehicles v3 = Vehicles("tb3_3/odom", STATION_ID);
+  Position pos = Position(52, 52, 0);
+  v3.setDest(pos);
 
   // Attendre d'avoir une connection avec un subscriber au moins
-  while (v2.getPubEce_C().getNumSubscribers() < 1) {
+  while (v3.getPubEce_C().getNumSubscribers() < 1) {
   }
 
-  ROS_INFO("Apres le while");
-
-  loop_rate.sleep();
-  v2.ece_data(0, 0);
-
-  ros::spin();
-
-  // while (ros::ok()) {
-  // ros::spinOnce();
-
-  //   }
+  while (ros::ok()) {
+    v3.ece_data(0, 0);
+    ros::spinOnce();
+    loop_rate.sleep();
+  }
 
   return 0;
 }

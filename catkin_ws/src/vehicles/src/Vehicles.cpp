@@ -2,23 +2,35 @@
 
 /// CONSTRUCTEUR
 
-Vehicles::Vehicles(char *odom_topic, uint32_t station_id) {
+Vehicles::Vehicles(char *odom_topic, uint32_t station_id) : count(0) {
 
   this->setStationId(station_id);
+
+  this->pub_ece_C = this->n.advertise<ece_msgs::ecemsg>("controler_ece", 1000);
+
+  this->pub_CAM_C = this->n.advertise<etsi_msgs::CAM>("controler_CAM", 1000);
+
+  this->pub_DENM_C = this->n.advertise<etsi_msgs::DENM>("controler_DENM", 1000);
+
+  this->pub_ece_V = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
+
+  this->pub_CAM_V = this->n.advertise<etsi_msgs::CAM>("vehicles_CAM", 1000);
+
+  this->pub_DENM_V = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
 
   /// SUBSCRIBERS
 
   this->sub_odom = this->n.subscribe<nav_msgs::Odometry>(
-      odom_topic, 1000, boost::bind(odom_callback, _1, *this));
+      odom_topic, 1000, boost::bind(odom_callback, _1, this));
 
   this->sub_ece_V = this->n.subscribe<ece_msgs::ecemsg>(
-      "vehicles_ece", 1000, boost::bind(sub_ece_V_callback, _1, *this));
+      "vehicles_ece", 1000, boost::bind(sub_ece_V_callback, _1, this));
 
   this->sub_DENM_V = this->n.subscribe<etsi_msgs::DENM>(
-      "vehicles_DENM", 1000, boost::bind(sub_DENM_V_callback, _1, *this));
+      "vehicles_DENM", 1000, boost::bind(sub_DENM_V_callback, _1, this));
 
   this->sub_CAM_V = this->n.subscribe<etsi_msgs::CAM>(
-      "vehicles_CAM", 1000, boost::bind(sub_CAM_V_callback, _1, *this));
+      "vehicles_CAM", 1000, boost::bind(sub_CAM_V_callback, _1, this));
 }
 
 /// DESTRUCTEUR
@@ -203,9 +215,12 @@ uint8_t Vehicles::brake_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   return 1;
 }
 
+/// INIT
+// uint8_t Vehicles::init_send() { this->ece_data(uint32_t id_dest); }
+
 // Callback
 void Vehicles::sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
-                                  Vehicles &v) {
+                                  Vehicles *v) {
 
   ROS_INFO("I have received ece msg, %d", msg->header.seq);
   int rep = 0;
@@ -218,7 +233,7 @@ void Vehicles::sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
 
   // Si le message nous est destiné on lis la suite
   uint8_t receiver = msg->basic_container.ID_dest;
-  /*if (receiver != v.getId()) {
+  /*if (receiver != v->getId()) {
     // si ne nous est pas destiné
   } else {
 
@@ -226,29 +241,29 @@ void Vehicles::sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
     case 0:
       // Récup véhicules avec destinations pour créer un platoon
       // Envoie ensuite les infos à chaque véhicule concerné
-      rep = v.init_receive(msg);
+      rep = v->init_receive(msg);
       // TODO rep == 0 ? (erreur)
       break;
 
     case 1:
       // Véhicule souhaitant s'insérer ? Ou uniquement confirmation insertion ?
-      rep = v.insert_receive(msg);
+      rep = v->insert_receive(msg);
       // TODO rep == 0 ? (erreur)
       break;
 
     case 2:
-      rep = v.desinsert_receive(msg);
+      rep = v->desinsert_receive(msg);
       // TODO rep == 0 ? (erreur)
       break;
 
     case 3:
-      rep = v.light_receive(msg);
+      rep = v->light_receive(msg);
       // Réception ici de message venant de feux
       // traitement_feux(msg, p);
       break;
 
     case 4:
-      rep = v.brake_receive(msg);
+      rep = v->brake_receive(msg);
       // ??? Reçoit d'un véhicule message freinage urgence
       // Renvoie aux autres véhicules l'info ?
       // traitement_freinage_urg(msg, p);
@@ -261,7 +276,7 @@ void Vehicles::sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
 }
 
 void Vehicles::sub_DENM_V_callback(const etsi_msgs::DENM::ConstPtr &msg,
-                                   Vehicles &v) {
+                                   Vehicles *v) {
 
   ROS_INFO("I have received DENM msg");
 
@@ -273,7 +288,7 @@ void Vehicles::sub_DENM_V_callback(const etsi_msgs::DENM::ConstPtr &msg,
 }
 
 void Vehicles::sub_CAM_V_callback(const etsi_msgs::CAM::ConstPtr &msg,
-                                  Vehicles &v) {
+                                  Vehicles *v) {
 
   ROS_INFO("I have received CAM msg");
 
@@ -292,12 +307,12 @@ uint8_t Vehicles::publish_ece_msg_C(ece_msgs::ecemsg msg) {
 }
 
 uint8_t Vehicles::publish_CAM_msg_C(etsi_msgs::CAM msg) {
-  this->pub_ece_C = this->n.advertise<etsi_msgs::CAM>("controler_CAM", 1000);
+  this->pub_CAM_C = this->n.advertise<etsi_msgs::CAM>("controler_CAM", 1000);
   this->pub_CAM_C.publish(msg);
 }
 
 uint8_t Vehicles::publish_DENM_msg_C(etsi_msgs::DENM msg) {
-  this->pub_ece_C = this->n.advertise<etsi_msgs::DENM>("controler_DENM", 1000);
+  this->pub_DENM_C = this->n.advertise<etsi_msgs::DENM>("controler_DENM", 1000);
   this->pub_DENM_C.publish(msg);
 }
 
@@ -308,38 +323,39 @@ uint8_t Vehicles::publish_ece_msg_V(ece_msgs::ecemsg msg) {
 }
 
 uint8_t Vehicles::publish_CAM_msg_V(etsi_msgs::CAM msg) {
-  this->pub_ece_V = this->n.advertise<etsi_msgs::CAM>("vehicles_CAM", 1000);
+  this->pub_CAM_V = this->n.advertise<etsi_msgs::CAM>("vehicles_CAM", 1000);
   this->pub_CAM_V.publish(msg);
 }
 
 uint8_t Vehicles::publish_DENM_msg_V(etsi_msgs::DENM msg) {
-  this->pub_ece_V = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
+  this->pub_DENM_V = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
   this->pub_DENM_V.publish(msg);
 }
 
 void Vehicles::odom_callback(const nav_msgs::Odometry::ConstPtr &msg,
-                             Vehicles &v) {
+                             Vehicles *v) {
 
   double lat = msg->pose.pose.position.x;
   double lon = msg->pose.pose.position.y;
   double alt = msg->pose.pose.position.z;
   Position actual_pos = Position((float)lat, (float)lon, (float)alt);
 
-  v.setActualPos(actual_pos);
+  v->setActualPos(actual_pos);
 
-  v.velocity = (int8_t)sqrt(pow(msg->twist.twist.linear.x, 2) +
-                            pow(msg->twist.twist.linear.y, 2));
+  v->velocity = (int8_t)sqrt(pow(msg->twist.twist.linear.x, 2) +
+                             pow(msg->twist.twist.linear.y, 2));
 
-  v.yaw_rate = msg->twist.twist.angular.z; // conversion rad/s to 0.01 degree/s
+  v->yaw_rate = msg->twist.twist.angular.z; // conversion rad/s to 0.01 degree/s
 
-  //   ROS_INFO("odom_callback : x : %f", v.longitude);
-  //   ROS_INFO("odom_callback : y : %f", v.latitude);
-  //   ROS_INFO("odom_callback : z : %f", v.altitude);
+  //   ROS_INFO("odom_callback : x : %f", v.getActualPos().getLon());
+  //   ROS_INFO("odom_callback : y : %f", v.getActualPos().getLat());
+  //   ROS_INFO("odom_callback : z : %f", v.getActualPos().getAlt());
 }
 
 /// REMPLIR MESSAGES
-void Vehicles::ece_data(ece_msgs::ecemsg &msg, uint32_t id_dest) {
+void Vehicles::ece_data(uint32_t id_dest, uint8_t phase) {
 
+  ece_msgs::ecemsg msg;
   msg.header.seq = this->getCount();   // uint32
   msg.header.stamp = ros::Time::now(); // time
   msg.header.frame_id = ECE_FRAME_ID;  // string
@@ -348,15 +364,15 @@ void Vehicles::ece_data(ece_msgs::ecemsg &msg, uint32_t id_dest) {
   msg.its_header.message_id = ECE_MSG_ID;             // uint8_t
   msg.its_header.station_id = this->getStationId();
 
-  msg.basic_container.phase.value = 0;
+  msg.basic_container.phase.value = phase;
   msg.basic_container.ID_exp = this->getStationId();
   msg.basic_container.ID_dest = id_dest;
 
   // Destination actuelle
   // Convertir en int pour ne pas perdre la précision des float
-  float longitude = (int64_t)(this->getDest().getLon() * 131072);
-  float latitude = (int64_t)(this->getDest().getLat() * 131072);
-  float altitude = (int32_t)(this->getDest().getAlt() * 131072);
+  int64_t longitude = (int64_t)(this->getDest().getLon() * 1024);
+  int64_t latitude = (int64_t)(this->getDest().getLat() * 1024);
+  int32_t altitude = (int32_t)(this->getDest().getAlt() * 1024);
 
   msg.platoon.reference_position.longitude = longitude;
   msg.platoon.reference_position.latitude = latitude;
@@ -364,15 +380,42 @@ void Vehicles::ece_data(ece_msgs::ecemsg &msg, uint32_t id_dest) {
 
   // Position voiture
   // Convertir en int pour ne pas perdre la précision des float
-  longitude = (int64_t)(this->getActualPos().getLon() * 131072);
-  latitude = (int64_t)(this->getActualPos().getLat() * 131072);
-  altitude = (int32_t)(this->getActualPos().getAlt() * 131072);
+  longitude = (int64_t)(this->getActualPos().getLon() * 1024);
+  latitude = (int64_t)(this->getActualPos().getLat() * 1024);
+  altitude = (int32_t)(this->getActualPos().getAlt() * 1024);
 
   msg.actual_position.longitude = longitude;     // 50;
   msg.actual_position.latitude = latitude;       // 50;
   msg.actual_position.altitude.value = altitude; // 0;
 
+  switch (phase) {
+  // Init
+  case 0:
+    break;
+  }
+
   this->setCount(this->getCount() + 1);
+
+  switch (id_dest) {
+  // Controler
+  case 0:
+    this->publish_ece_msg_C(msg);
+    break;
+
+  case 1:
+    this->publish_ece_msg_V(msg);
+    break;
+
+  case 2:
+    this->publish_ece_msg_V(msg);
+    break;
+
+  case 3:
+    this->publish_ece_msg_V(msg);
+    break;
+  }
+
+  ROS_INFO("I have send ece msg, station_id : %d", this->getStationId());
 }
 
 // TODO : implémenter dans Vehicles
@@ -398,9 +441,9 @@ void Vehicles::cam_data(etsi_msgs::CAM &msg) {
   //   msg.reference_position.position_confidence.semi_major_orientation = 0;
 
   // Convertir en int pour ne pas perdre la précision des float
-  float longitude = (int64_t)(this->getActualPos().getLon() * 131072);
-  float latitude = (int64_t)(this->getActualPos().getLat() * 131072);
-  float altitude = (int32_t)(this->getActualPos().getAlt() * 131072);
+  int64_t longitude = (int64_t)(this->getActualPos().getLon() * 1024);
+  int64_t latitude = (int64_t)(this->getActualPos().getLat() * 1024);
+  int32_t altitude = (int32_t)(this->getActualPos().getAlt() * 1024);
 
   msg.reference_position.longitude = longitude;
   msg.reference_position.latitude = latitude;

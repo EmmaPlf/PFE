@@ -3,6 +3,7 @@
 int main(int argc, char **argv) {
 
   ros::init(argc, argv, "controler");
+  ROS_INFO("Controler launched");
 
   Controler c = Controler();
 
