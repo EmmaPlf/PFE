@@ -128,23 +128,11 @@ uint8_t Vehicles::insert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   uint8_t header_message_id = msg->its_header.message_id;
 
   // Ref Position
-  int64_t lon = msg->insertion.reference_position.longitude;
-  int64_t lat = msg->insertion.reference_position.latitude;
+  int64_t lon = msg->insertion.point_insertion.longitude;
+  int64_t lat = msg->insertion.point_insertion.latitude;
 
-  // PositionConfidenceEllipse
-  uint16_t semi_major_confidence =
-      msg->insertion.reference_position.position_confidence
-          .semi_major_confidence;
-  uint16_t semi_minor_confidence =
-      msg->insertion.reference_position.position_confidence
-          .semi_minor_confidence;
-  uint16_t semi_major_orientation =
-      msg->insertion.reference_position.position_confidence
-          .semi_major_orientation;
-
-  // Altitude:
-  int32_t altValue = msg->insertion.reference_position.altitude.value;
-  uint8_t altConf = msg->insertion.reference_position.altitude.confidence;
+    // Altitude:
+  int32_t altValue = msg->insertion.point_insertion.altitude;
 
   // Confirmation insertion
   bool checkInsert = msg->insertion.confirmation_insertion;
@@ -170,17 +158,8 @@ uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   int64_t lat = msg->desinsertion.point_sortie.latitude;
   int64_t lon = msg->desinsertion.point_sortie.longitude;
 
-  // PositionConfidenceEllipse
-  uint16_t semi_major_confidence =
-      msg->desinsertion.point_sortie.position_confidence.semi_major_confidence;
-  uint16_t semi_minor_confidence =
-      msg->desinsertion.point_sortie.position_confidence.semi_minor_confidence;
-  uint16_t semi_major_orientation =
-      msg->desinsertion.point_sortie.position_confidence.semi_major_orientation;
-
   // insert Altitude:
-  int32_t altValue = msg->desinsertion.point_sortie.altitude.value;
-  uint8_t altConf = msg->desinsertion.point_sortie.altitude.confidence;
+  int32_t altValue = msg->desinsertion.point_sortie.altitude;
 
   // Confirmation insertion
   uint8_t position = msg->desinsertion.position;
@@ -374,9 +353,9 @@ void Vehicles::ece_data(uint32_t id_dest, uint8_t phase) {
   int64_t latitude = (int64_t)(this->getDest().getLat() * 1024);
   int32_t altitude = (int32_t)(this->getDest().getAlt() * 1024);
 
-  msg.platoon.reference_position.longitude = longitude;
-  msg.platoon.reference_position.latitude = latitude;
-  msg.platoon.reference_position.altitude.value = altitude;
+  msg.init.destination.longitude = longitude;
+  msg.init.destination.latitude = latitude;
+  msg.init.destination.altitude = altitude;
 
   // Position voiture
   // Convertir en int pour ne pas perdre la précision des float
@@ -384,9 +363,9 @@ void Vehicles::ece_data(uint32_t id_dest, uint8_t phase) {
   latitude = (int64_t)(this->getActualPos().getLat() * 1024);
   altitude = (int32_t)(this->getActualPos().getAlt() * 1024);
 
-  msg.actual_position.longitude = longitude;     // 50;
-  msg.actual_position.latitude = latitude;       // 50;
-  msg.actual_position.altitude.value = altitude; // 0;
+  msg.init.actual_position.longitude = longitude;     // 50;
+  msg.init.actual_position.latitude = latitude;       // 50;
+  msg.init.actual_position.altitude = altitude; // 0;
 
   switch (phase) {
   // Init

@@ -110,9 +110,9 @@ uint8_t Controler::init_receive(ece_msgs::ecemsg &msg) {
   uint8_t exp_id = msg.basic_container.ID_exp;
 
   // Recoit position actuelle de la voiture
-  float latitude = (float)msg.actual_position.latitude / 1024;
-  float longitude = (float)msg.actual_position.longitude / 1024;
-  float altitude = (float)msg.actual_position.altitude.value / 1024;
+  float latitude = (float)msg.init.actual_position.latitude / 1024;
+  float longitude = (float)msg.init.actual_position.longitude / 1024;
+  float altitude = (float)msg.init.actual_position.altitude / 1024;
 
   Position exp_pos = Position(latitude, longitude, altitude);
 
@@ -120,9 +120,9 @@ uint8_t Controler::init_receive(ece_msgs::ecemsg &msg) {
            exp_pos.getLat(), exp_pos.getLon());
 
   // Recoit destination de la voiture
-  latitude = (float)msg.platoon.reference_position.latitude / 1024;
-  longitude = (float)msg.platoon.reference_position.longitude / 1024;
-  altitude = (float)msg.platoon.reference_position.altitude.value / 1024;
+  latitude = (float)msg.init.destination.latitude / 1024;
+  longitude = (float)msg.init.destination.longitude / 1024;
+  altitude = (float)msg.init.destination.altitude / 1024;
 
   Position exp_dest = Position(latitude, longitude, altitude);
 
@@ -291,15 +291,15 @@ uint8_t Controler::init_send(Platoon p) {
   this->fill_header(msg, ECE_FRAME, ECE_ID);
 
   // Nb vehicules
-  msg.platoon.nombre_vehicules = p.getNbVehicles();
+  msg.init.platoon.nombre_vehicules = p.getNbVehicles();
 
   // ID platoon
-  msg.platoon.id_platoon = p.getId();
+  msg.init.platoon.id_platoon = p.getId();
 
   // Destination (lat, long, alt)
-  msg.platoon.reference_position.latitude = p.getDest().getLat();
-  msg.platoon.reference_position.longitude = p.getDest().getLon();
-  msg.platoon.reference_position.altitude.value = p.getDest().getAlt();
+  msg.init.platoon.destination.latitude = p.getDest().getLat();
+  msg.init.platoon.destination.longitude = p.getDest().getLon();
+  msg.init.platoon.destination.altitude = p.getDest().getAlt();
 
   ROS_INFO("Avant remplissage");
 
@@ -312,7 +312,7 @@ uint8_t Controler::init_send(Platoon p) {
       ece_msgs::IDs id;
       id.ID = it->first;
       id.position = it->second;
-      msg.platoon.ids.push_back(id);
+      msg.init.platoon.ids.push_back(id);
       ++it;
     }
   }
