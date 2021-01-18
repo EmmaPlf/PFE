@@ -6,3 +6,6 @@ uint8 ID_dest
 
 # Phase de plattoning
 Phase phase
+
+# Type de station
+StationType station_type

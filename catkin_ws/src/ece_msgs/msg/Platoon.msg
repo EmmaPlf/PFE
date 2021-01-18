@@ -8,4 +8,7 @@ IDs[] ids
 uint8 nombre_vehicules
 
 # Destination : 8 octets
-ReferencePosition reference_position
+ReferencePosition destination
+
+# Vitesse et interdistance
+VitesseInterdistance vitesse_interdistance

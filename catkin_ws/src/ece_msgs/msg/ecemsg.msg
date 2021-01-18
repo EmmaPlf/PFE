@@ -1,23 +1,22 @@
-Header header
 ItsPduHeader its_header
 uint16 generation_delta_time # milliseconds since 2004 modulo 2^16
 
 # basic container
 BasicContainer basic_container
 
-StationType station_type
+# Init
+Initialisation init
 
-Platoon platoon
-
-VitesseInterdistance vitesse_interdistance
-
+# Insertion
 Insertion insertion
 
+# Desinsertion
 Desinsertion desinsertion 
 
+# Freinage d'urgence
 FreinageUrgence freinage_urgence
 
+# Feu
 Feu feu
 
-# Actual position : 8 octets
-ReferencePosition actual_position
+
