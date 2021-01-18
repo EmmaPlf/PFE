@@ -1,3 +1,4 @@
+Header header
 ItsPduHeader its_header
 uint16 generation_delta_time # milliseconds since 2004 modulo 2^16
 
@@ -5,7 +6,7 @@ uint16 generation_delta_time # milliseconds since 2004 modulo 2^16
 BasicContainer basic_container
 
 # Init
-Initialisation init
+Init init
 
 # Insertion
 Insertion insertion

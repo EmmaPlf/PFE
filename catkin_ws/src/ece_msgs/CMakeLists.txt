@@ -54,15 +54,14 @@ find_package(catkin REQUIRED COMPONENTS
    DIRECTORY msg
    FILES
    ecemsg.msg
-   Altitude.msg
    Desinsertion.msg
    Feu.msg
    FreinageUrgence.msg
    IDs.msg
+   Init.msg
    Insertion.msg
    ItsPduHeader.msg
    Platoon.msg
-   PositionConfidenceEllipse.msg
    ReferencePosition.msg
    Speed.msg
    StationType.msg
