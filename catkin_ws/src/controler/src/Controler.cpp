@@ -16,7 +16,7 @@ Controler::Controler() {
 
   this->setCount(0);
 
-  /// SUBSCRIBERS
+  /// SUBSCRIBERS /// UTILISER GETTERS POUR N
 
   this->sub_ece = this->n.subscribe<ece_msgs::ecemsg>(
       "controler_ece", 1000, boost::bind(sub_ece_callback, _1, *this));

@@ -1,6 +1,7 @@
 #include "../../devel/include/ece_msgs/ecemsg.h"
 #include "../../devel/include/etsi_msgs/CAM.h"
 #include "../../devel/include/etsi_msgs/DENM.h"
+#include "Position.h"
 #include "nav_msgs/Odometry.h"
 #include "ros/ros.h"
 
@@ -13,12 +14,17 @@
 #define STATION_TYPE 5       // PassengerCar
 
 class Vehicles {
+
 private:
-  int64_t longitude; // posX
-  int64_t latitude;  // posY
-  int32_t altitude;  // posZ perte de donnée par rapport à ROS
-  int8_t velocity;   // vitesse
-  int16_t yaw_rate;  // dénivelé ?
+  //   int64_t longitude; // posX
+  //   int64_t latitude;  // posY
+  //   int32_t altitude;  // posZ perte de donnée par rapport à ROS
+  Position actual_pos;
+  Position dest;
+  int8_t velocity;  // vitesse
+  int16_t yaw_rate; // dénivelé ?
+  uint32_t station_id;
+  uint64_t count;
 
   ros::NodeHandle n;
 
@@ -32,18 +38,24 @@ private:
   ros::Subscriber sub_ece_V;
   ros::Subscriber sub_DENM_V;
   ros::Subscriber sub_CAM_V;
+  ros::Subscriber sub_odom;
 
 public:
-  Vehicles();
+  Vehicles(char *odom_topic, uint32_t station_id);
   ~Vehicles();
 
   // GETTERS
-  int64_t getLongitude();
-  int64_t getLatitude();
-  int32_t getAltitude();
+  //   int64_t getLongitude();
+  //   int64_t getLatitude();
+  //   int32_t getAltitude();
+  Position getDest();
+  Position getActualPos();
   int8_t getVelocity();
   int16_t getYawRate();
+  uint32_t getStationId();
+  uint64_t getCount();
   ros::NodeHandle getNodeHandle();
+
   // Pub
   ros::Publisher getPubEce_C();
   ros::Publisher getPubDENM_C();
@@ -57,12 +69,17 @@ public:
   ros::Subscriber getSubCAM_V();
 
   // SETTERS
-  void setLongitude(int64_t longitude);
-  void setLatitude(int64_t latitude);
-  void setAltitude(int32_t altitude);
+  //   void setLongitude(int64_t longitude);
+  //   void setLatitude(int64_t latitude);
+  //   void setAltitude(int32_t altitude);
+  void setDest(Position dest);
+  void setActualPos(Position actual_pos);
   void setVelocity(int8_t velocity);
   void setYawRate(int16_t yaw_rate);
   void setNodeHandle(ros::NodeHandle n);
+  void setStationId(uint32_t station_id);
+  void setCount(uint64_t count);
+
   // Pub
   void setPubEce_C(ros::Publisher pub);
   void setPubDENM_C(ros::Publisher pub);
@@ -98,5 +115,10 @@ public:
   uint8_t publish_DENM_msg_V(etsi_msgs::DENM msg);
   uint8_t publish_CAM_msg_V(etsi_msgs::CAM msg);
 
-  void odom_callback(const nav_msgs::Odometry::ConstPtr &msg);
+  static void odom_callback(const nav_msgs::Odometry::ConstPtr &msg,
+                            Vehicles &v);
+
+  // Messages
+  void ece_data(ece_msgs::ecemsg &msg, uint32_t id_dest);
+  void cam_data(etsi_msgs::CAM &msg);
 };
