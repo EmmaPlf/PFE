@@ -7,6 +7,24 @@
 
 #define TRUE 1
 #define FALSE 0
+#define STATION_TYPE 16      // Controler (inventé)
+#define STATION_ID 0         // 1 ID par station
+#define VERSION_PROTOCOL 131 // EN 302 637-3 v1.3.1.
+#define ECE_FRAME "/ece"
+#define CAM_FRAME "/cam"
+#define DENM_FRAME "/denm"
+#define DENM_ID 1
+#define CAM_ID 2
+#define ECE_ID 8
+#define ID_CONTROLER 0
+#define ID_VEHICULE_1 1
+#define ID_VEHICULE_2 2
+#define ID_VEHICULE_3 3
+#define INIT_PHASE 0
+#define INSERT_PHASE 1
+#define DESINSERT_PHASE 2
+#define LIGHT_PHASE 3
+#define BRAKE_PHASE 4
 
 class Controler {
 

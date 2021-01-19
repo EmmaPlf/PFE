@@ -43,23 +43,15 @@ void Platoon::setSpeed(uint16_t speed) { this->speed = speed; }
 void Platoon::setInter(uint8_t inter) { this->inter = inter; }
 
 void Platoon::setMapRank(std::map<uint8_t, uint8_t> map_rank) {
-  this->map_rank = map_rank;
-  //   std::map<uint8_t, uint8_t>::iterator it = map_rank.begin();
-  //   while (it != map_rank.end()) {
-  //     this->map_rank.insert(std::pair<uint8_t, uint8_t>(it->first,
-  //     it->second)); it++;
-  //   }
+  std::map<uint8_t, uint8_t>::iterator it = map_rank.begin();
+  while (it != map_rank.end()) {
+    this->map_rank.insert(std::pair<uint8_t, uint8_t>(it->first, it->second));
+    it++;
+  }
 }
 
 void Platoon::setNbVehicles(uint8_t nb_vehicles) {
   this->nb_vehicles = nb_vehicles;
-}
-
-void Platoon::addVehicle(Vehicle v) {
-  // ID position ???
-  // Appel fonction pour checker position et déterminer rang dans le platoon
-  // TODO
-  // vector_v.insert(std::pair<Vehicle, uint8_t>(v, 0));
 }
 
 void Platoon::erase_map_elmt(std::map<uint8_t, uint8_t>::iterator it) {

@@ -1,7 +1,7 @@
 #include "../../devel/include/ece_msgs/ecemsg.h"
 #include "../../devel/include/etsi_msgs/CAM.h"
 #include "../../devel/include/etsi_msgs/DENM.h"
-#include "Position.h"
+#include "Platoon.h"
 #include "nav_msgs/Odometry.h"
 #include "ros/ros.h"
 
@@ -12,16 +12,27 @@
 #define CAM_MSG_ID 2         // CAM
 #define ECE_MSG_ID 8         // ECE
 #define STATION_TYPE 5       // PassengerCar
+#define ID_CONTROLER 0
+#define ID_VEHICULE_1 1
+#define ID_VEHICULE_2 2
+#define ID_VEHICULE_3 3
+#define INIT_PHASE 0
+#define INSERT_PHASE 1
+#define DESINSERT_PHASE 2
+#define LIGHT_PHASE 3
+#define BRAKE_PHASE 4
 
 class Vehicles {
 
 private:
   Position actual_pos;
   Position dest;
-  int8_t velocity;  // vitesse
+  int8_t velocity;
   int16_t yaw_rate; // dénivelé ?
   uint32_t station_id;
   uint64_t count;
+  bool has_platoon;
+  Platoon platoon;
 
   ros::NodeHandle n;
 
@@ -42,16 +53,15 @@ public:
   ~Vehicles();
 
   // GETTERS
-  //   int64_t getLongitude();
-  //   int64_t getLatitude();
-  //   int32_t getAltitude();
   Position getDest();
   Position getActualPos();
+  Platoon getPlatoon();
   int8_t getVelocity();
   int16_t getYawRate();
   uint32_t getStationId();
   uint64_t getCount();
   ros::NodeHandle getNodeHandle();
+  bool getHasPlatoon();
 
   // Pub
   ros::Publisher getPubEce_C();
@@ -60,15 +70,13 @@ public:
   ros::Publisher getPubEce_V();
   ros::Publisher getPubDENM_V();
   ros::Publisher getPubCAM_V();
+
   // Sub
   ros::Subscriber getSubEce_V();
   ros::Subscriber getSubDENM_V();
   ros::Subscriber getSubCAM_V();
 
   // SETTERS
-  //   void setLongitude(int64_t longitude);
-  //   void setLatitude(int64_t latitude);
-  //   void setAltitude(int32_t altitude);
   void setDest(Position dest);
   void setActualPos(Position actual_pos);
   void setVelocity(int8_t velocity);
@@ -76,6 +84,8 @@ public:
   void setNodeHandle(ros::NodeHandle n);
   void setStationId(uint32_t station_id);
   void setCount(uint64_t count);
+  void setPlatoon(Platoon platoon);
+  void setHasPlatoon(bool has_platoon);
 
   // Pub
   void setPubEce_C(ros::Publisher pub);
@@ -84,6 +94,7 @@ public:
   void setPubEce_V(ros::Publisher pub);
   void setPubDENM_V(ros::Publisher pub);
   void setPubCAM_V(ros::Publisher pub);
+
   // Sub
   void setSubEce_V(ros::Subscriber sub);
   void setSubDENM_V(ros::Subscriber sub);
@@ -106,6 +117,7 @@ public:
   uint8_t desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg);
   uint8_t light_receive(const ece_msgs::ecemsg::ConstPtr &msg);
   uint8_t brake_receive(const ece_msgs::ecemsg::ConstPtr &msg);
+  void fill_platoon(const ece_msgs::ecemsg::ConstPtr &msg);
 
   // Publish
   uint8_t publish_ece_msg_C(ece_msgs::ecemsg msg);
@@ -117,6 +129,6 @@ public:
   uint8_t publish_CAM_msg_V(etsi_msgs::CAM msg);
 
   // Messages
-  void ece_data(uint32_t id_dest, uint8_t phase);
-  void cam_data(etsi_msgs::CAM &msg);
+  void fill_ece_data(uint32_t id_dest, uint8_t phase, uint8_t part);
+  void fill_cam_data(uint32_t id_dest);
 };

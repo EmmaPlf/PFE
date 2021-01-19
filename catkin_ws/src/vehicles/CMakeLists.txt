@@ -128,13 +128,15 @@ include_directories(
 # add_dependencies(../etsi_msgs ${etsi_msgs_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 # target_link_libraries(vehicles ${catkin_LIBRARIES})
 
-add_executable(voiture_1 src/voiture_1.cpp src/Vehicles.cpp src/Position.cpp)
+add_executable(voiture_1 src/voiture_1.cpp src/Vehicles.cpp src/Position.cpp src/Platoon.cpp)
 add_dependencies(voiture_1 ${controler_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_executable(voiture_2 src/voiture_2.cpp src/Vehicles.cpp src/Position.cpp)
+add_executable(voiture_2 src/voiture_2.cpp src/Vehicles.cpp src/Position.cpp src/Platoon.cpp)
 add_dependencies(voiture_2 ${controler_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_executable(voiture_3 src/voiture_3.cpp src/Vehicles.cpp src/Position.cpp src/Platoon.cpp)
+add_dependencies(voiture_3 ${controler_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(voiture_1 ${catkin_LIBRARIES})
 target_link_libraries(voiture_2 ${catkin_LIBRARIES})
-
+target_link_libraries(voiture_3 ${catkin_LIBRARIES})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}

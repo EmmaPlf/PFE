@@ -1,14 +1,6 @@
 #include "../include/Controler.h"
 #include <iostream>
 #include <map>
-#define STATION_ID 0         // 1 ID par station
-#define VERSION_PROTOCOL 131 // EN 302 637-3 v1.3.1.
-#define ECE_FRAME "/ece"
-#define CAM_FRAME "/cam"
-#define DENM_FRAME "/denm"
-#define DENM_ID 1
-#define CAM_ID 2
-#define ECE_ID 8
 
 /// CONSTRUCTEURS
 
@@ -202,7 +194,7 @@ void Controler::search_for_platoon(Vehicle v) {
       // Vérifier si destination est dans même zone
       if (it->getDest().compareZone(v.getDest())) {
 
-        // Ajout
+        // Ajout QUELLE POSITION ?? ET DANS MAPRANK TODO
         it->addVehicle(v);
         v.setHasPlatoon(true);
       }
@@ -235,6 +227,8 @@ void Controler::search_for_platoon(Vehicle v) {
           // On crée un platoon avec les 2 voitures
           Platoon p = Platoon();
 
+          p.setId(this->getVectorP().size());
+
           p.setDest(v.getDest());
 
           // TODO : speed dans vehicle et calcul à faire !
@@ -243,7 +237,7 @@ void Controler::search_for_platoon(Vehicle v) {
           // TODO : inter : calcul à faire !
           p.setInter(0);
 
-          p.setNbVehicles(1);
+          p.setNbVehicles(2);
 
           // Créer une map de Véicule et de rang
           std::map<uint8_t, uint8_t> map_rank;
@@ -251,28 +245,24 @@ void Controler::search_for_platoon(Vehicle v) {
           // Remplir la map avec le première véhicule qui est la voiture de tête
           map_rank.insert(std::pair<uint8_t, uint8_t>(v.getId(), 0));
 
+          // Remplir avec la deuxieme voiture trouvée
+          map_rank.insert(std::pair<uint8_t, uint8_t>(it->getId(), 1));
+
           p.setMapRank(map_rank);
 
-          ROS_INFO("Avant init_send");
-
           // Envoi message initialisation
+          // Il faut envoyer à tous les véhicules
           this->init_send(p);
-
-          ROS_INFO("Apres init_send");
 
           // Envoi message insertion au deuxième véhicule
           // pour qu'il rejoigne la voiture de tête
           this->insert_send(it->getId());
 
-          ROS_INFO("Apres insert_send");
-
-          // Id du platoon : récupérer de l'index du vector de platoon
-          p.setId(this->getVectorP().size() + 1);
-
-          // Ajout du platoon dans le vector de platoon
+          //   // Ajout du platoon dans le vector de platoon
           this->add_platoon(p);
 
-          ROS_INFO("station_id : %d : Platoon cree", v.getId());
+          /// probleme on quitte pas ??? AH NON PUISQUE JAMAS PLUS DE DEUX
+          /// VEHICULE SNA SPLATOON AVEC MEME DESTINATION
         }
         it++;
       }
@@ -290,6 +280,10 @@ uint8_t Controler::init_send(Platoon p) {
   // Headers
   this->fill_header(msg, ECE_FRAME, ECE_ID);
 
+  msg.basic_container.ID_exp = ID_CONTROLER;
+  msg.basic_container.phase.value = INIT_PHASE;
+  msg.basic_container.station_type.value = STATION_TYPE;
+
   // Nb vehicules
   msg.init.platoon.nombre_vehicules = p.getNbVehicles();
 
@@ -301,30 +295,33 @@ uint8_t Controler::init_send(Platoon p) {
   msg.init.platoon.destination.longitude = p.getDest().getLon();
   msg.init.platoon.destination.altitude = p.getDest().getAlt();
 
-  ROS_INFO("Avant remplissage");
+  std::map<uint8_t, uint8_t> map_rank = p.getMapRank();
 
   // Remplir tableau ID/Rang avec la map
-  if (!p.getMapRank().empty()) {
-
-    std::map<uint8_t, uint8_t>::iterator it = p.getMapRank().begin();
+  if (!map_rank.empty()) {
+    std::map<uint8_t, uint8_t>::iterator it_1 = map_rank.begin();
     for (int i = 0; i < p.getNbVehicles(); i++) {
 
       ece_msgs::IDs id;
-      id.ID = it->first;
-      id.position = it->second;
+      id.ID = it_1->first;
+      id.position = it_1->second;
       msg.init.platoon.ids.push_back(id);
-      ++it;
+      ++it_1;
     }
   }
 
-  ROS_INFO("Apres remplissage");
+  std::map<uint8_t, uint8_t>::iterator it = map_rank.begin();
+  while (it != map_rank.end()) {
 
-  // Envoyer le msg init sur le topic des véhicules
-  if (ros::ok()) {
-    // this->getPubEce().publish(msg);
-    this->publish_ece_msg(msg);
+    // Changer le destinataire
+    msg.basic_container.ID_dest = it->first;
+
+    // Envoyer le msg init sur le topic des véhicules
+    if (ros::ok()) {
+      this->publish_ece_msg(msg);
+    }
+    ++it;
   }
-  ROS_INFO("Apres envoi");
 }
 
 uint8_t Controler::insert_receive(ece_msgs::ecemsg &msg) {
@@ -631,10 +628,11 @@ uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
 
       // On récupère la position actuelle et la renseigne dans le véhicule
       // Récupérer en float
-      float latitude = (float) msg->reference_position.latitude / 1024;
+      float latitude = (float)msg->reference_position.latitude / 1024;
       float longitude = (float)msg->reference_position.longitude / 1024;
       float altitude = (float)msg->reference_position.altitude.value / 1024;
       Position p = Position(latitude, longitude, altitude);
+      ROS_INFO("latitude %f, longitude %f", latitude, longitude);
       it_v->setActualPos(p);
     }
     it_v++;

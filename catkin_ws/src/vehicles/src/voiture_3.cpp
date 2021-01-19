@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
   // INIT
   ros::init(argc, argv, "vehicle_3");
   ros::Time::init();
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(0.1);
 
   // TODO /ODOM Changer quand on aura plusieurs vehicules
   Vehicles v3 = Vehicles("tb3_3/odom", STATION_ID);
@@ -27,11 +27,20 @@ int main(int argc, char **argv) {
   while (v3.getPubEce_C().getNumSubscribers() < 1) {
   }
 
+  // Envoyer message INIT au démarrage et si changement de destination
+  v3.fill_ece_data(ID_CONTROLER, INIT_PHASE, 0);
+
   while (ros::ok()) {
-    v3.ece_data(0, 0);
     ros::spinOnce();
     loop_rate.sleep();
+    // Envoyer CAM en boucle au controler
+    v3.fill_cam_data(ID_CONTROLER);
   }
 
+  // Envoyer CAM en boucle si platoon et si voiture de tete aux autres vehicules
+  // Envoyer DENM au controler et aux voitures (déterminer lesquelles selon
+  // positiond ans le platoon)
+
+  // Envoyer ECE a controler si desinsertion
   return 0;
 }

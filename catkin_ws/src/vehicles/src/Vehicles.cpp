@@ -53,6 +53,10 @@ uint32_t Vehicles::getStationId() { return this->station_id; }
 
 uint64_t Vehicles::getCount() { return this->count; }
 
+Platoon Vehicles::getPlatoon() { return this->platoon; }
+
+bool Vehicles::getHasPlatoon() { return this->has_platoon; }
+
 // getPub
 ros::Publisher Vehicles::getPubEce_C() { return this->pub_ece_C; }
 
@@ -93,6 +97,12 @@ void Vehicles::setStationId(uint32_t station_id) {
 
 void Vehicles::setCount(uint64_t count) { this->count = count; }
 
+void Vehicles::setPlatoon(Platoon platoon) { this->platoon = platoon; }
+
+void Vehicles::setHasPlatoon(bool has_platoon) {
+  this->has_platoon = has_platoon;
+}
+
 // setPub
 void Vehicles::setPubEce_C(ros::Publisher pub) { this->pub_ece_C = pub; }
 
@@ -115,11 +125,58 @@ void Vehicles::setSubCAM_V(ros::Subscriber sub) { this->sub_CAM_V = sub; }
 
 /// METHODS
 uint8_t Vehicles::init_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
+
+  // Header
+  uint8_t header_station_id = msg->its_header.station_id;
+  uint8_t header_message_id = msg->its_header.message_id;
+
   // Récupère les informations utiles pour l'initialisation
+  this->fill_platoon(msg);
+
+  /// FAIRE UN TRUC AVEC ROBOT (genre envoyer des cam et denm)
+
   return 1;
 }
 
+void Vehicles::fill_platoon(const ece_msgs::ecemsg::ConstPtr &msg) {
+
+  // Indiquer que objet a un platoon
+  this->setHasPlatoon(true);
+
+  // Création d'un Platoon
+  Platoon platoon = Platoon();
+
+  // Infos générales
+  platoon.setId(msg->init.platoon.id_platoon);
+  platoon.setNbVehicles(msg->init.platoon.nombre_vehicules);
+  platoon.setSpeed(msg->init.platoon.vitesse_interdistance.speed.value);
+  platoon.setInter(msg->init.platoon.vitesse_interdistance.interdistance);
+
+  // Destination
+  Position dest = Position();
+  dest.setLat(msg->init.platoon.destination.latitude);
+  dest.setLon(msg->init.platoon.destination.longitude);
+  dest.setAlt(msg->init.platoon.destination.altitude);
+  platoon.setDest(dest);
+
+  // Map des rangs
+  std::map<uint8_t, uint8_t> map_rank;
+  for (int i = 0; i < platoon.getNbVehicles(); i++) {
+    ece_msgs::IDs id = msg->init.platoon.ids[i];
+    map_rank.insert(std::pair<uint8_t, uint8_t>(id.ID, id.position));
+  }
+  platoon.setMapRank(map_rank);
+
+  // Remplir le platoon
+  this->setPlatoon(platoon);
+
+  ROS_INFO("Init received: Platoon cree");
+  ROS_INFO("ID platoon: %d, Nb_v: %d, speed: %d", this->getPlatoon().getId(),
+           this->getPlatoon().getNbVehicles(), this->getPlatoon().getSpeed());
+}
+
 uint8_t Vehicles::insert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
+
   // Récupère les informations utiles pour l'initialisation
   ROS_INFO("I have received ece msg, insertion message !");
 
@@ -131,15 +188,22 @@ uint8_t Vehicles::insert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   int64_t lon = msg->insertion.point_insertion.longitude;
   int64_t lat = msg->insertion.point_insertion.latitude;
 
-    // Altitude:
+  // Altitude:
   int32_t altValue = msg->insertion.point_insertion.altitude;
 
   // Confirmation insertion
   bool checkInsert = msg->insertion.confirmation_insertion;
+
+  /// FAIRE QUELQUE CHOSE AVEC LE ROBOT
+
+  // Puis confirmer insertion avec message ECE
+  this->fill_ece_data(ID_CONTROLER, INSERT_PHASE, 0);
+
   return 1;
 }
 
 uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
+
   // Récupère les informations utiles pour désinsertion
   ROS_INFO("I have received ece msg, desinsertion message !");
 
@@ -163,10 +227,17 @@ uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 
   // Confirmation insertion
   uint8_t position = msg->desinsertion.position;
+
+  /// FAIRE QUELQUE CHOSE AVEC LE ROBOT
+
+  // Puis confirmer desinsertion avec message ECE
+  this->fill_ece_data(ID_CONTROLER, DESINSERT_PHASE, 1);
+
   return 1;
 }
 
 uint8_t Vehicles::light_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
+
   // Récupère les informations utiles pour l'initialisation
   ROS_INFO("I have received ece msg, traffic light message !");
 
@@ -175,7 +246,9 @@ uint8_t Vehicles::light_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   uint8_t header_message_id = msg->its_header.message_id;
 
   /// feu de signalisation
-  bool askExit = msg->feu.permission_feu;
+  bool permission = msg->feu.permission_feu;
+
+  /// FAIRE QUELQUECHOSE AVEC ROBOT GENRE PASSER OU RALENTIR
 
   return 1;
 }
@@ -189,20 +262,29 @@ uint8_t Vehicles::brake_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   uint8_t header_message_id = msg->its_header.message_id;
 
   /// freinage d'urgence
-  uint8_t postion = msg->freinage_urgence.position;
+  uint8_t position = msg->freinage_urgence.position;
+
+  /// FAIRE QUELQUECHOSE AVEC ROBOT GENRE FREINER
 
   return 1;
 }
 
 /// INIT
+
 // uint8_t Vehicles::init_send() { this->ece_data(uint32_t id_dest); }
 
-// Callback
+// CALLBACK
+
 void Vehicles::sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
                                   Vehicles *v) {
 
-  ROS_INFO("I have received ece msg, %d", msg->header.seq);
+  ROS_INFO("I have received ece msg, phase : %d",
+           msg->basic_container.phase.value);
   int rep = 0;
+
+  // Header
+  uint8_t header_station_id = msg->its_header.station_id;
+  uint8_t header_message_id = msg->its_header.message_id;
 
   // Récupérer expéditeur
   uint8_t exp = msg->basic_container.ID_exp;
@@ -211,8 +293,12 @@ void Vehicles::sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
   uint8_t phase = msg->basic_container.phase.value;
 
   // Si le message nous est destiné on lis la suite
-  uint8_t receiver = msg->basic_container.ID_dest;
-  /*if (receiver != v->getId()) {
+  uint8_t dest = msg->basic_container.ID_dest;
+
+  ROS_INFO("StationID %d = %d", dest, v->getStationId());
+
+  if (dest != v->getStationId()) {
+
     // si ne nous est pas destiné
   } else {
 
@@ -238,22 +324,21 @@ void Vehicles::sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
     case 3:
       rep = v->light_receive(msg);
       // Réception ici de message venant de feux
-      // traitement_feux(msg, p);
       break;
 
     case 4:
       rep = v->brake_receive(msg);
       // ??? Reçoit d'un véhicule message freinage urgence
       // Renvoie aux autres véhicules l'info ?
-      // traitement_freinage_urg(msg, p);
       break;
 
     default:
       break;
     }
-  }*/
+  }
 }
 
+/// PLUS TARD
 void Vehicles::sub_DENM_V_callback(const etsi_msgs::DENM::ConstPtr &msg,
                                    Vehicles *v) {
 
@@ -271,11 +356,12 @@ void Vehicles::sub_CAM_V_callback(const etsi_msgs::CAM::ConstPtr &msg,
 
   ROS_INFO("I have received CAM msg");
 
-  // Récupérer expéditeur // EXISTE PAS
-  // uint8_t exp = msg->basic_container.ID_exp;
+  // Header
+  uint8_t header_station_id = msg->its_header.station_id;
+  uint8_t header_message_id = msg->its_header.message_id;
 
-  // Récupérer destinataire // EXISTE PAS
-  // uint8_t dest = msg->basic_container.ID_dest;
+  /// RECUPE INFOS CAM
+  /// FAIRE QUELUECHOSE AVEC ROBOT GENRE ADPATER VITESSE ET INTER
 }
 
 // Publish
@@ -288,6 +374,7 @@ uint8_t Vehicles::publish_ece_msg_C(ece_msgs::ecemsg msg) {
 uint8_t Vehicles::publish_CAM_msg_C(etsi_msgs::CAM msg) {
   this->pub_CAM_C = this->n.advertise<etsi_msgs::CAM>("controler_CAM", 1000);
   this->pub_CAM_C.publish(msg);
+  ROS_INFO("message CAM published");
 }
 
 uint8_t Vehicles::publish_DENM_msg_C(etsi_msgs::DENM msg) {
@@ -332,75 +419,88 @@ void Vehicles::odom_callback(const nav_msgs::Odometry::ConstPtr &msg,
 }
 
 /// REMPLIR MESSAGES
-void Vehicles::ece_data(uint32_t id_dest, uint8_t phase) {
+void Vehicles::fill_ece_data(uint32_t id_dest, uint8_t phase, uint8_t part) {
 
+  int64_t longitude = 0;
+  int64_t latitude = 0;
+  int32_t altitude = 0;
+
+  // HEADER
   ece_msgs::ecemsg msg;
   msg.header.seq = this->getCount();   // uint32
   msg.header.stamp = ros::Time::now(); // time
   msg.header.frame_id = ECE_FRAME_ID;  // string
 
+  // ITS HEADER
   msg.its_header.protocol_version = PROTOCOL_VERSION; // uint8_t
   msg.its_header.message_id = ECE_MSG_ID;             // uint8_t
   msg.its_header.station_id = this->getStationId();
 
+  // BASIC CONTAINER
   msg.basic_container.phase.value = phase;
   msg.basic_container.ID_exp = this->getStationId();
   msg.basic_container.ID_dest = id_dest;
 
-  // Destination actuelle
-  // Convertir en int pour ne pas perdre la précision des float
-  int64_t longitude = (int64_t)(this->getDest().getLon() * 1024);
-  int64_t latitude = (int64_t)(this->getDest().getLat() * 1024);
-  int32_t altitude = (int32_t)(this->getDest().getAlt() * 1024);
-
-  msg.init.destination.longitude = longitude;
-  msg.init.destination.latitude = latitude;
-  msg.init.destination.altitude = altitude;
-
-  // Position voiture
-  // Convertir en int pour ne pas perdre la précision des float
-  longitude = (int64_t)(this->getActualPos().getLon() * 1024);
-  latitude = (int64_t)(this->getActualPos().getLat() * 1024);
-  altitude = (int32_t)(this->getActualPos().getAlt() * 1024);
-
-  msg.init.actual_position.longitude = longitude;     // 50;
-  msg.init.actual_position.latitude = latitude;       // 50;
-  msg.init.actual_position.altitude = altitude; // 0;
-
   switch (phase) {
-  // Init
+
+  // INIT
   case 0:
+    // Destination actuelle
+    // Convertir en int pour ne pas perdre la précision des float
+    longitude = (int64_t)(this->getDest().getLon() * 1024);
+    latitude = (int64_t)(this->getDest().getLat() * 1024);
+    altitude = (int32_t)(this->getDest().getAlt() * 1024);
+
+    msg.init.destination.longitude = longitude;
+    msg.init.destination.latitude = latitude;
+    msg.init.destination.altitude = altitude;
+
+    // Position voiture
+    // Convertir en int pour ne pas perdre la précision des float
+    longitude = (int64_t)(this->getActualPos().getLon() * 1024);
+    latitude = (int64_t)(this->getActualPos().getLat() * 1024);
+    altitude = (int32_t)(this->getActualPos().getAlt() * 1024);
+
+    msg.init.actual_position.longitude = longitude; // 50;
+    msg.init.actual_position.latitude = latitude;   // 50;
+    msg.init.actual_position.altitude = altitude;   // 0;
+    break;
+
+  // INSERT
+  case 1:
+    msg.insertion.confirmation_insertion = true;
+    break;
+
+  // DESINSERT
+  case 2:
+    // Demande
+    if (part == 0) {
+      msg.desinsertion.demande_sortie = true;
+      msg.desinsertion.confirmation_sortie = false;
+    }
+    // Confirmation
+    else {
+      msg.desinsertion.demande_sortie = false;
+      msg.desinsertion.confirmation_sortie = true;
+    }
     break;
   }
 
   this->setCount(this->getCount() + 1);
 
-  switch (id_dest) {
-  // Controler
-  case 0:
+  if (id_dest == 0) {
     this->publish_ece_msg_C(msg);
-    break;
-
-  case 1:
+  } else {
     this->publish_ece_msg_V(msg);
-    break;
-
-  case 2:
-    this->publish_ece_msg_V(msg);
-    break;
-
-  case 3:
-    this->publish_ece_msg_V(msg);
-    break;
   }
 
   ROS_INFO("I have send ece msg, station_id : %d", this->getStationId());
 }
 
 // TODO : implémenter dans Vehicles
-void Vehicles::cam_data(etsi_msgs::CAM &msg) {
+void Vehicles::fill_cam_data(uint32_t id_dest) {
 
-  // Passer la position en int -> faire la conversion
+  etsi_msgs::CAM msg;
 
   msg.generation_delta_time = 0; // milliseconds since 2004 modulo 2^16 uint16_t
 
@@ -423,6 +523,9 @@ void Vehicles::cam_data(etsi_msgs::CAM &msg) {
   int64_t longitude = (int64_t)(this->getActualPos().getLon() * 1024);
   int64_t latitude = (int64_t)(this->getActualPos().getLat() * 1024);
   int32_t altitude = (int32_t)(this->getActualPos().getAlt() * 1024);
+
+  ROS_INFO("longitude: %d", longitude);
+  ROS_INFO("latitude: %d", latitude);
 
   msg.reference_position.longitude = longitude;
   msg.reference_position.latitude = latitude;
@@ -460,4 +563,12 @@ void Vehicles::cam_data(etsi_msgs::CAM &msg) {
   // msg.low_frequency_container.path_history.points.path_delta_time = 0;
 
   this->setCount(this->getCount() + 1);
+
+  if (id_dest == 0) {
+    this->publish_CAM_msg_C(msg);
+  }
+  // Si vehicule de tête seulement
+  else {
+    this->publish_CAM_msg_V(msg);
+  }
 }
