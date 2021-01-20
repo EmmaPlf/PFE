@@ -18,7 +18,11 @@ yp=0.0
 T=0.05
 compteur_point=0
 compteur_dir=0
-liste_dir=[]
+liste_dir = []
+err_angle_prec = 0
+err_angle = 0
+err_vit_prec = 0
+err_vit = 0
 
 def set_references():
     global compteur_dir, compteur_point, xp, yp
@@ -59,7 +63,7 @@ def set_references():
 
 
 def callback(data):
-    global v, omega, xp, yp, compteur_point
+    global v, omega, xp, yp, compteur_point, err_angle, err_angle_prec,err_vit, err_vit_prec
     
     x=data.pose.pose.position.x
     y=data.pose.pose.position.y
@@ -71,31 +75,40 @@ def callback(data):
     
     xp, yp = set_references()
 
-    kp=1 #0.75
-    kv=1 #1
-    vref=1 #0.75
+    # kp=1 #0.75
+    # kv=1.25 #1
+    vmax=1 #0.75
+    kp_angle = 1.3
+    kd_angle = 1.8
+
+    kp_vit = 1
+    kd_vit = 1.4
     #print("xp-x",xp-x)
     #print("yp-y",yp-y)
- 
     phi=atan2((yp-y),(xp-x))
     d=sqrt((xp-x)**2+(yp-y)**2)
 
     delta= theta - phi 
-    
+    err_angle = delta
+
     if delta>pi:
         delta-=2*pi
     if delta<-pi:
         delta+=2*pi
-    
-    omega = -kp*delta
+
+    omega = -kp_angle * delta + kd_angle * (err_angle - err_angle_prec)
+    err_angle_prec = err_angle
+
     if(d<0.5):
         #d=0
-        compteur_point+=1
+        compteur_point += 1
 
-    if v > vref:
-        v=vref
+    err_vit = d
+    if v > vmax:
+        v=vmax
     else:
-        v= kv*d
+        v = kp_vit * d + kd_vit * (err_vit - err_vit_prec)
+    err_vit_prec = err_vit
 
 def create_path():
     a0= np.arange(0,2.1,0.1,dtype=float)

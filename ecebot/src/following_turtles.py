@@ -19,6 +19,10 @@ xp=0.0
 yp=0.0
 T = 0.05
 phi = 0.0
+err_angle_prec = 0
+err_angle = 0
+err_vit_prec = 0
+err_vit = 0
 # r1_ref = np.zeros([1, 2])
 r1_ref = np.array([[-0.5, 0]])
 
@@ -61,7 +65,7 @@ r1_ref = np.array([[-0.5, 0]])
 
 
 def callback_odom_r1(data):
-    global v, omega, r1_ref, phi
+    global v, omega, r1_ref, phi, err_angle, err_angle_prec,err_vit, err_vit_prec
     
     x=data.pose.pose.position.x
     y=data.pose.pose.position.y
@@ -75,30 +79,64 @@ def callback_odom_r1(data):
     yp = r1_ref[0, 1]
     print("xp = ", xp)
     print("yp = ", yp)
-    kp=1 #0.75
-    kv=1.4#1
+
     vmax=1 #0.75
+    kp_angle = 1.3
+    kd_angle = 1.8
+
+    kp_vit = 1.3
+    kd_vit = 1.4
     #print("xp-x",xp-x)
     #print("yp-y",yp-y)
- 
     phi=atan2((yp-y),(xp-x))
     d=sqrt((xp-x)**2+(yp-y)**2)
 
-    delta= theta - phi
-    
+    delta= theta - phi 
+    err_angle = delta
+
     if delta>pi:
         delta-=2*pi
     if delta<-pi:
         delta+=2*pi
-    
-    omega = -kp*delta
+
+    omega = -kp_angle * delta + kd_angle * (err_angle - err_angle_prec)
+    err_angle_prec = err_angle
+
     if(d<0.5):
+        #d=0
         r1_ref = np.delete(r1_ref, 0, axis=0)
 
+    err_vit = d
     if v > vmax:
         v=vmax
     else:
-        v= kv*d
+        v = kp_vit * d + kd_vit * (err_vit - err_vit_prec)
+    err_vit_prec = err_vit
+
+    # kp=1 #0.75
+    # kv=1.25#1
+    # vmax=1 #0.75
+    # #print("xp-x",xp-x)
+    # #print("yp-y",yp-y)
+ 
+    # phi=atan2((yp-y),(xp-x))
+    # d=sqrt((xp-x)**2+(yp-y)**2)
+
+    # delta= theta - phi
+    
+    # if delta>pi:
+    #     delta-=2*pi
+    # if delta<-pi:
+    #     delta+=2*pi
+    
+    # omega = -kp*delta
+    # if(d<0.5):
+    #     r1_ref = np.delete(r1_ref, 0, axis=0)
+
+    # if v > vmax:
+    #     v=vmax
+    # else:
+    #     v= kv*d
 
 def callback_cam(data):
     global r1_ref
@@ -116,12 +154,13 @@ def callback_cam(data):
     # r1_pos_x = head_pos_x
     # r1_pos_y = head_pos_y
 
-    xp_prev = r1_ref[-1,0]
-    yp_prev = r1_ref[-1,1]
-    cap = atan2((head_pos_y - yp_prev), (head_pos_x - xp_prev))
-    r1_pos_x = head_pos_x - (interdistance * robot_rang) * cos(cap)
-    r1_pos_y = head_pos_y - (interdistance * robot_rang) * sin(cap)
-    r1_ref = np.append(r1_ref, [[r1_pos_x, r1_pos_y]], axis=0)
+    # xp_prev = r1_ref[-1,0]
+    # yp_prev = r1_ref[-1,1]
+    # cap = atan2((head_pos_y - yp_prev), (head_pos_x - xp_prev))
+    # r1_pos_x = head_pos_x - (interdistance * robot_rang) * cos(cap)
+    # r1_pos_y = head_pos_y - (interdistance * robot_rang) * sin(cap)
+    # r1_ref = np.append(r1_ref, [[r1_pos_x, r1_pos_y]], axis=0)
+    r1_ref = np.append(r1_ref, [[head_pos_x, head_pos_y]], axis=0)
 
 
 
