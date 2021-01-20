@@ -71,9 +71,9 @@ def callback(data):
     
     xp, yp = set_references()
 
-    kp=1
-    kv=1.25
-    vref=1
+    kp=1 #0.75
+    kv=1.25 #1
+    vref=1 #0.75
     #print("xp-x",xp-x)
     #print("yp-y",yp-y)
  
