@@ -76,7 +76,7 @@ def callback_odom_r1(data):
     print("xp = ", xp)
     print("yp = ", yp)
     kp=1 #0.75
-    kv=1.25 #1
+    kv=1.4#1
     vmax=1 #0.75
     #print("xp-x",xp-x)
     #print("yp-y",yp-y)
@@ -92,7 +92,7 @@ def callback_odom_r1(data):
         delta+=2*pi
     
     omega = -kp*delta
-    if(d<0.2):
+    if(d<0.5):
         r1_ref = np.delete(r1_ref, 0, axis=0)
 
     if v > vmax:
@@ -106,7 +106,7 @@ def callback_cam(data):
     # id_robot = data.dest
     robot_rang = 1
     # interdistance = data.interdistance
-    interdistance = 0.3
+    interdistance = 0.1
     # v_len = data.vehicle_length.value
     # head_pos_x = data.reference_position.longitude # a verifier
     # head_pos_y = data.reference_position.lattitude  # a verifier
