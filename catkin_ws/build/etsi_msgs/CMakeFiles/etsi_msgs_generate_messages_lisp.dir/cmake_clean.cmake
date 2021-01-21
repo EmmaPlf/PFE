@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/etsi_msgs_generate_messages_lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/CAM.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/SituationContainer.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/DeltaReferencePosition.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/ExteriorLights.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/PathPoint.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/PathHistory.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/BasicVehicleContainerLowFrequency.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/ActionID.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/LongitudinalAcceleration.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/Curvature.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/VehicleWidth.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/RelevanceDistance.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/AccelerationControl.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/LocationContainer.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/EventPoint.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/ManagementContainer.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/VehicleLength.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/PositionConfidenceEllipse.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/ReferencePosition.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/CurvatureCalculationMode.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/DriveDirection.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/YawRate.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/Heading.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/CauseCode.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/VehicleRole.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/ItsPduHeader.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/Altitude.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/InformationQuality.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/DENM.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/StationType.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/BasicVehicleContainerHighFrequency.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/Speed.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/RelevanceTrafficDirection.lisp"
+  "/home/user/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/PathDeltaTime.lisp"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang )
+  include(CMakeFiles/etsi_msgs_generate_messages_lisp.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

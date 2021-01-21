@@ -1,0 +1,8 @@
+prefix=/home/user/catkin_ws/install
+
+Name: vehicles
+Description: Description of vehicles
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/user/catkin_ws/install/lib 
+Requires: roscpp rospy

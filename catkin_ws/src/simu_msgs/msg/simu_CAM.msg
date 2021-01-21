@@ -1,0 +1,8 @@
+Header header 
+ItsPduHeader its_header
+Speed speed
+ReferencePosition reference_position
+VehicleLength vehicle_length
+uint8 rank
+uint32 interdistance
+uint8 dest

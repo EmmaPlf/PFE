@@ -1,0 +1,2 @@
+set(simu_msgs_MESSAGE_FILES "/home/user/catkin_ws/src/simu_msgs/msg/ItsPduHeader.msg;/home/user/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg;/home/user/catkin_ws/src/simu_msgs/msg/Speed.msg;/home/user/catkin_ws/src/simu_msgs/msg/VehicleLength.msg;/home/user/catkin_ws/src/simu_msgs/msg/simu_CAM.msg;/home/user/catkin_ws/src/simu_msgs/msg/PositionConfidenceEllipse.msg;/home/user/catkin_ws/src/simu_msgs/msg/Altitude.msg")
+set(simu_msgs_SERVICE_FILES "")
