@@ -151,16 +151,13 @@ def callback_cam(data):
     head_pos_x = data.pose.pose.position.x
     head_pos_y = data.pose.pose.position.y
 
-    # r1_pos_x = head_pos_x
-    # r1_pos_y = head_pos_y
-
-    # xp_prev = r1_ref[-1,0]
-    # yp_prev = r1_ref[-1,1]
-    # cap = atan2((head_pos_y - yp_prev), (head_pos_x - xp_prev))
-    # r1_pos_x = head_pos_x - (interdistance * robot_rang) * cos(cap)
-    # r1_pos_y = head_pos_y - (interdistance * robot_rang) * sin(cap)
-    # r1_ref = np.append(r1_ref, [[r1_pos_x, r1_pos_y]], axis=0)
-    r1_ref = np.append(r1_ref, [[head_pos_x, head_pos_y]], axis=0)
+    xp_prev = r1_ref[-1,0]
+    yp_prev = r1_ref[-1,1]
+    cap = atan2((head_pos_y - yp_prev), (head_pos_x - xp_prev))
+    r1_pos_x = head_pos_x - (interdistance * robot_rang) * cos(cap)
+    r1_pos_y = head_pos_y - (interdistance * robot_rang) * sin(cap)
+    r1_ref = np.append(r1_ref, [[r1_pos_x, r1_pos_y]], axis=0)
+    # r1_ref = np.append(r1_ref, [[head_pos_x, head_pos_y]], axis=0)
 
 
 
