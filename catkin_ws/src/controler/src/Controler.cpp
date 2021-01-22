@@ -614,7 +614,7 @@ uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
                                     Controler *c) {
 
   uint8_t ret = 1;
-  ROS_INFO("I have received CAM msg");
+  // ROS_INFO("I have received CAM msg");
 
   // Vérifier que c'est bien un CAM
   uint8_t cam_id = msg->its_header.message_id;

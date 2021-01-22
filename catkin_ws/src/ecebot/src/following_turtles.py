@@ -148,29 +148,23 @@ def callback_cam(data):
     global r1_ref
 
     # id_robot = data.dest
-    robot_rang = 1
-    # interdistance = data.interdistance
-    interdistance = 0.1
+    robot_rang = data.rank
+    interdistance = float(data.interdistance)/1024
+    print("interdistance : ", interdistance)
     # v_len = data.vehicle_length.value
     head_pos_x = float(data.reference_position.latitude) / 1024 # a verifier
     head_pos_y = float(data.reference_position.longitude) / 1024 # a verifier
-    #head_pos_x = data.pose.pose.position.x
-    #head_pos_y = data.pose.pose.position.y
 
     print("X : ", head_pos_x)
     print("Y : ", head_pos_y)
 
-
-    # r1_pos_x = head_pos_x
-    # r1_pos_y = head_pos_y
-
-    # xp_prev = r1_ref[-1,0]
-    # yp_prev = r1_ref[-1,1]
-    # cap = atan2((head_pos_y - yp_prev), (head_pos_x - xp_prev))
-    # r1_pos_x = head_pos_x - (interdistance * robot_rang) * cos(cap)
-    # r1_pos_y = head_pos_y - (interdistance * robot_rang) * sin(cap)
-    # r1_ref = np.append(r1_ref, [[r1_pos_x, r1_pos_y]], axis=0)
-    r1_ref = np.append(r1_ref, [[head_pos_x, head_pos_y]], axis=0)
+    xp_prev = r1_ref[-1,0]
+    yp_prev = r1_ref[-1,1]
+    cap = atan2((head_pos_y - yp_prev), (head_pos_x - xp_prev))
+    r1_pos_x = head_pos_x - (interdistance * robot_rang) * cos(cap)
+    r1_pos_y = head_pos_y - (interdistance * robot_rang) * sin(cap)
+    r1_ref = np.append(r1_ref, [[r1_pos_x, r1_pos_y]], axis=0)
+    # r1_ref = np.append(r1_ref, [[head_pos_x, head_pos_y]], axis=0)
 
 
 

@@ -635,7 +635,7 @@ void Vehicles::fill_cam_data(uint32_t id_dest) {
   }
 
   simu_msg.speed.value = this->getVelocity();
-  simu_msg.interdistance = 5;
+  simu_msg.interdistance = 0.5 * 1024;
   simu_msg.dest = id_dest;
   simu_msg.vehicle_length.value = 1; // uint16
 
