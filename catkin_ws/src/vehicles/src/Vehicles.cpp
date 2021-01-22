@@ -147,7 +147,7 @@ void Vehicles::setSubCAM_V(ros::Subscriber sub) { this->sub_CAM_V = sub; }
 void Vehicles::setSubSimuCAM(ros::Subscriber sub) { this->sub_simu_CAM = sub; }
 
 /// METHODS
-uint8_t Vehicles::init_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
+uint8_t Vehicles::insert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 
   // Header
   uint8_t header_station_id = msg->its_header.station_id;
@@ -191,9 +191,9 @@ void Vehicles::fill_platoon(const ece_msgs::ecemsg::ConstPtr &msg) {
     // Afficher ici
 
     // Si voiture de tête
-    if ((this->getStationId() == 1) /* && (id.position == 0)*/) {
+    if ((this->getStationId() == 1) && (id.position == 0)) {
       this->setHead(true);
-      ROS_INFO("HeadSet:  id: %d, rang: %d", id.ID, id.position);
+      ROS_INFO("Voiture de tete: id: %d, rang: %d", id.ID, id.position);
     }
   }
   platoon.setMapRank(map_rank);
@@ -201,39 +201,38 @@ void Vehicles::fill_platoon(const ece_msgs::ecemsg::ConstPtr &msg) {
   // Remplir le platoon
   this->setPlatoon(platoon);
 
-  ROS_INFO("Init received: Platoon map_rank rempli");
-  ROS_INFO("ID platoon: %d, Nb_v: %d, speed: %d", this->getPlatoon().getId(),
+  ROS_INFO("Platoon : ID: %d, Nb_v: %d, speed: %d", this->getPlatoon().getId(),
            this->getPlatoon().getNbVehicles(), this->getPlatoon().getSpeed());
 
   this->setInit(true);
 }
 
-uint8_t Vehicles::insert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
+// uint8_t Vehicles::insert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 
-  // Récupère les informations utiles pour l'initialisation
-  ROS_INFO("I have received ece msg, insertion message !");
+//   // Récupère les informations utiles pour l'initialisation
+//   ROS_INFO("I have received ece msg, insertion message !");
 
-  // Header
-  uint8_t header_station_id = msg->its_header.station_id;
-  uint8_t header_message_id = msg->its_header.message_id;
+//   // Header
+//   uint8_t header_station_id = msg->its_header.station_id;
+//   uint8_t header_message_id = msg->its_header.message_id;
 
-  // Ref Position
-  int64_t lon = msg->insertion.point_insertion.longitude;
-  int64_t lat = msg->insertion.point_insertion.latitude;
+//   // Ref Position
+//   int64_t lon = msg->insertion.point_insertion.longitude;
+//   int64_t lat = msg->insertion.point_insertion.latitude;
 
-  // Altitude:
-  int32_t altValue = msg->insertion.point_insertion.altitude;
+//   // Altitude:
+//   int32_t altValue = msg->insertion.point_insertion.altitude;
 
-  // Confirmation insertion
-  bool checkInsert = msg->insertion.confirmation_insertion;
+//   // Confirmation insertion
+//   bool checkInsert = msg->insertion.confirmation_insertion;
 
-  /// FAIRE QUELQUE CHOSE AVEC LE ROBOT
+//   /// FAIRE QUELQUE CHOSE AVEC LE ROBOT
 
-  // Puis confirmer insertion avec message ECE
-  this->fill_ece_data(ID_CONTROLER, INSERT_PHASE, 0);
+//   // Puis confirmer insertion avec message ECE
+//   this->fill_ece_data(ID_CONTROLER, INSERT_PHASE, 0);
 
-  return 1;
-}
+//   return 1;
+// }
 
 uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 
@@ -302,10 +301,6 @@ uint8_t Vehicles::brake_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   return 1;
 }
 
-/// INIT
-
-// uint8_t Vehicles::init_send() { this->ece_data(uint32_t id_dest); }
-
 // CALLBACK
 
 void Vehicles::sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
@@ -338,13 +333,13 @@ void Vehicles::sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
     case 0:
       // Récup véhicules avec destinations pour créer un platoon
       // Envoie ensuite les infos à chaque véhicule concerné
-      rep = v->init_receive(msg);
+      // rep = v->init_receive(msg);
       // TODO rep == 0 ? (erreur)
       break;
 
     case 1:
       // Véhicule souhaitant s'insérer ? Ou uniquement confirmation insertion ?
-      // rep = v->insert_receive(msg);
+      rep = v->insert_receive(msg);
       // TODO rep == 0 ? (erreur)
       break;
 
@@ -576,8 +571,8 @@ void Vehicles::fill_cam_data(uint32_t id_dest) {
   int64_t latitude = (int64_t)(this->getActualPos().getLat() * 1024);
   int32_t altitude = (int32_t)(this->getActualPos().getAlt() * 1024);
 
-  ROS_INFO("longitude: %f", (float)longitude / 1024);
-  ROS_INFO("latitude: %f", (float)latitude / 1024);
+  //   ROS_INFO("longitude: %f", (float)longitude / 1024);
+  //   ROS_INFO("latitude: %f", (float)latitude / 1024);
 
   msg.reference_position.longitude = longitude;
   msg.reference_position.latitude = latitude;
@@ -633,7 +628,7 @@ void Vehicles::fill_cam_data(uint32_t id_dest) {
   std::map<uint8_t, uint8_t> map_rank = this->getPlatoon().getMapRank();
   std::map<uint8_t, uint8_t>::iterator it = map_rank.begin();
   while (it != map_rank.end()) {
-    if (this->getStationId() == it->first) {
+    if (id_dest == it->first) {
       simu_msg.rank = it->second;
     }
     it++;

@@ -83,12 +83,14 @@ public:
   // ou modif platoon
   void search_for_platoon(Vehicle v);
 
+  void new_platoon(Vehicle &v);
+
   void fill_header(ece_msgs::ecemsg &msg, char *frame, uint8_t msg_id);
 
   uint8_t init_receive(ece_msgs::ecemsg &msg);
-  uint8_t init_send(Platoon p);
+  // uint8_t init_send(Platoon p);
   uint8_t insert_receive(ece_msgs::ecemsg &msg);
-  uint8_t insert_send(uint8_t id_dest);
+  uint8_t insert_send(Platoon p);
   uint8_t desinsert_receive(ece_msgs::ecemsg &msg);
   uint8_t feux(ece_msgs::ecemsg &msg);
   uint8_t freinage_urg(ece_msgs::ecemsg &msg);

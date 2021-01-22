@@ -193,9 +193,12 @@ void Controler::search_for_platoon(Vehicle v) {
       // Vérifier si destination est dans même zone
       if (it->getDest().compareZone(v.getDest())) {
 
-        // Ajout QUELLE POSITION ?? ET DANS MAPRANK TODO
+        // Ajout véhicule au platoon
         it->addVehicle(v);
         v.setHasPlatoon(true);
+
+        // Envoie message à tous les véhciules du platoon pour mettre à jour
+        this->insert_send(*it);
       }
       it++;
     }
@@ -206,76 +209,77 @@ void Controler::search_for_platoon(Vehicle v) {
   if (!v.getHasPlatoon()) {
     // ROS_INFO("Pas de platoon trouve");
 
-    // Si vector différent de vide
-    if (!this->vector_v.empty()) {
+    this->new_platoon(v);
+  }
+}
 
-      std::vector<Vehicle>::iterator it = this->vector_v.begin();
+void Controler::new_platoon(Vehicle &v) {
 
-      // Tant qu'on n'est pas à la fin et que les deux véhicules n'ont pas de
-      // platoon
-      while (it != this->vector_v.end() && !v.getHasPlatoon() &&
-             !it->getHasPlatoon()) {
+  // Si vector différent de vide
+  if (!this->vector_v.empty()) {
 
-        // Vérifier si destination est dans même zone
-        if (it->getDest().compareZone(v.getDest()) &&
-            it->getId() != v.getId()) {
-          // ROS_INFO("compareZone = 1");
+    std::vector<Vehicle>::iterator it = this->vector_v.begin();
 
-          // On crée un platoon avec les 2 voitures
-          Platoon p = Platoon();
+    // Tant qu'on n'est pas à la fin et que les deux véhicules n'ont pas de
+    // platoon
+    while (it != this->vector_v.end() && !v.getHasPlatoon() &&
+           !it->getHasPlatoon()) {
 
-          p.setId(this->getVectorP().size());
+      // Vérifier si destination est dans même zone
+      if (it->getDest().compareZone(v.getDest()) && it->getId() != v.getId()) {
+        // ROS_INFO("compareZone = 1");
 
-          p.setDest(v.getDest());
+        // Faire ça dans confirmation insertion
+        // On crée un platoon avec les 2 voitures
+        Platoon p = Platoon();
 
-          // TODO : speed dans vehicle et calcul à faire !
-          p.setSpeed(0);
+        p.setId(this->getVectorP().size());
 
-          // TODO : inter : calcul à faire !
-          p.setInter(0);
+        p.setDest(v.getDest());
 
-          p.setNbVehicles(2);
+        // TODO : speed dans vehicle et calcul à faire !
+        p.setSpeed(0);
 
-          // Créer une map de Véicule et de rang
-          std::map<uint8_t, uint8_t> map_rank;
+        // TODO : inter : calcul à faire !
+        p.setInter(0);
 
-          // Remplir la map avec le première véhicule qui est la voiture de tête
-          map_rank.insert(std::pair<uint8_t, uint8_t>(v.getId(), 0));
+        p.setNbVehicles(2);
 
-          // Remplir avec la deuxieme voiture trouvée
-          map_rank.insert(std::pair<uint8_t, uint8_t>(it->getId(), 1));
+        // Créer une map de Véicule et de rang
+        std::map<uint8_t, uint8_t> map_rank;
 
-          p.setMapRank(map_rank);
+        // Remplir la map avec le première véhicule qui est la voiture de tête
+        map_rank.insert(std::pair<uint8_t, uint8_t>(v.getId(), 0));
 
-          // Attendre d'avoir une connection avec deux subscribers au moins
-          while (this->getPubEce().getNumSubscribers() < 2) {
-          }
+        // Remplir avec la deuxieme voiture trouvée
+        map_rank.insert(std::pair<uint8_t, uint8_t>(it->getId(), 1));
 
-          // Envoi message initialisation
-          // Il faut envoyer à tous les véhicules
-          this->init_send(p);
+        p.setMapRank(map_rank);
 
-          // Envoi message insertion au deuxième véhicule
-          // pour qu'il rejoigne la voiture de tête
-          // this->insert_send(it->getId());
-
-          //   // Ajout du platoon dans le vector de platoon
-          this->add_platoon(p);
+        // Attendre d'avoir une connection avec deux subscribers au moins
+        while (this->getPubEce().getNumSubscribers() < 2) {
         }
 
-        // Dans le cas de ce projet, il n'y a forcément jamais plus de 2
-        // véhicules sans platoon, car à chaque ajout d'un véhicule nous lui
-        // cherchons un platoon ou un autre véhicule pour en former un Nous
-        // pouvons doc parcourir toutes la listes sans problèmes
-        it++;
+        // Envoi message initialisation
+        // Il faut envoyer à tous les véhicules
+        this->insert_send(p);
+
+        // Ajout du platoon dans le vector de platoon
+        this->add_platoon(p);
       }
+
+      // Dans le cas de ce projet, il n'y a forcément jamais plus de 2
+      // véhicules sans platoon, car à chaque ajout d'un véhicule nous lui
+      // cherchons un platoon ou un autre véhicule pour en former un Nous
+      // pouvons doc parcourir toutes la listes sans problèmes
+      it++;
     }
   }
 }
 
 /** @brief Permet d'envoyer un message ece de la phase init
  */
-uint8_t Controler::init_send(Platoon p) {
+uint8_t Controler::insert_send(Platoon p) {
 
   // Créer un message et le remplir
   ece_msgs::ecemsg msg;
@@ -284,7 +288,7 @@ uint8_t Controler::init_send(Platoon p) {
   this->fill_header(msg, ECE_FRAME, ECE_ID);
 
   msg.basic_container.ID_exp = ID_CONTROLER;
-  msg.basic_container.phase.value = INIT_PHASE;
+  msg.basic_container.phase.value = INSERT_PHASE;
   msg.basic_container.station_type.value = STATION_TYPE;
 
   // Nb vehicules
@@ -313,6 +317,7 @@ uint8_t Controler::init_send(Platoon p) {
     }
   }
 
+  // On envoie a tous les vehicules du platoon
   std::map<uint8_t, uint8_t>::iterator it = map_rank.begin();
   while (it != map_rank.end()) {
 
@@ -326,78 +331,78 @@ uint8_t Controler::init_send(Platoon p) {
     ++it;
   }
 
-  ROS_INFO("init send by controler");
+  ROS_INFO("Insert send by controler");
 }
 
-uint8_t Controler::insert_receive(ece_msgs::ecemsg &msg) {
+// uint8_t Controler::insert_receive(ece_msgs::ecemsg &msg) {
 
-  // Header
-  uint8_t header_station_id = msg.its_header.station_id;
-  uint8_t header_message_id = msg.its_header.message_id;
+//   // Header
+//   uint8_t header_station_id = msg.its_header.station_id;
+//   uint8_t header_message_id = msg.its_header.message_id;
 
-  if (header_message_id != ECE_ID) {
-    return 0;
-  }
+//   if (header_message_id != ECE_ID) {
+//     return 0;
+//   }
 
-  // Expéditeur
-  uint8_t exp_id = msg.basic_container.ID_exp;
+//   // Expéditeur
+//   uint8_t exp_id = msg.basic_container.ID_exp;
 
-  // Check confirmation insertion : si faux on supprime
-  if (msg.insertion.confirmation_insertion == false) {
+//   // Check confirmation insertion : si faux on supprime
+//   if (msg.insertion.confirmation_insertion == false) {
 
-    // Chercher le platoon correspondant de la voiture
-    if (!this->vector_p.empty()) {
+//     // Chercher le platoon correspondant de la voiture
+//     if (!this->vector_p.empty()) {
 
-      std::vector<Platoon>::iterator it_p = this->getVectorP().begin();
-      std::map<uint8_t, uint8_t>::iterator it_m = it_p->getMapRank().begin();
+//       std::vector<Platoon>::iterator it_p = this->getVectorP().begin();
+//       std::map<uint8_t, uint8_t>::iterator it_m = it_p->getMapRank().begin();
 
-      while (it_p != this->getVectorP().end()) {
+//       while (it_p != this->getVectorP().end()) {
 
-        while (it_m != it_p->getMapRank().end()) {
+//         while (it_m != it_p->getMapRank().end()) {
 
-          // Vérifier si véhicule présent dans platoon avec ID
-          if (it_m->first == exp_id) {
+//           // Vérifier si véhicule présent dans platoon avec ID
+//           if (it_m->first == exp_id) {
 
-            // Retirer la voiture du platoon (map)
-            it_p->erase_map_elmt(it_m);
+//             // Retirer la voiture du platoon (map)
+//             it_p->erase_map_elmt(it_m);
 
-            // Décrémenter nb_véhicules du platoon
-            it_p->setNbVehicles(it_p->getNbVehicles() - 1);
-          }
-        }
-      }
-    }
-  }
+//             // Décrémenter nb_véhicules du platoon
+//             it_p->setNbVehicles(it_p->getNbVehicles() - 1);
+//           }
+//         }
+//       }
+//     }
+//   }
 
-  return 1;
-}
+//   return 1;
+// }
 
-/** A FINIR
- */
-uint8_t Controler::insert_send(uint8_t id_dest) {
+// /** A FINIR
+//  */
+// uint8_t Controler::insert_send(uint8_t id_dest) {
 
-  // Créer un message
-  ece_msgs::ecemsg msg;
+//   // Créer un message
+//   ece_msgs::ecemsg msg;
 
-  // Headers
-  this->fill_header(msg, ECE_FRAME, ECE_ID);
+//   // Headers
+//   this->fill_header(msg, ECE_FRAME, ECE_ID);
 
-  // Remplir  basic_container
-  msg.basic_container.ID_exp = STATION_ID;
-  msg.basic_container.ID_dest = id_dest;
-  msg.basic_container.phase.value = 1; // INSERTION
+//   // Remplir  basic_container
+//   msg.basic_container.ID_exp = STATION_ID;
+//   msg.basic_container.ID_dest = id_dest;
+//   msg.basic_container.phase.value = 1; // INSERTION
 
-  // Calculer position d'insertion
+//   // Calculer position d'insertion
 
-  // Indiquer la position d'insertion
-  // msg.insertion.reference_position = ???;
+//   // Indiquer la position d'insertion
+//   msg.insertion.reference_position = ? ? ? ;
 
-  // Envoyer message sur topic des véhicules
-  if (ros::ok()) {
-    // this->getPubEce().publish(msg);
-    this->publish_ece_msg(msg);
-  }
-}
+//   // Envoyer message sur topic des véhicules
+//   if (ros::ok()) {
+//     // this->getPubEce().publish(msg);
+//     this->publish_ece_msg(msg);
+//   }
+// }
 
 // A finir mais plutôt compliqué pour le moment
 uint8_t Controler::desinsert_receive(ece_msgs::ecemsg &msg) {
@@ -463,62 +468,69 @@ uint8_t Controler::desinsert_receive(ece_msgs::ecemsg &msg) {
 
             // Décrémenter nb_véhicules du platoon
             it_p->setNbVehicles(it_p->getNbVehicles() - 1);
+
+            // Changer param
+            // this->desinsert_send();
           }
         }
       }
-
-      // Calcule la vitesse et le point de sortie du véhicule sortant TODO
-      // Calcule l'interdistance et la vitesse de décélération des véhicules
-      // TODO derrière le véhicule sortant Calcule la vitesse d'accélération par
-      // la suite à tous les véhicules du platoon TODO
-
-      // Envoie message:
-      ece_msgs::ecemsg msg;
-
-      // Remplir header
-      this->fill_header(msg, ECE_FRAME, ECE_ID);
-
-      // Remplir  basic_container
-      msg.basic_container.ID_exp = STATION_ID;
-      msg.basic_container.phase.value = 2; // DESINSERTION
-
-      // Interdistance et vitesse de décélération aux véhicules derrière le
-      // véhicule sortant(sur chaque topic de chaque véhicule)
-      for (uint8_t i = 0; i < ids_behind.size(); i++) {
-
-        msg.basic_container.ID_dest = ids_behind[i];
-        // msg.vitesse_interdistance.speed = ? ? ? ; // ralentir
-        // msg.vitesse_interdistance.interdistance = ? ? ? ;
-
-        // Envoyer message sur topic des véhicules
-        if (ros::ok()) {
-          // this->getPubEce().publish(msg);
-          this->publish_ece_msg(msg);
-        }
-      }
-
-      // Vitesse et point de sortie au véhicule sortant
-      // C to Vd
-      msg.basic_container.ID_dest = exp_id;
-      // msg.desinsertion.speed = ? ? ? ;
-      // msg.desinsertion.point_sortie.latitude = ? ? ? ;
-      // msg.desinsertion.point_sortie.longitude = ? ? ? ;
-      // msg.desinsertion.point_sortie.altitude.value = ? ? ? ;
-
-      // Envoyer
-      if (ros::ok()) {
-        // this->getPubEce().publish(msg);
-        this->publish_ece_msg(msg);
-      }
-
-      // Envoie ensuite à tous les véhicules derrière la vitesse
-      // d'accélération et leur nouvelle position dans P
     }
   }
-
   // Tout s'est bien passé
   return 1;
 }
+
+/*
+void Controler::desinsert_send() {
+  // Calcule la vitesse et le point de sortie du véhicule sortant TODO
+  // Calcule l'interdistance et la vitesse de décélération des véhicules
+  // TODO derrière le véhicule sortant Calcule la vitesse d'accélération
+  // par la suite à tous les véhicules du platoon TODO
+
+  // Envoie message:
+  ece_msgs::ecemsg msg;
+
+  // Remplir header
+  this->fill_header(msg, ECE_FRAME, ECE_ID);
+
+  // Remplir  basic_container
+  msg.basic_container.ID_exp = STATION_ID;
+  msg.basic_container.phase.value = 2; // DESINSERTION
+
+  // Interdistance et vitesse de décélération aux véhicules derrière le
+  // véhicule sortant(sur chaque topic de chaque véhicule)
+  for (uint8_t i = 0; i < ids_behind.size(); i++) {
+
+    msg.basic_container.ID_dest = ids_behind[i];
+    // msg.vitesse_interdistance.speed = ? ? ? ; // ralentir
+    // msg.vitesse_interdistance.interdistance = ? ? ? ;
+
+    // Envoyer message sur topic des véhicules
+    if (ros::ok()) {
+      // this->getPubEce().publish(msg);
+      this->publish_ece_msg(msg);
+    }
+  }
+
+  // Vitesse et point de sortie au véhicule sortant
+  // C to Vd
+  msg.basic_container.ID_dest = exp_id;
+  // msg.desinsertion.speed = ? ? ? ;
+  // msg.desinsertion.point_sortie.latitude = ? ? ? ;
+  // msg.desinsertion.point_sortie.longitude = ? ? ? ;
+  // msg.desinsertion.point_sortie.altitude.value = ? ? ? ;
+
+  // Envoyer
+  if (ros::ok()) {
+    // this->getPubEce().publish(msg);
+    this->publish_ece_msg(msg);
+  }
+
+  // Envoie ensuite à tous les véhicules derrière la vitesse
+  // d'accélération et leur nouvelle position dans P
+}
+}
+*/
 
 // Plus tard
 uint8_t Controler::feux(ece_msgs::ecemsg &msg) {
@@ -556,8 +568,9 @@ void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &p_msg,
     break;
 
   case 1:
-    // Véhicule souhaitant s'insérer ? Ou uniquement confirmation insertion ?
-    rep = c->insert_receive(msg);
+    // Véhicule souhaitant s'insérer ? Ou uniquement confirmation insertion
+    // ?
+    // rep = c->insert_receive(msg);
     // TODO rep == 0 ? (erreur)
     break;
 
@@ -658,11 +671,13 @@ void Controler::fill_header(ece_msgs::ecemsg &msg, char *frame,
 void Controler::increment_counter() { this->count++; }
 
 uint8_t Controler::publish_ece_msg(ece_msgs::ecemsg msg) {
-  // this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
+  // this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece",
+  // 1000);
   this->pub_ece.publish(msg);
 }
 
 uint8_t Controler::publish_DENM_msg(etsi_msgs::DENM msg) {
-  // this->pub_ece = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
+  // this->pub_ece = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM",
+  // 1000);
   this->pub_DENM.publish(msg);
 }

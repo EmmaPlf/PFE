@@ -132,8 +132,8 @@ public:
 
   // METHODS
 
-  uint8_t init_receive(const ece_msgs::ecemsg::ConstPtr &msg);
   uint8_t insert_receive(const ece_msgs::ecemsg::ConstPtr &msg);
+  // uint8_t insert_receive(const ece_msgs::ecemsg::ConstPtr &msg);
   uint8_t desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg);
   uint8_t light_receive(const ece_msgs::ecemsg::ConstPtr &msg);
   uint8_t brake_receive(const ece_msgs::ecemsg::ConstPtr &msg);
