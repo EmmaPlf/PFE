@@ -27,24 +27,18 @@ int main(int argc, char **argv) {
   // Envoyer message INIT au démarrage et si changement de destination
   v1.fill_ece_data(ID_CONTROLER, INIT_PHASE, 0);
 
-  // ros::spin();
-
-  // v1.setHead(true);
-
   while (ros::ok()) {
 
     ros::spinOnce();
 
     // if (v1.getInit() == true) {
 
-    //   ROS_INFO("boucle init");
-
     // Attendre d'avoir une connection avec un subscriber au moins
     while (v1.getPubCAM_C().getNumSubscribers() < 1) {
     }
 
     // Envoyer CAM en boucle au controler
-    // v1.fill_cam_data(ID_CONTROLER);
+    v1.fill_cam_data(ID_CONTROLER);
 
     // Si le véhicule est le véhicule de tête
     if (v1.getHead() == true) {

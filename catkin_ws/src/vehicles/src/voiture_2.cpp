@@ -31,14 +31,12 @@ int main(int argc, char **argv) {
 
     // if (v2.getInit() == true) {
 
-    //   ROS_INFO("boucle init");
-
     // Attendre d'avoir une connection avec un subscriber au moins
     while (v2.getPubCAM_C().getNumSubscribers() < 1) {
     }
 
     // Envoyer CAM en boucle au controler
-    // v2.fill_cam_data(ID_CONTROLER);
+    v2.fill_cam_data(ID_CONTROLER);
 
     // Si le véhicule est le véhicule de tête s
     if (v2.getHead() == true) {

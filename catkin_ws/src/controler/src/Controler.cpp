@@ -17,7 +17,7 @@ Controler::Controler() {
       "controler_DENM", 1000, boost::bind(sub_DENM_callback, _1, this));
 
   this->sub_CAM = this->n.subscribe<etsi_msgs::CAM>(
-      "controler_CAM", 1000, boost::bind(sub_CAM_callback, _1, this));
+      "controler_CAM", 10000, boost::bind(sub_CAM_callback, _1, this));
 
   /// PUBLISHERS
 
@@ -632,7 +632,7 @@ uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
       float longitude = (float)msg->reference_position.longitude / 1024;
       float altitude = (float)msg->reference_position.altitude.value / 1024;
       Position p = Position(latitude, longitude, altitude);
-      ROS_INFO("latitude %f, longitude %f", latitude, longitude);
+      // ROS_INFO("latitude %f, longitude %f", latitude, longitude);
       it_v->setActualPos(p);
     }
     it_v++;
