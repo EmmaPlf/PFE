@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
   // INIT
   ros::init(argc, argv, "vehicle_2");
   ros::Time::init();
-  ros::Rate loop_rate(5);
+  ros::Rate loop_rate(0.6);
 
   // TODO /ODOM Changer quand on aura plusieurs vehicules
   Vehicles v2 = Vehicles("tb3_1/odom", STATION_ID);
@@ -49,7 +49,7 @@ int main(int argc, char **argv) {
         if (it->first != v2.getStationId()) {
           // Envoyer CAM en boucle au véhicule correspondant à l'ID
           v2.fill_cam_data(it->first);
-          // ROS_INFO("Envoie message CAM au vehicule : %d", it->first);
+          ROS_INFO("Envoie message CAM au vehicule : %d", it->first);
         }
         it++;
       }

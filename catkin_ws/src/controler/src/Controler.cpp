@@ -184,6 +184,8 @@ void Controler::search_for_platoon(Vehicle v) {
   // Si vector de platoon n'est pas vide
   if (!this->vector_p.empty()) {
 
+    ROS_INFO("Search for platoon");
+
     // Itérateur
     std::vector<Platoon>::iterator it = this->vector_p.begin();
 
@@ -196,6 +198,10 @@ void Controler::search_for_platoon(Vehicle v) {
         // Ajout véhicule au platoon
         it->addVehicle(v);
         v.setHasPlatoon(true);
+
+        // Attendre d'avoir une connection avec deux subscribers au moins
+        while (this->getPubEce().getNumSubscribers() < 3) {
+        }
 
         // Envoie message à tous les véhciules du platoon pour mettre à jour
         this->insert_send(*it);
@@ -249,10 +255,10 @@ void Controler::new_platoon(Vehicle &v) {
         std::map<uint8_t, uint8_t> map_rank;
 
         // Remplir la map avec le première véhicule qui est la voiture de tête
-        map_rank.insert(std::pair<uint8_t, uint8_t>(v.getId(), 0));
+        map_rank.insert(std::pair<uint8_t, uint8_t>(1, 0));
 
         // Remplir avec la deuxieme voiture trouvée
-        map_rank.insert(std::pair<uint8_t, uint8_t>(it->getId(), 1));
+        map_rank.insert(std::pair<uint8_t, uint8_t>(2, 1));
 
         p.setMapRank(map_rank);
 

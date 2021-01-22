@@ -188,8 +188,6 @@ void Vehicles::fill_platoon(const ece_msgs::ecemsg::ConstPtr &msg) {
     ece_msgs::IDs id = msg->init.platoon.ids[i];
     map_rank.insert(std::pair<uint8_t, uint8_t>(id.ID, id.position));
 
-    // Afficher ici
-
     // Si voiture de tête
     if ((this->getStationId() == 1) && (id.position == 0)) {
       this->setHead(true);

@@ -58,6 +58,7 @@ void Platoon::setNbVehicles(uint8_t nb_vehicles) {
 void Platoon::addVehicle(Vehicle v) {
   this->map_rank.insert(
       std::pair<uint8_t, uint8_t>(v.getId(), this->map_rank.size()));
+  this->setNbVehicles(this->getNbVehicles() + 1);
 }
 
 void Platoon::erase_map_elmt(std::map<uint8_t, uint8_t>::iterator it) {
