@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
   // INIT
   ros::init(argc, argv, "vehicle_3");
   ros::Time::init();
-  ros::Rate loop_rate(0.6);
+  ros::Rate loop_rate(10);
 
   // TODO /ODOM Changer quand on aura plusieurs vehicules
   Vehicles v3 = Vehicles("tb3_3/odom", STATION_ID);

@@ -1,8 +1,8 @@
-prefix=/home/user/catkin_ws/install
+prefix=/home/david/catkin_ws/install
 
 Name: controler
 Description: Description of controler
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/user/catkin_ws/install/lib 
+Libs: -L${prefix}/lib 
 Requires: roscpp rospy

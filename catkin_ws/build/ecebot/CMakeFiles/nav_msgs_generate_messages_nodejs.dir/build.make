@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/user/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/david/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/user/catkin_ws/build
+CMAKE_BINARY_DIR = /home/david/catkin_ws/build
 
 # Utility rule file for nav_msgs_generate_messages_nodejs.
 
@@ -63,10 +63,10 @@ ecebot/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build: nav_msgs_generate
 .PHONY : ecebot/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
 
 ecebot/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/clean:
-	cd /home/user/catkin_ws/build/ecebot && $(CMAKE_COMMAND) -P CMakeFiles/nav_msgs_generate_messages_nodejs.dir/cmake_clean.cmake
+	cd /home/david/catkin_ws/build/ecebot && $(CMAKE_COMMAND) -P CMakeFiles/nav_msgs_generate_messages_nodejs.dir/cmake_clean.cmake
 .PHONY : ecebot/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/clean
 
 ecebot/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/depend:
-	cd /home/user/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/user/catkin_ws/src /home/user/catkin_ws/src/ecebot /home/user/catkin_ws/build /home/user/catkin_ws/build/ecebot /home/user/catkin_ws/build/ecebot/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/david/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/david/catkin_ws/src /home/david/catkin_ws/src/ecebot /home/david/catkin_ws/build /home/david/catkin_ws/build/ecebot /home/david/catkin_ws/build/ecebot/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : ecebot/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/depend
 

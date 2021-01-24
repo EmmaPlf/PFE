@@ -1,8 +1,0 @@
-(cl:in-package ece_msgs-msg)
-(cl:export '(SEMI_MAJOR_CONFIDENCE-VAL
-          SEMI_MAJOR_CONFIDENCE
-          SEMI_MINOR_CONFIDENCE-VAL
-          SEMI_MINOR_CONFIDENCE
-          SEMI_MAJOR_ORIENTATION-VAL
-          SEMI_MAJOR_ORIENTATION
-))

@@ -36,7 +36,8 @@ struct simu_CAM_
     , vehicle_length()
     , rank(0)
     , interdistance(0)
-    , dest(0)  {
+    , dest(0)
+    , yaw_rate(0)  {
     }
   simu_CAM_(const ContainerAllocator& _alloc)
     : header(_alloc)
@@ -46,7 +47,8 @@ struct simu_CAM_
     , vehicle_length(_alloc)
     , rank(0)
     , interdistance(0)
-    , dest(0)  {
+    , dest(0)
+    , yaw_rate(0)  {
   (void)_alloc;
     }
 
@@ -75,6 +77,9 @@ struct simu_CAM_
 
    typedef uint8_t _dest_type;
   _dest_type dest;
+
+   typedef int16_t _yaw_rate_type;
+  _yaw_rate_type yaw_rate;
 
 
 
@@ -111,7 +116,7 @@ namespace message_traits
 
 
 // BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': True}
-// {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'simu_msgs': ['/home/user/catkin_ws/src/simu_msgs/msg']}
+// {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'simu_msgs': ['/home/david/catkin_ws/src/simu_msgs/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
@@ -154,12 +159,12 @@ struct MD5Sum< ::simu_msgs::simu_CAM_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "5589f115a74e70bb753446994398051e";
+    return "57b39355d3eb18289ce69aca4d0b91b8";
   }
 
   static const char* value(const ::simu_msgs::simu_CAM_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x5589f115a74e70bbULL;
-  static const uint64_t static_value2 = 0x753446994398051eULL;
+  static const uint64_t static_value1 = 0x57b39355d3eb1828ULL;
+  static const uint64_t static_value2 = 0x9ce69aca4d0b91b8ULL;
 };
 
 template<class ContainerAllocator>
@@ -186,6 +191,7 @@ VehicleLength vehicle_length\n\
 uint8 rank\n\
 uint32 interdistance\n\
 uint8 dest\n\
+int16 yaw_rate\n\
 ================================================================================\n\
 MSG: std_msgs/Header\n\
 # Standard metadata for higher-level stamped data types.\n\
@@ -310,6 +316,7 @@ namespace serialization
       stream.next(m.rank);
       stream.next(m.interdistance);
       stream.next(m.dest);
+      stream.next(m.yaw_rate);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -349,6 +356,8 @@ struct Printer< ::simu_msgs::simu_CAM_<ContainerAllocator> >
     Printer<uint32_t>::stream(s, indent + "  ", v.interdistance);
     s << indent << "dest: ";
     Printer<uint8_t>::stream(s, indent + "  ", v.dest);
+    s << indent << "yaw_rate: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.yaw_rate);
   }
 };
 

@@ -7,5 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export PWD="/home/user/catkin_ws/build"
-export PYTHONPATH="/home/user/catkin_ws/devel/lib/python2.7/dist-packages:/opt/ros/kinetic/lib/python2.7/dist-packages:/home/simulations/public_sim_ws/devel/lib/python2.7/dist-packages:/home/simulations/public_sim_ws/src/all/ros_basics_examples/python_course_class:/home/simulations/public_sim_ws/src/ros_basics_examples/python_course_class:/home/simulations/public_sim_ws/src/all/kinematics_course_utils/kinematics"
+export PWD='/home/david/catkin_ws/build'

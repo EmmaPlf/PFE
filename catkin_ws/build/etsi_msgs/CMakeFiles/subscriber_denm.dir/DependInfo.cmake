@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/user/catkin_ws/src/etsi_msgs/src/subscriber_denm.cpp" "/home/user/catkin_ws/build/etsi_msgs/CMakeFiles/subscriber_denm.dir/src/subscriber_denm.cpp.o"
+  "/home/david/catkin_ws/src/etsi_msgs/src/subscriber_denm.cpp" "/home/david/catkin_ws/build/etsi_msgs/CMakeFiles/subscriber_denm.dir/src/subscriber_denm.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,7 +17,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/user/catkin_ws/devel/include"
+  "/home/david/catkin_ws/devel/include"
   "/opt/ros/kinetic/include"
   "/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   )

@@ -15,4 +15,6 @@
           INTERDISTANCE
           DEST-VAL
           DEST
+          YAW_RATE-VAL
+          YAW_RATE
 ))

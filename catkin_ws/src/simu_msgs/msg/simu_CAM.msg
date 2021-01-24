@@ -6,3 +6,4 @@ VehicleLength vehicle_length
 uint8 rank
 uint32 interdistance
 uint8 dest
+int16 yaw_rate

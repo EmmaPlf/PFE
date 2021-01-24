@@ -3,8 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/voiture_2.dir/src/Vehicles.cpp.o"
   "CMakeFiles/voiture_2.dir/src/Position.cpp.o"
   "CMakeFiles/voiture_2.dir/src/Platoon.cpp.o"
-  "/home/user/catkin_ws/devel/lib/vehicles/voiture_2.pdb"
-  "/home/user/catkin_ws/devel/lib/vehicles/voiture_2"
+  "/home/david/catkin_ws/devel/lib/vehicles/voiture_2.pdb"
+  "/home/david/catkin_ws/devel/lib/vehicles/voiture_2"
 )
 
 # Per-language clean rules from dependency scanning.

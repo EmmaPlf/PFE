@@ -2,6 +2,7 @@
 # license removed for brevity
 
 ## CODE TRAJECTOIRE / PATH POUR TURTLEBOT3
+import sys
 import rospy
 import numpy as np
 from math import atan2
@@ -78,7 +79,7 @@ def callback(data):
     # kp=1 #0.75
     # kv=1.25 #1
     vmax=1 #0.75
-    kp_angle = 1.3
+    kp_angle = 1.6
     kd_angle = 1.8
 
     kp_vit = 1
@@ -144,6 +145,7 @@ def talker():
 
 if __name__ == '__main__':
     try:
+        print("argv 1", sys.argv[1])
         create_path()
         talker()
     except rospy.ROSInterruptException:

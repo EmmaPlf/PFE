@@ -135,9 +135,12 @@ add_executable(voiture_2 src/voiture_2.cpp src/Vehicles.cpp src/Position.cpp src
 add_dependencies(voiture_2 ${controler_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_executable(voiture_3 src/voiture_3.cpp src/Vehicles.cpp src/Position.cpp src/Platoon.cpp)
 add_dependencies(voiture_3 ${controler_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_executable(voiture_4 src/voiture_4.cpp src/Vehicles.cpp src/Position.cpp src/Platoon.cpp)
+add_dependencies(voiture_4 ${controler_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(voiture_1 ${catkin_LIBRARIES})
 target_link_libraries(voiture_2 ${catkin_LIBRARIES})
 target_link_libraries(voiture_3 ${catkin_LIBRARIES})
+target_link_libraries(voiture_4 ${catkin_LIBRARIES})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}

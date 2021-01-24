@@ -1,74 +1,74 @@
 
 "use strict";
 
+let Heading = require('./Heading.js');
+let ReferencePosition = require('./ReferencePosition.js');
+let PathHistory = require('./PathHistory.js');
+let VehicleRole = require('./VehicleRole.js');
+let ManagementContainer = require('./ManagementContainer.js');
+let BasicVehicleContainerLowFrequency = require('./BasicVehicleContainerLowFrequency.js');
+let ItsPduHeader = require('./ItsPduHeader.js');
 let LocationContainer = require('./LocationContainer.js');
+let RelevanceDistance = require('./RelevanceDistance.js');
+let Altitude = require('./Altitude.js');
+let LongitudinalAcceleration = require('./LongitudinalAcceleration.js');
+let SituationContainer = require('./SituationContainer.js');
+let CauseCode = require('./CauseCode.js');
 let DeltaReferencePosition = require('./DeltaReferencePosition.js');
+let EventPoint = require('./EventPoint.js');
+let AccelerationControl = require('./AccelerationControl.js');
+let InformationQuality = require('./InformationQuality.js');
 let CurvatureCalculationMode = require('./CurvatureCalculationMode.js');
-let BasicVehicleContainerHighFrequency = require('./BasicVehicleContainerHighFrequency.js');
+let Curvature = require('./Curvature.js');
+let VehicleLength = require('./VehicleLength.js');
 let PathDeltaTime = require('./PathDeltaTime.js');
+let CAM = require('./CAM.js');
+let StationType = require('./StationType.js');
+let VehicleWidth = require('./VehicleWidth.js');
+let Speed = require('./Speed.js');
+let YawRate = require('./YawRate.js');
+let PathPoint = require('./PathPoint.js');
 let DENM = require('./DENM.js');
 let ExteriorLights = require('./ExteriorLights.js');
-let YawRate = require('./YawRate.js');
-let StationType = require('./StationType.js');
-let RelevanceDistance = require('./RelevanceDistance.js');
-let CAM = require('./CAM.js');
-let EventPoint = require('./EventPoint.js');
-let BasicVehicleContainerLowFrequency = require('./BasicVehicleContainerLowFrequency.js');
-let Speed = require('./Speed.js');
-let SituationContainer = require('./SituationContainer.js');
-let VehicleWidth = require('./VehicleWidth.js');
-let Heading = require('./Heading.js');
+let DriveDirection = require('./DriveDirection.js');
 let PositionConfidenceEllipse = require('./PositionConfidenceEllipse.js');
 let RelevanceTrafficDirection = require('./RelevanceTrafficDirection.js');
-let Altitude = require('./Altitude.js');
-let PathPoint = require('./PathPoint.js');
-let AccelerationControl = require('./AccelerationControl.js');
-let PathHistory = require('./PathHistory.js');
-let LongitudinalAcceleration = require('./LongitudinalAcceleration.js');
-let VehicleLength = require('./VehicleLength.js');
-let CauseCode = require('./CauseCode.js');
-let InformationQuality = require('./InformationQuality.js');
-let ManagementContainer = require('./ManagementContainer.js');
-let ItsPduHeader = require('./ItsPduHeader.js');
 let ActionID = require('./ActionID.js');
-let DriveDirection = require('./DriveDirection.js');
-let VehicleRole = require('./VehicleRole.js');
-let Curvature = require('./Curvature.js');
-let ReferencePosition = require('./ReferencePosition.js');
+let BasicVehicleContainerHighFrequency = require('./BasicVehicleContainerHighFrequency.js');
 
 module.exports = {
+  Heading: Heading,
+  ReferencePosition: ReferencePosition,
+  PathHistory: PathHistory,
+  VehicleRole: VehicleRole,
+  ManagementContainer: ManagementContainer,
+  BasicVehicleContainerLowFrequency: BasicVehicleContainerLowFrequency,
+  ItsPduHeader: ItsPduHeader,
   LocationContainer: LocationContainer,
+  RelevanceDistance: RelevanceDistance,
+  Altitude: Altitude,
+  LongitudinalAcceleration: LongitudinalAcceleration,
+  SituationContainer: SituationContainer,
+  CauseCode: CauseCode,
   DeltaReferencePosition: DeltaReferencePosition,
+  EventPoint: EventPoint,
+  AccelerationControl: AccelerationControl,
+  InformationQuality: InformationQuality,
   CurvatureCalculationMode: CurvatureCalculationMode,
-  BasicVehicleContainerHighFrequency: BasicVehicleContainerHighFrequency,
+  Curvature: Curvature,
+  VehicleLength: VehicleLength,
   PathDeltaTime: PathDeltaTime,
+  CAM: CAM,
+  StationType: StationType,
+  VehicleWidth: VehicleWidth,
+  Speed: Speed,
+  YawRate: YawRate,
+  PathPoint: PathPoint,
   DENM: DENM,
   ExteriorLights: ExteriorLights,
-  YawRate: YawRate,
-  StationType: StationType,
-  RelevanceDistance: RelevanceDistance,
-  CAM: CAM,
-  EventPoint: EventPoint,
-  BasicVehicleContainerLowFrequency: BasicVehicleContainerLowFrequency,
-  Speed: Speed,
-  SituationContainer: SituationContainer,
-  VehicleWidth: VehicleWidth,
-  Heading: Heading,
+  DriveDirection: DriveDirection,
   PositionConfidenceEllipse: PositionConfidenceEllipse,
   RelevanceTrafficDirection: RelevanceTrafficDirection,
-  Altitude: Altitude,
-  PathPoint: PathPoint,
-  AccelerationControl: AccelerationControl,
-  PathHistory: PathHistory,
-  LongitudinalAcceleration: LongitudinalAcceleration,
-  VehicleLength: VehicleLength,
-  CauseCode: CauseCode,
-  InformationQuality: InformationQuality,
-  ManagementContainer: ManagementContainer,
-  ItsPduHeader: ItsPduHeader,
   ActionID: ActionID,
-  DriveDirection: DriveDirection,
-  VehicleRole: VehicleRole,
-  Curvature: Curvature,
-  ReferencePosition: ReferencePosition,
+  BasicVehicleContainerHighFrequency: BasicVehicleContainerHighFrequency,
 };

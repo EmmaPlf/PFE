@@ -16,7 +16,7 @@
 
 (defclass simu_msgs::simu_CAM
   :super ros::object
-  :slots (_header _its_header _speed _reference_position _vehicle_length _rank _interdistance _dest ))
+  :slots (_header _its_header _speed _reference_position _vehicle_length _rank _interdistance _dest _yaw_rate ))
 
 (defmethod simu_msgs::simu_CAM
   (:init
@@ -29,6 +29,7 @@
     ((:rank __rank) 0)
     ((:interdistance __interdistance) 0)
     ((:dest __dest) 0)
+    ((:yaw_rate __yaw_rate) 0)
     )
    (send-super :init)
    (setq _header __header)
@@ -39,6 +40,7 @@
    (setq _rank (round __rank))
    (setq _interdistance (round __interdistance))
    (setq _dest (round __dest))
+   (setq _yaw_rate (round __yaw_rate))
    self)
   (:header
    (&rest __header)
@@ -84,6 +86,9 @@
   (:dest
    (&optional __dest)
    (if __dest (setq _dest __dest)) _dest)
+  (:yaw_rate
+   (&optional __yaw_rate)
+   (if __yaw_rate (setq _yaw_rate __yaw_rate)) _yaw_rate)
   (:serialization-length
    ()
    (+
@@ -103,6 +108,8 @@
     4
     ;; uint8 _dest
     1
+    ;; int16 _yaw_rate
+    2
     ))
   (:serialize
    (&optional strm)
@@ -124,6 +131,8 @@
        (write-long _interdistance s)
      ;; uint8 _dest
        (write-byte _dest s)
+     ;; int16 _yaw_rate
+       (write-word _yaw_rate s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
@@ -144,11 +153,13 @@
      (setq _interdistance (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;; uint8 _dest
      (setq _dest (sys::peek buf ptr- :char)) (incf ptr- 1)
+   ;; int16 _yaw_rate
+     (setq _yaw_rate (sys::peek buf ptr- :short)) (incf ptr- 2)
    ;;
    self)
   )
 
-(setf (get simu_msgs::simu_CAM :md5sum-) "5589f115a74e70bb753446994398051e")
+(setf (get simu_msgs::simu_CAM :md5sum-) "57b39355d3eb18289ce69aca4d0b91b8")
 (setf (get simu_msgs::simu_CAM :datatype-) "simu_msgs/simu_CAM")
 (setf (get simu_msgs::simu_CAM :definition-)
       "Header header 
@@ -159,6 +170,7 @@ VehicleLength vehicle_length
 uint8 rank
 uint32 interdistance
 uint8 dest
+int16 yaw_rate
 ================================================================================
 MSG: std_msgs/Header
 # Standard metadata for higher-level stamped data types.
@@ -262,6 +274,6 @@ uint8 CONFIDENCE_INDICATION_UNAVAILABLE = 4
 
 
 
-(provide :simu_msgs/simu_CAM "5589f115a74e70bb753446994398051e")
+(provide :simu_msgs/simu_CAM "57b39355d3eb18289ce69aca4d0b91b8")
 
 

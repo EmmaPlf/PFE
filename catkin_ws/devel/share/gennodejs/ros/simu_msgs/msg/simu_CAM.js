@@ -31,6 +31,7 @@ class simu_CAM {
       this.rank = null;
       this.interdistance = null;
       this.dest = null;
+      this.yaw_rate = null;
     }
     else {
       if (initObj.hasOwnProperty('header')) {
@@ -81,6 +82,12 @@ class simu_CAM {
       else {
         this.dest = 0;
       }
+      if (initObj.hasOwnProperty('yaw_rate')) {
+        this.yaw_rate = initObj.yaw_rate
+      }
+      else {
+        this.yaw_rate = 0;
+      }
     }
   }
 
@@ -102,6 +109,8 @@ class simu_CAM {
     bufferOffset = _serializer.uint32(obj.interdistance, buffer, bufferOffset);
     // Serialize message field [dest]
     bufferOffset = _serializer.uint8(obj.dest, buffer, bufferOffset);
+    // Serialize message field [yaw_rate]
+    bufferOffset = _serializer.int16(obj.yaw_rate, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -125,13 +134,15 @@ class simu_CAM {
     data.interdistance = _deserializer.uint32(buffer, bufferOffset);
     // Deserialize message field [dest]
     data.dest = _deserializer.uint8(buffer, bufferOffset);
+    // Deserialize message field [yaw_rate]
+    data.yaw_rate = _deserializer.int16(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
     length += std_msgs.msg.Header.getMessageSize(object.header);
-    return length + 45;
+    return length + 47;
   }
 
   static datatype() {
@@ -141,7 +152,7 @@ class simu_CAM {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '5589f115a74e70bb753446994398051e';
+    return '57b39355d3eb18289ce69aca4d0b91b8';
   }
 
   static messageDefinition() {
@@ -155,6 +166,7 @@ class simu_CAM {
     uint8 rank
     uint32 interdistance
     uint8 dest
+    int16 yaw_rate
     ================================================================================
     MSG: std_msgs/Header
     # Standard metadata for higher-level stamped data types.
@@ -317,6 +329,13 @@ class simu_CAM {
     }
     else {
       resolved.dest = 0
+    }
+
+    if (msg.yaw_rate !== undefined) {
+      resolved.yaw_rate = msg.yaw_rate;
+    }
+    else {
+      resolved.yaw_rate = 0
     }
 
     return resolved;

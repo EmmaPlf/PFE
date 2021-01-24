@@ -68,6 +68,11 @@ bool Vehicles::getHead() { return this->head; }
 
 bool Vehicles::getInit() { return this->init; }
 
+int8_t Vehicles::getQz() { return this->qz; }
+
+int8_t Vehicles::getQw() { return this->qw; }
+
+
 // getPub
 ros::Publisher Vehicles::getPubEce_C() { return this->pub_ece_C; }
 
@@ -121,6 +126,11 @@ void Vehicles::setHasPlatoon(bool has_platoon) {
 void Vehicles::setHead(bool head) { this->head = head; }
 
 void Vehicles::setInit(bool init) { this->init = init; }
+
+void Vehicles::setQz(int8_t qz) { this->qz = qz; }
+
+void Vehicles::setQw(int8_t qw) { this->qw = qw; }
+
 
 // setPub
 void Vehicles::setPubEce_C(ros::Publisher pub) { this->pub_ece_C = pub; }
@@ -456,7 +466,7 @@ void Vehicles::odom_callback(const nav_msgs::Odometry::ConstPtr &msg,
   v->velocity = (int8_t)sqrt(pow(msg->twist.twist.linear.x, 2) +
                              pow(msg->twist.twist.linear.y, 2));
 
-  v->yaw_rate = msg->twist.twist.angular.z; // conversion rad/s to 0.01 degree/s
+  v->yaw_rate = msg->twist.twist.angular.z * 1024; // conversion rad/s to 0.01 degree/s
 
   //   ROS_INFO("odom_callback : x : %f", v.getActualPos().getLon());
   //   ROS_INFO("odom_callback : y : %f", v.getActualPos().getLat());
@@ -633,9 +643,10 @@ void Vehicles::fill_cam_data(uint32_t id_dest) {
   }
 
   simu_msg.speed.value = this->getVelocity();
-  simu_msg.interdistance = 0.5 * 1024;
+  simu_msg.interdistance = 0.4 * 1024;
   simu_msg.dest = id_dest;
   simu_msg.vehicle_length.value = 1; // uint16
+  simu_msg.yaw_rate = this->getYawRate();
 
   this->setCount(this->getCount() + 1);
 

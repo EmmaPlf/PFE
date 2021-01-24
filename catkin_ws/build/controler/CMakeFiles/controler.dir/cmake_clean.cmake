@@ -4,8 +4,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/controler.dir/src/Platoon.cpp.o"
   "CMakeFiles/controler.dir/src/Position.cpp.o"
   "CMakeFiles/controler.dir/src/Vehicle.cpp.o"
-  "/home/user/catkin_ws/devel/lib/controler/controler.pdb"
-  "/home/user/catkin_ws/devel/lib/controler/controler"
+  "/home/david/catkin_ws/devel/lib/controler/controler.pdb"
+  "/home/david/catkin_ws/devel/lib/controler/controler"
 )
 
 # Per-language clean rules from dependency scanning.

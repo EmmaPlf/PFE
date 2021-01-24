@@ -1,20 +1,20 @@
 
 "use strict";
 
-let Speed = require('./Speed.js');
-let simu_CAM = require('./simu_CAM.js');
-let PositionConfidenceEllipse = require('./PositionConfidenceEllipse.js');
+let ReferencePosition = require('./ReferencePosition.js');
+let ItsPduHeader = require('./ItsPduHeader.js');
 let Altitude = require('./Altitude.js');
 let VehicleLength = require('./VehicleLength.js');
-let ItsPduHeader = require('./ItsPduHeader.js');
-let ReferencePosition = require('./ReferencePosition.js');
+let Speed = require('./Speed.js');
+let PositionConfidenceEllipse = require('./PositionConfidenceEllipse.js');
+let simu_CAM = require('./simu_CAM.js');
 
 module.exports = {
-  Speed: Speed,
-  simu_CAM: simu_CAM,
-  PositionConfidenceEllipse: PositionConfidenceEllipse,
+  ReferencePosition: ReferencePosition,
+  ItsPduHeader: ItsPduHeader,
   Altitude: Altitude,
   VehicleLength: VehicleLength,
-  ItsPduHeader: ItsPduHeader,
-  ReferencePosition: ReferencePosition,
+  Speed: Speed,
+  PositionConfidenceEllipse: PositionConfidenceEllipse,
+  simu_CAM: simu_CAM,
 };

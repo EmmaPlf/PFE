@@ -1,8 +1,8 @@
-# Install script for directory: /home/user/catkin_ws/src/ecebot
+# Install script for directory: /home/david/catkin_ws/src/ecebot
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/user/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/david/catkin_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,17 +33,17 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/user/catkin_ws/build/ecebot/catkin_generated/installspace/ecebot.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/david/catkin_ws/build/ecebot/catkin_generated/installspace/ecebot.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ecebot/cmake" TYPE FILE FILES
-    "/home/user/catkin_ws/build/ecebot/catkin_generated/installspace/ecebotConfig.cmake"
-    "/home/user/catkin_ws/build/ecebot/catkin_generated/installspace/ecebotConfig-version.cmake"
+    "/home/david/catkin_ws/build/ecebot/catkin_generated/installspace/ecebotConfig.cmake"
+    "/home/david/catkin_ws/build/ecebot/catkin_generated/installspace/ecebotConfig-version.cmake"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ecebot" TYPE FILE FILES "/home/user/catkin_ws/src/ecebot/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ecebot" TYPE FILE FILES "/home/david/catkin_ws/src/ecebot/package.xml")
 endif()
 

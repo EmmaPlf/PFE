@@ -33,6 +33,8 @@ private:
   int16_t yaw_rate; // dénivelé ?
   uint32_t station_id;
   uint64_t count;
+  int8_t qw;
+  int8_t qz;
   bool has_platoon;
   bool head;
   bool init;
@@ -71,6 +73,8 @@ public:
   bool getHasPlatoon();
   bool getHead();
   bool getInit();
+  int8_t getQz();
+  int8_t getQw();
 
   ros::Publisher getPubEce_C();
   ros::Publisher getPubDENM_C();
@@ -99,6 +103,8 @@ public:
   void setHasPlatoon(bool has_platoon);
   void setHead(bool head);
   void setInit(bool init);
+  void setQz(int8_t qz);
+  void setQw(int8_t qw);
 
   void setPubEce_C(ros::Publisher pub);
   void setPubDENM_C(ros::Publisher pub);

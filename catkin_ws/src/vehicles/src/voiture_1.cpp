@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
   // INIT
   ros::init(argc, argv, "vehicle_1");
   ros::Time::init();
-  ros::Rate loop_rate(0.6);
+  ros::Rate loop_rate(10);
   // ros::MultiThreadedSpinner spinner(4);
 
   // Construction d'un véhicule
