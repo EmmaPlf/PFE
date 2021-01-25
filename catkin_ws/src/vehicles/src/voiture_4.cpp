@@ -13,6 +13,7 @@ int main(int argc, char **argv) {
   ros::init(argc, argv, "vehicle_4");
   ros::Time::init();
   ros::Rate loop_rate(10);
+  uint8_t rank = 0;
 
   // TODO /ODOM Changer quand on aura plusieurs vehicules
   Vehicles v4 = Vehicles("tb3_3/odom", STATION_ID);
@@ -32,20 +33,30 @@ int main(int argc, char **argv) {
     // Envoyer CAM en boucle au controler
     v4.fill_cam_data(ID_CONTROLER);
 
-    // Si le véhicule est le véhicule de tête
-    if (v4.getHead() == true) {
+    // Parcourir le platoon du véhicule
+    std::map<uint8_t, uint8_t> map_rank = v4.getPlatoon().getMapRank();
+    std::map<uint8_t, uint8_t>::iterator it = map_rank.begin();
+    while (it != map_rank.end()) {
 
-      // Parcourir le platoon du véhicule
-      std::map<uint8_t, uint8_t> map_rank = v4.getPlatoon().getMapRank();
-      std::map<uint8_t, uint8_t>::iterator it = map_rank.begin();
-      while (it != map_rank.end()) {
-        // Si l'ID du véhicule n'est pas celui parcouru dans la map du platoon
-        if (it->first != v4.getStationId()) {
-          // Envoyer CAM en boucle au véhicule correspondant à l'ID
-          v4.fill_cam_data(it->first);
-          ROS_INFO("Envoie message CAM au véhicule : %d", it->first);
-        }
+      // Récupérer le rang de la voiture actuelle
+      if (it->first == v4.getStationId()) {
+        rank = it->second;
       }
+      it++;
+    }
+
+    // Parcourir le platoon du véhicule
+    it = map_rank.begin();
+    while (it != map_rank.end()) {
+
+      // Si l'ID du véhicule n'est pas celui parcouru dans la map du
+      // platoon et que son rang est supérieur + 1
+      if ((it->first != v4.getStationId()) && (it->second == rank + 1)) {
+        // Envoyer CAM en boucle au véhicule correspondant à l'ID
+        v4.fill_cam_data(it->first);
+        ROS_INFO("Envoie message CAM au vehicule : %d", it->first);
+      }
+      it++;
     }
 
     loop_rate.sleep();
