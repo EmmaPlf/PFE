@@ -58,6 +58,7 @@ add_message_files(
   simu_CAM.msg
   PositionConfidenceEllipse.msg
   Altitude.msg
+  simu_ECE.msg
 )
 
 ## Generate services in the 'srv' folder
