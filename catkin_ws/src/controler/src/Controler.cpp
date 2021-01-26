@@ -13,17 +13,20 @@ Controler::Controler() {
   this->sub_ece = this->n.subscribe<ece_msgs::ecemsg>(
       "controler_ece", 1000, boost::bind(sub_ece_callback, _1, this));
 
-  this->sub_DENM = this->n.subscribe<etsi_msgs::DENM>(
-      "controler_DENM", 1000, boost::bind(sub_DENM_callback, _1, this));
+  //   this->sub_DENM = this->n.subscribe<etsi_msgs::DENM>(
+  //       "controler_DENM", 1000, boost::bind(sub_DENM_callback, _1, this));
 
   this->sub_CAM = this->n.subscribe<etsi_msgs::CAM>(
-      "controler_CAM", 10000, boost::bind(sub_CAM_callback, _1, this));
+      "controler_CAM", 1000000, boost::bind(sub_CAM_callback, _1, this));
+
+  this->sub_SPAT = this->n.subscribe<etsi_msgs::SPAT>(
+      "controler_SPAT", 1000000, boost::bind(sub_SPAT_callback, _1, this));
 
   /// PUBLISHERS
 
   this->pub_ece = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece", 1000);
 
-  this->pub_DENM = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
+  // this->pub_DENM = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM", 1000);
 }
 
 /// DESTRUCTEURS
@@ -45,6 +48,8 @@ ros::Subscriber Controler::getSubEce() { return this->sub_ece; }
 ros::Subscriber Controler::getSubCAM() { return this->sub_CAM; }
 
 ros::Subscriber Controler::getSubDENM() { return this->sub_DENM; }
+
+ros::Subscriber Controler::getSubSPAT() { return this->sub_SPAT; }
 
 uint64_t Controler::getCount() { return this->count; }
 
@@ -69,6 +74,8 @@ void Controler::setSubEce(ros::Subscriber sub) { this->sub_ece = sub; }
 void Controler::setSubCAM(ros::Subscriber sub) { this->sub_CAM = sub; }
 
 void Controler::setSubDENM(ros::Subscriber sub) { this->sub_DENM = sub; }
+
+void Controler::setSubSPAT(ros::Subscriber sub) { this->sub_SPAT = sub; }
 
 void Controler::setCount(uint64_t count) { this->count = count; }
 
@@ -340,76 +347,6 @@ uint8_t Controler::insert_send(Platoon p) {
   ROS_INFO("Insert send by controler");
 }
 
-// uint8_t Controler::insert_receive(ece_msgs::ecemsg &msg) {
-
-//   // Header
-//   uint8_t header_station_id = msg.its_header.station_id;
-//   uint8_t header_message_id = msg.its_header.message_id;
-
-//   if (header_message_id != ECE_ID) {
-//     return 0;
-//   }
-
-//   // Expéditeur
-//   uint8_t exp_id = msg.basic_container.ID_exp;
-
-//   // Check confirmation insertion : si faux on supprime
-//   if (msg.insertion.confirmation_insertion == false) {
-
-//     // Chercher le platoon correspondant de la voiture
-//     if (!this->vector_p.empty()) {
-
-//       std::vector<Platoon>::iterator it_p = this->getVectorP().begin();
-//       std::map<uint8_t, uint8_t>::iterator it_m = it_p->getMapRank().begin();
-
-//       while (it_p != this->getVectorP().end()) {
-
-//         while (it_m != it_p->getMapRank().end()) {
-
-//           // Vérifier si véhicule présent dans platoon avec ID
-//           if (it_m->first == exp_id) {
-
-//             // Retirer la voiture du platoon (map)
-//             it_p->erase_map_elmt(it_m);
-
-//             // Décrémenter nb_véhicules du platoon
-//             it_p->setNbVehicles(it_p->getNbVehicles() - 1);
-//           }
-//         }
-//       }
-//     }
-//   }
-
-//   return 1;
-// }
-
-// /** A FINIR
-//  */
-// uint8_t Controler::insert_send(uint8_t id_dest) {
-
-//   // Créer un message
-//   ece_msgs::ecemsg msg;
-
-//   // Headers
-//   this->fill_header(msg, ECE_FRAME, ECE_ID);
-
-//   // Remplir  basic_container
-//   msg.basic_container.ID_exp = STATION_ID;
-//   msg.basic_container.ID_dest = id_dest;
-//   msg.basic_container.phase.value = 1; // INSERTION
-
-//   // Calculer position d'insertion
-
-//   // Indiquer la position d'insertion
-//   msg.insertion.reference_position = ? ? ? ;
-
-//   // Envoyer message sur topic des véhicules
-//   if (ros::ok()) {
-//     // this->getPubEce().publish(msg);
-//     this->publish_ece_msg(msg);
-//   }
-// }
-
 // A finir mais plutôt compliqué pour le moment
 uint8_t Controler::desinsert_receive(ece_msgs::ecemsg &msg) {
 
@@ -538,20 +475,6 @@ void Controler::desinsert_send() {
 }
 */
 
-// Plus tard
-uint8_t Controler::feux(ece_msgs::ecemsg &msg) {
-
-  // Si feu on envoie quelque chose
-  // Envoyer ok ou non au platoon pour passer le feu
-}
-
-// Plus tard
-uint8_t Controler::freinage_urg(ece_msgs::ecemsg &msg) {
-
-  // ??? Reçoit d'un véhicule message freinage urgence
-  // Renvoie aux autres véhicules l'info ?
-}
-
 void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &p_msg,
                                  Controler *c) {
 
@@ -570,27 +493,13 @@ void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &p_msg,
     // Récup véhicules avec destinations pour créer un platoon
     // Envoie ensuite les infos à chaque véhicule concerné
     rep = c->init_receive(msg);
-    // TODO rep == 0 ? (erreur)
-    break;
-
-  case 1:
-    // Véhicule souhaitant s'insérer ? Ou uniquement confirmation insertion
-    // ?
-    // rep = c->insert_receive(msg);
-    // TODO rep == 0 ? (erreur)
     break;
 
   case 2:
     rep = c->desinsert_receive(msg);
-    // TODO rep == 0 ? (erreur)
     break;
 
   case 3:
-    // Réception ici de message venant de feux
-    // traitement_feux(msg, p);
-    break;
-
-  case 4:
     // ??? Reçoit d'un véhicule message freinage urgence
     // Renvoie aux autres véhicules l'info ?
     // traitement_freinage_urg(msg, p);
@@ -614,6 +523,66 @@ uint8_t Controler::sub_DENM_callback(const etsi_msgs::DENM::ConstPtr &msg,
 
   // Récupérer expéditeur
   uint8_t exp = msg->its_header.station_id;
+}
+
+uint8_t Controler::sub_SPAT_callback(const etsi_msgs::SPAT::ConstPtr &msg,
+                                     Controler *c) {
+  uint8_t ret = 1;
+  // ROS_INFO("I have received SPAT msg, val: %d", msg->state);
+
+  // Vérifier que c'est bien un DENM
+  //   uint8_t denm_id = msg->its_header.message_id;
+  //   if (denm_id != DENM_ID) {
+  //     return 0;
+  //   }
+
+  // Récupérer expéditeur
+  // uint8_t exp = msg->its_header.station_id;
+  uint8_t id_head = 0;
+  int32_t lat_light = 0;
+  int32_t lon_light = 0;
+  bool perm = msg->state;
+  Position pos_light = Position(lat_light, lon_light, 0);
+
+  // Parcourir le vecteur de platoon
+  std::vector<Platoon>::iterator it = c->getVectorP().begin();
+  while (it != c->getVectorP().end()) {
+    // Récup position de la voiture de tête
+    std::map<uint8_t, uint8_t> map_rank = it->getMapRank();
+    std::map<uint8_t, uint8_t>::iterator it_m = map_rank.begin();
+    while (it_m != map_rank.end()) {
+      if (it_m->second == 0) {
+
+        // Recup id véhicule de tête
+        id_head = it_m->first;
+
+        // Recup vehicule de tête dans le vecteur de tête
+        std::vector<Vehicle>::iterator it_v = c->getVectorV().begin();
+        while (it_v != c->getVectorV().end()) {
+          if (id_head == it_v->getId()) {
+
+            // Check la zone par rapport à position du feu et feu rouge
+            if (true) // pos_light.compareZone(it_v->getActualPos()))
+            {
+
+              // Envoyer message ece
+              ece_msgs::ecemsg ece_msg;
+              c->fill_header(ece_msg, ECE_FRAME, ECE_ID);
+              ece_msg.basic_container.ID_exp = STATION_ID;
+              ece_msg.basic_container.phase.value = LIGHT_PHASE;
+              ece_msg.basic_container.ID_dest = id_head;
+              ece_msg.feu.permission_feu = perm;
+              c->publish_ece_msg(ece_msg);
+            }
+          }
+          it_v++;
+        }
+      }
+      it_m++;
+    }
+
+    it++;
+  }
 }
 
 uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,

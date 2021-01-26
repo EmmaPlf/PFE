@@ -1,6 +1,7 @@
 #include "../../devel/include/ece_msgs/ecemsg.h"
 #include "../../devel/include/etsi_msgs/CAM.h"
 #include "../../devel/include/etsi_msgs/DENM.h"
+#include "../../devel/include/etsi_msgs/SPAT.h"
 #include "Platoon.h"
 #include "ros/ros.h"
 #include <vector>
@@ -36,6 +37,7 @@ private:
   ros::Subscriber sub_ece;
   ros::Subscriber sub_DENM;
   ros::Subscriber sub_CAM;
+  ros::Subscriber sub_SPAT;
   ros::NodeHandle n;
   uint64_t count;
 
@@ -50,6 +52,7 @@ public:
   ros::Subscriber getSubEce();
   ros::Subscriber getSubCAM();
   ros::Subscriber getSubDENM();
+  ros::Subscriber getSubSPAT();
   uint64_t getCount();
   ros::NodeHandle getNodeHandle();
 
@@ -60,6 +63,7 @@ public:
   void setSubEce(ros::Subscriber sub);
   void setSubCAM(ros::Subscriber sub);
   void setSubDENM(ros::Subscriber sub);
+  void setSubSPAT(ros::Subscriber sub);
   void setCount(uint64_t count);
   void setNodeHandle(ros::NodeHandle n);
 
@@ -69,6 +73,8 @@ public:
                                    Controler *c);
   static uint8_t sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
                                   Controler *c);
+  static uint8_t sub_SPAT_callback(const etsi_msgs::SPAT::ConstPtr &msg,
+                                   Controler *c);
 
   // Ajouter un véhicule
   void add_vehicle(Vehicle v);
