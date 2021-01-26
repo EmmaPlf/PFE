@@ -2,7 +2,6 @@
 #include "../../devel/include/etsi_msgs/CAM.h"
 #include "../../devel/include/etsi_msgs/DENM.h"
 #include "../../devel/include/simu_msgs/simu_CAM.h"
-#include "../../devel/include/simu_msgs/simu_ECE.h"
 #include "Platoon.h"
 #include "nav_msgs/Odometry.h"
 #include "ros/ros.h"
@@ -23,7 +22,6 @@
 #define DESINSERT_PHASE 2
 #define LIGHT_PHASE 3
 #define BRAKE_PHASE 4
-#define FREQ 5
 
 class Vehicles {
 
@@ -32,9 +30,11 @@ private:
   Position dest;
   Platoon platoon;
   int8_t velocity;
-  int16_t yaw_rate;
+  int16_t yaw_rate; // dénivelé ?
   uint32_t station_id;
   uint64_t count;
+  int8_t qw;
+  int8_t qz;
   bool has_platoon;
   bool head;
   bool init;
@@ -49,15 +49,13 @@ private:
   ros::Publisher pub_CAM_V;
 
   ros::Publisher pub_simu_CAM;
-  ros::Publisher pub_simu_ECE;
 
   ros::Subscriber sub_ece_V;
   ros::Subscriber sub_DENM_V;
   ros::Subscriber sub_CAM_V;
   ros::Subscriber sub_odom;
 
-  // TEST
-  // ros::Subscriber sub_simu_ECE;
+  ros::Subscriber sub_simu_CAM;
 
 public:
   Vehicles(char *odom_topic, uint32_t station_id);
@@ -75,6 +73,8 @@ public:
   bool getHasPlatoon();
   bool getHead();
   bool getInit();
+  int8_t getQz();
+  int8_t getQw();
 
   ros::Publisher getPubEce_C();
   ros::Publisher getPubDENM_C();
@@ -84,14 +84,12 @@ public:
   ros::Publisher getPubCAM_V();
 
   ros::Publisher getPubSimuCAM();
-  ros::Publisher getPubSimuECE();
 
   ros::Subscriber getSubEce_V();
   ros::Subscriber getSubDENM_V();
   ros::Subscriber getSubCAM_V();
 
-  // TEST
-  // ros::Subscriber getSubSimuECE();
+  ros::Subscriber getSubSimuCAM();
 
   // SETTERS
   void setDest(Position dest);
@@ -105,6 +103,8 @@ public:
   void setHasPlatoon(bool has_platoon);
   void setHead(bool head);
   void setInit(bool init);
+  void setQz(int8_t qz);
+  void setQw(int8_t qw);
 
   void setPubEce_C(ros::Publisher pub);
   void setPubDENM_C(ros::Publisher pub);
@@ -114,14 +114,12 @@ public:
   void setPubCAM_V(ros::Publisher pub);
 
   void setPubSimuCAM(ros::Publisher pub);
-  void setPubSimuECE(ros::Publisher pub);
 
   void setSubEce_V(ros::Subscriber sub);
   void setSubDENM_V(ros::Subscriber sub);
   void setSubCAM_V(ros::Subscriber sub);
 
-  // TEST
-  // void setSubSimuECE(ros::Subscriber sub);
+  void setSubSimuCAM(ros::Subscriber sub);
 
   /// CALL BACK
 
@@ -132,9 +130,8 @@ public:
   static void sub_CAM_V_callback(const etsi_msgs::CAM::ConstPtr &msg,
                                  Vehicles *v);
 
-  // TEST
-  // static void sub_simu_ECE_callback(const simu_msgs::simu_ECE::ConstPtr &msg,
-  //                                Vehicles *v);
+  static void sub_simu_CAM_callback(const simu_msgs::simu_CAM::ConstPtr &msg,
+                                    Vehicles *v);
 
   static void odom_callback(const nav_msgs::Odometry::ConstPtr &msg,
                             Vehicles *v);
@@ -142,6 +139,7 @@ public:
   // METHODS
 
   uint8_t insert_receive(const ece_msgs::ecemsg::ConstPtr &msg);
+  // uint8_t insert_receive(const ece_msgs::ecemsg::ConstPtr &msg);
   uint8_t desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg);
   uint8_t light_receive(const ece_msgs::ecemsg::ConstPtr &msg);
   uint8_t brake_receive(const ece_msgs::ecemsg::ConstPtr &msg);
@@ -154,7 +152,6 @@ public:
   uint8_t publish_DENM_msg_V(etsi_msgs::DENM msg);
   uint8_t publish_CAM_msg_V(etsi_msgs::CAM msg);
   uint8_t publish_simu_CAM_msg(simu_msgs::simu_CAM msg);
-  uint8_t publish_simu_ECE_msg(simu_msgs::simu_ECE msg);
 
   void fill_ece_data(uint32_t id_dest, uint8_t phase, uint8_t part);
   void fill_cam_data(uint32_t id_dest);

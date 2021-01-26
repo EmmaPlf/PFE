@@ -8,6 +8,7 @@ void messageCallback(const etsi_msgs::CAM::ConstPtr &msg) {
   ROS_INFO("/n posX: [%ld]", msg->reference_position.longitude);
   ROS_INFO("/n posY: [%ld]", msg->reference_position.latitude);
   ROS_INFO("/n posZ: [%d]", msg->reference_position.altitude);
+
   ROS_INFO("/n confZ: [%d]", msg->reference_position.altitude.confidence);
   ROS_INFO("/n Acceleration: [%d]",
            msg->high_frequency_container.longitudinal_acceleration.value);

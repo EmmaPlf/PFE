@@ -22,16 +22,13 @@ Vehicles::Vehicles(char *odom_topic, uint32_t station_id)
   this->pub_simu_CAM =
       this->n.advertise<simu_msgs::simu_CAM>("vehicles_simu_CAM", 1000);
 
-  this->pub_simu_ECE =
-      this->n.advertise<simu_msgs::simu_ECE>("vehicles_simu_ECE", 1000);
-
   /// SUBSCRIBERS
 
   this->sub_odom = this->n.subscribe<nav_msgs::Odometry>(
       odom_topic, 1000, boost::bind(odom_callback, _1, this));
 
   this->sub_ece_V = this->n.subscribe<ece_msgs::ecemsg>(
-      "vehicles_ece", 100000, boost::bind(sub_ece_V_callback, _1, this));
+      "vehicles_ece", 1000, boost::bind(sub_ece_V_callback, _1, this));
 
   this->sub_DENM_V = this->n.subscribe<etsi_msgs::DENM>(
       "vehicles_DENM", 1000, boost::bind(sub_DENM_V_callback, _1, this));
@@ -39,9 +36,8 @@ Vehicles::Vehicles(char *odom_topic, uint32_t station_id)
   this->sub_CAM_V = this->n.subscribe<etsi_msgs::CAM>(
       "vehicles_CAM", 1000, boost::bind(sub_CAM_V_callback, _1, this));
 
-  //   this->sub_simu_ECE = this->n.subscribe<simu_msgs::simu_ECE>(
-  //       "vehicles_simu_ECE", 100000,
-  //       boost::bind(sub_simu_ECE_callback, _1, this));
+  this->sub_simu_CAM = this->n.subscribe<simu_msgs::simu_CAM>(
+      "vehicles_simu_CAM", 1000, boost::bind(sub_simu_CAM_callback, _1, this));
 }
 
 /// DESTRUCTEUR
@@ -72,6 +68,11 @@ bool Vehicles::getHead() { return this->head; }
 
 bool Vehicles::getInit() { return this->init; }
 
+int8_t Vehicles::getQz() { return this->qz; }
+
+int8_t Vehicles::getQw() { return this->qw; }
+
+
 // getPub
 ros::Publisher Vehicles::getPubEce_C() { return this->pub_ece_C; }
 
@@ -87,8 +88,6 @@ ros::Publisher Vehicles::getPubCAM_V() { return this->pub_CAM_V; }
 
 ros::Publisher Vehicles::getPubSimuCAM() { return this->pub_simu_CAM; }
 
-ros::Publisher Vehicles::getPubSimuECE() { return this->pub_simu_ECE; }
-
 // getSub
 ros::Subscriber Vehicles::getSubEce_V() { return this->sub_ece_V; }
 
@@ -96,9 +95,7 @@ ros::Subscriber Vehicles::getSubDENM_V() { return this->sub_DENM_V; }
 
 ros::Subscriber Vehicles::getSubCAM_V() { return this->sub_CAM_V; }
 
-// TEST
-
-// ros::Subscriber Vehicles::getSubSimuECE() { return this->sub_simu_ECE; }
+ros::Subscriber Vehicles::getSubSimuCAM() { return this->sub_simu_CAM; }
 
 /// SETTERS
 
@@ -130,6 +127,11 @@ void Vehicles::setHead(bool head) { this->head = head; }
 
 void Vehicles::setInit(bool init) { this->init = init; }
 
+void Vehicles::setQz(int8_t qz) { this->qz = qz; }
+
+void Vehicles::setQw(int8_t qw) { this->qw = qw; }
+
+
 // setPub
 void Vehicles::setPubEce_C(ros::Publisher pub) { this->pub_ece_C = pub; }
 
@@ -152,9 +154,7 @@ void Vehicles::setSubDENM_V(ros::Subscriber sub) { this->sub_DENM_V = sub; }
 
 void Vehicles::setSubCAM_V(ros::Subscriber sub) { this->sub_CAM_V = sub; }
 
-// TEST
-// void Vehicles::setSubSimuECE(ros::Subscriber sub) { this->sub_simu_ECE = sub;
-// }
+void Vehicles::setSubSimuCAM(ros::Subscriber sub) { this->sub_simu_CAM = sub; }
 
 /// METHODS
 uint8_t Vehicles::insert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
@@ -215,6 +215,33 @@ void Vehicles::fill_platoon(const ece_msgs::ecemsg::ConstPtr &msg) {
   this->setInit(true);
 }
 
+// uint8_t Vehicles::insert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
+
+//   // Récupère les informations utiles pour l'initialisation
+//   ROS_INFO("I have received ece msg, insertion message !");
+
+//   // Header
+//   uint8_t header_station_id = msg->its_header.station_id;
+//   uint8_t header_message_id = msg->its_header.message_id;
+
+//   // Ref Position
+//   int64_t lon = msg->insertion.point_insertion.longitude;
+//   int64_t lat = msg->insertion.point_insertion.latitude;
+
+//   // Altitude:
+//   int32_t altValue = msg->insertion.point_insertion.altitude;
+
+//   // Confirmation insertion
+//   bool checkInsert = msg->insertion.confirmation_insertion;
+
+//   /// FAIRE QUELQUE CHOSE AVEC LE ROBOT
+
+//   // Puis confirmer insertion avec message ECE
+//   this->fill_ece_data(ID_CONTROLER, INSERT_PHASE, 0);
+
+//   return 1;
+// }
+
 uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 
   // Récupère les informations utiles pour désinsertion
@@ -241,6 +268,8 @@ uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   // Confirmation insertion
   uint8_t position = msg->desinsertion.position;
 
+  /// FAIRE QUELQUE CHOSE AVEC LE ROBOT
+
   // Puis confirmer desinsertion avec message ECE
   this->fill_ece_data(ID_CONTROLER, DESINSERT_PHASE, 1);
 
@@ -250,26 +279,16 @@ uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 uint8_t Vehicles::light_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 
   // Récupère les informations utiles pour l'initialisation
-  ROS_INFO("I have received traffic light message PERM : %d!",
-           msg->feu.permission_feu);
+  ROS_INFO("I have received ece msg, traffic light message !");
 
-  // Message reçu
-  uint8_t id_exp = msg->its_header.station_id;
+  // Header
+  uint8_t header_station_id = msg->its_header.station_id;
   uint8_t header_message_id = msg->its_header.message_id;
-  uint8_t id_dest = msg->basic_container.ID_dest;
+
+  /// feu de signalisation
   bool permission = msg->feu.permission_feu;
 
-  // Message envoyé
-  simu_msgs::simu_ECE simu_msg;
-  simu_msg.header.stamp = ros::Time::now();
-  simu_msg.header.frame_id = ECE_FRAME_ID;
-  simu_msg.dest = this->getStationId();
-  simu_msg.permission = permission;
-
-  // Envoyer sur simu_ECE si c'ets pour nous
-  if (id_dest == this->getStationId()) {
-    this->publish_simu_ECE_msg(simu_msg);
-  }
+  /// FAIRE QUELQUECHOSE AVEC ROBOT GENRE PASSER OU RALENTIR
 
   return 1;
 }
@@ -378,16 +397,18 @@ void Vehicles::sub_CAM_V_callback(const etsi_msgs::CAM::ConstPtr &msg,
   uint8_t header_message_id = msg->its_header.message_id;
 }
 
-// TEST
-// void Vehicles::sub_simu_ECE_callback(const simu_msgs::simu_ECE::ConstPtr
-// &msg,
-//                                      Vehicles *v) {
+// Fonction qui remplace les CAM
+void Vehicles::sub_simu_CAM_callback(const simu_msgs::simu_CAM::ConstPtr &msg,
+                                     Vehicles *v) {
 
-//   if (msg->dest == v->getStationId()) {
-//     // ROS_INFO("I have received simu ECE msg permission: %d",
-//     msg->permission);
-//   }
-// }
+  // Header
+  uint8_t header_station_id = msg->its_header.station_id;
+  uint8_t header_message_id = msg->its_header.message_id;
+
+  //   if (msg->dest == v->getStationId()) {
+  //     ROS_INFO("I have received CAM msg");
+  //   }
+}
 
 // Publish
 // to CONTROLER
@@ -408,26 +429,28 @@ uint8_t Vehicles::publish_DENM_msg_C(etsi_msgs::DENM msg) {
   this->pub_DENM_C.publish(msg);
 }
 
-// TO VEHICLE
-
+// to VEHICLE
 uint8_t Vehicles::publish_ece_msg_V(ece_msgs::ecemsg msg) {
+  // this->pub_ece_V = this->n.advertise<ece_msgs::ecemsg>("vehicles_ece",
+  // 1000);
   this->pub_ece_V.publish(msg);
 }
 
 uint8_t Vehicles::publish_CAM_msg_V(etsi_msgs::CAM msg) {
+  // this->pub_CAM_V = this->n.advertise<etsi_msgs::CAM>("vehicles_CAM", 1000);
   this->pub_CAM_V.publish(msg);
 }
 
 uint8_t Vehicles::publish_DENM_msg_V(etsi_msgs::DENM msg) {
+  // this->pub_DENM_V = this->n.advertise<etsi_msgs::DENM>("vehicles_DENM",
+  // 1000);
   this->pub_DENM_V.publish(msg);
 }
 
 uint8_t Vehicles::publish_simu_CAM_msg(simu_msgs::simu_CAM msg) {
+  //  this->pub_simu_CAM =
+  //  this->n.advertise<simu_msgs::simu_CAM>("vehicles_simu_CAM", 1000);
   this->pub_simu_CAM.publish(msg);
-}
-
-uint8_t Vehicles::publish_simu_ECE_msg(simu_msgs::simu_ECE msg) {
-  this->pub_simu_ECE.publish(msg);
 }
 
 void Vehicles::odom_callback(const nav_msgs::Odometry::ConstPtr &msg,
@@ -443,8 +466,7 @@ void Vehicles::odom_callback(const nav_msgs::Odometry::ConstPtr &msg,
   v->velocity = (int8_t)sqrt(pow(msg->twist.twist.linear.x, 2) +
                              pow(msg->twist.twist.linear.y, 2));
 
-  v->yaw_rate =
-      msg->twist.twist.angular.z * 1024; // conversion rad/s to 0.01 degree/s
+  v->yaw_rate = msg->twist.twist.angular.z * 1024; // conversion rad/s to 0.01 degree/s
 
   //   ROS_INFO("odom_callback : x : %f", v.getActualPos().getLon());
   //   ROS_INFO("odom_callback : y : %f", v.getActualPos().getLat());

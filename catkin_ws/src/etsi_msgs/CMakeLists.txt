@@ -85,7 +85,6 @@ add_message_files(
   VehicleRole.msg
   VehicleWidth.msg
   YawRate.msg
-  SPAT.msg
 )
 
 ## Generate services in the 'srv' folder
