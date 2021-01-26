@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
     }
 
     // Envoyer CAM en boucle au controler
-    v1.fill_cam_data(ID_CONTROLER);
+    // v1.fill_cam_data(ID_CONTROLER);
 
     // Parcourir le platoon du véhicule
     std::map<uint8_t, uint8_t> map_rank = v1.getPlatoon().getMapRank();

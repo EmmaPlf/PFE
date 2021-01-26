@@ -78,7 +78,7 @@ def callback(data):
 
     # kp=1 #0.75
     # kv=1.25 #1
-    vmax=1 #0.75
+    vmax=1#0.75
     kp_angle = 1.6
     kd_angle = 1.8
 

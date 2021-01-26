@@ -20,16 +20,16 @@
   <arg name="third_tb3_z_pos" default=" 0.0"/>
   <arg name="third_tb3_yaw"   default=" 0.0"/>
 
-  <arg name="fourth_tb3_x_pos" default="-2.1"/>
-  <arg name="fourth_tb3_y_pos" default=" 0"/>
+  <arg name="fourth_tb3_x_pos" default="0"/>
+  <arg name="fourth_tb3_y_pos" default=" 2.5"/>
   <arg name="fourth_tb3_z_pos" default=" 0.0"/>
-  <arg name="fourth_tb3_yaw"   default=" 0"/>
+  <arg name="fourth_tb3_yaw"   default=" -3.14"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <!-- <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_house.world"/> -->
     <!-- <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/empty.world"/> -->
-    <!-- <arg name="world_name" value="$(find ecebot)/world/simple_map.world"/> -->
-    <arg name="world_name" value="$(find ecebot)/world/small_cubes.world"/>
+    <arg name="world_name" value="$(find ecebot)/world/simple_map.world"/>
+    <!-- <arg name="world_name" value="$(find ecebot)/world/small_cubes.world"/> -->
     <arg name="paused" value="true"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
@@ -81,14 +81,15 @@
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg fourth_tb3) -x $(arg fourth_tb3_x_pos) -y $(arg fourth_tb3_y_pos) -z $(arg fourth_tb3_z_pos) -Y $(arg fourth_tb3_yaw) -param robot_description" />
   </group>
 
+
   <node pkg="ecebot" name="path_turtle" type="path_turtle.py" args="oui" output="screen"/>
   <node pkg="vehicles" name="voiture_1" type="voiture_1" output="screen"/>
   <node pkg="vehicles" name="voiture_2" type="voiture_2" output="screen"/>
-  <node pkg="controler" name="controler" type="controler" output="screen"/>
   <!-- <node pkg="vehicles" name="voiture_3" type="voiture_3" output="screen"/> -->
   <!-- <node pkg="vehicles" name="voiture_4" type="voiture_4" output="screen"/> -->
+  <!-- <node pkg="controler" name="controler" type="controler" output="screen"/> -->
   <node pkg="ecebot" name="following_turtles_2" type="following_turtles.py" args="2" output="screen"/>
   <node pkg="ecebot" name="following_turtle_3" type="following_turtles.py" args="3" output="screen"/>
-  <node pkg="ecebot" name="following_turtle_4" type="following_turtles.py" args="4" output="screen"/>
+  <!-- <node pkg="ecebot" name="following_turtle_4" type="following_turtles.py" args="4" output="screen"/> -->
 
 </launch>

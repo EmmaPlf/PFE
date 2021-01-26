@@ -13,12 +13,16 @@
           <iyz>0</iyz>
           <izz>0.166667</izz>
         </inertia>
-      </inertial>
-      <visual name='visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <gravity>1</gravity>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <visual name='visual'>
+        <pose frame=''>0 0 -0.1 0 -0 0</pose>
         <geometry>
           <box>
-            <size>1 1 1</size>
+            <size>0.8 0.8 0.8</size>
           </box>
         </geometry>
         <material>
@@ -31,6 +35,9 @@
           <diffuse>0.7 0.7 0.7 1</diffuse>
           <specular>0.01 0.01 0.01 1</specular>
           <emissive>0 0 0 1</emissive>
+          <shader type='vertex'>
+            <normal_map>__default__</normal_map>
+          </shader>
         </material>
         <cast_shadows>1</cast_shadows>
         <transparency>0</transparency>
@@ -38,10 +45,10 @@
       <collision name='collision'>
         <laser_retro>0</laser_retro>
         <max_contacts>10</max_contacts>
-        <pose frame=''>0 0 0 0 -0 0</pose>
+        <pose frame=''>0 0 -0.1 0 -0 0</pose>
         <geometry>
           <box>
-            <size>1 1 1</size>
+            <size>0.8 0.8 0.8</size>
           </box>
         </geometry>
         <surface>
@@ -91,7 +98,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_2'>
+    <link name='link_1_clone'>
       <pose frame=''>1 1 0 0 -0 0</pose>
       <inertial>
         <mass>1</mass>
@@ -103,12 +110,15 @@
           <iyz>0</iyz>
           <izz>0.166667</izz>
         </inertia>
-      </inertial>
-      <visual name='visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <visual name='visual'>
+        <pose frame=''>0 0 -0.1 0 -0 0</pose>
         <geometry>
           <box>
-            <size>1 1 1</size>
+            <size>0.8 0.8 0.8</size>
           </box>
         </geometry>
         <material>
@@ -121,6 +131,9 @@
           <diffuse>0.7 0.7 0.7 1</diffuse>
           <specular>0.01 0.01 0.01 1</specular>
           <emissive>0 0 0 1</emissive>
+          <shader type='vertex'>
+            <normal_map>__default__</normal_map>
+          </shader>
         </material>
         <cast_shadows>1</cast_shadows>
         <transparency>0</transparency>
@@ -128,10 +141,10 @@
       <collision name='collision'>
         <laser_retro>0</laser_retro>
         <max_contacts>10</max_contacts>
-        <pose frame=''>0 0 0 0 -0 0</pose>
+        <pose frame=''>0 0 -0.1 0 -0 0</pose>
         <geometry>
           <box>
-            <size>1 1 1</size>
+            <size>0.8 0.8 0.8</size>
           </box>
         </geometry>
         <surface>
@@ -181,7 +194,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_3'>
+    <link name='link_1_clone_0'>
       <pose frame=''>-1 -1 0 0 -0 0</pose>
       <inertial>
         <mass>1</mass>
@@ -193,12 +206,15 @@
           <iyz>0</iyz>
           <izz>0.166667</izz>
         </inertia>
-      </inertial>
-      <visual name='visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <visual name='visual'>
+        <pose frame=''>0 0 -0.1 0 -0 0</pose>
         <geometry>
           <box>
-            <size>1 1 1</size>
+            <size>0.8 0.8 0.8</size>
           </box>
         </geometry>
         <material>
@@ -211,6 +227,9 @@
           <diffuse>0.7 0.7 0.7 1</diffuse>
           <specular>0.01 0.01 0.01 1</specular>
           <emissive>0 0 0 1</emissive>
+          <shader type='vertex'>
+            <normal_map>__default__</normal_map>
+          </shader>
         </material>
         <cast_shadows>1</cast_shadows>
         <transparency>0</transparency>
@@ -218,10 +237,10 @@
       <collision name='collision'>
         <laser_retro>0</laser_retro>
         <max_contacts>10</max_contacts>
-        <pose frame=''>0 0 0 0 -0 0</pose>
+        <pose frame=''>0 0 -0.1 0 -0 0</pose>
         <geometry>
           <box>
-            <size>1 1 1</size>
+            <size>0.8 0.8 0.8</size>
           </box>
         </geometry>
         <surface>
@@ -271,7 +290,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_4'>
+    <link name='link_1_clone_1'>
       <pose frame=''>1 -1 0 0 -0 0</pose>
       <inertial>
         <mass>1</mass>
@@ -283,12 +302,15 @@
           <iyz>0</iyz>
           <izz>0.166667</izz>
         </inertia>
-      </inertial>
-      <visual name='visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <visual name='visual'>
+        <pose frame=''>0 0 -0.1 0 -0 0</pose>
         <geometry>
           <box>
-            <size>1 1 1</size>
+            <size>0.8 0.8 0.8</size>
           </box>
         </geometry>
         <material>
@@ -301,6 +323,9 @@
           <diffuse>0.7 0.7 0.7 1</diffuse>
           <specular>0.01 0.01 0.01 1</specular>
           <emissive>0 0 0 1</emissive>
+          <shader type='vertex'>
+            <normal_map>__default__</normal_map>
+          </shader>
         </material>
         <cast_shadows>1</cast_shadows>
         <transparency>0</transparency>
@@ -308,10 +333,10 @@
       <collision name='collision'>
         <laser_retro>0</laser_retro>
         <max_contacts>10</max_contacts>
-        <pose frame=''>0 0 0 0 -0 0</pose>
+        <pose frame=''>0 0 -0.1 0 -0 0</pose>
         <geometry>
           <box>
-            <size>1 1 1</size>
+            <size>0.8 0.8 0.8</size>
           </box>
         </geometry>
         <surface>

@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
   uint8_t rank = 0;
 
   // TODO /ODOM Changer quand on aura plusieurs vehicules
-  Vehicles v3 = Vehicles("tb3_3/odom", STATION_ID);
+  Vehicles v3 = Vehicles("tb3_2/odom", STATION_ID);
   Position pos = Position(52, 52, 0);
   v3.setDest(pos);
 
@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
     ros::spinOnce();
 
     // Envoyer CAM en boucle au controler
-    v3.fill_cam_data(ID_CONTROLER);
+    // v3.fill_cam_data(ID_CONTROLER);
 
     // Parcourir le platoon du véhicule
     std::map<uint8_t, uint8_t> map_rank = v3.getPlatoon().getMapRank();

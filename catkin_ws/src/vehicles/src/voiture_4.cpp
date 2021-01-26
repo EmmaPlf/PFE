@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
     ros::spinOnce();
 
     // Envoyer CAM en boucle au controler
-    v4.fill_cam_data(ID_CONTROLER);
+    // v4.fill_cam_data(ID_CONTROLER);
 
     // Parcourir le platoon du véhicule
     std::map<uint8_t, uint8_t> map_rank = v4.getPlatoon().getMapRank();
