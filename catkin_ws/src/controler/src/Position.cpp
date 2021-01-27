@@ -45,3 +45,19 @@ uint8_t Position::compareZone(Position p) {
 
   return ret;
 }
+
+uint8_t Position::compareLightZone()
+{
+  uint8_t ret = 0;
+
+  // Position du feu :
+  // -1*1024 en lat
+  // -0.5*1024 et 0.5*1024 en long
+  if(((this->getLat() <= int64_t(-1*1024)) && (this->getLat() >= int64_t(-0.98*1024)) 
+  && ((this->getLon() >= int64_t(-0.5*1024)) && (this->getLon() <= int64_t(0.5*1024)))))
+  {
+    ret = 1;
+  }
+
+  return ret;
+}

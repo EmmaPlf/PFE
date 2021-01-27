@@ -539,8 +539,8 @@ uint8_t Controler::sub_SPAT_callback(const etsi_msgs::SPAT::ConstPtr &msg,
   // Récupérer expéditeur
   // uint8_t exp = msg->its_header.station_id;
   uint8_t id_head = 0;
-  int32_t lat_light = 0;
-  int32_t lon_light = 0;
+  int32_t lat_light = int64_t(-0.5 * 1024);
+  int32_t lon_light = int64_t(-0.5 * 1024);
   bool perm = msg->state;
   Position pos_light = Position(lat_light, lon_light, 0);
 
@@ -562,9 +562,8 @@ uint8_t Controler::sub_SPAT_callback(const etsi_msgs::SPAT::ConstPtr &msg,
           if (id_head == it_v->getId()) {
 
             // Check la zone par rapport à position du feu et feu rouge
-            if (true) // pos_light.compareZone(it_v->getActualPos()))
+            if (it_v->getActualPos().compareLightZone()) 
             {
-
               // Envoyer message ece
               ece_msgs::ecemsg ece_msg;
               c->fill_header(ece_msg, ECE_FRAME, ECE_ID);
