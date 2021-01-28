@@ -68,6 +68,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
     "/home/david/catkin_ws/src/etsi_msgs/msg/VehicleRole.msg"
     "/home/david/catkin_ws/src/etsi_msgs/msg/VehicleWidth.msg"
     "/home/david/catkin_ws/src/etsi_msgs/msg/YawRate.msg"
+    "/home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg"
     )
 endif()
 

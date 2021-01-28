@@ -6,15 +6,11 @@ import rospy
 import numpy as np
 import sys
 import genpy
-from math import atan2
-from math import sqrt
-from math import pi
-from math import cos
-from math import sin
+from math import atan2, sqrt, pi, cos, sin
 from geometry_msgs.msg import Twist, Point
 from turtlesim.msg import Pose
 from nav_msgs.msg import Odometry
-from simu_msgs.msg import simu_CAM
+from simu_msgs.msg import simu_CAM, simu_ECE
 from std_msgs.msg import Float32
 
 v=0.0
@@ -43,12 +39,14 @@ following = False
 old_last_pos_x = 0.0
 old_last_pos_y = 0.0
 dist_r3 = 0.0
+dist_r4 = 0.0
 xp_r3 = 0.0
 yp_r3 = 0.0
 err = 3
+green_light = True
 
 def callback_odom(data):
-    global v, omega, r1_ref, phi, err_angle, err_angle_prec,err_vit, err_vit_prec, theta_prec, mean, turning, theta_vit, robot_destinations, arg_bot, x, y, r4_path, dist_r3, err
+    global v, omega, r1_ref, phi, err_angle, err_angle_prec,err_vit, err_vit_prec, theta_prec, mean, turning, theta_vit, robot_destinations, arg_bot, x, y, r4_path, dist_r3, err, dist_r4
     
     x=data.pose.pose.position.x
     y=data.pose.pose.position.y
@@ -68,13 +66,7 @@ def callback_odom(data):
 
         kp_vit = 1
         kd_vit = 1.4
-        # kp_angle = 1.3
-        # kd_angle = 2
-
-        # kp_vit = 1.3
-        # kd_vit = 1.6
-        #print("xp-x",xp-x)
-        #print("yp-y",yp-y)
+      
         phi=atan2((yp-y),(xp-x))
         d=sqrt((xp-x)**2+(yp-y)**2)
 
@@ -111,13 +103,7 @@ def callback_odom(data):
 
         kp_vit = 1
         kd_vit = 1.4
-        # kp_angle = 1.3
-        # kd_angle = 2
-
-        # kp_vit = 1.3
-        # kd_vit = 1.6
-        #print("xp-x",xp-x)
-        #print("yp-y",yp-y)
+      
         phi=atan2((yp-y),(xp-x))
         d=sqrt((xp-x)**2+(yp-y)**2)
 
@@ -143,17 +129,19 @@ def callback_odom(data):
         else:
             v = kp_vit * d + kd_vit * (err_vit - err_vit_prec)
         err_vit_prec = err_vit
+        dist_r4  = (sqrt((xp_r3 - x)** 2 + (yp_r3 - y)** 2))
         err = (sqrt((xp_r3 - x)** 2 + (yp_r3 - y)** 2)) - dist_r3
-        print("xp_r3 = ", xp_r3)
-        print("yp_r3 = ", yp_r3)
-        print("dist_r3 = ", dist_r3)
-        print("err = ", err)
+        # print("xp_r3 = ", xp_r3)
+        # print("yp_r3 = ", yp_r3)
+        # print("dist_r3 = ", dist_r3)
+        # print("err = ", err)
     elif arg_bot == 4 and following == False:
+        dist_r4  = (sqrt((xp_r3 - x)** 2 + (yp_r3 - y)** 2))
         err = (sqrt((xp_r3 - x)** 2 + (yp_r3 - y)** 2)) - dist_r3
-        print("xp_r3 = ", xp_r3)
-        print("yp_r3 = ", yp_r3)
-        print("dist_r3 = ", dist_r3)
-        print("err = ", err)
+        # print("xp_r3 = ", xp_r3)
+        # print("yp_r3 = ", yp_r3)
+        # print("dist_r3 = ", dist_r3)
+        # print("err = ", err)
 
 
 
@@ -196,72 +184,10 @@ def callback_cam(data):
         old_last_pos_x = last_pos_x
         old_last_pos_y = last_pos_y
 
-
-    # if arg_bot == id_robot:
-    #     robot_rang = data.rank
-    #     interdistance = float(data.interdistance) / 1024
-    #     yawrate_head = float(data.yaw_rate) / 1024
-    #     head_pos_x = float(data.reference_position.latitude) / 1024
-    #     head_pos_y = float(data.reference_position.longitude) / 1024
-    #     distance = 0.0
-    #     # mean = 0.18 * yawrate_head + 0.82 * mean
-    #     r1_ref = np.append(r1_ref, [[head_pos_x, head_pos_y]], axis=0)
-    #     #chercher un point a ajouter a la liste des destinations grace a l'interdistance
-    #     for elem in r1_ref[::-1]:
-    #         # distance = sqrt((elem[0] - r1_ref[-1, 0])** 2 + (elem[1] - r1_ref[-1, 1])** 2)
-    #         distance = sqrt((elem[0] - head_pos_x)** 2 + (elem[1] - head_pos_y)** 2)
-    #         # print("elem =", elem)
-    #         # print("robot_dim = ", np.shape(robot_destinations))
-    #         # print("elem dim = ", np.shape(elem))
-    #         if distance >= interdistance * robot_rang and distance <= interdistance * robot_rang + 0.1:
-    #             # if not (elem in robot_destinations):
-    #             robot_destinations = np.append(robot_destinations, [elem], axis=0)
-    #             break
-        
-        # print("distance argbot ", arg_bot , " = ", distance)
-        # if arg_bot == 4:
-        #     print(robot_destinations[-1])
-
-        #cap = atan2((head_pos_y - yp_prev), (head_pos_x - xp_prev))
-        #r1_pos_x = head_pos_x - ((interdistance * robot_rang) * cos(cap))
-        #r1_pos_y = head_pos_y - ((interdistance * robot_rang) * sin(cap))
-        #r1_ref = np.append(r1_ref, [[r1_pos_x, r1_pos_y]], axis=0)
-
-        # r1_ref = np.append(r1_ref, [[head_pos_x, head_pos_y]], axis=0)
-        # print("mean = ", mean)
-
-        # print("angle_vit = ", theta_vit)
-        # if turning == False:
-        #     xp_prev = r1_ref[-1,0]
-        #     yp_prev = r1_ref[-1, 1]
-        #     cap = atan2((head_pos_y - yp_prev), (head_pos_x - xp_prev))
-        #     r1_pos_x = head_pos_x - ((interdistance * robot_rang) * cos(cap))
-        #     r1_pos_y = head_pos_y - ((interdistance * robot_rang) * sin(cap))
-        #     r1_ref = np.append(r1_ref, [[r1_pos_x, r1_pos_y]], axis=0)
-        # else:
-        #     xp_prev = r1_ref[-1,0]
-        #     yp_prev = r1_ref[-1,1]
-        #     cap = atan2((head_pos_y - yp_prev), (head_pos_x - xp_prev))
-        #     r1_pos_x = head_pos_x - ((abs(theta_vit) * 30 * robot_rang) * cos(cap))
-        #     r1_pos_y = head_pos_y - ((abs(theta_vit) * 30 * robot_rang) * sin(cap))
-        #     r1_ref = np.append(r1_ref, [[r1_pos_x, r1_pos_y]], axis=0)
-
-        # if mean > 0.8: # ne tourne pas
-        #     print("turning")
-        #     xp_prev = r1_ref[-1,0]
-        #     yp_prev = r1_ref[-1,1]
-        #     cap = atan2((head_pos_y - yp_prev), (head_pos_x - xp_prev))
-        #     r1_pos_x = head_pos_x - ((interdistance * robot_rang) * cos(cap))
-        #     r1_pos_y = head_pos_y - ((interdistance * robot_rang) * sin(cap))
-        #     r1_ref = np.append(r1_ref, [[r1_pos_x, r1_pos_y]], axis=0)
-        #     # r1_ref = np.append(r1_ref, [[head_pos_x, head_pos_y]], axis=0)
-        # else: # tourne
-        #     xp_prev = r1_ref[-1,0]
-        #     yp_prev = r1_ref[-1,1]
-        #     cap = atan2((head_pos_y - yp_prev), (head_pos_x - xp_prev))
-        #     r1_pos_x = head_pos_x - ((0.6 * robot_rang) * cos(cap))
-        #     r1_pos_y = head_pos_y - ((0.6 * robot_rang) * sin(cap))
-        #     r1_ref = np.append(r1_ref, [[r1_pos_x, r1_pos_y]], axis=0)
+def callback_ece(data):
+    global green_light
+    green_light = data.permission
+    print(green_light)
 
 def callback_dist_r3(msg):
     global dist_r3
@@ -277,6 +203,7 @@ def talker(arg):
     rospy.init_node('talker', anonymous=True)
     arg_bot = int(arg)
     cam_msg = rospy.Subscriber('vehicles_simu_CAM', simu_CAM, callback_cam)
+    ece_msg = rospy.Subscriber('vehicles_simu_ECE', simu_ECE, callback_ece)
     #on publish sur le bon topic pour le robot correspondant
     if arg_bot == 2:
         vel_t1 = rospy.Publisher('tb3_1/cmd_vel', Twist, queue_size=10)
@@ -285,22 +212,26 @@ def talker(arg):
         # delay_graph = rospy.Publisher('delay', Duration, queue_size=10)
         vel_t2 = rospy.Publisher('tb3_2/cmd_vel', Twist, queue_size=10)
         odom_t2 = rospy.Subscriber('tb3_2/odom', Odometry, callback_odom)
-        dist_r3_pub = rospy.Publisher('dist_r3', Float32, queue_size=10)
+        dist_r3_pub = rospy.Publisher('interdistance_robot3', Float32, queue_size=10)
         pose_r3_pub = rospy.Publisher('pose_r3', Point, queue_size=10)
     elif arg_bot == 4:
         odom_t3 = rospy.Subscriber('tb3_3/odom', Odometry, callback_odom)
-        dist_r3_sub = rospy.Subscriber('dist_r3', Float32, callback_dist_r3)
+        dist_r3_sub = rospy.Subscriber('interdistance_robot3', Float32, callback_dist_r3)
         vel_t3 = rospy.Publisher('tb3_3/cmd_vel', Twist, queue_size=10)
         pose_r3_pub = rospy.Subscriber('pose_r3', Point, callback_pose_r3)
-        err_pub = rospy.Publisher('err', Float32, queue_size=10)
-
+        err_pub = rospy.Publisher('erreur', Float32, queue_size=10)
+        dist_r4_pub = rospy.Publisher('interdistance_robot4', Float32, queue_size=10)
 
 
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
         speed=Twist()
-        speed.linear.x=v
-        speed.angular.z=omega
+        if green_light == True:
+            speed.linear.x=v
+            speed.angular.z = omega
+        else:
+            speed.linear.x=0
+            speed.angular.z=0
         if arg_bot == 2:
             vel_t1.publish(speed)
         elif arg_bot == 3:
@@ -313,8 +244,10 @@ def talker(arg):
             # delay_graph.publish(delay)
         elif arg_bot == 4:
             err_pub.publish(err)
+            dist_r4_pub.publish(dist_r4)
             if following == True:
                 vel_t3.publish(speed)
+                dist_r4_pub.publish(dist_r4)
         rate.sleep()
 
 if __name__ == '__main__':

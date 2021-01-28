@@ -25,6 +25,7 @@ from ._PositionConfidenceEllipse import *
 from ._ReferencePosition import *
 from ._RelevanceDistance import *
 from ._RelevanceTrafficDirection import *
+from ._SPAT import *
 from ._SituationContainer import *
 from ._Speed import *
 from ._StationType import *

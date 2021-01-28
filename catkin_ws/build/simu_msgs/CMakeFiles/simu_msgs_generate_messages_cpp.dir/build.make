@@ -53,6 +53,7 @@ CMAKE_BINARY_DIR = /home/david/catkin_ws/build
 # Include the progress variables for this target.
 include simu_msgs/CMakeFiles/simu_msgs_generate_messages_cpp.dir/progress.make
 
+simu_msgs/CMakeFiles/simu_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/simu_msgs/simu_ECE.h
 simu_msgs/CMakeFiles/simu_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/simu_msgs/ReferencePosition.h
 simu_msgs/CMakeFiles/simu_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/simu_msgs/Speed.h
 simu_msgs/CMakeFiles/simu_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/simu_msgs/VehicleLength.h
@@ -62,42 +63,49 @@ simu_msgs/CMakeFiles/simu_msgs_generate_messages_cpp: /home/david/catkin_ws/deve
 simu_msgs/CMakeFiles/simu_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/simu_msgs/simu_CAM.h
 
 
+/home/david/catkin_ws/devel/include/simu_msgs/simu_ECE.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
+/home/david/catkin_ws/devel/include/simu_msgs/simu_ECE.h: /home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg
+/home/david/catkin_ws/devel/include/simu_msgs/simu_ECE.h: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+/home/david/catkin_ws/devel/include/simu_msgs/simu_ECE.h: /opt/ros/kinetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from simu_msgs/simu_ECE.msg"
+	cd /home/david/catkin_ws/src/simu_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/include/simu_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
+
 /home/david/catkin_ws/devel/include/simu_msgs/ReferencePosition.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/david/catkin_ws/devel/include/simu_msgs/ReferencePosition.h: /home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg
 /home/david/catkin_ws/devel/include/simu_msgs/ReferencePosition.h: /home/david/catkin_ws/src/simu_msgs/msg/PositionConfidenceEllipse.msg
 /home/david/catkin_ws/devel/include/simu_msgs/ReferencePosition.h: /home/david/catkin_ws/src/simu_msgs/msg/Altitude.msg
 /home/david/catkin_ws/devel/include/simu_msgs/ReferencePosition.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from simu_msgs/ReferencePosition.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from simu_msgs/ReferencePosition.msg"
 	cd /home/david/catkin_ws/src/simu_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/include/simu_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/david/catkin_ws/devel/include/simu_msgs/Speed.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/david/catkin_ws/devel/include/simu_msgs/Speed.h: /home/david/catkin_ws/src/simu_msgs/msg/Speed.msg
 /home/david/catkin_ws/devel/include/simu_msgs/Speed.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from simu_msgs/Speed.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from simu_msgs/Speed.msg"
 	cd /home/david/catkin_ws/src/simu_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/simu_msgs/msg/Speed.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/include/simu_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/david/catkin_ws/devel/include/simu_msgs/VehicleLength.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/david/catkin_ws/devel/include/simu_msgs/VehicleLength.h: /home/david/catkin_ws/src/simu_msgs/msg/VehicleLength.msg
 /home/david/catkin_ws/devel/include/simu_msgs/VehicleLength.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from simu_msgs/VehicleLength.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from simu_msgs/VehicleLength.msg"
 	cd /home/david/catkin_ws/src/simu_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/simu_msgs/msg/VehicleLength.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/include/simu_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/david/catkin_ws/devel/include/simu_msgs/PositionConfidenceEllipse.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/david/catkin_ws/devel/include/simu_msgs/PositionConfidenceEllipse.h: /home/david/catkin_ws/src/simu_msgs/msg/PositionConfidenceEllipse.msg
 /home/david/catkin_ws/devel/include/simu_msgs/PositionConfidenceEllipse.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from simu_msgs/PositionConfidenceEllipse.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating C++ code from simu_msgs/PositionConfidenceEllipse.msg"
 	cd /home/david/catkin_ws/src/simu_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/simu_msgs/msg/PositionConfidenceEllipse.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/include/simu_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/david/catkin_ws/devel/include/simu_msgs/Altitude.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/david/catkin_ws/devel/include/simu_msgs/Altitude.h: /home/david/catkin_ws/src/simu_msgs/msg/Altitude.msg
 /home/david/catkin_ws/devel/include/simu_msgs/Altitude.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating C++ code from simu_msgs/Altitude.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating C++ code from simu_msgs/Altitude.msg"
 	cd /home/david/catkin_ws/src/simu_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/simu_msgs/msg/Altitude.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/include/simu_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/david/catkin_ws/devel/include/simu_msgs/ItsPduHeader.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/david/catkin_ws/devel/include/simu_msgs/ItsPduHeader.h: /home/david/catkin_ws/src/simu_msgs/msg/ItsPduHeader.msg
 /home/david/catkin_ws/devel/include/simu_msgs/ItsPduHeader.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating C++ code from simu_msgs/ItsPduHeader.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating C++ code from simu_msgs/ItsPduHeader.msg"
 	cd /home/david/catkin_ws/src/simu_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/simu_msgs/msg/ItsPduHeader.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/include/simu_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/david/catkin_ws/devel/include/simu_msgs/simu_CAM.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
@@ -110,10 +118,11 @@ simu_msgs/CMakeFiles/simu_msgs_generate_messages_cpp: /home/david/catkin_ws/deve
 /home/david/catkin_ws/devel/include/simu_msgs/simu_CAM.h: /home/david/catkin_ws/src/simu_msgs/msg/PositionConfidenceEllipse.msg
 /home/david/catkin_ws/devel/include/simu_msgs/simu_CAM.h: /home/david/catkin_ws/src/simu_msgs/msg/ItsPduHeader.msg
 /home/david/catkin_ws/devel/include/simu_msgs/simu_CAM.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating C++ code from simu_msgs/simu_CAM.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating C++ code from simu_msgs/simu_CAM.msg"
 	cd /home/david/catkin_ws/src/simu_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/simu_msgs/msg/simu_CAM.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/include/simu_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 simu_msgs_generate_messages_cpp: simu_msgs/CMakeFiles/simu_msgs_generate_messages_cpp
+simu_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/simu_msgs/simu_ECE.h
 simu_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/simu_msgs/ReferencePosition.h
 simu_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/simu_msgs/Speed.h
 simu_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/simu_msgs/VehicleLength.h

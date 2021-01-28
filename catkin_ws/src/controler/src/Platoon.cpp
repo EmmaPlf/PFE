@@ -55,9 +55,9 @@ void Platoon::setNbVehicles(uint8_t nb_vehicles) {
   this->nb_vehicles = nb_vehicles;
 }
 
-void Platoon::addVehicle(Vehicle v) {
+void Platoon::addVehicle(Vehicle *v) {
   this->map_rank.insert(
-      std::pair<uint8_t, uint8_t>(v.getId(), this->map_rank.size()));
+      std::pair<uint8_t, uint8_t>(v->getId(), this->map_rank.size()));
   this->setNbVehicles(this->getNbVehicles() + 1);
 }
 

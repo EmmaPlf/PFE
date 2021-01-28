@@ -1,10 +1,10 @@
 #include "../include/Controler.h"
+#include "ros/ros.h"
 
 int main(int argc, char **argv) {
 
   ros::init(argc, argv, "controler");
   ROS_INFO("Controler launched");
-  // ros::MultiThreadedSpinner spinner(4);
 
   Controler c = Controler();
 

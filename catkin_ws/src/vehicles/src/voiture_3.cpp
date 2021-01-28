@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
       if ((it->first != v3.getStationId()) && (it->second == rank + 1)) {
         // Envoyer CAM en boucle au véhicule correspondant à l'ID
         v3.fill_cam_data(it->first);
-        ROS_INFO("Envoie message CAM au vehicule : %d", it->first);
+        // ROS_INFO("Envoie message CAM au vehicule : %d", it->first);
       }
       it++;
     }

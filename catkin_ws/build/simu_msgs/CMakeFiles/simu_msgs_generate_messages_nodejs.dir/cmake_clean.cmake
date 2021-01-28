@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/simu_msgs_generate_messages_nodejs"
+  "/home/david/catkin_ws/devel/share/gennodejs/ros/simu_msgs/msg/simu_ECE.js"
   "/home/david/catkin_ws/devel/share/gennodejs/ros/simu_msgs/msg/ReferencePosition.js"
   "/home/david/catkin_ws/devel/share/gennodejs/ros/simu_msgs/msg/Speed.js"
   "/home/david/catkin_ws/devel/share/gennodejs/ros/simu_msgs/msg/VehicleLength.js"

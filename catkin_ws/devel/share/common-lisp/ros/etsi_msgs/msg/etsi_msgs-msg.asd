@@ -59,6 +59,8 @@
     (:file "_package_RelevanceDistance" :depends-on ("_package"))
     (:file "RelevanceTrafficDirection" :depends-on ("_package_RelevanceTrafficDirection"))
     (:file "_package_RelevanceTrafficDirection" :depends-on ("_package"))
+    (:file "SPAT" :depends-on ("_package_SPAT"))
+    (:file "_package_SPAT" :depends-on ("_package"))
     (:file "SituationContainer" :depends-on ("_package_SituationContainer"))
     (:file "_package_SituationContainer" :depends-on ("_package"))
     (:file "Speed" :depends-on ("_package_Speed"))

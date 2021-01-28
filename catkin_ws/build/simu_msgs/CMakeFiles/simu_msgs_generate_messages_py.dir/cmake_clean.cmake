@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/simu_msgs_generate_messages_py"
+  "/home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_simu_ECE.py"
   "/home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_ReferencePosition.py"
   "/home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_Speed.py"
   "/home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_VehicleLength.py"

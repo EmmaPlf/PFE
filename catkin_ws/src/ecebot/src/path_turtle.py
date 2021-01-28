@@ -5,12 +5,12 @@
 import sys
 import rospy
 import numpy as np
-from math import atan2
-from math import sqrt
-from math import pi
+from math import atan2, sqrt, pi
 from geometry_msgs.msg import Twist, Point
 from turtlesim.msg import Pose
 from nav_msgs.msg import Odometry
+from std_msgs.msg import Float32
+from simu_msgs.msg import simu_ECE
 
 v=0.0
 omega=0.0
@@ -24,6 +24,9 @@ err_angle_prec = 0
 err_angle = 0
 err_vit_prec = 0
 err_vit = 0
+err_traj_x = 0
+err_traj_y = 0
+green_light = True
 
 def set_references():
     global compteur_dir, compteur_point, xp, yp
@@ -64,7 +67,7 @@ def set_references():
 
 
 def callback(data):
-    global v, omega, xp, yp, compteur_point, err_angle, err_angle_prec,err_vit, err_vit_prec
+    global v, omega, xp, yp, compteur_point, err_angle, err_angle_prec,err_vit, err_vit_prec, err_traj_x, err_traj_y
     
     x=data.pose.pose.position.x
     y=data.pose.pose.position.y
@@ -76,18 +79,20 @@ def callback(data):
     
     xp, yp = set_references()
 
-    # kp=1 #0.75
-    # kv=1.25 #1
     vmax=1#0.75
     kp_angle = 1.6
     kd_angle = 1.8
 
     kp_vit = 1
     kd_vit = 1.4
-    #print("xp-x",xp-x)
-    #print("yp-y",yp-y)
+
     phi=atan2((yp-y),(xp-x))
-    d=sqrt((xp-x)**2+(yp-y)**2)
+    d = sqrt((xp - x)** 2 + (yp - y)** 2)
+    
+    # err_traj_x=xp-x
+    err_traj_x=x
+    # err_traj_y=yp-y
+    err_traj_y=y
 
     delta= theta - phi 
     err_angle = delta
@@ -101,7 +106,6 @@ def callback(data):
     err_angle_prec = err_angle
 
     if(d<0.5):
-        #d=0
         compteur_point += 1
 
     err_vit = d
@@ -126,26 +130,36 @@ def create_path():
     liste_dir.append(a4)
     #print(liste_dir)
 
+def callback_ece(data):
+    global green_light
+    green_light = data.permission
+    print(green_light)
+
 def talker():
-    global v, omega, compteur_point, compteur_dir
+    global v, omega, compteur_point, compteur_dir, err_traj_x, err_traj_y
     rospy.init_node('talker', anonymous=True)
 
+    ece_msg = rospy.Subscriber('vehicles_simu_ECE', simu_ECE, callback_ece)
     pub = rospy.Publisher('tb3_0/cmd_vel', Twist, queue_size=10)
+    trajectoire_pub_x = rospy.Publisher('erreur_trajectoire_x', Float32, queue_size=10)
+    trajectoire_pub_y = rospy.Publisher('erreur_trajectoire_y', Float32, queue_size=10)
     sub = rospy.Subscriber('tb3_0/odom', Odometry, callback)
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
-        speed=Twist()
-        speed.linear.x=v
-        speed.angular.z=omega 
-        #print(speed)
-        #print("compteur_point:",compteur_point)
-        #print("compteur_dir:",compteur_dir)
+        speed = Twist()
+        if green_light == True:
+            speed.linear.x=v
+            speed.angular.z = omega
+        else:
+            speed.linear.x=0
+            speed.angular.z=0
         pub.publish(speed)
+        trajectoire_pub_x.publish(err_traj_x)
+        trajectoire_pub_y.publish(err_traj_y)
         rate.sleep()
 
 if __name__ == '__main__':
     try:
-        print("argv 1", sys.argv[1])
         create_path()
         talker()
     except rospy.ROSInterruptException:

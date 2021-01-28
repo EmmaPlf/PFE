@@ -15,5 +15,7 @@
    "VEHICLELENGTH"
    "<SIMU_CAM>"
    "SIMU_CAM"
+   "<SIMU_ECE>"
+   "SIMU_ECE"
   ))
 

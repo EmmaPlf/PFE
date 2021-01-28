@@ -30,6 +30,7 @@ file(REMOVE_RECURSE
   "/home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/PathPoint.l"
   "/home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/CurvatureCalculationMode.l"
   "/home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/CauseCode.l"
+  "/home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/SPAT.l"
   "/home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/InformationQuality.l"
   "/home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/Altitude.l"
   "/home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/VehicleRole.l"

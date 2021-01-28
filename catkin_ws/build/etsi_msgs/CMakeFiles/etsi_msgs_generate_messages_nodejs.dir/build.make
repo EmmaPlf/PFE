@@ -83,6 +83,7 @@ etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/d
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/PathPoint.js
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/CurvatureCalculationMode.js
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/CauseCode.js
+etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/SPAT.js
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/InformationQuality.js
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/Altitude.js
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/VehicleRole.js
@@ -328,24 +329,31 @@ etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/d
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Generating Javascript code from etsi_msgs/CauseCode.msg"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/david/catkin_ws/src/etsi_msgs/msg/CauseCode.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg
 
+/home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/SPAT.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/SPAT.js: /home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg
+/home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/SPAT.js: /home/david/catkin_ws/src/etsi_msgs/msg/ItsPduHeader.msg
+/home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/SPAT.js: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Generating Javascript code from etsi_msgs/SPAT.msg"
+	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg
+
 /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/InformationQuality.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/InformationQuality.js: /home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Generating Javascript code from etsi_msgs/InformationQuality.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Generating Javascript code from etsi_msgs/InformationQuality.msg"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg
 
 /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/Altitude.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/Altitude.js: /home/david/catkin_ws/src/etsi_msgs/msg/Altitude.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Generating Javascript code from etsi_msgs/Altitude.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Generating Javascript code from etsi_msgs/Altitude.msg"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/david/catkin_ws/src/etsi_msgs/msg/Altitude.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg
 
 /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/VehicleRole.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/VehicleRole.js: /home/david/catkin_ws/src/etsi_msgs/msg/VehicleRole.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Generating Javascript code from etsi_msgs/VehicleRole.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Generating Javascript code from etsi_msgs/VehicleRole.msg"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/david/catkin_ws/src/etsi_msgs/msg/VehicleRole.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg
 
 /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/YawRate.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/YawRate.js: /home/david/catkin_ws/src/etsi_msgs/msg/YawRate.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Generating Javascript code from etsi_msgs/YawRate.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Generating Javascript code from etsi_msgs/YawRate.msg"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/david/catkin_ws/src/etsi_msgs/msg/YawRate.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg
 
 etsi_msgs_generate_messages_nodejs: etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_nodejs
@@ -379,6 +387,7 @@ etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/
 etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/PathPoint.js
 etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/CurvatureCalculationMode.js
 etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/CauseCode.js
+etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/SPAT.js
 etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/InformationQuality.js
 etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/Altitude.js
 etsi_msgs_generate_messages_nodejs: /home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/VehicleRole.js

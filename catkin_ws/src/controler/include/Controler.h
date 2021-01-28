@@ -30,8 +30,8 @@
 class Controler {
 
 private:
-  std::vector<Vehicle> vector_v;
-  std::vector<Platoon> vector_p;
+  std::vector<Vehicle *> vector_v;
+  std::vector<Platoon *> vector_p;
   ros::Publisher pub_ece;
   ros::Publisher pub_DENM;
   ros::Subscriber sub_ece;
@@ -45,8 +45,8 @@ public:
   Controler();
   ~Controler();
 
-  std::vector<Vehicle> getVectorV();
-  std::vector<Platoon> getVectorP();
+  std::vector<Vehicle *> getVectorV();
+  std::vector<Platoon *> getVectorP();
   ros::Publisher getPubEce();
   ros::Publisher getPubDENM();
   ros::Subscriber getSubEce();
@@ -56,8 +56,8 @@ public:
   uint64_t getCount();
   ros::NodeHandle getNodeHandle();
 
-  void setVectorV(std::vector<Vehicle> vector_v);
-  void setVectorP(std::vector<Platoon> vector_p);
+  void setVectorV(std::vector<Vehicle *> vector_v);
+  void setVectorP(std::vector<Platoon *> vector_p);
   void setPubEce(ros::Publisher pub);
   void setPubDENM(ros::Publisher pub);
   void setSubEce(ros::Subscriber sub);
@@ -77,26 +77,25 @@ public:
                                    Controler *c);
 
   // Ajouter un véhicule
-  void add_vehicle(Vehicle v);
+  void add_vehicle(Vehicle *v);
 
   // Ajouter un platoon
-  void add_platoon(Platoon p);
+  void add_platoon(Platoon *p);
 
   // Incrémente le compteur
   void increment_counter();
 
   // Méthode pour checker destination et créer platoon après
   // ou modif platoon
-  void search_for_platoon(Vehicle v);
+  void search_for_platoon(Vehicle *v);
 
-  void new_platoon(Vehicle &v);
+  void new_platoon(Vehicle *v);
 
   void fill_header(ece_msgs::ecemsg &msg, char *frame, uint8_t msg_id);
 
   uint8_t init_receive(ece_msgs::ecemsg &msg);
-  // uint8_t init_send(Platoon p);
   uint8_t insert_receive(ece_msgs::ecemsg &msg);
-  uint8_t insert_send(Platoon p);
+  uint8_t insert_send(Platoon *p);
   uint8_t desinsert_receive(ece_msgs::ecemsg &msg);
   uint8_t feux(ece_msgs::ecemsg &msg);
   uint8_t freinage_urg(ece_msgs::ecemsg &msg);

@@ -5,3 +5,4 @@ from ._ReferencePosition import *
 from ._Speed import *
 from ._VehicleLength import *
 from ._simu_CAM import *
+from ._simu_ECE import *

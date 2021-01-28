@@ -1108,6 +1108,24 @@ simu_msgs/ReferencePosition.h
 simu_msgs/VehicleLength.h
 -
 
+/home/david/catkin_ws/devel/include/simu_msgs/simu_ECE.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+std_msgs/Header.h
+-
+
 /home/david/catkin_ws/src/vehicles/include/Platoon.h
 Position.h
 /home/david/catkin_ws/src/vehicles/include/Position.h
@@ -1127,6 +1145,8 @@ stdint.h
 /home/david/catkin_ws/src/devel/include/etsi_msgs/DENM.h
 ../../devel/include/simu_msgs/simu_CAM.h
 /home/david/catkin_ws/src/devel/include/simu_msgs/simu_CAM.h
+../../devel/include/simu_msgs/simu_ECE.h
+/home/david/catkin_ws/src/devel/include/simu_msgs/simu_ECE.h
 Platoon.h
 /home/david/catkin_ws/src/vehicles/include/Platoon.h
 nav_msgs/Odometry.h

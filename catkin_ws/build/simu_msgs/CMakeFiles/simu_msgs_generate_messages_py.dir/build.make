@@ -53,6 +53,7 @@ CMAKE_BINARY_DIR = /home/david/catkin_ws/build
 # Include the progress variables for this target.
 include simu_msgs/CMakeFiles/simu_msgs_generate_messages_py.dir/progress.make
 
+simu_msgs/CMakeFiles/simu_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_simu_ECE.py
 simu_msgs/CMakeFiles/simu_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_ReferencePosition.py
 simu_msgs/CMakeFiles/simu_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_Speed.py
 simu_msgs/CMakeFiles/simu_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_VehicleLength.py
@@ -63,36 +64,42 @@ simu_msgs/CMakeFiles/simu_msgs_generate_messages_py: /home/david/catkin_ws/devel
 simu_msgs/CMakeFiles/simu_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/__init__.py
 
 
+/home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_simu_ECE.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_simu_ECE.py: /home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg
+/home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_simu_ECE.py: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG simu_msgs/simu_ECE"
+	cd /home/david/catkin_ws/build/simu_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg
+
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_ReferencePosition.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_ReferencePosition.py: /home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_ReferencePosition.py: /home/david/catkin_ws/src/simu_msgs/msg/PositionConfidenceEllipse.msg
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_ReferencePosition.py: /home/david/catkin_ws/src/simu_msgs/msg/Altitude.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG simu_msgs/ReferencePosition"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG simu_msgs/ReferencePosition"
 	cd /home/david/catkin_ws/build/simu_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg
 
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_Speed.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_Speed.py: /home/david/catkin_ws/src/simu_msgs/msg/Speed.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG simu_msgs/Speed"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG simu_msgs/Speed"
 	cd /home/david/catkin_ws/build/simu_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/simu_msgs/msg/Speed.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg
 
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_VehicleLength.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_VehicleLength.py: /home/david/catkin_ws/src/simu_msgs/msg/VehicleLength.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG simu_msgs/VehicleLength"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python from MSG simu_msgs/VehicleLength"
 	cd /home/david/catkin_ws/build/simu_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/simu_msgs/msg/VehicleLength.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg
 
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_PositionConfidenceEllipse.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_PositionConfidenceEllipse.py: /home/david/catkin_ws/src/simu_msgs/msg/PositionConfidenceEllipse.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python from MSG simu_msgs/PositionConfidenceEllipse"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python from MSG simu_msgs/PositionConfidenceEllipse"
 	cd /home/david/catkin_ws/build/simu_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/simu_msgs/msg/PositionConfidenceEllipse.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg
 
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_Altitude.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_Altitude.py: /home/david/catkin_ws/src/simu_msgs/msg/Altitude.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python from MSG simu_msgs/Altitude"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Python from MSG simu_msgs/Altitude"
 	cd /home/david/catkin_ws/build/simu_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/simu_msgs/msg/Altitude.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg
 
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_ItsPduHeader.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_ItsPduHeader.py: /home/david/catkin_ws/src/simu_msgs/msg/ItsPduHeader.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Python from MSG simu_msgs/ItsPduHeader"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Python from MSG simu_msgs/ItsPduHeader"
 	cd /home/david/catkin_ws/build/simu_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/simu_msgs/msg/ItsPduHeader.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg
 
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_simu_CAM.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
@@ -104,10 +111,11 @@ simu_msgs/CMakeFiles/simu_msgs_generate_messages_py: /home/david/catkin_ws/devel
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_simu_CAM.py: /home/david/catkin_ws/src/simu_msgs/msg/VehicleLength.msg
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_simu_CAM.py: /home/david/catkin_ws/src/simu_msgs/msg/PositionConfidenceEllipse.msg
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_simu_CAM.py: /home/david/catkin_ws/src/simu_msgs/msg/ItsPduHeader.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Python from MSG simu_msgs/simu_CAM"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Python from MSG simu_msgs/simu_CAM"
 	cd /home/david/catkin_ws/build/simu_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/simu_msgs/msg/simu_CAM.msg -Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p simu_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg
 
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_simu_ECE.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_ReferencePosition.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_Speed.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_VehicleLength.py
@@ -115,10 +123,11 @@ simu_msgs/CMakeFiles/simu_msgs_generate_messages_py: /home/david/catkin_ws/devel
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_Altitude.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_ItsPduHeader.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_simu_CAM.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Python msg __init__.py for simu_msgs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating Python msg __init__.py for simu_msgs"
 	cd /home/david/catkin_ws/build/simu_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg --initpy
 
 simu_msgs_generate_messages_py: simu_msgs/CMakeFiles/simu_msgs_generate_messages_py
+simu_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_simu_ECE.py
 simu_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_ReferencePosition.py
 simu_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_Speed.py
 simu_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/simu_msgs/msg/_VehicleLength.py

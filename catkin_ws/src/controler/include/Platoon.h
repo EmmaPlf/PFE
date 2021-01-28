@@ -32,5 +32,5 @@ public:
   void erase_map_elmt(std::map<uint8_t, uint8_t>::iterator it);
 
   // Ajouter véhicule au platoon
-  void addVehicle(Vehicle v);
+  void addVehicle(Vehicle* v);
 };

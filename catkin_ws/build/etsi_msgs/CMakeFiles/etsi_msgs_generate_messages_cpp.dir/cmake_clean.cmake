@@ -30,6 +30,7 @@ file(REMOVE_RECURSE
   "/home/david/catkin_ws/devel/include/etsi_msgs/PathPoint.h"
   "/home/david/catkin_ws/devel/include/etsi_msgs/CurvatureCalculationMode.h"
   "/home/david/catkin_ws/devel/include/etsi_msgs/CauseCode.h"
+  "/home/david/catkin_ws/devel/include/etsi_msgs/SPAT.h"
   "/home/david/catkin_ws/devel/include/etsi_msgs/InformationQuality.h"
   "/home/david/catkin_ws/devel/include/etsi_msgs/Altitude.h"
   "/home/david/catkin_ws/devel/include/etsi_msgs/VehicleRole.h"

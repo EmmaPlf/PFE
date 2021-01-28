@@ -81,6 +81,7 @@ vehicles/CMakeFiles/voiture_2.dir/src/Vehicles.cpp.o
  /home/david/catkin_ws/devel/include/simu_msgs/Speed.h
  /home/david/catkin_ws/devel/include/simu_msgs/VehicleLength.h
  /home/david/catkin_ws/devel/include/simu_msgs/simu_CAM.h
+ /home/david/catkin_ws/devel/include/simu_msgs/simu_ECE.h
  /home/david/catkin_ws/src/vehicles/include/Platoon.h
  /home/david/catkin_ws/src/vehicles/include/Position.h
  /home/david/catkin_ws/src/vehicles/include/Vehicles.h
@@ -225,6 +226,7 @@ vehicles/CMakeFiles/voiture_2.dir/src/voiture_2.cpp.o
  /home/david/catkin_ws/devel/include/simu_msgs/Speed.h
  /home/david/catkin_ws/devel/include/simu_msgs/VehicleLength.h
  /home/david/catkin_ws/devel/include/simu_msgs/simu_CAM.h
+ /home/david/catkin_ws/devel/include/simu_msgs/simu_ECE.h
  /home/david/catkin_ws/src/vehicles/include/Platoon.h
  /home/david/catkin_ws/src/vehicles/include/Position.h
  /home/david/catkin_ws/src/vehicles/include/Vehicles.h

@@ -83,6 +83,7 @@ etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_eus: /home/david/catkin_ws/deve
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/PathPoint.l
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/CurvatureCalculationMode.l
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/CauseCode.l
+etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/SPAT.l
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/InformationQuality.l
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/Altitude.l
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/VehicleRole.l
@@ -329,28 +330,35 @@ etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_eus: /home/david/catkin_ws/deve
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Generating EusLisp code from etsi_msgs/CauseCode.msg"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/david/catkin_ws/src/etsi_msgs/msg/CauseCode.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg
 
+/home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/SPAT.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
+/home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/SPAT.l: /home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg
+/home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/SPAT.l: /home/david/catkin_ws/src/etsi_msgs/msg/ItsPduHeader.msg
+/home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/SPAT.l: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Generating EusLisp code from etsi_msgs/SPAT.msg"
+	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg
+
 /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/InformationQuality.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/InformationQuality.l: /home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Generating EusLisp code from etsi_msgs/InformationQuality.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Generating EusLisp code from etsi_msgs/InformationQuality.msg"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg
 
 /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/Altitude.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/Altitude.l: /home/david/catkin_ws/src/etsi_msgs/msg/Altitude.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Generating EusLisp code from etsi_msgs/Altitude.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Generating EusLisp code from etsi_msgs/Altitude.msg"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/david/catkin_ws/src/etsi_msgs/msg/Altitude.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg
 
 /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/VehicleRole.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/VehicleRole.l: /home/david/catkin_ws/src/etsi_msgs/msg/VehicleRole.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Generating EusLisp code from etsi_msgs/VehicleRole.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Generating EusLisp code from etsi_msgs/VehicleRole.msg"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/david/catkin_ws/src/etsi_msgs/msg/VehicleRole.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg
 
 /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/YawRate.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/YawRate.l: /home/david/catkin_ws/src/etsi_msgs/msg/YawRate.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Generating EusLisp code from etsi_msgs/YawRate.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Generating EusLisp code from etsi_msgs/YawRate.msg"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/david/catkin_ws/src/etsi_msgs/msg/YawRate.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg
 
 /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/manifest.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Generating EusLisp manifest code for etsi_msgs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Generating EusLisp manifest code for etsi_msgs"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs etsi_msgs std_msgs
 
 etsi_msgs_generate_messages_eus: etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_eus
@@ -384,6 +392,7 @@ etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/et
 etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/PathPoint.l
 etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/CurvatureCalculationMode.l
 etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/CauseCode.l
+etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/SPAT.l
 etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/InformationQuality.l
 etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/Altitude.l
 etsi_msgs_generate_messages_eus: /home/david/catkin_ws/devel/share/roseus/ros/etsi_msgs/msg/VehicleRole.l

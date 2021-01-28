@@ -83,6 +83,7 @@ etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_PathPoint.py
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_CurvatureCalculationMode.py
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_CauseCode.py
+etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_SPAT.py
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_InformationQuality.py
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_Altitude.py
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_VehicleRole.py
@@ -329,24 +330,31 @@ etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Generating Python from MSG etsi_msgs/CauseCode"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/etsi_msgs/msg/CauseCode.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg
 
+/home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_SPAT.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_SPAT.py: /home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg
+/home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_SPAT.py: /home/david/catkin_ws/src/etsi_msgs/msg/ItsPduHeader.msg
+/home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_SPAT.py: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Generating Python from MSG etsi_msgs/SPAT"
+	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg
+
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_InformationQuality.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_InformationQuality.py: /home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Generating Python from MSG etsi_msgs/InformationQuality"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Generating Python from MSG etsi_msgs/InformationQuality"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg
 
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_Altitude.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_Altitude.py: /home/david/catkin_ws/src/etsi_msgs/msg/Altitude.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Generating Python from MSG etsi_msgs/Altitude"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Generating Python from MSG etsi_msgs/Altitude"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/etsi_msgs/msg/Altitude.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg
 
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_VehicleRole.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_VehicleRole.py: /home/david/catkin_ws/src/etsi_msgs/msg/VehicleRole.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Generating Python from MSG etsi_msgs/VehicleRole"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Generating Python from MSG etsi_msgs/VehicleRole"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/etsi_msgs/msg/VehicleRole.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg
 
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_YawRate.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_YawRate.py: /home/david/catkin_ws/src/etsi_msgs/msg/YawRate.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Generating Python from MSG etsi_msgs/YawRate"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Generating Python from MSG etsi_msgs/YawRate"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/david/catkin_ws/src/etsi_msgs/msg/YawRate.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg
 
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
@@ -380,11 +388,12 @@ etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_PathPoint.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_CurvatureCalculationMode.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_CauseCode.py
+/home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_SPAT.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_InformationQuality.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_Altitude.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_VehicleRole.py
 /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/__init__.py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_YawRate.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Generating Python msg __init__.py for etsi_msgs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Generating Python msg __init__.py for etsi_msgs"
 	cd /home/david/catkin_ws/build/etsi_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg --initpy
 
 etsi_msgs_generate_messages_py: etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_py
@@ -418,6 +427,7 @@ etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-p
 etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_PathPoint.py
 etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_CurvatureCalculationMode.py
 etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_CauseCode.py
+etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_SPAT.py
 etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_InformationQuality.py
 etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_Altitude.py
 etsi_msgs_generate_messages_py: /home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_VehicleRole.py

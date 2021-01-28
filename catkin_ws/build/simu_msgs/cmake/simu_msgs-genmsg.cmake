@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "simu_msgs: 7 messages, 0 services")
+message(STATUS "simu_msgs: 8 messages, 0 services")
 
 set(MSG_I_FLAGS "-Isimu_msgs:/home/david/catkin_ws/src/simu_msgs/msg;-Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg")
 
@@ -16,6 +16,11 @@ add_custom_target(simu_msgs_generate_messages ALL)
 # verify that message/service dependencies have not changed since configure
 
 
+
+get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg" NAME_WE)
+add_custom_target(_simu_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simu_msgs" "/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg" "std_msgs/Header"
+)
 
 get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg" NAME_WE)
 add_custom_target(_simu_msgs_generate_messages_check_deps_${_filename}
@@ -58,6 +63,12 @@ add_custom_target(_simu_msgs_generate_messages_check_deps_${_filename}
 
 ### Section generating for lang: gencpp
 ### Generating Messages
+_generate_msg_cpp(simu_msgs
+  "/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simu_msgs
+)
 _generate_msg_cpp(simu_msgs
   "/home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg"
   "${MSG_I_FLAGS}"
@@ -115,6 +126,8 @@ add_custom_target(simu_msgs_generate_messages_cpp
 add_dependencies(simu_msgs_generate_messages simu_msgs_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg" NAME_WE)
+add_dependencies(simu_msgs_generate_messages_cpp _simu_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg" NAME_WE)
 add_dependencies(simu_msgs_generate_messages_cpp _simu_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/simu_CAM.msg" NAME_WE)
@@ -139,6 +152,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS simu_msgs_generate_messages_cpp)
 
 ### Section generating for lang: geneus
 ### Generating Messages
+_generate_msg_eus(simu_msgs
+  "/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/simu_msgs
+)
 _generate_msg_eus(simu_msgs
   "/home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg"
   "${MSG_I_FLAGS}"
@@ -196,6 +215,8 @@ add_custom_target(simu_msgs_generate_messages_eus
 add_dependencies(simu_msgs_generate_messages simu_msgs_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg" NAME_WE)
+add_dependencies(simu_msgs_generate_messages_eus _simu_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg" NAME_WE)
 add_dependencies(simu_msgs_generate_messages_eus _simu_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/simu_CAM.msg" NAME_WE)
@@ -220,6 +241,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS simu_msgs_generate_messages_eus)
 
 ### Section generating for lang: genlisp
 ### Generating Messages
+_generate_msg_lisp(simu_msgs
+  "/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simu_msgs
+)
 _generate_msg_lisp(simu_msgs
   "/home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg"
   "${MSG_I_FLAGS}"
@@ -277,6 +304,8 @@ add_custom_target(simu_msgs_generate_messages_lisp
 add_dependencies(simu_msgs_generate_messages simu_msgs_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg" NAME_WE)
+add_dependencies(simu_msgs_generate_messages_lisp _simu_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg" NAME_WE)
 add_dependencies(simu_msgs_generate_messages_lisp _simu_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/simu_CAM.msg" NAME_WE)
@@ -301,6 +330,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS simu_msgs_generate_messages_lisp)
 
 ### Section generating for lang: gennodejs
 ### Generating Messages
+_generate_msg_nodejs(simu_msgs
+  "/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/simu_msgs
+)
 _generate_msg_nodejs(simu_msgs
   "/home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg"
   "${MSG_I_FLAGS}"
@@ -358,6 +393,8 @@ add_custom_target(simu_msgs_generate_messages_nodejs
 add_dependencies(simu_msgs_generate_messages simu_msgs_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg" NAME_WE)
+add_dependencies(simu_msgs_generate_messages_nodejs _simu_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg" NAME_WE)
 add_dependencies(simu_msgs_generate_messages_nodejs _simu_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/simu_CAM.msg" NAME_WE)
@@ -382,6 +419,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS simu_msgs_generate_messages_nodejs)
 
 ### Section generating for lang: genpy
 ### Generating Messages
+_generate_msg_py(simu_msgs
+  "/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simu_msgs
+)
 _generate_msg_py(simu_msgs
   "/home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg"
   "${MSG_I_FLAGS}"
@@ -439,6 +482,8 @@ add_custom_target(simu_msgs_generate_messages_py
 add_dependencies(simu_msgs_generate_messages simu_msgs_generate_messages_py)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg" NAME_WE)
+add_dependencies(simu_msgs_generate_messages_py _simu_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg" NAME_WE)
 add_dependencies(simu_msgs_generate_messages_py _simu_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/simu_msgs/msg/simu_CAM.msg" NAME_WE)

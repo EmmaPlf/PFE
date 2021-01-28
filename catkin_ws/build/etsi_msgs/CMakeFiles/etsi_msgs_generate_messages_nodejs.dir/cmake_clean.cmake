@@ -30,6 +30,7 @@ file(REMOVE_RECURSE
   "/home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/PathPoint.js"
   "/home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/CurvatureCalculationMode.js"
   "/home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/CauseCode.js"
+  "/home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/SPAT.js"
   "/home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/InformationQuality.js"
   "/home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/Altitude.js"
   "/home/david/catkin_ws/devel/share/gennodejs/ros/etsi_msgs/msg/VehicleRole.js"

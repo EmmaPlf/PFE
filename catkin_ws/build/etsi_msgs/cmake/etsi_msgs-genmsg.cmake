@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "etsi_msgs: 34 messages, 0 services")
+message(STATUS "etsi_msgs: 35 messages, 0 services")
 
 set(MSG_I_FLAGS "-Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg;-Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg")
 
@@ -165,6 +165,11 @@ add_custom_target(_etsi_msgs_generate_messages_check_deps_${_filename}
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/CauseCode.msg" NAME_WE)
 add_custom_target(_etsi_msgs_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "etsi_msgs" "/home/david/catkin_ws/src/etsi_msgs/msg/CauseCode.msg" ""
+)
+
+get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg" NAME_WE)
+add_custom_target(_etsi_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "etsi_msgs" "/home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg" "etsi_msgs/ItsPduHeader:std_msgs/Header"
 )
 
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg" NAME_WE)
@@ -374,6 +379,12 @@ _generate_msg_cpp(etsi_msgs
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/etsi_msgs
 )
 _generate_msg_cpp(etsi_msgs
+  "/home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg"
+  "${MSG_I_FLAGS}"
+  "/home/david/catkin_ws/src/etsi_msgs/msg/ItsPduHeader.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/etsi_msgs
+)
+_generate_msg_cpp(etsi_msgs
   "/home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg"
   "${MSG_I_FLAGS}"
   ""
@@ -471,6 +482,8 @@ add_dependencies(etsi_msgs_generate_messages_cpp _etsi_msgs_generate_messages_ch
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/CurvatureCalculationMode.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_cpp _etsi_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/CauseCode.msg" NAME_WE)
+add_dependencies(etsi_msgs_generate_messages_cpp _etsi_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_cpp _etsi_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_cpp _etsi_msgs_generate_messages_check_deps_${_filename})
@@ -671,6 +684,12 @@ _generate_msg_eus(etsi_msgs
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/etsi_msgs
 )
 _generate_msg_eus(etsi_msgs
+  "/home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg"
+  "${MSG_I_FLAGS}"
+  "/home/david/catkin_ws/src/etsi_msgs/msg/ItsPduHeader.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/etsi_msgs
+)
+_generate_msg_eus(etsi_msgs
   "/home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg"
   "${MSG_I_FLAGS}"
   ""
@@ -768,6 +787,8 @@ add_dependencies(etsi_msgs_generate_messages_eus _etsi_msgs_generate_messages_ch
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/CurvatureCalculationMode.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_eus _etsi_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/CauseCode.msg" NAME_WE)
+add_dependencies(etsi_msgs_generate_messages_eus _etsi_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_eus _etsi_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_eus _etsi_msgs_generate_messages_check_deps_${_filename})
@@ -968,6 +989,12 @@ _generate_msg_lisp(etsi_msgs
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/etsi_msgs
 )
 _generate_msg_lisp(etsi_msgs
+  "/home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg"
+  "${MSG_I_FLAGS}"
+  "/home/david/catkin_ws/src/etsi_msgs/msg/ItsPduHeader.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/etsi_msgs
+)
+_generate_msg_lisp(etsi_msgs
   "/home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg"
   "${MSG_I_FLAGS}"
   ""
@@ -1065,6 +1092,8 @@ add_dependencies(etsi_msgs_generate_messages_lisp _etsi_msgs_generate_messages_c
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/CurvatureCalculationMode.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_lisp _etsi_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/CauseCode.msg" NAME_WE)
+add_dependencies(etsi_msgs_generate_messages_lisp _etsi_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_lisp _etsi_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_lisp _etsi_msgs_generate_messages_check_deps_${_filename})
@@ -1265,6 +1294,12 @@ _generate_msg_nodejs(etsi_msgs
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/etsi_msgs
 )
 _generate_msg_nodejs(etsi_msgs
+  "/home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg"
+  "${MSG_I_FLAGS}"
+  "/home/david/catkin_ws/src/etsi_msgs/msg/ItsPduHeader.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/etsi_msgs
+)
+_generate_msg_nodejs(etsi_msgs
   "/home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg"
   "${MSG_I_FLAGS}"
   ""
@@ -1362,6 +1397,8 @@ add_dependencies(etsi_msgs_generate_messages_nodejs _etsi_msgs_generate_messages
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/CurvatureCalculationMode.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_nodejs _etsi_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/CauseCode.msg" NAME_WE)
+add_dependencies(etsi_msgs_generate_messages_nodejs _etsi_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_nodejs _etsi_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_nodejs _etsi_msgs_generate_messages_check_deps_${_filename})
@@ -1562,6 +1599,12 @@ _generate_msg_py(etsi_msgs
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/etsi_msgs
 )
 _generate_msg_py(etsi_msgs
+  "/home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg"
+  "${MSG_I_FLAGS}"
+  "/home/david/catkin_ws/src/etsi_msgs/msg/ItsPduHeader.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/etsi_msgs
+)
+_generate_msg_py(etsi_msgs
   "/home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg"
   "${MSG_I_FLAGS}"
   ""
@@ -1659,6 +1702,8 @@ add_dependencies(etsi_msgs_generate_messages_py _etsi_msgs_generate_messages_che
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/CurvatureCalculationMode.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_py _etsi_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/CauseCode.msg" NAME_WE)
+add_dependencies(etsi_msgs_generate_messages_py _etsi_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_py _etsi_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg" NAME_WE)
 add_dependencies(etsi_msgs_generate_messages_py _etsi_msgs_generate_messages_check_deps_${_filename})

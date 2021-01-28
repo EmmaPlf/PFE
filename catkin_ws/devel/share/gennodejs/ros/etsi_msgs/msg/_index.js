@@ -22,6 +22,7 @@ let CurvatureCalculationMode = require('./CurvatureCalculationMode.js');
 let Curvature = require('./Curvature.js');
 let VehicleLength = require('./VehicleLength.js');
 let PathDeltaTime = require('./PathDeltaTime.js');
+let SPAT = require('./SPAT.js');
 let CAM = require('./CAM.js');
 let StationType = require('./StationType.js');
 let VehicleWidth = require('./VehicleWidth.js');
@@ -58,6 +59,7 @@ module.exports = {
   Curvature: Curvature,
   VehicleLength: VehicleLength,
   PathDeltaTime: PathDeltaTime,
+  SPAT: SPAT,
   CAM: CAM,
   StationType: StationType,
   VehicleWidth: VehicleWidth,

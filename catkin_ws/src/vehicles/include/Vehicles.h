@@ -23,7 +23,7 @@
 #define DESINSERT_PHASE 2
 #define LIGHT_PHASE 3
 #define BRAKE_PHASE 4
-#define FREQ 5
+#define FREQ 10
 
 class Vehicles {
 

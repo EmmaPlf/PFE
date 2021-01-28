@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "ros/ros.h"
 //#include <sys/types.h>
 
 // A modifier selon les conditions de simulation
@@ -28,7 +29,5 @@ public:
 
   // Ret 1 si positions assez proches (même zone)
   uint8_t compareZone(Position p);
-
-  // Ret 1 si feux proches de la position
   uint8_t compareLightZone();
 };

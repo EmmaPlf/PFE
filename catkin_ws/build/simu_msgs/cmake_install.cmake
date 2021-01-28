@@ -41,6 +41,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
     "/home/david/catkin_ws/src/simu_msgs/msg/simu_CAM.msg"
     "/home/david/catkin_ws/src/simu_msgs/msg/PositionConfidenceEllipse.msg"
     "/home/david/catkin_ws/src/simu_msgs/msg/Altitude.msg"
+    "/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg"
     )
 endif()
 

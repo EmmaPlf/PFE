@@ -30,6 +30,7 @@ file(REMOVE_RECURSE
   "/home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_PathPoint.py"
   "/home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_CurvatureCalculationMode.py"
   "/home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_CauseCode.py"
+  "/home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_SPAT.py"
   "/home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_InformationQuality.py"
   "/home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_Altitude.py"
   "/home/david/catkin_ws/devel/lib/python2.7/dist-packages/etsi_msgs/msg/_VehicleRole.py"

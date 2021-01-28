@@ -19,4 +19,6 @@
     (:file "_package_VehicleLength" :depends-on ("_package"))
     (:file "simu_CAM" :depends-on ("_package_simu_CAM"))
     (:file "_package_simu_CAM" :depends-on ("_package"))
+    (:file "simu_ECE" :depends-on ("_package_simu_ECE"))
+    (:file "_package_simu_ECE" :depends-on ("_package"))
   ))

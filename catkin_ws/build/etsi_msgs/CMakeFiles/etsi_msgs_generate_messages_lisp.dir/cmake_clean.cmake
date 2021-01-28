@@ -30,6 +30,7 @@ file(REMOVE_RECURSE
   "/home/david/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/PathPoint.lisp"
   "/home/david/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/CurvatureCalculationMode.lisp"
   "/home/david/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/CauseCode.lisp"
+  "/home/david/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/SPAT.lisp"
   "/home/david/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/InformationQuality.lisp"
   "/home/david/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/Altitude.lisp"
   "/home/david/catkin_ws/devel/share/common-lisp/ros/etsi_msgs/msg/VehicleRole.lisp"

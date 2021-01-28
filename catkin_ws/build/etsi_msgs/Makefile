@@ -181,6 +181,21 @@ subscriber_cam/fast:
 .PHONY : subscriber_cam/fast
 
 # Convenience name for target.
+etsi_msgs/CMakeFiles/publisher_cam.dir/rule:
+	cd /home/david/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 etsi_msgs/CMakeFiles/publisher_cam.dir/rule
+.PHONY : etsi_msgs/CMakeFiles/publisher_cam.dir/rule
+
+# Convenience name for target.
+publisher_cam: etsi_msgs/CMakeFiles/publisher_cam.dir/rule
+
+.PHONY : publisher_cam
+
+# fast build rule for target.
+publisher_cam/fast:
+	cd /home/david/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/publisher_cam.dir/build.make etsi_msgs/CMakeFiles/publisher_cam.dir/build
+.PHONY : publisher_cam/fast
+
+# Convenience name for target.
 etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_EventPoint.dir/rule:
 	cd /home/david/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_EventPoint.dir/rule
 .PHONY : etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_EventPoint.dir/rule
@@ -646,6 +661,21 @@ _etsi_msgs_generate_messages_check_deps_CurvatureCalculationMode/fast:
 .PHONY : _etsi_msgs_generate_messages_check_deps_CurvatureCalculationMode/fast
 
 # Convenience name for target.
+etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_SPAT.dir/rule:
+	cd /home/david/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_SPAT.dir/rule
+.PHONY : etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_SPAT.dir/rule
+
+# Convenience name for target.
+_etsi_msgs_generate_messages_check_deps_SPAT: etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_SPAT.dir/rule
+
+.PHONY : _etsi_msgs_generate_messages_check_deps_SPAT
+
+# fast build rule for target.
+_etsi_msgs_generate_messages_check_deps_SPAT/fast:
+	cd /home/david/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_SPAT.dir/build.make etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_SPAT.dir/build
+.PHONY : _etsi_msgs_generate_messages_check_deps_SPAT/fast
+
+# Convenience name for target.
 etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_Heading.dir/rule:
 	cd /home/david/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_Heading.dir/rule
 .PHONY : etsi_msgs/CMakeFiles/_etsi_msgs_generate_messages_check_deps_Heading.dir/rule
@@ -885,21 +915,6 @@ etsi_msgs_genpy/fast:
 	cd /home/david/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/etsi_msgs_genpy.dir/build.make etsi_msgs/CMakeFiles/etsi_msgs_genpy.dir/build
 .PHONY : etsi_msgs_genpy/fast
 
-# Convenience name for target.
-etsi_msgs/CMakeFiles/publisher_cam.dir/rule:
-	cd /home/david/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 etsi_msgs/CMakeFiles/publisher_cam.dir/rule
-.PHONY : etsi_msgs/CMakeFiles/publisher_cam.dir/rule
-
-# Convenience name for target.
-publisher_cam: etsi_msgs/CMakeFiles/publisher_cam.dir/rule
-
-.PHONY : publisher_cam
-
-# fast build rule for target.
-publisher_cam/fast:
-	cd /home/david/catkin_ws/build && $(MAKE) -f etsi_msgs/CMakeFiles/publisher_cam.dir/build.make etsi_msgs/CMakeFiles/publisher_cam.dir/build
-.PHONY : publisher_cam/fast
-
 src/publisher_cam.o: src/publisher_cam.cpp.o
 
 .PHONY : src/publisher_cam.o
@@ -1021,6 +1036,7 @@ help:
 	@echo "... install/local"
 	@echo "... install/strip"
 	@echo "... subscriber_cam"
+	@echo "... publisher_cam"
 	@echo "... _etsi_msgs_generate_messages_check_deps_EventPoint"
 	@echo "... _etsi_msgs_generate_messages_check_deps_VehicleWidth"
 	@echo "... _etsi_msgs_generate_messages_check_deps_LongitudinalAcceleration"
@@ -1053,6 +1069,7 @@ help:
 	@echo "... _etsi_msgs_generate_messages_check_deps_Speed"
 	@echo "... _etsi_msgs_generate_messages_check_deps_BasicVehicleContainerHighFrequency"
 	@echo "... _etsi_msgs_generate_messages_check_deps_CurvatureCalculationMode"
+	@echo "... _etsi_msgs_generate_messages_check_deps_SPAT"
 	@echo "... _etsi_msgs_generate_messages_check_deps_Heading"
 	@echo "... _etsi_msgs_generate_messages_check_deps_YawRate"
 	@echo "... etsi_msgs_gencpp"
@@ -1069,7 +1086,6 @@ help:
 	@echo "... etsi_msgs_generate_messages_py"
 	@echo "... _etsi_msgs_generate_messages_check_deps_ExteriorLights"
 	@echo "... etsi_msgs_genpy"
-	@echo "... publisher_cam"
 	@echo "... src/publisher_cam.o"
 	@echo "... src/publisher_cam.i"
 	@echo "... src/publisher_cam.s"

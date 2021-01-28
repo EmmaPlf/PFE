@@ -83,6 +83,7 @@ etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/deve
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/PathPoint.h
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/CurvatureCalculationMode.h
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/CauseCode.h
+etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/SPAT.h
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/InformationQuality.h
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/Altitude.h
 etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/VehicleRole.h
@@ -371,31 +372,39 @@ etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/deve
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Generating C++ code from etsi_msgs/CauseCode.msg"
 	cd /home/david/catkin_ws/src/etsi_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/etsi_msgs/msg/CauseCode.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/include/etsi_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
+/home/david/catkin_ws/devel/include/etsi_msgs/SPAT.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
+/home/david/catkin_ws/devel/include/etsi_msgs/SPAT.h: /home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg
+/home/david/catkin_ws/devel/include/etsi_msgs/SPAT.h: /home/david/catkin_ws/src/etsi_msgs/msg/ItsPduHeader.msg
+/home/david/catkin_ws/devel/include/etsi_msgs/SPAT.h: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+/home/david/catkin_ws/devel/include/etsi_msgs/SPAT.h: /opt/ros/kinetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Generating C++ code from etsi_msgs/SPAT.msg"
+	cd /home/david/catkin_ws/src/etsi_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/etsi_msgs/msg/SPAT.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/include/etsi_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
+
 /home/david/catkin_ws/devel/include/etsi_msgs/InformationQuality.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/david/catkin_ws/devel/include/etsi_msgs/InformationQuality.h: /home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg
 /home/david/catkin_ws/devel/include/etsi_msgs/InformationQuality.h: /home/david/catkin_ws/src/etsi_msgs/include/etsi_msgs/plugin/InformationQuality.h
 /home/david/catkin_ws/devel/include/etsi_msgs/InformationQuality.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Generating C++ code from etsi_msgs/InformationQuality.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Generating C++ code from etsi_msgs/InformationQuality.msg"
 	cd /home/david/catkin_ws/src/etsi_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/etsi_msgs/msg/InformationQuality.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/include/etsi_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/david/catkin_ws/devel/include/etsi_msgs/Altitude.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/david/catkin_ws/devel/include/etsi_msgs/Altitude.h: /home/david/catkin_ws/src/etsi_msgs/msg/Altitude.msg
 /home/david/catkin_ws/devel/include/etsi_msgs/Altitude.h: /home/david/catkin_ws/src/etsi_msgs/include/etsi_msgs/plugin/Altitude.h
 /home/david/catkin_ws/devel/include/etsi_msgs/Altitude.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Generating C++ code from etsi_msgs/Altitude.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Generating C++ code from etsi_msgs/Altitude.msg"
 	cd /home/david/catkin_ws/src/etsi_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/etsi_msgs/msg/Altitude.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/include/etsi_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/david/catkin_ws/devel/include/etsi_msgs/VehicleRole.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/david/catkin_ws/devel/include/etsi_msgs/VehicleRole.h: /home/david/catkin_ws/src/etsi_msgs/msg/VehicleRole.msg
 /home/david/catkin_ws/devel/include/etsi_msgs/VehicleRole.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Generating C++ code from etsi_msgs/VehicleRole.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Generating C++ code from etsi_msgs/VehicleRole.msg"
 	cd /home/david/catkin_ws/src/etsi_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/etsi_msgs/msg/VehicleRole.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/include/etsi_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/david/catkin_ws/devel/include/etsi_msgs/YawRate.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/david/catkin_ws/devel/include/etsi_msgs/YawRate.h: /home/david/catkin_ws/src/etsi_msgs/msg/YawRate.msg
 /home/david/catkin_ws/devel/include/etsi_msgs/YawRate.h: /home/david/catkin_ws/src/etsi_msgs/include/etsi_msgs/plugin/YawRate.h
 /home/david/catkin_ws/devel/include/etsi_msgs/YawRate.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Generating C++ code from etsi_msgs/YawRate.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/david/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Generating C++ code from etsi_msgs/YawRate.msg"
 	cd /home/david/catkin_ws/src/etsi_msgs && /home/david/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/david/catkin_ws/src/etsi_msgs/msg/YawRate.msg -Ietsi_msgs:/home/david/catkin_ws/src/etsi_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p etsi_msgs -o /home/david/catkin_ws/devel/include/etsi_msgs -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 etsi_msgs_generate_messages_cpp: etsi_msgs/CMakeFiles/etsi_msgs_generate_messages_cpp
@@ -429,6 +438,7 @@ etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/L
 etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/PathPoint.h
 etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/CurvatureCalculationMode.h
 etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/CauseCode.h
+etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/SPAT.h
 etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/InformationQuality.h
 etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/Altitude.h
 etsi_msgs_generate_messages_cpp: /home/david/catkin_ws/devel/include/etsi_msgs/VehicleRole.h

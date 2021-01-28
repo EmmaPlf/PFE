@@ -53,8 +53,9 @@ uint8_t Position::compareLightZone()
   // Position du feu :
   // -1*1024 en lat
   // -0.5*1024 et 0.5*1024 en long
-  if(((this->getLat() <= int64_t(-1*1024)) && (this->getLat() >= int64_t(-0.98*1024)) 
-  && ((this->getLon() >= int64_t(-0.5*1024)) && (this->getLon() <= int64_t(0.5*1024)))))
+  ROS_INFO("lat = %f", this->getLat());
+  ROS_INFO("lon = %f", this->getLon());
+  if (((this->getLat() >= -1.1) && (this->getLat() <= -0.6) && ((this->getLon() >= -0.5) && (this->getLon() <= 0.5))))
   {
     ret = 1;
   }

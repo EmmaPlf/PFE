@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/david/catkin_ws/src/simu_msgs/msg/ItsPduHeader.msg;/home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg;/home/david/catkin_ws/src/simu_msgs/msg/Speed.msg;/home/david/catkin_ws/src/simu_msgs/msg/VehicleLength.msg;/home/david/catkin_ws/src/simu_msgs/msg/simu_CAM.msg;/home/david/catkin_ws/src/simu_msgs/msg/PositionConfidenceEllipse.msg;/home/david/catkin_ws/src/simu_msgs/msg/Altitude.msg"
+messages_str = "/home/david/catkin_ws/src/simu_msgs/msg/ItsPduHeader.msg;/home/david/catkin_ws/src/simu_msgs/msg/ReferencePosition.msg;/home/david/catkin_ws/src/simu_msgs/msg/Speed.msg;/home/david/catkin_ws/src/simu_msgs/msg/VehicleLength.msg;/home/david/catkin_ws/src/simu_msgs/msg/simu_CAM.msg;/home/david/catkin_ws/src/simu_msgs/msg/PositionConfidenceEllipse.msg;/home/david/catkin_ws/src/simu_msgs/msg/Altitude.msg;/home/david/catkin_ws/src/simu_msgs/msg/simu_ECE.msg"
 services_str = ""
 pkg_name = "simu_msgs"
 dependencies_str = "std_msgs"
