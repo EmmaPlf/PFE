@@ -20,6 +20,8 @@ int main(int argc, char **argv) {
   Position pos = Position(51, 51, 0);
   v2.setDest(pos);
 
+  ROS_INFO("Voiture 2 lancee");
+
   // Attendre d'avoir une connection avec un subscriber au moins
   while (v2.getPubEce_C().getNumSubscribers() < 1) {
   }
@@ -29,8 +31,6 @@ int main(int argc, char **argv) {
 
   while (ros::ok()) {
     ros::spinOnce();
-
-    // if (v2.getInit() == true) {
 
     // Attendre d'avoir une connection avec un subscriber au moins
     while (v2.getPubCAM_C().getNumSubscribers() < 1) {
@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
       if ((it->first != v2.getStationId()) && (it->second == rank + 1)) {
         // Envoyer CAM en boucle au véhicule correspondant à l'ID
         v2.fill_cam_data(it->first);
-        // ROS_INFO("Envoie message CAM au vehicule : %d", it->first);
+        ROS_INFO("Envoie message CAM au vehicule : %d", it->first);
       }
       it++;
     }

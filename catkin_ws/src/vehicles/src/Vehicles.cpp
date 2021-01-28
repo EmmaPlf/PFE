@@ -201,7 +201,7 @@ void Vehicles::fill_platoon(const ece_msgs::ecemsg::ConstPtr &msg) {
     // Si voiture de tête
     if ((this->getStationId() == 1) && (id.position == 0)) {
       this->setHead(true);
-      ROS_INFO("Voiture de tete: id: %d, rang: %d", id.ID, id.position);
+      // ROS_INFO("Voiture de tete: id: %d, rang: %d", id.ID, id.position);
     }
   }
   platoon.setMapRank(map_rank);
@@ -209,8 +209,8 @@ void Vehicles::fill_platoon(const ece_msgs::ecemsg::ConstPtr &msg) {
   // Remplir le platoon
   this->setPlatoon(platoon);
 
-  ROS_INFO("Platoon : ID: %d, Nb_v: %d, speed: %d", this->getPlatoon().getId(),
-           this->getPlatoon().getNbVehicles(), this->getPlatoon().getSpeed());
+  ROS_INFO("Platoon : ID: %d, Nb_v: %d, ID voiture de tete: 1",
+           this->getPlatoon().getId(), this->getPlatoon().getNbVehicles());
 
   this->setInit(true);
 }
@@ -218,7 +218,7 @@ void Vehicles::fill_platoon(const ece_msgs::ecemsg::ConstPtr &msg) {
 uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 
   // Récupère les informations utiles pour désinsertion
-  ROS_INFO("I have received ece msg, desinsertion message !");
+  ROS_INFO("Message ECE recu, desinsertion message !");
 
   // Header
   uint8_t header_station_id = msg->its_header.station_id;
@@ -250,7 +250,7 @@ uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 uint8_t Vehicles::light_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 
   // Récupère les informations utiles pour l'initialisation
-  ROS_INFO("I have received traffic light message PERM : %d!",
+  ROS_INFO("Message ECE recu : permission de passer le feu : %B",
            msg->feu.permission_feu);
 
   // Message reçu
@@ -276,7 +276,7 @@ uint8_t Vehicles::light_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 
 uint8_t Vehicles::brake_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   // Récupère les informations utiles pour l'initialisation
-  ROS_INFO("I have received ece msg, emergency brake message !");
+  // ROS_INFO("I have received ece msg, emergency brake message !");
 
   // Header
   uint8_t header_station_id = msg->its_header.station_id;
@@ -315,7 +315,7 @@ void Vehicles::sub_ece_V_callback(const ece_msgs::ecemsg::ConstPtr &msg,
     // si ne nous est pas destiné
   } else {
 
-    ROS_INFO("I have received ece msg, phase : %d",
+    ROS_INFO("Message ECE recu de %d, phase : %d", exp,
              msg->basic_container.phase.value);
 
     switch (phase) {
@@ -527,7 +527,7 @@ void Vehicles::fill_ece_data(uint32_t id_dest, uint8_t phase, uint8_t part) {
     this->publish_ece_msg_V(msg);
   }
 
-  ROS_INFO("I have send ece msg, station_id : %d", this->getStationId());
+  ROS_INFO("Message ECE envoye a %d, phase : %d", id_dest, phase);
 }
 
 // TODO : implémenter dans Vehicles

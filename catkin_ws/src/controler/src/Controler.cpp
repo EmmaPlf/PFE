@@ -212,7 +212,7 @@ void Controler::search_for_platoon(Vehicle *v) {
           // Attendre d'avoir une connection avec deux subscribers au moins
           while (this->getPubEce().getNumSubscribers() < 3) {
           }
-
+          ROS_INFO("Platoon trouve");
           // Envoie message à tous les véhciules du platoon pour mettre à jour
           this->insert_send(this->getVectorP()[i]);
         }
@@ -223,10 +223,8 @@ void Controler::search_for_platoon(Vehicle *v) {
   // Sinon chercher parmi les voitures celles avec une même destination
   // Si pas de platoon trouvé
   if (!v->getHasPlatoon()) {
-    ROS_INFO("Platoon not found");
+    ROS_INFO("Pas de platoon trouve");
     this->new_platoon(v);
-  } else {
-    ROS_INFO("Platoon found");
   }
 }
 
@@ -279,6 +277,8 @@ void Controler::new_platoon(Vehicle *v) {
           // Attendre d'avoir une connection avec deux subscribers au moins
           while (this->getPubEce().getNumSubscribers() < 2) {
           }
+
+          ROS_INFO("Platoon cree");
 
           // Envoi message initialisation
           // Il faut envoyer à tous les véhicules
@@ -346,7 +346,7 @@ uint8_t Controler::insert_send(Platoon *p) {
     ++it;
   }
 
-  ROS_INFO("Insert send by controler");
+  ROS_INFO("Message d'insert envoye");
 }
 
 // A finir mais plutôt compliqué pour le moment
@@ -481,7 +481,8 @@ void Controler::desinsert_send() {
 void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &p_msg,
                                  Controler *c) {
 
-  ROS_INFO("I have received ece msg, %d", p_msg->header.seq);
+  ROS_INFO("Message ECE recu de %d, phase : %d", p_msg->basic_container.ID_exp,
+           p_msg->basic_container.phase.value);
   int rep = 0;
 
   // Récupérer phase de platooning
@@ -516,7 +517,7 @@ void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &p_msg,
 uint8_t Controler::sub_DENM_callback(const etsi_msgs::DENM::ConstPtr &msg,
                                      Controler *c) {
   uint8_t ret = 1;
-  ROS_INFO("I have received DENM msg");
+  // ROS_INFO("I have received DENM msg");
 
   // Vérifier que c'est bien un DENM
   uint8_t denm_id = msg->its_header.message_id;
@@ -531,13 +532,7 @@ uint8_t Controler::sub_DENM_callback(const etsi_msgs::DENM::ConstPtr &msg,
 uint8_t Controler::sub_SPAT_callback(const etsi_msgs::SPAT::ConstPtr &msg,
                                      Controler *c) {
   uint8_t ret = 1;
-  ROS_INFO("I have received SPAT msg, val: %d", msg->state);
-
-  // Vérifier que c'est bien un DENM
-  //   uint8_t denm_id = msg->its_header.message_id;
-  //   if (denm_id != DENM_ID) {
-  //     return 0;
-  //   }
+  // ROS_INFO("SPAT message recu, valeur du feu: %d", msg->state);
 
   // Récupérer expéditeur
   // uint8_t exp = msg->its_header.station_id;
@@ -562,10 +557,11 @@ uint8_t Controler::sub_SPAT_callback(const etsi_msgs::SPAT::ConstPtr &msg,
           if (id_head == c->getVectorV()[i]->getId()) {
 
             // Check la zone par rapport à position du feu et feu rouge
-            if (c->getVectorV()[i]->getActualPos().compareLightZone()) // pos_light.compareZone(it_v->getActualPos()))
+            if (c->getVectorV()[i]
+                    ->getActualPos()
+                    .compareLightZone()) // pos_light.compareZone(it_v->getActualPos()))
             {
               // Envoyer message ece
-              ROS_INFO("id head = %d", id_head);
               ece_msgs::ecemsg ece_msg;
               c->fill_header(ece_msg, ECE_FRAME, ECE_ID);
               ece_msg.basic_container.ID_exp = STATION_ID;
@@ -586,7 +582,7 @@ uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
                                     Controler *c) {
 
   uint8_t ret = 1;
-  // ROS_INFO("I have received CAM msg");
+  // ROS_INFO("Message CAM recu");
 
   // Vérifier que c'est bien un CAM
   uint8_t cam_id = msg->its_header.message_id;
@@ -612,7 +608,8 @@ uint8_t Controler::sub_CAM_callback(const etsi_msgs::CAM::ConstPtr &msg,
       float longitude = (float)msg->reference_position.longitude / 1024;
       float altitude = (float)msg->reference_position.altitude.value / 1024;
       Position p = Position(latitude, longitude, altitude);
-      // ROS_INFO("(CAM_CB) latitude %f, longitude %f, id %d", latitude, longitude, c->getVectorV()[i]->getId());
+      // ROS_INFO("(CAM_CB) latitude %f, longitude %f, id %d", latitude,
+      // longitude, c->getVectorV()[i]->getId());
       c->getVectorV()[i]->setActualPos(p);
     }
   }

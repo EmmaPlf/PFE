@@ -26,7 +26,8 @@ int main(int argc, char **argv) {
 
   // Publish topic controler spat
   ros::NodeHandle n;
-  ros::Publisher pub_spat = n.advertise<etsi_msgs::SPAT>("controler_SPAT", 1000);
+  ros::Publisher pub_spat =
+      n.advertise<etsi_msgs::SPAT>("controler_SPAT", 1000);
 
   etsi_msgs::SPAT msg;
 
@@ -40,10 +41,10 @@ int main(int argc, char **argv) {
     //   last = ros::Time::now();
     //   state = !state;
     // }
-    ROS_INFO("count = %d, state = %d", count,state);
-    if (count == PAUSE_DURATION)
-    {
+    // ROS_INFO("count = %d, state = %d", count,state);
+    if (count == PAUSE_DURATION) {
       state = !state;
+      ROS_INFO("Le feu a change d'etat : %d", state);
       count = 0;
     }
 
