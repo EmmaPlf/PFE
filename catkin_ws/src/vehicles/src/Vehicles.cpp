@@ -224,6 +224,9 @@ uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   uint8_t header_station_id = msg->its_header.station_id;
   uint8_t header_message_id = msg->its_header.message_id;
 
+  // Destinataire
+  uint8_t id_dest = msg->basic_container.ID_dest;
+
   /// Desinsertion
   bool askExit = msg->desinsertion.demande_sortie;
 
@@ -241,6 +244,18 @@ uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
   // Confirmation insertion
   uint8_t position = msg->desinsertion.position;
 
+  // Envoi en simulation
+  simu_msgs::simu_ECE simu_msg;
+  simu_msg.header.stamp = ros::Time::now();
+  simu_msg.header.frame_id = ECE_FRAME_ID;
+  simu_msg.dest = this->getStationId();
+  simu_msg.desinsertion = askExit;
+
+  // Envoyer sur simu_ECE si c'ets pour nous
+  if (id_dest == this->getStationId()) {
+    this->publish_simu_ECE_msg(simu_msg);
+  }
+
   // Puis confirmer desinsertion avec message ECE
   this->fill_ece_data(ID_CONTROLER, DESINSERT_PHASE, 1);
 
@@ -250,7 +265,7 @@ uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 uint8_t Vehicles::light_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 
   // Récupère les informations utiles pour l'initialisation
-  ROS_INFO("Message ECE recu : permission de passer le feu : %B",
+  ROS_INFO("Message ECE recu : permission de passer le feu : %d",
            msg->feu.permission_feu);
 
   // Message reçu
@@ -506,6 +521,7 @@ void Vehicles::fill_ece_data(uint32_t id_dest, uint8_t phase, uint8_t part) {
 
   // DESINSERT
   case 2:
+    ROS_INFO("Desinsert send");
     // Demande
     if (part == 0) {
       msg.desinsertion.demande_sortie = true;

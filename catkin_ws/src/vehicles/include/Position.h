@@ -28,4 +28,5 @@ public:
 
   // Ret 1 si positions assez proches (même zone)
   uint8_t compareZone(Position p);
+  uint8_t compareDesinsertZone();
 };

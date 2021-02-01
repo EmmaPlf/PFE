@@ -349,9 +349,9 @@ uint8_t Controler::insert_send(Platoon *p) {
   ROS_INFO("Message d'insert envoye");
 }
 
-// A finir mais plutôt compliqué pour le moment
-/*uint8_t Controler::desinsert_receive(ece_msgs::ecemsg &msg) {
+uint8_t Controler::desinsert_receive(ece_msgs::ecemsg &msg) {
 
+  ROS_INFO("Controler : desinsert_receive");
   uint8_t rank = 0;
   uint8_t rank_found = 0;
   std::vector<uint8_t> ids_behind;
@@ -377,7 +377,7 @@ uint8_t Controler::insert_send(Platoon *p) {
   if (exit_req) {
 
     // Chercher le platoon de la voiture
-    if (!this->vector_p.empty()) {
+    /*if (!this->vector_p.empty()) {
 
       for (int i = 0; i < this->getVectorP().size(); i++) {
 
@@ -416,18 +416,20 @@ uint8_t Controler::insert_send(Platoon *p) {
                 this->getVectorP()[i]->getNbVehicles() - 1);
 
             // Changer param
-            // this->desinsert_send();
+            this->desinsert_send(exp_id);
           }
         }
       }
-    }
+    }*/
+    // Changer param
+    this->desinsert_send(exp_id);
   }
   // Tout s'est bien passé
   return 1;
-}*/
+}
 
-/*
-void Controler::desinsert_send() {
+void Controler::desinsert_send(uint8_t dest_id) {
+  ROS_INFO("Controler : desinsert_send");
   // Calcule la vitesse et le point de sortie du véhicule sortant TODO
   // Calcule l'interdistance et la vitesse de décélération des véhicules
   // TODO derrière le véhicule sortant Calcule la vitesse d'accélération
@@ -445,7 +447,7 @@ void Controler::desinsert_send() {
 
   // Interdistance et vitesse de décélération aux véhicules derrière le
   // véhicule sortant(sur chaque topic de chaque véhicule)
-  for (uint8_t i = 0; i < ids_behind.size(); i++) {
+  /*for (uint8_t i = 0; i < ids_behind.size(); i++) {
 
     msg.basic_container.ID_dest = ids_behind[i];
     // msg.vitesse_interdistance.speed = ? ? ? ; // ralentir
@@ -456,15 +458,15 @@ void Controler::desinsert_send() {
       // this->getPubEce().publish(msg);
       this->publish_ece_msg(msg);
     }
-  }
-
+  }*/
   // Vitesse et point de sortie au véhicule sortant
   // C to Vd
-  msg.basic_container.ID_dest = exp_id;
+  msg.basic_container.ID_dest = dest_id;
   // msg.desinsertion.speed = ? ? ? ;
   // msg.desinsertion.point_sortie.latitude = ? ? ? ;
   // msg.desinsertion.point_sortie.longitude = ? ? ? ;
   // msg.desinsertion.point_sortie.altitude.value = ? ? ? ;
+  msg.desinsertion.demande_sortie = 1;
 
   // Envoyer
   if (ros::ok()) {
@@ -475,8 +477,6 @@ void Controler::desinsert_send() {
   // Envoie ensuite à tous les véhicules derrière la vitesse
   // d'accélération et leur nouvelle position dans P
 }
-}
-*/
 
 void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &p_msg,
                                  Controler *c) {
@@ -500,7 +500,7 @@ void Controler::sub_ece_callback(const ece_msgs::ecemsg::ConstPtr &p_msg,
     break;
 
   case 2:
-    // rep = c->desinsert_receive(msg);
+    rep = c->desinsert_receive(msg);
     break;
 
   case 3:

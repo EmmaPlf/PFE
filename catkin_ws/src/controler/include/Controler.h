@@ -97,6 +97,7 @@ public:
   uint8_t insert_receive(ece_msgs::ecemsg &msg);
   uint8_t insert_send(Platoon *p);
   uint8_t desinsert_receive(ece_msgs::ecemsg &msg);
+  void desinsert_send(uint8_t dest_id);
   uint8_t feux(ece_msgs::ecemsg &msg);
   uint8_t freinage_urg(ece_msgs::ecemsg &msg);
 

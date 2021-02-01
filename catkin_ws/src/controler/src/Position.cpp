@@ -61,3 +61,4 @@ uint8_t Position::compareLightZone() {
 
   return ret;
 }
+

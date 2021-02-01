@@ -61,6 +61,12 @@ int main(int argc, char **argv) {
       it++;
     }
 
+    // Check de la position
+    if (v4.getActualPos().compareDesinsertZone()) {
+      // Demande de sortie au contrôleur
+      v4.fill_ece_data(ID_CONTROLER, DESINSERT_PHASE, 0);
+    }
+
     loop_rate.sleep();
   }
 

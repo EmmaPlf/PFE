@@ -45,3 +45,12 @@ uint8_t Position::compareZone(Position p) {
 
   return ret;
 }
+
+uint8_t Position::compareDesinsertZone() {
+  uint8_t ret = 0;
+  if (((this->getLat() >= 1.8) && (this->getLat() <= 2) &&
+       ((this->getLon() >= -0.5) && (this->getLon() <= 0.5)))) {
+    ret = 1;
+  }
+  return ret;
+}
