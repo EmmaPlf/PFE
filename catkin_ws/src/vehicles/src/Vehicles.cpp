@@ -178,16 +178,16 @@ void Vehicles::fill_platoon(const ece_msgs::ecemsg::ConstPtr &msg) {
   Platoon platoon = Platoon();
 
   // Infos générales
-  platoon.setId(msg->init.platoon.id_platoon);
-  platoon.setNbVehicles(msg->init.platoon.nombre_vehicules);
-  platoon.setSpeed(msg->init.platoon.vitesse_interdistance.speed.value);
-  platoon.setInter(msg->init.platoon.vitesse_interdistance.interdistance);
+  platoon.setId(msg->insertion.platoon.id_platoon);
+  platoon.setNbVehicles(msg->insertion.platoon.nombre_vehicules);
+  platoon.setSpeed(msg->insertion.platoon.vitesse_interdistance.speed.value);
+  platoon.setInter(msg->insertion.platoon.vitesse_interdistance.interdistance);
 
   // Destination
   Position dest = Position();
-  dest.setLat(msg->init.platoon.destination.latitude);
-  dest.setLon(msg->init.platoon.destination.longitude);
-  dest.setAlt(msg->init.platoon.destination.altitude);
+  dest.setLat(msg->insertion.platoon.destination.latitude);
+  dest.setLon(msg->insertion.platoon.destination.longitude);
+  dest.setAlt(msg->insertion.platoon.destination.altitude);
   platoon.setDest(dest);
 
   // Map des rangs
@@ -195,7 +195,7 @@ void Vehicles::fill_platoon(const ece_msgs::ecemsg::ConstPtr &msg) {
   for (int i = 0; i < platoon.getNbVehicles(); i++) {
 
     // Remplir la map d'ID et Rang
-    ece_msgs::IDs id = msg->init.platoon.ids[i];
+    ece_msgs::IDs id = msg->insertion.platoon.ids[i];
     map_rank.insert(std::pair<uint8_t, uint8_t>(id.ID, id.position));
 
     // Si voiture de tête
@@ -246,6 +246,7 @@ uint8_t Vehicles::desinsert_receive(const ece_msgs::ecemsg::ConstPtr &msg) {
 
   // Envoi en simulation
   simu_msgs::simu_ECE simu_msg;
+  simu_msg.phase = DESINSERT_PHASE;
   simu_msg.header.stamp = ros::Time::now();
   simu_msg.header.frame_id = ECE_FRAME_ID;
   simu_msg.dest = this->getStationId();

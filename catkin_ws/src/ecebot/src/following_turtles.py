@@ -44,6 +44,8 @@ xp_r3 = 0.0
 yp_r3 = 0.0
 err = 3
 green_light = True
+phase = 0
+desinsertion = False
 
 def callback_odom(data):
     global v, omega, r1_ref, phi, err_angle, err_angle_prec,err_vit, err_vit_prec, theta_prec, mean, turning, theta_vit, robot_destinations, arg_bot, x, y, r4_path, dist_r3, err, dist_r4
@@ -54,7 +56,6 @@ def callback_odom(data):
     qz = data.pose.pose.orientation.z
 
     if arg_bot != 4:
-        
         #angle de lacet
         theta = atan2(2 * qw * qz, 1 - (2 * qz * qz))
         
@@ -119,10 +120,8 @@ def callback_odom(data):
         err_angle_prec = err_angle
 
         if(d<0.5):
-            #d=0
             if np.size(r4_path,0)!=1:
                 r4_path = np.delete(r4_path, 0, axis=0)
-
         err_vit = d
         if v > vmax:
             v=vmax
@@ -131,19 +130,45 @@ def callback_odom(data):
         err_vit_prec = err_vit
         dist_r4  = (sqrt((xp_r3 - x)** 2 + (yp_r3 - y)** 2))
         err = (sqrt((xp_r3 - x)** 2 + (yp_r3 - y)** 2)) - dist_r3
-        # print("xp_r3 = ", xp_r3)
-        # print("yp_r3 = ", yp_r3)
-        # print("dist_r3 = ", dist_r3)
-        # print("err = ", err)
-    elif arg_bot == 4 and following == False:
+        
+    elif arg_bot == 4 and following == False and desinsertion == False:
         dist_r4  = (sqrt((xp_r3 - x)** 2 + (yp_r3 - y)** 2))
         err = (sqrt((xp_r3 - x)** 2 + (yp_r3 - y)** 2)) - dist_r3
-        # print("xp_r3 = ", xp_r3)
-        # print("yp_r3 = ", yp_r3)
-        # print("dist_r3 = ", dist_r3)
-        # print("err = ", err)
+    elif arg_bot == 4 and following == False and desinsertion == True:
+        theta = atan2(2 * qw * qz, 1 - (2 * qz * qz))
+        
+        xp = 3
+        yp = 2
+        vmax = 0.5  #0.75
+        kp_angle = 1.6
+        kd_angle = 1.8
 
+        kp_vit = 1
+        kd_vit = 1.4
+      
+        phi=atan2((yp-y),(xp-x))
+        d = sqrt((xp - x)** 2 + (yp - y)** 2)
 
+        delta= theta - phi
+        err_angle = delta
+
+        if delta>pi:
+            delta-=2*pi
+        if delta<-pi:
+            delta+=2*pi
+
+        omega = -kp_angle * delta + kd_angle * (err_angle - err_angle_prec)
+        err_angle_prec = err_angle
+
+        if(d<0.1):
+            d=0
+
+        err_vit = d
+        if v > vmax:
+            v=vmax
+        else:
+            v = kp_vit * d + kd_vit * (err_vit - err_vit_prec)
+        err_vit_prec = err_vit
 
 
 def callback_cam(data):
@@ -152,11 +177,8 @@ def callback_cam(data):
     send_time = data.header.stamp
     reception_time = rospy.get_rostime()
     delay = reception_time - send_time
-    # print("send_time:", send_time, " and reception time:", reception_time)
     id_robot = data.dest
     interdistance = float(data.interdistance) / 1024
-
-    # print("data.dest = ", data.dest)
 
     if arg_bot == id_robot and id_robot != 4:
         # v_len = data.vehicle_length.value
@@ -180,14 +202,18 @@ def callback_cam(data):
             r1_pos_x = last_pos_x - (interdistance) * cos(cap)
             r1_pos_y = last_pos_y - (interdistance) * sin(cap)
             r4_path = np.append(r4_path, [[r1_pos_x, r1_pos_y]], axis=0)
-            following = True
+            if desinsertion == False:
+                following = True
+            else:
+                following = False
         old_last_pos_x = last_pos_x
         old_last_pos_y = last_pos_y
 
 def callback_ece(data):
-    global green_light
+    global green_light, phase, desinsertion, following
     green_light = data.permission
-    print(green_light)
+    desinsertion = data.desinsertion
+    phase = data.phase
 
 def callback_dist_r3(msg):
     global dist_r3
@@ -226,10 +252,11 @@ def talker(arg):
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
         speed=Twist()
-        if green_light == True:
+        if green_light == True or phase == 2:
             speed.linear.x=v
             speed.angular.z = omega
-        else:
+        elif green_light == False and phase != 2:
+            # print("elif , ", arg_bot)
             speed.linear.x=0
             speed.angular.z=0
         if arg_bot == 2:
@@ -245,7 +272,7 @@ def talker(arg):
         elif arg_bot == 4:
             err_pub.publish(err)
             dist_r4_pub.publish(dist_r4)
-            if following == True:
+            if following == True or desinsertion == True:
                 vel_t3.publish(speed)
                 dist_r4_pub.publish(dist_r4)
         rate.sleep()

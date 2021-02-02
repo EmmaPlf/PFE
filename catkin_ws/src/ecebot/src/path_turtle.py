@@ -27,6 +27,7 @@ err_vit = 0
 err_traj_x = 0
 err_traj_y = 0
 green_light = True
+phase = 0
 
 def set_references():
     global compteur_dir, compteur_point, xp, yp
@@ -131,9 +132,9 @@ def create_path():
     #print(liste_dir)
 
 def callback_ece(data):
-    global green_light
+    global green_light, phase
     green_light = data.permission
-    print(green_light)
+    phase = data.phase
 
 def talker():
     global v, omega, compteur_point, compteur_dir, err_traj_x, err_traj_y
@@ -147,10 +148,12 @@ def talker():
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
         speed = Twist()
-        if green_light == True:
+        if green_light == True or phase == 2:
+            # print("if, 1")
             speed.linear.x=v
             speed.angular.z = omega
-        else:
+        elif green_light == False and phase != 2:
+            # print("elif, 1")
             speed.linear.x=0
             speed.angular.z=0
         pub.publish(speed)

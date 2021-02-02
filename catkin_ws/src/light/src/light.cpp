@@ -7,7 +7,7 @@
 #include <sstream>
 
 #define STATION_ID 5 // 1 ID par station
-#define PAUSE_DURATION 30
+#define PAUSE_DURATION 80
 
 int main(int argc, char **argv) {
 
@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
     //   state = !state;
     // }
     // ROS_INFO("count = %d, state = %d", count,state);
-    if (count == PAUSE_DURATION) {
+    if (count == PAUSE_DURATION || (!state && count == PAUSE_DURATION/2)) {
       state = !state;
       ROS_INFO("Le feu a change d'etat : %d", state);
       count = 0;

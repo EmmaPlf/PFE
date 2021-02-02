@@ -14,6 +14,7 @@ int main(int argc, char **argv) {
   ros::Time::init();
   ros::Rate loop_rate(FREQ);
   uint8_t rank = 0;
+  uint8_t desinsertion = 0;
 
   // TODO /ODOM Changer quand on aura plusieurs vehicules
   Vehicles v4 = Vehicles("tb3_3/odom", STATION_ID);
@@ -62,9 +63,10 @@ int main(int argc, char **argv) {
     }
 
     // Check de la position
-    if (v4.getActualPos().compareDesinsertZone()) {
+    if (v4.getActualPos().compareDesinsertZone() && !desinsertion) {
       // Demande de sortie au contrôleur
       v4.fill_ece_data(ID_CONTROLER, DESINSERT_PHASE, 0);
+      desinsertion = 1;
     }
 
     loop_rate.sleep();

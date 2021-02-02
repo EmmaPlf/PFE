@@ -307,15 +307,15 @@ uint8_t Controler::insert_send(Platoon *p) {
   msg.basic_container.station_type.value = STATION_TYPE;
 
   // Nb vehicules
-  msg.init.platoon.nombre_vehicules = p->getNbVehicles();
+  msg.insertion.platoon.nombre_vehicules = p->getNbVehicles();
 
   // ID platoon
-  msg.init.platoon.id_platoon = p->getId();
+  msg.insertion.platoon.id_platoon = p->getId();
 
   // Destination (lat, long, alt)
-  msg.init.platoon.destination.latitude = p->getDest().getLat();
-  msg.init.platoon.destination.longitude = p->getDest().getLon();
-  msg.init.platoon.destination.altitude = p->getDest().getAlt();
+  msg.insertion.platoon.destination.latitude = p->getDest().getLat();
+  msg.insertion.platoon.destination.longitude = p->getDest().getLon();
+  msg.insertion.platoon.destination.altitude = p->getDest().getAlt();
 
   std::map<uint8_t, uint8_t> map_rank = p->getMapRank();
 
@@ -327,7 +327,7 @@ uint8_t Controler::insert_send(Platoon *p) {
       ece_msgs::IDs id;
       id.ID = it->first;
       id.position = it->second;
-      msg.init.platoon.ids.push_back(id);
+      msg.insertion.platoon.ids.push_back(id);
       ++it;
     }
   }
